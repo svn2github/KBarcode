@@ -1,0 +1,268 @@
+/***************************************************************************
+                          dsmainwindow.cpp  -  description
+                             -------------------
+    begin                : Fri Jan 17 2003
+    copyright            : (C) 2003 by Dominik Seichter
+    email                : domseichter@web.de
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#include "dsmainwindow.h"
+#include "sqltables.h"
+#include "confwizard.h"
+#include "printersettings.h"
+#include "kbarcodesettings.h"
+#include "kactionmap.h"
+#include "barkode.h"
+
+// Qt includes
+#include <qcheckbox.h>
+#include <qtextbrowser.h>
+#include <qsqldatabase.h>
+
+// KDE includes
+#include <kaction.h>
+#include <kapplication.h>
+#include <kconfig.h>
+#include <kiconloader.h>
+#include <klocale.h>
+#include <kmenubar.h>
+#include <kmessagebox.h>
+#include <kpopupmenu.h>
+#include <kstandarddirs.h>
+#include <krun.h>
+
+bool DSMainWindow::autoconnect = true;
+bool DSMainWindow::startwizard = true;
+
+DSMainWindow::DSMainWindow(QWidget *parent, const char *name, WFlags f)
+    : KMainWindow(parent,name,f)
+{
+    connectAct = 0;
+    first = false;
+    loadConfig();
+
+    setAutoSaveSettings( QString("Window") + name, true );
+    connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
+
+    if( first && startwizard ) {
+        wizard();
+        startwizard = false;
+    }
+    
+}
+
+DSMainWindow::~DSMainWindow()
+{
+}
+
+void DSMainWindow::setupActions()
+{
+    KAction* quitAct = KStdAction::quit(kapp, SLOT(quit()), actionCollection());
+    KAction* closeAct = KStdAction::close( this, SLOT( close() ), actionCollection(), "close" );
+    KAction* configureAct = KStdAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );
+    KAction* wizardAct = new KAction( i18n("&Start Configuration Wizard..."), BarIcon("wizard"), 0, this,
+                                SLOT(wizard()), actionCollection(), "wizard" );
+    connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
+                                actionCollection(),"connect" );
+
+
+    KAction* newTablesAct = new KAction( i18n("&Create Tables"), "", 0, this,
+                                SLOT(newTables()), actionCollection(), "tables" );
+
+    importLabelDefAct = new KAction( i18n("&Import Label Definitions"), "", 0, SqlTables::getInstance(),
+                                SLOT(importLabelDef()), actionCollection(), "import" );
+
+    importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
+                                SLOT(importExampleData()), actionCollection(), "import" );
+                                
+    KPopupMenu* file = new KPopupMenu( this );
+    KPopupMenu* settings = new KPopupMenu( this );
+    KPopupMenu* hlpMenu = helpMenu();
+    int helpid = hlpMenu->idAt( 0 );
+    hlpMenu->removeItem( helpid );
+    hlpMenu->insertItem( SmallIconSet("contents"), i18n("&Help"),
+        this, SLOT(appHelpActivated()), Key_F1, -1, 0 );
+    hlpMenu->insertSeparator(-1);
+    hlpMenu->insertItem( i18n("&Action Map..."), this, SLOT( slotFunctionMap() ), 0, -1, 0 );
+    hlpMenu->insertSeparator(-2);
+    hlpMenu->insertItem( SmallIconSet("system"), i18n("&System Check..."), this, SLOT(showCheck() ), 0, -1, 0 );
+    hlpMenu->insertItem( SmallIconSet("barcode"), i18n("&Barcode Help..."), this, SLOT( startInfo() ), 0, -1, 0 );
+    hlpMenu->insertItem( i18n("&Donate..."), this, SLOT( donations() ), 0, -1, 0 );
+
+    menuBar()->insertItem( i18n("&File"), file );
+    menuBar()->insertItem( i18n("&Settings"), settings );
+    menuBar()->insertItem( i18n("&Help"), hlpMenu );
+
+    closeAct->plug( file );
+    quitAct->plug( file );
+
+    configureAct->plug( settings );
+    wizardAct->plug( settings );
+    connectAct->plug( settings );
+    (new KActionSeparator( this ))->plug( settings );
+    newTablesAct->plug( settings );
+    importLabelDefAct->plug( settings );
+    importExampleAct->plug( settings );
+
+    SqlTables* tables = SqlTables::getInstance();
+    if( tables->getData().autoconnect && autoconnect && !first ) {
+        tables->connectMySQL();
+        autoconnect = false;
+    }
+
+    connectAct->setEnabled( !SqlTables::isConnected() );
+    importLabelDefAct->setEnabled( !connectAct->isEnabled() );
+    importExampleAct->setEnabled( !connectAct->isEnabled() );
+}
+
+void DSMainWindow::loadConfig()
+{
+    KConfig* config = kapp->config();
+
+    config->setGroup("Wizard");
+    first = config->readBoolEntry("firststart2", true );
+
+    SqlTables* tables = SqlTables::getInstance();
+    if( tables->getData().autoconnect && !first && autoconnect && connectAct ) {
+        connectAct->setEnabled( !tables->connectMySQL() );
+        importLabelDefAct->setEnabled( !connectAct->isEnabled() );
+        importExampleAct->setEnabled( !connectAct->isEnabled() );
+
+        autoconnect = false;
+    }
+
+    KBarcodeSettings::getInstance()->loadConfig();
+}
+
+void DSMainWindow::saveConfig()
+{
+    KConfig* config = kapp->config();
+
+    config->setGroup("Wizard");
+    config->writeEntry("firststart2", false );
+
+    PrinterSettings::getInstance()->saveConfig();
+    SqlTables::getInstance()->saveConfig();
+    KBarcodeSettings::getInstance()->saveConfig();
+
+    config->sync();
+}
+
+void DSMainWindow::wizard()
+{
+    ConfWizard* wiz = new ConfWizard( 0, "wiz", true );
+    if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() )
+        SqlTables::getInstance()->connectMySQL();
+
+    delete wiz;
+}
+
+void DSMainWindow::connectMySQL()
+{
+    connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
+    importLabelDefAct->setEnabled( !connectAct->isEnabled() );
+    importExampleAct->setEnabled( !connectAct->isEnabled() );
+
+    if( !connectAct->isEnabled() )
+        emit connectedSQL();
+}
+
+void DSMainWindow::appHelpActivated()
+{
+    KMessageBox::information( this, i18n(
+        "<qt>The KBarcode documentation is avaible as PDF for download on our webpage.<br><br>") +
+        "<a href=\"http://www.kbarcode.net/17.0.html\">" +
+        i18n("Download Now") + "</a></qt>",
+        QString::null, QString::null, KMessageBox::AllowLink );
+}
+
+void DSMainWindow::showCheck()
+{
+    QTextBrowser* b = new QTextBrowser( 0, "b" );
+    b->setText( DSMainWindow::systemCheck() );
+    b->resize( 320, 240 );
+    b->show();
+}
+
+void DSMainWindow::startInfo()
+{
+    QString info = locate("appdata", "barcodes.html");
+    if( !info.isEmpty() )
+        kapp->invokeBrowser( info );
+}
+
+bool DSMainWindow::newTables()
+{
+    return SqlTables::getInstance()->newTables();
+}
+
+void DSMainWindow::donations()
+{
+    // orig =https://www.paypal.com/xclick/business=domseichter%40web.de&item_name=Support+KBarcode+Development&item_number=0&image_url=http%3A//www.kbarcode.net/themes/DeepBlue/images/logo.gif&no_shipping=1&return=http%3A//www.kbarcode.net&cancel_return=http%3A//www.kbarcode.net&cn=Suggestions%2C+Comments%3F&tax=0&currency_code=EUR
+    QString url = "https://www.paypal.com/xclick/business=domseichter@web.de&item_name=Support+KBarcode+Development&item_number=0&image_url=www.kbarcode.net/themes/DeepBlue/images/logo.gif&no_shipping=1&return=www.kbarcode.net&cancel_return=www.kbarcode.net&cn=Suggestions,+Comments,&tax=0&currency_code=EUR";
+    
+    KMessageBox::information( this, i18n(
+        "<qt>It is possible to support the further development of KBarcode through donations. "
+        "PayPal will be used for processing the donation.<br><br>" ) +
+        "<a href=\"" + url + "\">" +  
+        i18n("Donate Now") + "</a></qt>", QString::null, QString::null, KMessageBox::AllowLink );
+}
+
+QString DSMainWindow::systemCheck()
+{
+    bool gnubarcode = !Barkode::haveGNUBarcode();
+    bool pdf = !Barkode::havePDFBarcode();
+    bool tbarcode = !Barkode::haveTBarcode();
+    bool tbarcode2 = !Barkode::haveTBarcode2();
+    bool pure = !Barkode::havePurePostscriptBarcode();
+
+    QString text;
+
+    text.append( i18n("<p><h3>Barcode Support</h3></p>") );
+    text.append( "<p>GNU Barcode: ");
+    text.append(  gnubarcode ? i18n("<b>No</b><br />") : i18n("<b>Found</b><br />") );
+    text.append( "PDF417 Encode: ");
+    text.append( pdf ? i18n("<b>No</b><br />") : i18n("<b>Found</b><br />") );
+    text.append( "TBarcode: ");
+    text.append( tbarcode ? i18n("<b>No</b><br />") : i18n("<b>Found</b><br />") );
+    text.append( "TBarcode2: ");
+    text.append( tbarcode2 ? i18n("<b>No</b><br />") : i18n("<b>Found</b><br />") );
+    text.append( "Pure Postscript Barcode Writer: ");
+    text.append( pure ? i18n("<b>No</b><br />") : i18n("<b>Found</b><br />") );
+
+    if( gnubarcode && tbarcode && pdf )
+        text.append( i18n("<p>To get <b>barcode support</b> you have to either install <i>GNU Barcode</i>, <i>TBarcode</i> or <i>PDF417 Enc</i>.</p>") );
+
+    text.append( i18n("<p><h3>Database Support</h3></p>") );
+
+    QStringList list = QSqlDatabase::drivers();
+
+    if( list.count() ) {
+        text.append( "<ul>" );
+        QStringList::Iterator it = list.begin();
+        while( it != list.end() ) {
+            text.append( i18n("<li>Driver found: ") + *it + "</li>" );
+            ++it;
+        }
+        text.append( "</ul>" );
+    } else
+        text.append( i18n("<p><b>No database drivers found. SQL database support is disabled.</b></p>") );
+
+    return text;
+}
+
+void DSMainWindow::slotFunctionMap()
+{
+    new KActionMapDlg( actionCollection(), this );
+}
+
+#include "dsmainwindow.moc"

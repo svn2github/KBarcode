@@ -73,7 +73,7 @@ QStringList CSVFile::readNextLine()
     for( ;; )
     {
 	line = m_stream.readLine();
-	line = line.stripWhiteSpace();
+	line = line.trimmed();
 
 	// check for eof
 	if( line.isNull() )
@@ -147,7 +147,7 @@ QStringList CSVFile::readFixedLine( const QString & line )
 
 QString CSVFile::removeQuote( const QString & text ) 
 {
-    QString line = text.stripWhiteSpace();
+    QString line = text.trimmed();
 
     if( m_quote.isEmpty() )
         return text;
@@ -163,6 +163,6 @@ QString CSVFile::removeQuote( const QString & text )
 
 void CSVFile::setEncoding( const QString & enc )
 {
-    m_stream.setCodec( QTextCodec::codecForName( enc.latin1() ) );
+    m_stream.setCodec( QTextCodec::codecForName( enc.toLatin1() ) );
 }
 

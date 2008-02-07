@@ -179,7 +179,7 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
 	cmd += " -sNOPAUSE -q - -c showpage quit";
 	
         qDebug("cmd: " + cmd );
-	gs_pipe = popen( cmd.latin1(), "w" );
+	gs_pipe = popen( cmd.toLatin1(), "w" );
         if( !gs_pipe )
 	{
 	    qDebug("ERROR: cannot open Ghostscript pipe!");
@@ -210,7 +210,7 @@ bool PixmapBarcode::createPostscript( char** postscript, long* postscript_size )
     if( Barkode::engineForType( barkode->type() ) == TBARCODE ) 
     {
         cmd = createTBarcodeCmd();
-        qDebug("tbarcodeclient commandline: %s", cmd.latin1() );
+        qDebug("tbarcodeclient commandline: %s", cmd.toLatin1() );
     }
     else // GNU_BARCODE
     */
@@ -220,7 +220,7 @@ bool PixmapBarcode::createPostscript( char** postscript, long* postscript_size )
         cmd += " -e " + barkode->type();
     }
     
-    if( !readFromPipe( cmd.latin1(), postscript, postscript_size ) )
+    if( !readFromPipe( cmd.toLatin1(), postscript, postscript_size ) )
         return false;
 
     return true;
@@ -333,7 +333,7 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
         double scalex = (resx/screenresx)*barkode->scaling();
         double scaley = (resy/screenresy)*barkode->scaling();
         m.scale( scalex, scaley );
-        *target = target->xForm( m );
+        *target = target->transformed( m );
     }
     *target = cut( target, barkode->cut() );
     *target = addMargin( target );
@@ -341,7 +341,7 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
     // Rotate
     QMatrix m;
     m.rotate( (double)barkode->rotation() );
-    *target = target->xForm( m );
+    *target = target->transformed( m );
 
     //barcode.valid = true;
 }
@@ -448,9 +448,9 @@ QPixmap PixmapBarcode::cut( QPixmap* pic, double cut)
         m.rotate( 180 );
 
     QPainter painter( &pcut );
-    painter.drawPixmap( 0, 0, pic->xForm( m ) );
+    painter.drawPixmap( 0, 0, pic->transformed( m ) );
 
-    return pcut.xForm( m );
+    return pcut.transformed( m );
 }
 
 QPixmap PixmapBarcode::addMargin( QPixmap* pic )

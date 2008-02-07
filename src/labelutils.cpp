@@ -91,13 +91,13 @@ double LabelUtils::pixelToPixelY( double unit, const QPaintDevice* src, const QP
 const QString LabelUtils::getTypeFromCaption( const QString & cap )
 {
     // TODO: remove this function
-    QString search = cap.right( cap.length() - cap.find(":") - 1 ).lower().stripWhiteSpace();
+    QString search = cap.right( cap.length() - cap.find(":") - 1 ).toLower().trimmed();
     return search;
 }
 
 const QString LabelUtils::getModeFromCaption( const QString & cap )
 {
-    return cap.left( cap.find(":") ).lower().stripWhiteSpace();
+    return cap.left( cap.find(":") ).toLower().trimmed();
 }
 
 QSize LabelUtils::stringSize( const QString & t )
@@ -176,7 +176,7 @@ QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
         QPixmap* p = new QPixmap( w2, h2 );
         p->fill( Qt::white );
         painter.begin( p );
-        painter.drawPixmap( 0, 0, tmp->xForm( wm ) );
+        painter.drawPixmap( 0, 0, tmp->transformed( wm ) );
         painter.end();
 
         p->setMask( p->createHeuristicMask() );

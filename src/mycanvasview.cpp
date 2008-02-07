@@ -165,7 +165,7 @@ void MyCanvasView::contentsMouseMoveEvent(QMouseEvent* e)
         return;
     }
 
-    bool shift_pressed = e->state() & Qt::ShiftButton;
+    bool shift_pressed = e->state() & Qt::ShiftModifier;
 
     TCanvasItem* moving = getActive();
     if( moving && !moving->item()->locked() ) {
@@ -246,13 +246,13 @@ void MyCanvasView::contentsMouseMoveEvent(QMouseEvent* e)
 
 void MyCanvasView::contentsMousePressEvent(QMouseEvent* e)
 {
-    setActive( 0, e->state() & Qt::ControlButton  );
+    setActive( 0, e->state() & Qt::ControlModifier  );
 
     Q3CanvasItemList list = canvas()->allItems();
     for( int z = MyCanvasView::getLowestZ( list ); z <= MyCanvasView::getHighestZ( list ); z++ )
         for( unsigned int i = 0; i < list.count(); i++ )
             if( list[i]->z() == z && isInside( e->pos(), list[i] ) )
-                setActive( list[i], (e->state() & Qt::ControlButton) );
+                setActive( list[i], (e->state() & Qt::ControlModifier) );
 
     if( getActive() ) {
         moving_start = inverseWorldMatrix().map(e->pos());

@@ -115,7 +115,7 @@ bool TBarcode2::createPostscript( char** postscript, long* postscript_size )
         text = "below";
 
     cmd = cmd.sprintf( "tbarcode -f PS -b %s -d %s  -t %s --translation=%s --autocorrect=%s --modulewidth=%.3f -h %i --checkdigit=%i --72dpiraster\n", 
-                       barkode->type().latin1(), KShellProcess::quote(  barkode->parsedValue() ).latin1(), 
+                       barkode->type().toLatin1(), KShellProcess::quote(  barkode->parsedValue() ).toLatin1(), 
                        text, tbarcode->escape() ? "on" : "off", 
                        tbarcode->autocorrect() ? "on" : "off", 
                        tbarcode->moduleWidth(), 
@@ -123,7 +123,7 @@ bool TBarcode2::createPostscript( char** postscript, long* postscript_size )
                        tbarcode->checksum() );
 
     qDebug( "Cmd = " + cmd );
-    if( !readFromPipe( cmd.latin1(), postscript, postscript_size ) )
+    if( !readFromPipe( cmd.toLatin1(), postscript, postscript_size ) )
         return false;
 
     return true;
@@ -138,10 +138,10 @@ QRect TBarcode2::bbox( const char* postscript, long postscript_size )
     QRect   size;
 
     KTempFile psfile( QString::null, ".ps" );
-    psfile.file()->writeBlock( postscript, postscript_size );
+    psfile.file()->write( postscript, postscript_size );
     psfile.file()->close();
 
-    if( !readFromPipe( QString( gs_bbox ).arg( psfile.file()->name() ).latin1(), &buffer, &len ) || !len )
+    if( !readFromPipe( QString( gs_bbox ).arg( psfile.file()->name() ).toLatin1(), &buffer, &len ) || !len )
     {
         psfile.unlink();
         return QRect( 0, 0, 0, 0 );

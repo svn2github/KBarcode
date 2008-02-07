@@ -295,7 +295,7 @@ bool LabelEditor::saveas()
     if(name.isEmpty())
         return false;
 
-    if( name.right(9).lower() != ".kbarcode" )
+    if( name.right(9).toLower() != ".kbarcode" )
         name += ".kbarcode";
 
     return save( name );
@@ -346,7 +346,7 @@ void LabelEditor::save( QIODevice* device )
     }
 
     Q3CString xml = doc.toCString();
-    device->writeBlock( xml, xml.length() );
+    device->write( xml, xml.length() );
     device->close();
 }
 

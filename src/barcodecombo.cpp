@@ -69,7 +69,7 @@ bool BarcodeValidator::pcreValidate( QString* pattern, const QString & input ) c
     if( !compiled ) // ignore all errors
         return true; 
 
-     result = pcre_exec( compiled, NULL, input.latin1(), input.length(), 0, 0, ovector, ovector_size );
+     result = pcre_exec( compiled, NULL, input.toLatin1(), input.length(), 0, 0, ovector, ovector_size );
 
      return (result >= 1);
 }

@@ -170,11 +170,11 @@ bool KBarcode::parseCmdLine()
     int numlabels      = -1;
 
     QString format = args->getOption("output");
-    if( format.upper() == "BARCODE" )
+    if( format.toUpper() == "BARCODE" )
 	eFormat = BatchPrinter::BCP;
-    else if( format.upper() == "IMAGE" )
+    else if( format.toUpper() == "IMAGE" )
 	eFormat = BatchPrinter::IMAGE;
-    else if( format.upper() == "POSTSCRIPT" )
+    else if( format.toUpper() == "POSTSCRIPT" )
 	eFormat = BatchPrinter::POSTSCRIPT;
     else
     {

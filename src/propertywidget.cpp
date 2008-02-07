@@ -284,7 +284,7 @@ void PropertyBarcode::initSettings( DocumentItem* item )
     
     barcode->setData( *bcode );
     for( int i = 0; i < comboComplex->count(); i++ )
-        if( comboComplex->text( i ).lower() == bcode->databaseMode().lower() )
+        if( comboComplex->text( i ).toLower() == bcode->databaseMode().toLower() )
             comboComplex->setCurrentItem( i );
 
     changedCombo();

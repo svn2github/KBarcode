@@ -218,7 +218,7 @@ bool TextItem::IsQtTextRenderingBroken()
     if( !s_qt_broken_init )
     {
         QString version( qVersion() );
-//        qDebug( "Detected Qt Version: %s", version.latin1() );
+//        qDebug( "Detected Qt Version: %s", version.toLatin1() );
         int major = version.section( ".", 0, 0 ).toInt();
         int minor = version.section( ".", 1, 1 ).toInt();
         int bugfix = version.section( ".", 2, 2 ).toInt();

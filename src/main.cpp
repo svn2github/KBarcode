@@ -66,7 +66,7 @@ void setupDirs()
         if( !kdedir.contains( "/usr/" ) )
             dirs->addPrefix( "/usr/" );
 
-        qDebug("WARNING: Prefix changed: %s", dirs->kfsstnd_prefixes().latin1() );
+        qDebug("WARNING: Prefix changed: %s", dirs->kfsstnd_prefixes().toLatin1() );
     }
 }
 

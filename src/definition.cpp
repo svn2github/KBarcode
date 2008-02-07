@@ -80,11 +80,11 @@ class PrivateParser {
 
 PrivateParser::PrivateParser( QString line, bool all )
 {
-    line = line.stripWhiteSpace();
+    line = line.trimmed();
     int pos = line.find("(");
     line = line.mid( pos + 1, line.length() - pos - 1 );
 
-    m_label_def_id = line.section( ",", 0, 0 ).stripWhiteSpace();
+    m_label_def_id = line.section( ",", 0, 0 ).trimmed();
     m_producer     = removeQuote( line.section( ",", 1, 1 ) );
     m_type         = removeQuote( line.section( ",", 2, 2 ) );
 
@@ -113,7 +113,7 @@ PrivateParser::~PrivateParser()
 
 QString PrivateParser::removeQuote( const QString & q )
 {
-    QString quote = q.stripWhiteSpace();
+    QString quote = q.trimmed();
 
     if( quote.startsWith("'") )
         quote = quote.mid( 1, quote.length() - 1 );
@@ -528,7 +528,7 @@ int Definition::writeSQL( const Measurements & c, QString type, QString producer
             " type = '" + type + "'" );
 
         if(!query.isValid())
-            qDebug("Query to update values not valid!\n%s\n", query.lastQuery().latin1() );
+            qDebug("Query to update values not valid!\n%s\n", query.lastQuery().toLatin1() );
     }
 
     QSqlQuery qi("SELECT label_no FROM " TABLE_LABEL_DEF " WHERE manufacture='" + producer + "' AND type='" + type + "'" );

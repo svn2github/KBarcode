@@ -226,8 +226,8 @@ DefinitionDialog::DefinitionDialog( QWidget* parent,  const char* name, bool mod
     connect( editNumH, SIGNAL( textChanged(const QString &) ), this, SLOT( updatePreview() ) );
     connect( editNumV, SIGNAL( textChanged(const QString &) ), this, SLOT( updatePreview() ) );
 
-    comboProducer->setInsertionPolicy( QComboBox::NoInsertion );
-    comboType->setInsertionPolicy( QComboBox::NoInsertion );
+    comboProducer->setInsertPolicy( QComboBox::NoInsert );
+    comboType->setInsertPolicy( QComboBox::NoInsert );
 
     comboProducer->clear();
     QStringList list = Definition::getProducers();
@@ -403,14 +403,14 @@ void DefinitionDialog::drawGraphic()
     p.drawText( 100, 260, i18n("Number of horizontal Labels") );
 
     QPixmap* pix = LabelUtils::drawString( i18n("Number of vertical Labels") );
-    p.drawPixmap( 340, 110, pix->xForm( wm ) );
+    p.drawPixmap( 340, 110, pix->transformed( wm ) );
     delete pix;
 
     p.drawText( 5, 80, i18n("Gap Top") );
 
     pix = LabelUtils::drawString( i18n("Gap Left") );
 
-    p.drawPixmap( 60, 5, pix->xForm( wm ) );
+    p.drawPixmap( 60, 5, pix->transformed( wm ) );
     delete pix;
 
     p.drawText( 5, 150, i18n("Vertical Gap") );

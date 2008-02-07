@@ -68,7 +68,7 @@ void GnuBarcode::update( const QPaintDevice* device )
         return;
 
     char* value = new char[val.length()+1];
-    strncpy( value, val.latin1(), val.length()+1 );
+    strncpy( value, val.toLatin1(), val.length()+1 );
     value[val.length()] = '\0';
     
     m_item = Barcode_Create( value );

@@ -892,7 +892,7 @@ void BatchWizard::loadFromFile( const QString & url )
     
     if( !file.open( QIODevice::ReadOnly ) ) 
     {
-        qDebug("Unable to open file: %s", url.latin1() );
+        qDebug("Unable to open file: %s", url.toLatin1() );
         return;
     }
 
@@ -1110,11 +1110,11 @@ bool BatchWizard::fillVarTable()
                     printf("numRows=%i\n", m_varTable->numCols() );
 		    for( int x = 0; x < m_varTable->numCols(); x++ )
                     {
-                        printf("horizontal header=%s\n", m_varTable->horizontalHeader()->label( x ).lower().latin1() );
-                        printf("heading=%s\n", heading[z].lower().latin1() );
-			if( m_varTable->horizontalHeader()->label( x ).lower() == heading[z].lower() )
+                        printf("horizontal header=%s\n", m_varTable->horizontalHeader()->label( x ).toLower().toLatin1() );
+                        printf("heading=%s\n", heading[z].toLower().toLatin1() );
+			if( m_varTable->horizontalHeader()->label( x ).toLower() == heading[z].toLower() )
 			{
-                            printf("Reading: (%s)\n", data[z].latin1());
+                            printf("Reading: (%s)\n", data[z].toLatin1());
 			    m_varTable->setText( i, x, data[z] );
 			    break;
 			}

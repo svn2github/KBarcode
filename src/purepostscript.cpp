@@ -143,7 +143,7 @@ void PurePostscriptBarcode::initInfo( TBarcodeInfoList* info )
             if( line.startsWith( START_TOKEN ) ) 
             {
                 // remove all whitespaces on the line ending (and '-')
-                line = line.stripWhiteSpace();
+                line = line.trimmed();
 
                 line = line.right( line.length() - QString( START_TOKEN ).length() );
                 if( line.startsWith( BEGIN_ENCODER ) ) 
@@ -203,10 +203,10 @@ QRect PurePostscriptBarcode::bbox( const char* postscript, long postscript_size 
     QRect   size;
 
     KTempFile psfile( QString::null, ".ps" );
-    psfile.file()->writeBlock( postscript, postscript_size );
+    psfile.file()->write( postscript, postscript_size );
     psfile.file()->close();
 
-    if( !readFromPipe( QString( gs_bbox ).arg( psfile.file()->name() ).latin1(), &buffer, &len ) || !len )
+    if( !readFromPipe( QString( gs_bbox ).arg( psfile.file()->name() ).toLatin1(), &buffer, &len ) || !len )
     {
         psfile.unlink();
         return QRect( 0, 0, 0, 0 );
@@ -234,7 +234,7 @@ bool PurePostscriptBarcode::createPostscript( char** postscript, long* postscrip
     if( !*postscript ) 
         return false;
 
-    memcpy( *postscript, cmd.latin1(), *postscript_size );
+    memcpy( *postscript, cmd.toLatin1(), *postscript_size );
 
     return true;
 }

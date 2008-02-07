@@ -187,7 +187,7 @@ void Label::draw( QPainter* painter, int x, int y )
 void Label::setBarcodeValue( Barkode* barcode )
 {
     // use the same i18n() for static as in BarcodeSettingsDlg
-    if( barcode->databaseMode().lower() != "static" && barcode->databaseMode().lower() != i18n("Static") ) 
+    if( barcode->databaseMode().toLower() != "static" && barcode->databaseMode().toLower() != i18n("Static") ) 
     {
         QString encoding_type = getTypeFromCaption( barcode->databaseMode() );
         QString mode = getModeFromCaption( barcode->databaseMode() );
@@ -200,7 +200,7 @@ void Label::setBarcodeValue( Barkode* barcode )
             barcode->setType( query.value(1).toString() );
         }
 
-        if( mode.lower() != "main" ) 
+        if( mode.toLower() != "main" ) 
         {
             QSqlQuery query1( "select barcode_no from " TABLE_CUSTOMER_TEXT " where customer_no ='"+ mode +
                              "' and article_no='" + articleNo() + "'" );

@@ -433,7 +433,7 @@ QString TokenProvider::processUserVars( const QString & t )
 	{
 	    // every token starting with $ is a user defined variable
 	    for(it = m_findUserVarsList->begin(); it != m_findUserVarsList->end(); ++it ) 
-		if( (*it).lower() == t.lower() )
+		if( (*it).toLower() == t.toLower() )
 		{
 		    found = true;
 		    break;
@@ -852,7 +852,7 @@ QString TokenProvider::jsParse( const QString & script )
     KJS::Interpreter *js = new KJS::Interpreter(); //KJSEmbed::JSFactory::defaultJS();
     KJS::Completion comp;
 
-    comp = js->evaluate( KJS::UString( script.latin1() ) );
+    comp = js->evaluate( KJS::UString( script.toLatin1() ) );
     if( comp.complType() == KJS::ReturnValue || comp.complType() == KJS::Normal )
     {
 	ret = comp.value().toString( js->globalExec() ).cstring().c_str();
@@ -860,7 +860,7 @@ QString TokenProvider::jsParse( const QString & script )
 
 #else
     // Maybe we need no Completion object for KJSEmbed
-    KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.latin1() ) );
+    KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
     KJS::Value val = comp.value();
     if( val.isValid() )
 	ret = val.toString( s_interpreter->globalExec() ).cstring().c_str();
@@ -875,7 +875,7 @@ bool TokenProvider::jsParseToBool( const QString & script )
 {
 #ifdef USE_JAVASCRIPT
     // Maybe we need no Completion object for KJSEmbed
-    KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.latin1() ) );
+    KJS::Completion comp = s_interpreter->evaluate( KJS::UString( script.toLatin1() ) );
     KJS::Value val = comp.value();
     if( val.isValid() )
     {

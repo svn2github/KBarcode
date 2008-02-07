@@ -218,7 +218,7 @@ void ImageItem::createImage()
 	    {
 		QMatrix matrix;
 		matrix.rotate( m_rotation );
-		img = img.xForm( matrix );
+		img = img.transformed( matrix );
 	    }
         
 	    // scale with high quality on the printer

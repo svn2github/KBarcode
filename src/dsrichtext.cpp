@@ -188,7 +188,7 @@ void DSRichText::drawJustified( formated_line* line )
 {
     int all = 0;
     for( unsigned int z = 0; z < line->formats.count(); z++ ) {
-        line->formats[z].text = line->formats[z].text.stripWhiteSpace();
+        line->formats[z].text = line->formats[z].text.trimmed();
         QFontMetrics fm( line->formats[z].font );
         all += fm.width( line->formats[z].text );
     }
@@ -201,7 +201,7 @@ void DSRichText::drawJustified( formated_line* line )
 
         int ya = yDeviation( line );
         int tw = painter->fontMetrics().width(line->formats[z].text);
-        painter->drawText( int(x*sx), int((y+ya)*sy), int(tw*sx), int(line->lineSpacing * sy), Qt::AlignAuto, line->formats[z].text );
+        painter->drawText( int(x*sx), int((y+ya)*sy), int(tw*sx), int(line->lineSpacing * sy), Qt::AlignLeft, line->formats[z].text );
         x += tw;
         x += space;
     }

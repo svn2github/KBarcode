@@ -504,7 +504,7 @@ void Barkode::setBarHeight( unsigned int h )
 
 void Barkode::setType( const QString & type )
 {
-    m_type = type.lower();
+    m_type = type.toLower();
     updateEngine();
 }
 
@@ -919,7 +919,7 @@ void Barkode::initValidators()
 
     if( !xml.open( QIODevice::ReadOnly ) )
     {
-        qDebug( "Cannot read validation rules from %s\n", path.latin1() );
+        qDebug( "Cannot read validation rules from %s\n", path.toLatin1() );
         return;
     }
 
@@ -945,7 +945,7 @@ void Barkode::initValidators()
 
                 if( child.firstChild().isCDATASection() )
                 {
-                    pattern = child.firstChild().toCDATASection().data().stripWhiteSpace();
+                    pattern = child.firstChild().toCDATASection().data().trimmed();
                 }
 
                 

@@ -26,6 +26,8 @@
 
 #ifdef _ENABLE_NATIVE_GNU_BARCODE
 #  include <barcode.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 #else
 #define BARCODE_DEFAULT_FLAGS 0x00000000
 
@@ -63,14 +65,14 @@ enum {
 #include <qdom.h>
 #include <qfile.h>
 #include <qpainter.h>
-#include <qpicture.h>
+#include <q3picture.h>
 #include <qpixmap.h>
 #include <qsize.h>
 
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-QValueList<tBarcodeInfo> Barkode::s_info;
+Q3ValueList<tBarcodeInfo> Barkode::s_info;
 QStringList* Barkode::s_encoding   = NULL;
 bool Barkode::s_haveGnuBarcode     = false;
 bool Barkode::s_havePdfEncode      = false;
@@ -197,9 +199,9 @@ bool Barkode::operator==( const Barkode & barkode ) const
     return b;
 }
 
-const QPicture Barkode::picture()
+const Q3Picture Barkode::picture()
 {
-    QPicture pic;
+    Q3Picture pic;
     QPainter painter( &pic );
 
     painter.fillRect( 0, 0, size().width(), size().height(), m_background );
@@ -915,7 +917,7 @@ void Barkode::initValidators()
     QString*     regular;
     QString*     regularNot;
 
-    if( !xml.open( IO_ReadOnly ) )
+    if( !xml.open( QIODevice::ReadOnly ) )
     {
         qDebug( "Cannot read validation rules from %s\n", path.latin1() );
         return;

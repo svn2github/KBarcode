@@ -22,7 +22,7 @@
 #include "pixmapbarcode.h"
 #include "barkode.h"
 
-#include <qcstring.h>
+#include <q3cstring.h>
 
 class PurePostscriptOptions : public BarkodeEngineOptions {
     public:

@@ -21,6 +21,8 @@
 #include "mycanvasitem.h"
 
 #include <qobject.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 #include <kcommand.h>
 #include <klocale.h>
@@ -36,7 +38,7 @@ class MyCanvasRectangle;
 class MyCanvasView;
 class CanvasBarcode;
 class PictureRectangle;
-class QCanvasItem;
+class Q3CanvasItem;
 class QColor;
 class QFont;
 class QImage;
@@ -64,7 +66,7 @@ class CommandUtils : public QObject {
         void documentItemDeleted();
         
     protected:
-        QCanvas* c;
+        Q3Canvas* c;
         TCanvasItem* m_canvas_item;
 };
 

@@ -19,6 +19,8 @@
 #define PROPERTYWIDGET_H
 
 #include <qwidget.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
 #include "labelutils.h"
 
 class BarcodeWidget;
@@ -31,14 +33,14 @@ class KMacroCommand;
 class KTextEdit;
 class MultiLineEditor;
 class QCheckBox;
-class QGridLayout;
+class Q3GridLayout;
 class QRadioButton;
 //NY23
 class TextLineEditor;
 //NY23
 class TokenProvider;
 
-class QHBox;
+class Q3HBox;
 class KURLRequester;
 class KLineEdit;
 class KPushButton;
@@ -56,7 +58,7 @@ class PropertyWidget : public QWidget
         virtual void initSettings( DocumentItem* item ) = 0;
     
     protected:
-        QGridLayout* grid;
+        Q3GridLayout* grid;
 };
 
 class PropertyBorder : public PropertyWidget {
@@ -180,7 +182,7 @@ class PropertyImage : public PropertyWidget {
         QCheckBox* checkMirrorH;
         QCheckBox* checkMirrorV;
 	
-	QHBox* imgHBox;
+	Q3HBox* imgHBox;
 
         KComboBox* comboRotation;
 	KURLRequester* imgUrl;

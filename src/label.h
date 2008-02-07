@@ -19,7 +19,7 @@
 #define LABEL_H
 
 #include <qfont.h>
-#include <qpicture.h>
+#include <q3picture.h>
 #include "labelutils.h"
 #include "xmlutils.h"
 #include "definition.h"
@@ -32,7 +32,7 @@ class QIODevice;
 class QString;
 class QPainter;
 class QPaintDevice;
-class QTextStream;
+class Q3TextStream;
 class KPrinter;
 /** Creates a QPicture from the XML KBarcode file. If a SQL connections is available
   * the data from the SQL tables will be used, too.
@@ -43,9 +43,9 @@ class Label : private LabelUtils, private XMLUtils, public TokenProvider {
         Label( Definition* _def, QIODevice* device, QString labelname, QPaintDevice* _printer );
         ~Label();
 
-        void epcl( QTextStream* stream );
-        void ipl( QTextStream* stream );
-        void zpl( QTextStream* stream );
+        void epcl( Q3TextStream* stream );
+        void ipl( Q3TextStream* stream );
+        void zpl( Q3TextStream* stream );
 
         void draw( QPainter* painter,int x, int y );
         

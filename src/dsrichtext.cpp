@@ -23,6 +23,8 @@
 #include <qfontmetrics.h>
 #include <qpainter.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3ValueList>
 
 // for DSREPLACE
 #include "sqltables.h"
@@ -83,7 +85,7 @@ void DSRichText::initFormat( formated_word* f, int alignment )
     f->color = m_color;
 }
 
-void DSRichText::initLine( QValueList<formated_line>* l )
+void DSRichText::initLine( Q3ValueList<formated_line>* l )
 {
     formated_line li;
     li.width = 0;
@@ -94,7 +96,7 @@ void DSRichText::initLine( QValueList<formated_line>* l )
     l->append( li );
 }
 
-void DSRichText::updateSpacing( QValueList<formated_line>* l, QFontMetrics* fm )
+void DSRichText::updateSpacing( Q3ValueList<formated_line>* l, QFontMetrics* fm )
 {
     l->last().lineSpacing = (l->last().lineSpacing < fm->lineSpacing()) ? fm->lineSpacing() : l->last().lineSpacing;
     l->last().ascent = (l->last().ascent < fm->ascent()) ? fm->ascent() : l->last().ascent;

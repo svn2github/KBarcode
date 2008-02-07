@@ -1,3 +1,6 @@
+//Added by qt3to4:
+#include <QSqlQuery>
+#include <QPixmap>
 /***************************************************************************
                           labelutils.h  -  description
                              -------------------

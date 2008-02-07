@@ -19,12 +19,12 @@
 
 // Qt includes
 #include <qbuffer.h>
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qimage.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qregexp.h>
 #include <qstring.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 
 // font table for IPL, thanks to Erich Kitzmueller
 struct { int size; int c; int h; int w; } iplfonttable[] = {
@@ -52,30 +52,30 @@ int BarcodePrinterDevice::metric( int e ) const
 {
     int val = 0;
     switch ( e ) {
-        case QPaintDeviceMetrics::PdmPhysicalDpiX:
+        case Q3PaintDeviceMetrics::PdmPhysicalDpiX:
             val = (int)m_resolution_y;
             break;
-        case QPaintDeviceMetrics::PdmPhysicalDpiY:
+        case Q3PaintDeviceMetrics::PdmPhysicalDpiY:
             val = (int)m_resolution_x;
             break;
-        case QPaintDeviceMetrics::PdmDpiX:
+        case Q3PaintDeviceMetrics::PdmDpiX:
             val = (int)m_resolution_x;
             break;
-        case QPaintDeviceMetrics::PdmDpiY:
+        case Q3PaintDeviceMetrics::PdmDpiY:
             val = (int)m_resolution_y;
             break;
 
-        case QPaintDeviceMetrics::PdmNumColors:
+        case Q3PaintDeviceMetrics::PdmNumColors:
             val = 2; // black and white
             break;
-        case QPaintDeviceMetrics::PdmDepth:
+        case Q3PaintDeviceMetrics::PdmDepth:
             val = 1; // black and white
             break;
 
-        case QPaintDeviceMetrics::PdmWidth:
-        case QPaintDeviceMetrics::PdmHeight:
-        case QPaintDeviceMetrics::PdmWidthMM:
-        case QPaintDeviceMetrics::PdmHeightMM:
+        case Q3PaintDeviceMetrics::PdmWidth:
+        case Q3PaintDeviceMetrics::PdmHeight:
+        case Q3PaintDeviceMetrics::PdmWidthMM:
+        case Q3PaintDeviceMetrics::PdmHeightMM:
         default:
             break;
     }

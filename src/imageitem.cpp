@@ -21,8 +21,10 @@
 #include <qbuffer.h>
 #include <qdom.h>
 #include <qimage.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 #include <klocale.h>
 #include <kmdcodec.h> 
@@ -58,12 +60,12 @@ void ImageItem::draw(QPainter* painter)
     DocumentItem::drawBorder(painter);
 }
 
-void ImageItem::drawZpl( QTextStream* stream )
+void ImageItem::drawZpl( Q3TextStream* stream )
 {
     createImage();
     
     QBuffer buffer;
-    if( buffer.open( IO_WriteOnly ) )
+    if( buffer.open( QIODevice::WriteOnly ) )
     {
         // TODO: bmp????
         QImageIO io( &buffer, "PNG" ); 
@@ -81,12 +83,12 @@ void ImageItem::drawZpl( QTextStream* stream )
     }        
 }
 
-void ImageItem::drawIpl( QTextStream*, IPLUtils* )
+void ImageItem::drawIpl( Q3TextStream*, IPLUtils* )
 {
     qDebug("ImageItem is not implemented for IPL!");
 }
 
-void ImageItem::drawEPcl( QTextStream* stream )
+void ImageItem::drawEPcl( Q3TextStream* stream )
 {
     createImage();
     
@@ -148,7 +150,7 @@ void ImageItem::saveXML(QDomElement* element)
     QBuffer buf;
     if( !m_pixmap.isNull() )
     {
-	if(!buf.open( IO_WriteOnly ))
+	if(!buf.open( QIODevice::WriteOnly ))
 	    return;
         
 	m_pixmap.save( &buf, "PNG" );
@@ -214,7 +216,7 @@ void ImageItem::createImage()
 	{
 	    if( m_rotation != 0.0 )        
 	    {
-		QWMatrix matrix;
+		QMatrix matrix;
 		matrix.rotate( m_rotation );
 		img = img.xForm( matrix );
 	    }
@@ -235,7 +237,7 @@ void ImageItem::createImage()
 		// we have to scale because of the bigger printer resolution
 		if( DocumentItem::paintDevice()->isExtDev() )
 		{
-		    QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
+		    Q3PaintDeviceMetrics metrics( DocumentItem::paintDevice() );
 		    
 		    img = img.smoothScale( (int)(img.width() * ((double)metrics.logicalDpiX()/QPaintDevice::x11AppDpiX())),
 					   (int)(img.height() * ((double)metrics.logicalDpiY()/QPaintDevice::x11AppDpiY())),

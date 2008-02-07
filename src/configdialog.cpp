@@ -20,14 +20,19 @@
 #include "sqltables.h"
 
 // Qt includes
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qradiobutton.h>
 #include <qsqldatabase.h>
 #include <qtooltip.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
+#include <Q3Frame>
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <kabc/addressee.h>
@@ -63,8 +68,8 @@ ConfigDialog::~ConfigDialog()
 
 void ConfigDialog::setupTab1( )
 {
-    QFrame* box = addPage( i18n("SQL Settings"), "", BarIcon("connect_no") );
-    QVBoxLayout* layout = new QVBoxLayout( box, 6, 6 );
+    Q3Frame* box = addPage( i18n("SQL Settings"), "", BarIcon("connect_no") );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( box, 6, 6 );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
 
     sqlwidget = new SqlWidget( false, box, "sqlwidget" );
@@ -77,11 +82,11 @@ void ConfigDialog::setupTab2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
     
-    QFrame* box = addPage( i18n("Print Settings"), "", BarIcon("fileprint") );
+    Q3Frame* box = addPage( i18n("Print Settings"), "", BarIcon("fileprint") );
 
-    QVBoxLayout* tabLayout = new QVBoxLayout( box, 11, 6 );
-    QHBoxLayout* Layout0 = new QHBoxLayout( 0, 6, 6 );
-    QHBoxLayout* Layout1 = new QHBoxLayout( 0, 6, 6 );
+    Q3VBoxLayout* tabLayout = new Q3VBoxLayout( box, 11, 6 );
+    Q3HBoxLayout* Layout0 = new Q3HBoxLayout( 0, 6, 6 );
+    Q3HBoxLayout* Layout1 = new Q3HBoxLayout( 0, 6, 6 );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
 
     printerQuality = new KComboBox( false, box );
@@ -120,8 +125,8 @@ void ConfigDialog::setupTab3()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
 
-    QFrame* box = addPage( i18n("Import"), "", BarIcon("fileimport") );
-    QGridLayout* grid = new QGridLayout( box, 2, 2 );
+    Q3Frame* box = addPage( i18n("Import"), "", BarIcon("fileimport") );
+    Q3GridLayout* grid = new Q3GridLayout( box, 2, 2 );
 
     QLabel* label = new QLabel( box );
     label->setText( i18n("Comment:") );
@@ -149,7 +154,7 @@ void ConfigDialog::setupTab3()
     
     grid->addMultiCellWidget( checkUseCustomNo, 3, 3, 0, 2 );
     
-    QHBoxLayout* Layout1 = new QHBoxLayout( 0, 6, 6 );
+    Q3HBoxLayout* Layout1 = new Q3HBoxLayout( 0, 6, 6 );
     Layout1->addWidget( new QLabel( i18n("File Format:"), box ) );
 
     combo1 = new KComboBox( box );
@@ -183,8 +188,8 @@ void ConfigDialog::setupTab3()
 
 void ConfigDialog::setupTab4()
 {
-    QFrame* box = addPage( i18n("Label Editor"), "", BarIcon("kbarcode") );
-    QGridLayout* tabLayout = new QGridLayout( box, 11, 6 );
+    Q3Frame* box = addPage( i18n("Label Editor"), "", BarIcon("kbarcode") );
+    Q3GridLayout* tabLayout = new Q3GridLayout( box, 11, 6 );
 
     checkNewDlg = new QCheckBox( box );
     checkNewDlg->setText( i18n("&Create a new label on startup") );
@@ -212,15 +217,15 @@ void ConfigDialog::setupTab4()
 void ConfigDialog::setupTab5()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
-    QFrame* box = addPage( i18n("On New"), "", BarIcon("filenew") );
+    Q3Frame* box = addPage( i18n("On New"), "", BarIcon("filenew") );
 
-    QVBoxLayout* tabLayout = new QVBoxLayout( box, 11, 6 );
+    Q3VBoxLayout* tabLayout = new Q3VBoxLayout( box, 11, 6 );
 
-    QButtonGroup* bg = new QButtonGroup( i18n("On New Article"), box );
+    Q3ButtonGroup* bg = new Q3ButtonGroup( i18n("On New Article"), box );
     bg->setColumnLayout(0, Qt::Vertical );
     bg->layout()->setSpacing( 6 );
     bg->layout()->setMargin( 11 );
-    QGridLayout* bgLayout = new QGridLayout( bg->layout() );
+    Q3GridLayout* bgLayout = new Q3GridLayout( bg->layout() );
 
     QStringList alist, glist;
     alist.append( i18n("No Line Break") );
@@ -257,11 +262,11 @@ void ConfigDialog::setupTab5()
     bgLayout->addWidget( onNewArticle3, 2, 1 );
     bgLayout->addWidget( onNewArticle4, 3, 1 );
 
-    QButtonGroup* bg2 = new QButtonGroup( i18n("On New Group"), box );
+    Q3ButtonGroup* bg2 = new Q3ButtonGroup( i18n("On New Group"), box );
     bg2->setColumnLayout(0, Qt::Vertical );
     bg2->layout()->setSpacing( 6 );
     bg2->layout()->setMargin( 11 );
-    QGridLayout* bg2Layout = new QGridLayout( bg2->layout() );
+    Q3GridLayout* bg2Layout = new Q3GridLayout( bg2->layout() );
 
     onNewGroup1 = new KComboBox( false, bg2 );
     onNewGroup2 = new KComboBox( false, bg2 );

@@ -32,6 +32,11 @@
 #include <kdialogbase.h>
 #include <qdialog.h>
 #include <qmap.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <QCloseEvent>
+#include <QLabel>
+#include <Q3VBoxLayout>
 
 class BatchPrinter;
 class KURL;
@@ -52,23 +57,23 @@ class MyCanvasRectangle;
 class MyCanvasView;
 class BarcodeItem;
 class MyCanvas;
-class QCanvasItemList;
+class Q3CanvasItemList;
 class QCheckBox;
 class KComboBox;
-class QDockArea;
-class QDockWindow;
-class QGroupBox;
+class Q3DockArea;
+class Q3DockWindow;
+class Q3GroupBox;
 class QLabel;
 class QImage;
-class QHBoxLayout;
-class QVBoxLayout;
+class Q3HBoxLayout;
+class Q3VBoxLayout;
 class QPoint;
 class QRect;
 class QPaintDevice;
 class QString;
 class KPushButton;
 class KPrinter;
-class QCanvasItem;
+class Q3CanvasItem;
 class TCanvasItem;
 class RectItem;
 class LineItem;
@@ -88,7 +93,7 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
         };
 
         LabelEditor( QWidget *parent=0, QString _filename = QString::null,
-            const char *name="labeleditor", WFlags f = WType_TopLevel | WDestructiveClose );
+            const char *name="labeleditor", Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
         ~LabelEditor();
         bool startupDlg( ELabelEditorMode mode, QString f = QString::null );
 
@@ -241,7 +246,7 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
         KListBox* listFields;
         KPushButton* buttonText;
 
-        QVBoxLayout* pageLayout;
+        Q3VBoxLayout* pageLayout;
 
         QMap<QString,QString> fields;
 

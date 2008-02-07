@@ -21,12 +21,16 @@
 // Qt includes
 #include <qcheckbox.h>
 #include <qfile.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qmap.h>
-#include <qprogressdialog.h>
+#include <q3progressdialog.h>
 #include <qsqldatabase.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <QSqlQuery>
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <kapplication.h>
@@ -317,9 +321,9 @@ void SqlTables::importData( const QString & filename, QSqlDatabase* db )
     }
 
     QFile data( filename);
-    QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );
+    Q3ProgressDialog* dlg = new Q3ProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );
 
-    if( data.open( IO_ReadOnly ) ) {
+    if( data.open( QIODevice::ReadOnly ) ) {
         QString s;
         QSqlQuery query( QString::null, db );
         while( data.readLine( s, 1024 ) != -1 )
@@ -511,17 +515,17 @@ const QString SqlTables::getBarcodeMaxLength( const QString & name )
 SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     : QWidget( parent, name )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( this );
 
-    QGroupBox* groupDatabase = new QGroupBox( this );
+    Q3GroupBox* groupDatabase = new Q3GroupBox( this );
     groupDatabase->setTitle( i18n( "Database Settings" ) );
     groupDatabase->setColumnLayout(0, Qt::Vertical );
     groupDatabase->layout()->setSpacing( 6 );
     groupDatabase->layout()->setMargin( 11 );
-    QVBoxLayout* groupDatabaseLayout = new QVBoxLayout( groupDatabase->layout() );
+    Q3VBoxLayout* groupDatabaseLayout = new Q3VBoxLayout( groupDatabase->layout() );
     groupDatabaseLayout->setAlignment( Qt::AlignTop );
 
-    QGridLayout* grid = new QGridLayout( 2, 2 );
+    Q3GridLayout* grid = new Q3GridLayout( 2, 2 );
 
     QLabel* label = new QLabel( groupDatabase );
     label->setText( i18n("Username :") );

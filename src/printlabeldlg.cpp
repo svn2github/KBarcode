@@ -21,6 +21,8 @@
 // Qt includes
 #include <qcheckbox.h>
 #include <qlayout.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <knuminput.h>
@@ -30,7 +32,7 @@ PrintLabelDlg::PrintLabelDlg(QWidget *parent, const char *name )
     : KDialogBase( KDialogBase::Plain, i18n("Print"),
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
 {
-    QVBoxLayout* box = new QVBoxLayout( plainPage() );
+    Q3VBoxLayout* box = new Q3VBoxLayout( plainPage() );
 
     numLabels  = new KIntNumInput( plainPage() );
     numLabels->setLabel( i18n("Number of labels:" ), KNumInput::AlignLeft | KNumInput::AlignVCenter );

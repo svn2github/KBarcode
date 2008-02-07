@@ -45,7 +45,7 @@ class KPushButton;
 class KBarcode: public DSMainWindow, public KBarcodeIface {
     Q_OBJECT
     public:
-        KBarcode( QWidget *parent=0, const char *name="kbarcode", WFlags f = WType_TopLevel | WDestructiveClose );
+        KBarcode( QWidget *parent=0, const char *name="kbarcode", Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
         ~KBarcode();
 
         /** Parse all commandline options and start batchprinting

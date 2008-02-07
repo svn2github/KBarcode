@@ -23,9 +23,11 @@
 #include <qmenubar.h>
 #include <qmenudata.h>
 #include <qpixmap.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
 #include <qregexp.h>
-#include <qvbox.h>
+#include <q3vbox.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
 #include <kaction.h>
 #include <kapplication.h>
@@ -41,11 +43,11 @@ public:
         : KListViewItem( parent ), m_action( action )
         {
             QPixmap  pix;
-            QSize    size    = QIconSet::iconSize( QIconSet::Large );
-            QIconSet iconset = m_action->iconSet( KIcon::Panel, KIcon::SizeLarge );
+            QSize    size    = QIcon::iconSize( QIcon::Large );
+            QIcon iconset = m_action->iconSet( KIcon::Panel, KIcon::SizeLarge );
             QRegExp  regtag( "<[^>]*>" );
 
-            pix = iconset.pixmap( QIconSet::Large, QIconSet::Normal ); // m_action->isEnabled() ? QIconSet::Normal : QIconSet::Disabled );
+            pix = iconset.pixmap( QIcon::Large, QIcon::Normal ); // m_action->isEnabled() ? QIconSet::Normal : QIconSet::Disabled );
             if( pix.isNull() )
             {
                 pix.resize( size );
@@ -90,7 +92,7 @@ private:
 KActionMapDlg::KActionMapDlg( KActionCollection* actions, QWidget* parent, const char* name )
     : KDialogBase( parent, name, false, i18n("Action Map"), KDialogBase::Close, KDialogBase::Close )
 {
-    QVBox *page = makeVBoxMainWidget();
+    Q3VBox *page = makeVBoxMainWidget();
 
     new QLabel( i18n("Find and execute actions."), page );
     m_map = new KActionMap( actions, page );
@@ -106,7 +108,7 @@ void KActionMapDlg::updateEnabledState()
 KActionMap::KActionMap( KActionCollection* actions, QWidget* parent, const char* name )
     : QWidget( parent, name ), m_actions( actions ), m_showMenuTree( true ), m_grayOutItems( false )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( this );
 
     m_listView   = new KListView( this );
 #if KDE_VERSION >= 0x030500
@@ -116,9 +118,9 @@ KActionMap::KActionMap( KActionCollection* actions, QWidget* parent, const char*
     m_listView->addColumn( i18n("Action") );
     m_listView->addColumn( i18n("Shortcut") );
     m_listView->addColumn( i18n("Description") );
-    m_listView->setColumnWidthMode( 0, QListView::Maximum );
-    m_listView->setColumnWidthMode( 1, QListView::Maximum );
-    m_listView->setColumnWidthMode( 2, QListView::Manual );
+    m_listView->setColumnWidthMode( 0, Q3ListView::Maximum );
+    m_listView->setColumnWidthMode( 1, Q3ListView::Maximum );
+    m_listView->setColumnWidthMode( 2, Q3ListView::Manual );
     m_listView->setSorting( 0 );
     m_listView->setAllColumnsShowFocus( true );
 
@@ -127,7 +129,7 @@ KActionMap::KActionMap( KActionCollection* actions, QWidget* parent, const char*
 #endif 
     layout->addWidget( m_listView );
 
-    connect( m_listView, SIGNAL( executed( QListViewItem* ) ), this, SLOT( slotExecuteAction( QListViewItem* ) ) );
+    connect( m_listView, SIGNAL( executed( Q3ListViewItem* ) ), this, SLOT( slotExecuteAction( Q3ListViewItem* ) ) );
     connect( actions, SIGNAL( inserted( KAction* ) ), this, SLOT( slotActionCollectionChanged() ) );
     connect( actions, SIGNAL( removed( KAction* ) ), this, SLOT( slotActionCollectionChanged() ) );
     slotActionCollectionChanged();
@@ -168,7 +170,7 @@ void KActionMap::slotActionCollectionChanged()
     
 }
 
-void KActionMap::slotExecuteAction( QListViewItem* item )
+void KActionMap::slotExecuteAction( Q3ListViewItem* item )
 {
     KListViewActionItem* action = dynamic_cast<KListViewActionItem*>(item);
     if( !action )

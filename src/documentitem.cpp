@@ -23,7 +23,7 @@
 #include <kapplication.h>
 
 #include <qpen.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qdom.h>
 

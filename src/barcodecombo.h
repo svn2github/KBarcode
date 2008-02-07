@@ -20,6 +20,8 @@
 
 #include <qvalidator.h>
 #include <qwidget.h>
+//Added by qt3to4:
+#include <QLabel>
 #include <kcombobox.h>
 
 #include "barkode.h"
@@ -69,7 +71,7 @@ class KPushButton;
 #if QT_VERSION >= 0x030100
     class KTextEdit;
 #else
-    class QTextEdit;
+    class Q3TextEdit;
 #endif
 class QCheckBox;
 class QLabel;
@@ -115,7 +117,7 @@ class BarcodeWidget : public QWidget {
 #if QT_VERSION >= 0x030100
         KTextEdit* multi;
 #else
-        QTextEdit* multi;
+        Q3TextEdit* multi;
 #endif
         
         KIntNumInput* spinMargin;

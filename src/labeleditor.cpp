@@ -52,13 +52,13 @@
 
 // QT includes
 #include <qbuffer.h>
-#include <qcanvas.h>
+#include <q3canvas.h>
 #include <qcheckbox.h>
 #include <qclipboard.h>
-#include <qdockarea.h>
+#include <q3dockarea.h>
 #include <qdom.h>
-#include <qdragobject.h>
-#include <qgroupbox.h>
+#include <q3dragobject.h>
+#include <q3groupbox.h>
 #include <qimage.h>
 #include <qinputdialog.h>
 #include <qlabel.h>
@@ -66,17 +66,21 @@
 #include <qmap.h>
 #include <qmime.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qpicture.h>
+#include <q3paintdevicemetrics.h>
+#include <q3picture.h>
 #include <qpoint.h>
-#include <qprogressdialog.h>
+#include <q3progressdialog.h>
 #include <qsqlquery.h>
-#include <qtextbrowser.h>
+#include <q3textbrowser.h>
 #include <qtooltip.h>
 #include <qvalidator.h>
 #include <qxml.h>
 #if QT_VERSION <= 0x030100
     #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <Q3CString>
+#include <QCloseEvent>
 #endif
 
 // KDE includes
@@ -124,7 +128,7 @@
 
 using namespace KABC;
 
-LabelEditor::LabelEditor( QWidget *parent, QString _filename, const char *name, WFlags f )
+LabelEditor::LabelEditor( QWidget *parent, QString _filename, const char *name, Qt::WFlags f )
     : DCOPObject( "LabelEditor" ),
       DSMainWindow( parent, name, f )
 {
@@ -242,7 +246,7 @@ void LabelEditor::createCommandHistoryActions()
 void LabelEditor::clearLabel()
 {
     TCanvasItem* citem;
-    QCanvasItemList::Iterator it;
+    Q3CanvasItemList::Iterator it;
 
     description = QString::null;
 
@@ -255,7 +259,7 @@ void LabelEditor::clearLabel()
 
     m_edited = false;
 
-    QCanvasItemList list = c->allItems();
+    Q3CanvasItemList list = c->allItems();
     it = list.begin();
     for (; it != list.end(); ++it)
     {
@@ -303,7 +307,7 @@ bool LabelEditor::save( QString name )
         QFile::remove( name );
 
     QFile f( name );
-    if ( !f.open( IO_WriteOnly ) )
+    if ( !f.open( QIODevice::WriteOnly ) )
         return false;
 
     save( &f );
@@ -332,7 +336,7 @@ void LabelEditor::save( QIODevice* device )
 
     writeXMLHeader( &root, description, d );
 
-    QCanvasItemList list = c->allItems();
+    Q3CanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
     {
         TCanvasItem* item = static_cast<TCanvasItem*>(list[i]);
@@ -341,7 +345,7 @@ void LabelEditor::save( QIODevice* device )
         writeXMLDocumentItem( &root, &ditem );
     }
 
-    QCString xml = doc.toCString();
+    Q3CString xml = doc.toCString();
     device->writeBlock( xml, xml.length() );
     device->close();
 }
@@ -365,7 +369,7 @@ bool LabelEditor::openUrl( const QString & url )
     m_token->setLabelName( filename.right( filename.length() - filename.findRev( "/" ) - 1 ) );
 
     QFile f( filename );
-    if ( !f.open( IO_ReadOnly ) )
+    if ( !f.open( QIODevice::ReadOnly ) )
         return false;
 
     clearLabel();
@@ -453,24 +457,24 @@ void LabelEditor::setupActions()
     saveAct = KStdAction::save( this, SLOT( save() ), actionCollection(), "save" );
     saveAsAct = KStdAction::saveAs( this, SLOT( saveas() ), actionCollection(), "saveas" );
     descriptionAct = new KAction( i18n("&Change description..."), 0, 0, this, SLOT(changeDes()), actionCollection() );
-    deleteAct = new KAction( i18n("&Delete Object"), QIconSet( BarIcon("editdelete") ), Key_Delete, cv, SLOT( deleteCurrent() ), actionCollection() );
+    deleteAct = new KAction( i18n("&Delete Object"), QIcon( BarIcon("editdelete") ), Key_Delete, cv, SLOT( deleteCurrent() ), actionCollection() );
     editPropAct = new KAction( i18n("&Properties..."), 0, 0, this, SLOT( doubleClickedCurrent() ), actionCollection() );
     printAct = KStdAction::print( this, SLOT( print() ), actionCollection(), "print" );
     bcpAct = new KAction( i18n("Print to &Barcode Printer..."), 0, 0, this, SLOT( printBCP() ), actionCollection() );
     imgAct = new KAction( i18n("Print to &Image..."), 0, 0, this, SLOT(printImage() ), actionCollection() );
     changeSizeAct = new KAction( i18n("&Change Label..."), 0, 0, this, SLOT( changeSize() ), actionCollection() );
-    barcodeAct = new KAction( i18n("Insert &Barcode"), QIconSet( BarIcon("barcode") ), 0, this, SLOT( insertBarcode() ), actionCollection() );
+    barcodeAct = new KAction( i18n("Insert &Barcode"), QIcon( BarIcon("barcode") ), 0, this, SLOT( insertBarcode() ), actionCollection() );
     barcodeAct->setEnabled( Barkode::haveBarcode() );
 
-    pictureAct = new KAction( i18n("Insert &Picture"), QIconSet( BarIcon("inline_image") ), 0, this, SLOT( insertPicture() ), actionCollection() );
-    textAct = new KAction( i18n("Insert &Text"), QIconSet( BarIcon("text") ), 0, this, SLOT( insertText() ), actionCollection() );
-    textDataAct = new KAction( i18n("Insert &Data Field"), QIconSet( BarIcon("contents") ), 0, this, SLOT( insertDataText() ), actionCollection() );
-    textLineAct = new KAction( i18n("Insert &Text Line"), QIconSet( BarIcon("text") ), 0, this, SLOT( insertTextLine() ), actionCollection() );
-    lineAct = new KAction( i18n("Insert &Line"), QIconSet( BarIcon("kbarcodelinetool") ), 0, this, SLOT( insertLine() ), actionCollection() );
-    rectAct = new KAction( i18n("Insert &Rectangle"), QIconSet( BarIcon("kbarcoderect") ), 0, this, SLOT( insertRect() ), actionCollection() );
-    circleAct = new KAction( i18n("Insert &Ellipse"), QIconSet( BarIcon("kbarcodeellipse") ), 0, this, SLOT( insertCircle() ), actionCollection() );
+    pictureAct = new KAction( i18n("Insert &Picture"), QIcon( BarIcon("inline_image") ), 0, this, SLOT( insertPicture() ), actionCollection() );
+    textAct = new KAction( i18n("Insert &Text"), QIcon( BarIcon("text") ), 0, this, SLOT( insertText() ), actionCollection() );
+    textDataAct = new KAction( i18n("Insert &Data Field"), QIcon( BarIcon("contents") ), 0, this, SLOT( insertDataText() ), actionCollection() );
+    textLineAct = new KAction( i18n("Insert &Text Line"), QIcon( BarIcon("text") ), 0, this, SLOT( insertTextLine() ), actionCollection() );
+    lineAct = new KAction( i18n("Insert &Line"), QIcon( BarIcon("kbarcodelinetool") ), 0, this, SLOT( insertLine() ), actionCollection() );
+    rectAct = new KAction( i18n("Insert &Rectangle"), QIcon( BarIcon("kbarcoderect") ), 0, this, SLOT( insertRect() ), actionCollection() );
+    circleAct = new KAction( i18n("Insert &Ellipse"), QIcon( BarIcon("kbarcodeellipse") ), 0, this, SLOT( insertCircle() ), actionCollection() );
     spellAct = KStdAction::spelling( this, SLOT(spellCheck()), actionCollection(), "spell" );
-    gridAct = new KToggleAction( i18n("&Grid"), QIconSet( BarIcon("kbarcodegrid") ), 0, this, SLOT( toggleGrid() ), actionCollection() );
+    gridAct = new KToggleAction( i18n("&Grid"), QIcon( BarIcon("kbarcodegrid") ), 0, this, SLOT( toggleGrid() ), actionCollection() );
     previewAct = new KAction( i18n("&Preview..."), 0, 0, this, SLOT( preview() ), actionCollection() );
     sep = new KActionSeparator( this );
     cutAct = KStdAction::cut( this, SLOT( cut() ), actionCollection(), "cut" );
@@ -478,7 +482,7 @@ void LabelEditor::setupActions()
     pasteAct = KStdAction::paste( this, SLOT( paste() ), actionCollection(), "paste" );
     selectAllAct = KStdAction::selectAll( cv, SLOT( selectAll() ), actionCollection(), "select_all" );
     deSelectAllAct = KStdAction::deselect( cv, SLOT( deSelectAll() ), actionCollection(), "de_select_all" );
-    addressBookAct = new KAction( i18n("Address&book"), QIconSet( BarIcon("kaddressbook") ), 0, this, SLOT( launchAddressBook() ), actionCollection() );
+    addressBookAct = new KAction( i18n("Address&book"), QIcon( BarIcon("kaddressbook") ), 0, this, SLOT( launchAddressBook() ), actionCollection() );
     KAction* singleBarcodeAct = new KAction(i18n("&Create Single Barcode..."), "",
                                 0, this, SLOT(startBarcodeGen()),
                                 actionCollection(), "create" );
@@ -801,7 +805,7 @@ void LabelEditor::printImage()
 void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
 {
     QBuffer buffer;
-    if( !buffer.open( IO_WriteOnly ) )
+    if( !buffer.open( QIODevice::WriteOnly ) )
         return;
 
     save( &buffer );
@@ -813,7 +817,7 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
     batch->setCustomer( QString::null );
     batch->setEvents( false );
 
-    QValueList<BatchPrinter::data>* list = new QValueList<BatchPrinter::data>;
+    Q3ValueList<BatchPrinter::data>* list = new Q3ValueList<BatchPrinter::data>;
     BatchPrinter::data m_data;
     m_data.number = copies;
     m_data.article_no = QString::null;
@@ -839,7 +843,7 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
 void LabelEditor::spellCheck()
 {
     KMacroCommand* sc = new KMacroCommand( i18n("Spellchecking") );
-    QCanvasItemList list = c->allItems();
+    Q3CanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->rtti() == eRtti_Text ) {
             TCanvasItem* item = (TCanvasItem*)list[i];
@@ -913,7 +917,7 @@ void LabelEditor::onTopCurrent()
 
     int z = 0;
 
-    QCanvasItemList list = c->allItems();
+    Q3CanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->z() > z )
             z = (int)list[i]->z();
@@ -930,7 +934,7 @@ void LabelEditor::backCurrent()
 
     int z = 0;
 
-    QCanvasItemList list = c->allItems();
+    Q3CanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->z() < z )
             z = (int)list[i]->z();
@@ -947,7 +951,7 @@ const QString LabelEditor::fileName() const
 void LabelEditor::preview()
 {
     QBuffer buffer;
-    if( !buffer.open( IO_WriteOnly ) )
+    if( !buffer.open( QIODevice::WriteOnly ) )
         return;
 
     save( &buffer );

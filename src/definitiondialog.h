@@ -3,11 +3,17 @@
 
 #include <qwidget.h>
 #include <qdialog.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QLabel>
+#include <QPaintEvent>
 #include "measurements.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class Q3VBoxLayout; 
+class Q3HBoxLayout; 
+class Q3GridLayout; 
 class KComboBox;
 class KPushButton;
 class KRestrictedLine;
@@ -46,7 +52,7 @@ class DefinitionDialog : public QDialog
     Q_OBJECT
 
 public:
-    DefinitionDialog( QWidget* parent = 0, const char* name = 0, bool modal = true, WFlags fl = 0 );
+    DefinitionDialog( QWidget* parent = 0, const char* name = 0, bool modal = true, Qt::WFlags fl = 0 );
     ~DefinitionDialog();
 private:
     const Measurements getCurrentMeasure();
@@ -89,11 +95,11 @@ protected:
     LabelPreview* preview;
 
 protected:
-    QVBoxLayout* DefinitionDialogLayout;
-    QHBoxLayout* Layout17;
-    QVBoxLayout* Layout13;
-    QVBoxLayout* Layout14;
-    QHBoxLayout* Layout16;
+    Q3VBoxLayout* DefinitionDialogLayout;
+    Q3HBoxLayout* Layout17;
+    Q3VBoxLayout* Layout13;
+    Q3VBoxLayout* Layout14;
+    Q3HBoxLayout* Layout16;
 };
 
 #endif // DEFINITIONDIALOG_H

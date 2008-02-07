@@ -19,6 +19,12 @@
 #define BARCODEDIALOG_H
 
 #include <qdialog.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
+#include <Q3GridLayout>
+#include <QPixmap>
+#include <Q3HBoxLayout>
+#include <QLabel>
 
 class BarcodeCombo;
 class BarcodeWidget;
@@ -33,9 +39,9 @@ class KPopupMenu;
 class QCheckBox;
 class QLabel;
 class QPixmap;
-class QVBoxLayout;
-class QHBoxLayout; 
-class QGridLayout;
+class Q3VBoxLayout;
+class Q3HBoxLayout; 
+class Q3GridLayout;
 class TokenProvider;
 
 /** This class provides a dialog, where the user can create a single barcode
@@ -71,9 +77,9 @@ class BarCodeDialog : public QDialog
         void copy();
 
     protected:
-        QHBoxLayout* BarCodeDialogLayout;
-        QVBoxLayout* Layout6;
-        QVBoxLayout* Layout5;
+        Q3HBoxLayout* BarCodeDialogLayout;
+        Q3VBoxLayout* Layout6;
+        Q3VBoxLayout* Layout5;
 };
 
 #endif // BARCODEDIALOG_H

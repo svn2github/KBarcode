@@ -19,6 +19,9 @@
 #define CSVIMPORTDLG_H
 
 #include <qwidget.h>
+//Added by qt3to4:
+#include <Q3Frame>
+#include <Q3ValueList>
 #include <kdialogbase.h>
 
 class CSVFile;
@@ -29,9 +32,9 @@ class KLineEdit;
 class KPushButton;
 class KURLRequester;
 class QCheckBox;
-class QFrame;
-class QGroupBox;
-class QTable;
+class Q3Frame;
+class Q3GroupBox;
+class Q3Table;
 class QRadioButton;
 
 /** Import a CSV (comma separated value) file into
@@ -74,7 +77,7 @@ class CSVImportDlg : public KDialogBase  {
         /** Get the field with from listWidth
          *  as an integer list.
          */
-        QValueList<int> getFieldWidth();
+        Q3ValueList<int> getFieldWidth();
 
         /** Create the first tab of the dialog 
          *  to set the import data.
@@ -98,8 +101,8 @@ class CSVImportDlg : public KDialogBase  {
         KIntNumInput* spinCol;
         KPushButton* buttonSet;
         KURLRequester* requester;
-        QFrame* frame;
-        QTable* table;
+        Q3Frame* frame;
+        Q3Table* table;
         KLineEdit* databaseName;
 
         QRadioButton* radioCSVFile;
@@ -109,8 +112,8 @@ class CSVImportDlg : public KDialogBase  {
         KLineEdit* quote;
         KLineEdit* separator;
 
-        QGroupBox* groupCSV;
-        QGroupBox* groupFixed;
+        Q3GroupBox* groupCSV;
+        Q3GroupBox* groupFixed;
 
         KListBox* listWidth;
         KPushButton* buttonAdd;

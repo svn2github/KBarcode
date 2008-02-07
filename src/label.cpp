@@ -30,11 +30,13 @@
 // Qt includes
 #include <qimage.h>
 #include <qiodevice.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qpen.h>
-#include <qsqlcursor.h>
+#include <q3sqlcursor.h>
 #include <qxml.h>
+//Added by qt3to4:
+#include <QSqlQuery>
 
 // KDE includes
 #include <kapplication.h>
@@ -74,7 +76,7 @@ Label::~Label()
 {
 }
 
-void Label::epcl( QTextStream* stream )
+void Label::epcl( Q3TextStream* stream )
 {
     *stream << EPCLUtils::header();
     
@@ -86,7 +88,7 @@ void Label::epcl( QTextStream* stream )
     *stream << EPCLUtils::footer();
 }
 
-void Label::ipl( QTextStream* stream )
+void Label::ipl( Q3TextStream* stream )
 {
     IPLUtils utils;
     *stream << utils.header();
@@ -100,7 +102,7 @@ void Label::ipl( QTextStream* stream )
 }
 
 
-void Label::zpl( QTextStream* stream )
+void Label::zpl( Q3TextStream* stream )
 {
     *stream << ZPLUtils::header();
     
@@ -219,7 +221,7 @@ void Label::load( QIODevice* device )
     if( !device ) return;
 
     if( !device->isOpen() )
-        device->open( IO_ReadOnly );
+        device->open( QIODevice::ReadOnly );
 
     QDomDocument doc( "KBarcodeLabel" );        
     doc.setContent( device );

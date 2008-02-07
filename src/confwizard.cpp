@@ -21,14 +21,18 @@
 #include "dsmainwindow.h"
 
 // Qt includes
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qlayout.h>
 #include <qsqldatabase.h>
 #include <qradiobutton.h>
 #include <qprinter.h>
-#include <qtextbrowser.h>
+#include <q3textbrowser.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QLabel>
 
 // KDE includes
 #include <kapplication.h>
@@ -84,11 +88,11 @@ void ConfWizard::accept()
 void ConfWizard::setupPage1()
 {
     page = new QWidget( this, "page" );
-    pageLayout = new QVBoxLayout( page, 11, 6, "pageLayout");
+    pageLayout = new Q3VBoxLayout( page, 11, 6, "pageLayout");
 
-    Layout8 = new QHBoxLayout( 0, 0, 6, "Layout8");
+    Layout8 = new Q3HBoxLayout( 0, 0, 6, "Layout8");
 
-    Layout7 = new QVBoxLayout( 0, 0, 6, "Layout7");
+    Layout7 = new Q3VBoxLayout( 0, 0, 6, "Layout7");
 
     logo = new QLabel( page, "logo" );
     logo->setPixmap( locate("data", "kbarcode/logo.png") );
@@ -114,9 +118,9 @@ void ConfWizard::setupPage1()
 void ConfWizard::setupPage0()
 {
     QWidget* page_0 = new QWidget( this, "page_0" );
-    QVBoxLayout* pageLayout = new QVBoxLayout( page_0, 11, 6, "pageLayout");
+    Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page_0, 11, 6, "pageLayout");
 
-    QTextBrowser* b = new QTextBrowser( page_0, "b" );
+    Q3TextBrowser* b = new Q3TextBrowser( page_0, "b" );
     b->setText( DSMainWindow::systemCheck() );
 
     pageLayout->addWidget( b );
@@ -127,7 +131,7 @@ void ConfWizard::setupPage0()
 void ConfWizard::setupPage2()
 {
     page_2 = new QWidget( this, "page_2" );
-    pageLayout_2 = new QVBoxLayout( page_2, 11, 6, "pageLayout_2");
+    pageLayout_2 = new Q3VBoxLayout( page_2, 11, 6, "pageLayout_2");
 
     checkDatabase = new QCheckBox( page_2 );
     checkDatabase->setText( i18n("&Use database with KBarcode") );
@@ -147,14 +151,14 @@ void ConfWizard::setupPage2()
 void ConfWizard::setupPage3()
 {
     page_3 = new QWidget( this, "page_3" );
-    pageLayout_3 = new QVBoxLayout( page_3, 11, 6, "pageLayout_3");
+    pageLayout_3 = new Q3VBoxLayout( page_3, 11, 6, "pageLayout_3");
 
     TextLabel1_2 = new QLabel( page_3, "TextLabel1_2" );
     TextLabel1_2->setText( i18n( "KBarcode can create the required SQL tables for you.<br>KBarcode will add also some Label Definitions to the tables.<br>After that you can fill the tables with some example data." ) );
     TextLabel1_2->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter ) );
     pageLayout_3->addWidget( TextLabel1_2 );
 
-    Layout5_2 = new QVBoxLayout( 0, 0, 6, "Layout5_2");
+    Layout5_2 = new Q3VBoxLayout( 0, 0, 6, "Layout5_2");
 
     buttonCreate = new KPushButton( page_3, "buttonCreate" );
     buttonCreate->setText( i18n( "&Create Tables" ) );
@@ -229,7 +233,7 @@ void ConfWizard::example()
 
 void ConfWizard::showPage( QWidget* page )
 {
-    QWizard::showPage(page);
+    Q3Wizard::showPage(page);
 
     if( page == page_2 && !sqlwidget->driverCount() ) {
         KMessageBox::information( this, i18n(

@@ -21,9 +21,9 @@
 
 #include <qapplication.h>
 #include <qdom.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
-#include <qsimplerichtext.h>
+#include <q3simplerichtext.h>
 
 #include <kapplication.h>
 
@@ -54,8 +54,8 @@ void TextLineItem::draw(QPainter* painter)
 {
     QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
     QColorGroup cg;
-    QSimpleRichText srt( text, painter->font() );
-    QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
+    Q3SimpleRichText srt( text, painter->font() );
+    Q3PaintDeviceMetrics metrics( DocumentItem::paintDevice() );
 
     double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
     double scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
@@ -84,7 +84,7 @@ void TextLineItem::draw(QPainter* painter)
     DocumentItem::drawBorder( painter );
 }
 
-void TextLineItem::drawZpl( QTextStream* stream )
+void TextLineItem::drawZpl( Q3TextStream* stream )
 {
     // simply remove all html tags....
     QString data = m_text.replace( QRegExp("<[^>]*>"), "" );
@@ -92,7 +92,7 @@ void TextLineItem::drawZpl( QTextStream* stream )
     *stream << ZPLUtils::font( QFont() ); // todo: select a valid font
 }
 
-void TextLineItem::drawIpl( QTextStream* stream, IPLUtils* utils )
+void TextLineItem::drawIpl( Q3TextStream* stream, IPLUtils* utils )
 {
     int counter = utils->counter();
 
@@ -112,7 +112,7 @@ void TextLineItem::drawIpl( QTextStream* stream, IPLUtils* utils )
     utils->addValue( data );
 }
 
-void TextLineItem::drawEPcl( QTextStream* stream )
+void TextLineItem::drawEPcl( Q3TextStream* stream )
 {
     // TODO: parse text field HTML
 

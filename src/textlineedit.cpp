@@ -24,12 +24,14 @@
     #include <klineedit.h>
 #else
     #include <qlineedit.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 #endif
 #include <ktoolbar.h>
 #include <kcombobox.h>
 
 // Qt includes
-#include <qdockarea.h>
+#include <q3dockarea.h>
 #include <qregexp.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -37,7 +39,7 @@
 TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent, const char *name )
     : QWidget( parent, name ), m_token( token )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this, 6, 6 );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( this, 6, 6 );
 
 
 
@@ -49,7 +51,7 @@ TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent, const cha
 
     editor->setFocus();
 
-    QDockArea* area = new QDockArea( Qt::Horizontal, QDockArea::Normal, this );
+    Q3DockArea* area = new Q3DockArea( Qt::Horizontal, Q3DockArea::Normal, this );
     toolBar = new KToolBar( area );
     tool2Bar = new KToolBar( area );
     tool3Bar = new KToolBar( area );

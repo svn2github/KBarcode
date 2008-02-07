@@ -26,6 +26,11 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpainter.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <QPaintEvent>
+#include <QPixmap>
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <klocale.h>
@@ -75,17 +80,17 @@ void LabelPreview::paintEvent( QPaintEvent* )
 }
 
 /*****************************************/
-DefinitionDialog::DefinitionDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+DefinitionDialog::DefinitionDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     resize( 465, 345 );
     setCaption( i18n( "Add Label Definition" ) );
-    QHBoxLayout* layout = new QHBoxLayout( this, 6, 6 );
-    DefinitionDialogLayout = new QVBoxLayout( 0, 11, 6, "DefinitionDialogLayout");
+    Q3HBoxLayout* layout = new Q3HBoxLayout( this, 6, 6 );
+    DefinitionDialogLayout = new Q3VBoxLayout( 0, 11, 6, "DefinitionDialogLayout");
 
-    Layout17 = new QHBoxLayout( 0, 0, 6, "Layout17"); 
+    Layout17 = new Q3HBoxLayout( 0, 0, 6, "Layout17"); 
 
-    Layout13 = new QVBoxLayout( 0, 0, 6, "Layout13"); 
+    Layout13 = new Q3VBoxLayout( 0, 0, 6, "Layout13"); 
 
     TextLabel1 = new QLabel( this, "TextLabel1" );
     TextLabel1->setText( i18n( "Producer:" ) );
@@ -128,7 +133,7 @@ DefinitionDialog::DefinitionDialog( QWidget* parent,  const char* name, bool mod
     Layout13->addWidget( TextLabel10 );
      
     Layout17->addLayout( Layout13 );
-    Layout14 = new QVBoxLayout( 0, 0, 6, "Layout14"); 
+    Layout14 = new Q3VBoxLayout( 0, 0, 6, "Layout14"); 
 
     comboProducer = new KComboBox( FALSE, this, "comboProducer" );
     comboProducer->setEditable( TRUE );
@@ -185,7 +190,7 @@ DefinitionDialog::DefinitionDialog( QWidget* parent,  const char* name, bool mod
     QSpacerItem* spacer_2 = new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding );
     DefinitionDialogLayout->addItem( spacer_2 );
 
-    Layout16 = new QHBoxLayout( 0, 0, 6, "Layout16");
+    Layout16 = new Q3HBoxLayout( 0, 0, 6, "Layout16");
     buttonInfo = new KPushButton( i18n("More &Information"), this );
     Layout16->addWidget( buttonInfo );
 
@@ -340,7 +345,7 @@ void DefinitionDialog::updatePreview()
 
 void DefinitionDialog::drawGraphic()
 {
-    QWMatrix wm;
+    QMatrix wm;
     wm.rotate( 90 );
 
     QPixmap pic( 450, 330 );

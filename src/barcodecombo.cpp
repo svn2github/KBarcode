@@ -28,10 +28,12 @@
 #include <qlayout.h>
 #include <qregexp.h>
 #include <qstring.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
 #if QT_VERSION >= 0x030100
     #include <ktextedit.h>
 #else
-    #include <qtextedit.h>
+    #include <q3textedit.h>
 #endif
 
 // KDE includes
@@ -120,7 +122,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent, const char *name )
 {
     m_token = NULL;
 
-    QGridLayout* grid = new QGridLayout( this, 6, 6 );
+    Q3GridLayout* grid = new Q3GridLayout( this, 6, 6 );
 
     labelStandard = new QLabel( i18n( "&Encoding Type:" ), this );
     grid->addWidget( labelStandard, 1, 0 );
@@ -144,13 +146,13 @@ BarcodeWidget::BarcodeWidget(QWidget *parent, const char *name )
 #if QT_VERSION >= 0x030100
         multi = new KTextEdit( this );
 #else
-        multi = new QTextEdit( this );
+        multi = new Q3TextEdit( this );
 #endif
-    multi->setTextFormat( QTextEdit::PlainText );
-    multi->setWordWrap( QTextEdit::NoWrap );
+    multi->setTextFormat( Q3TextEdit::PlainText );
+    multi->setWordWrap( Q3TextEdit::NoWrap );
     multi->setEnabled( false );
-    multi->setVScrollBarMode( QScrollView::AlwaysOn );
-    multi->setHScrollBarMode( QScrollView::AlwaysOn );
+    multi->setVScrollBarMode( Q3ScrollView::AlwaysOn );
+    multi->setHScrollBarMode( Q3ScrollView::AlwaysOn );
     multi->hide();
     connect( multi, SIGNAL( textChanged() ), this, SLOT( changed() ) );    
     grid->addMultiCellWidget( multi, 3, 3, 1, 3 );
@@ -166,7 +168,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent, const char *name )
     grid->addWidget( buttonAdvanced, 4, 2 );
 
     buttonToken = new KPushButton( i18n("&Insert Data Field..."), this );
-    buttonToken->setIconSet( QIconSet( SmallIcon("contents") ) );
+    buttonToken->setIconSet( QIcon( SmallIcon("contents") ) );
     grid->addWidget( buttonToken, 4, 3 );
     
     spinMargin = new KIntNumInput( this, "spinMargin" );

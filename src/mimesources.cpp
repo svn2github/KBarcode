@@ -24,7 +24,7 @@
 #include <kcommand.h>
 
 #include <qbuffer.h>
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qdom.h>
 
 class DragCommand : public NewItemCommand {
@@ -47,7 +47,7 @@ class DragCommand : public NewItemCommand {
 
 
 DocumentItemDrag::DocumentItemDrag( QWidget* dragSource, const char* name )
-    : QStoredDrag( DocumentItemDrag::mimeType(), dragSource, name )
+    : Q3StoredDrag( DocumentItemDrag::mimeType(), dragSource, name )
 {
 }
 
@@ -60,7 +60,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
 {
     QByteArray data;
     QBuffer buffer( data );
-    if( buffer.open( IO_WriteOnly ) )
+    if( buffer.open( QIODevice::WriteOnly ) )
     {
         QDomDocument doc("KBarcodeClipboard");
         QDomElement root = doc.createElement( "root" );
@@ -73,7 +73,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
             xml.writeXMLDocumentItem( &root, &item );
         }
                 
-        QTextStream t( &buffer );
+        Q3TextStream t( &buffer );
         doc.save( t, 0 );
         
         buffer.close();

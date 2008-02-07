@@ -32,7 +32,7 @@ CSVFile::CSVFile( const QString & filename )
     m_comment = PrinterSettings::getInstance()->getData()->comment;
 
     m_file.setName( filename );
-    m_file.open( IO_ReadOnly );
+    m_file.open( QIODevice::ReadOnly );
 
     if( m_file.isOpen() )
 	m_stream.setDevice( &m_file );
@@ -47,7 +47,7 @@ CSVFile::CSVFile( QBuffer & buf )
     m_separator = PrinterSettings::getInstance()->getData()->separator;
     m_comment = PrinterSettings::getInstance()->getData()->comment;
 
-    buf.open( IO_ReadOnly );
+    buf.open( QIODevice::ReadOnly );
 
     if( buf.isOpen() )
 	m_stream.setDevice( &buf );

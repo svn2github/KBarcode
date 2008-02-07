@@ -20,9 +20,9 @@
 
 #include <xmlutils.h>
 #include <qobject.h>
-#include <qsortedlist.h> 
+#include <q3sortedlist.h> 
 #include <qstring.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 
 #include <qcolor.h>
 #include <qpen.h>
@@ -43,7 +43,7 @@ enum ERtti {
 class QDomElement;
 class QPainter;
 class QPaintDevice;
-class QTextStream;
+class Q3TextStream;
 class TCanvasItem;
 class TokenProvider;
 
@@ -85,17 +85,17 @@ public:
     /** 
      * Write a ZPL string for drawing this item onto a zebra printer to a QTextStream
      */
-    virtual void drawZpl( QTextStream* stream ) = 0;
+    virtual void drawZpl( Q3TextStream* stream ) = 0;
 
     /** 
      * Write a IPL string for drawing this item onto a zebra printer to a QTextStream
      */
-    virtual void drawIpl( QTextStream* stream, IPLUtils* utils ) = 0;
+    virtual void drawIpl( Q3TextStream* stream, IPLUtils* utils ) = 0;
         
     /** 
      * Write a EPCL string for drawing this item onto a zebra printer to a QTextStream
      */
-    virtual void drawEPcl( QTextStream* stream ) = 0;
+    virtual void drawEPcl( Q3TextStream* stream ) = 0;
     
     void setCanvasItem( TCanvasItem* item );
     TCanvasItem* canvasItem() const;
@@ -224,7 +224,7 @@ const QString DocumentItem::visibilityScript() const
     return m_visibilityScript;
 }
 
-typedef QSortedList<DocumentItem> DocumentItemList;
+typedef Q3SortedList<DocumentItem> DocumentItemList;
 
 #endif //DOCUMENTITEM_H
 

@@ -18,14 +18,14 @@
 #ifndef MIMESOURCES_H
 #define MIMESOURCES_H
 
-#include <qdragobject.h>
+#include <q3dragobject.h>
 #include "documentitem.h"
 
 class KCommandHistory;
 class TokenProvider;
 class MyCanvasView;
 
-class DocumentItemDrag : public QStoredDrag {
+class DocumentItemDrag : public Q3StoredDrag {
     Q_OBJECT
     public:
         DocumentItemDrag( QWidget* dragSource = NULL, const char* name = 0 );

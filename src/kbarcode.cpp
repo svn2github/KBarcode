@@ -26,8 +26,10 @@
 #include "kbarcodesettings.h"
 
 // Qt includes
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlayout.h>
+//Added by qt3to4:
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <kaction.h>
@@ -39,13 +41,13 @@
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 
-KBarcode::KBarcode( QWidget *parent, const char *name, WFlags f)
+KBarcode::KBarcode( QWidget *parent, const char *name, Qt::WFlags f)
     : DCOPObject("KBarcode"),
       DSMainWindow( parent, name, f )
 {
-    QGroupBox* w = new QGroupBox( this );
+    Q3GroupBox* w = new Q3GroupBox( this );
     w->setColumnLayout(0, Qt::Vertical );
-    QVBoxLayout* layout = new QVBoxLayout( w->layout() );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( w->layout() );
     setCentralWidget( w );
 
     buttonSingle = new KPushButton( i18n("Barcode &Generator..."), w );

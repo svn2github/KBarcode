@@ -9,7 +9,9 @@
 #include "/home/dominik/Desktop/Programming/kbarcode/kbarcode/editoriface.h"
 
 #include <kdatastream.h>
-#include <qasciidict.h>
+#include <q3asciidict.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 
 static const int EditorIface_fhash = 19;
@@ -53,11 +55,11 @@ static const int EditorIface_ftable_hiddens[17] = {
     0,
 };
 
-bool EditorIface::process(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
+bool EditorIface::process(const Q3CString &fun, const QByteArray &data, Q3CString& replyType, QByteArray &replyData)
 {
-    static QAsciiDict<int>* fdict = 0;
+    static Q3AsciiDict<int>* fdict = 0;
     if ( !fdict ) {
-	fdict = new QAsciiDict<int>( EditorIface_fhash, true, false );
+	fdict = new Q3AsciiDict<int>( EditorIface_fhash, true, false );
 	for ( int i = 0; EditorIface_ftable[i][1]; i++ )
 	    fdict->insert( EditorIface_ftable[i][1],  new int( i ) );
     }
@@ -65,12 +67,12 @@ bool EditorIface::process(const QCString &fun, const QByteArray &data, QCString&
     switch ( fp?*fp:-1) {
     case 0: { // QString fileName()
 	replyType = EditorIface_ftable[0][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << fileName( );
     } break;
     case 1: { // bool isChanged()
 	replyType = EditorIface_ftable[1][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << isChanged( );
     } break;
     case 2: { // void print()
@@ -79,7 +81,7 @@ bool EditorIface::process(const QCString &fun, const QByteArray &data, QCString&
     } break;
     case 3: { // bool newLabel()
 	replyType = EditorIface_ftable[3][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << newLabel( );
     } break;
     case 4: { // void insertBarcode()
@@ -128,20 +130,20 @@ bool EditorIface::process(const QCString &fun, const QByteArray &data, QCString&
     } break;
     case 15: { // bool openUrl(QString)
 	QString arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = EditorIface_ftable[15][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << openUrl(arg0 );
     } break;
     case 16: { // bool save(QString)
 	QString arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = EditorIface_ftable[16][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << save(arg0 );
     } break;
     default: 
@@ -163,7 +165,7 @@ QCStringList EditorIface::functions()
     for ( int i = 0; EditorIface_ftable[i][2]; i++ ) {
 	if (EditorIface_ftable_hiddens[i])
 	    continue;
-	QCString func = EditorIface_ftable[i][0];
+	Q3CString func = EditorIface_ftable[i][0];
 	func += ' ';
 	func += EditorIface_ftable[i][2];
 	funcs << func;

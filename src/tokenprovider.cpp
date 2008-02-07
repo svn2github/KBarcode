@@ -25,10 +25,10 @@
 
 // Qt includes
 #include <qdatetime.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qsqlquery.h>
 #include <qregexp.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <time.h>
 
 #include <klocale.h>
@@ -177,7 +177,7 @@ TokenProvider::~TokenProvider()
 {
 }
 
-QValueList<tCategories> TokenProvider::s_categories;
+Q3ValueList<tCategories> TokenProvider::s_categories;
 QMap<TokenProvider::ECategories,QString> TokenProvider::s_captions;
 #ifdef NO_KJS_EMBED
 KJS::Interpreter* TokenProvider::s_interpreter = NULL;
@@ -194,7 +194,7 @@ bool TokenProvider::hasJavaScript()
 #endif // USE_JAVASCRIPT
 }
 
-QValueList<tCategories>* TokenProvider::getTokens()
+Q3ValueList<tCategories>* TokenProvider::getTokens()
 {
     TokenProvider::init(); 
     return &s_categories;
@@ -557,7 +557,7 @@ QString TokenProvider::process( const QString & t )
 
     if( m_printer && t == TOK_RESOLUTION ) 
     {
-	QPaintDeviceMetrics metrics( m_printer );
+	Q3PaintDeviceMetrics metrics( m_printer );
 	ret = QString( "%1dpi" ).arg( metrics.logicalDpiY() );
     }
 

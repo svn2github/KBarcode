@@ -20,6 +20,8 @@
 
 #include <kwizard.h>
 #include "batchiface.h"
+//Added by qt3to4:
+#include <QLabel>
 
 class BatchPrinter;
 class EncodingCombo;
@@ -32,14 +34,14 @@ class KListView;
 class KPushButton;
 class KURLRequester;
 class QCheckBox;
-class QHBox;
+class Q3HBox;
 class QLabel;
-class QListView;
-class QListViewItem;
+class Q3ListView;
+class Q3ListViewItem;
 class QRadioButton;
-class QTable;
-class QVBox;
-class QWidgetStack;
+class Q3Table;
+class Q3VBox;
+class Q3WidgetStack;
 
 class BatchWizard : public KWizard, public BatchIface {
     Q_OBJECT
@@ -131,7 +133,7 @@ class BatchWizard : public KWizard, public BatchIface {
 	void customerNameChanged( int index );
 	void addItem();
         bool slotAddItem( const QString & article, const QString & group, int count );
-	void changeItem( QListViewItem* item, const QPoint &, int );
+	void changeItem( Q3ListViewItem* item, const QPoint &, int );
 	void editItem();
 	void removeItem();
 
@@ -145,7 +147,7 @@ class BatchWizard : public KWizard, public BatchIface {
         void slotRemoveAllAddress();
 
     private:
-        void moveAddress( QListView* src, QListView* dst, bool bAll = false );
+        void moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll = false );
 
 	void fillByteArray();
 	void fillVarList();
@@ -186,17 +188,17 @@ class BatchWizard : public KWizard, public BatchIface {
 
 	QWidget* page1;
 	QWidget* page2;
-	QWidgetStack* page3;
-	QVBox* page4;
-	QVBox* page5;
+	Q3WidgetStack* page3;
+	Q3VBox* page4;
+	Q3VBox* page5;
 	QWidget* page10;
 
-	QVBox* stack1;
-	QHBox* stack2;
-	QVBox* stack3;
+	Q3VBox* stack1;
+	Q3HBox* stack2;
+	Q3VBox* stack3;
         QWidget* stack4;
 
-	QVBox* imageBox;
+	Q3VBox* imageBox;
 
 	QLabel* labelInfo;
 	QLabel* labelSqlQuery;
@@ -235,7 +237,7 @@ class BatchWizard : public KWizard, public BatchIface {
 	KIntNumInput* serialInc;
 	KIntNumInput* numLabels;
 
-	QTable* m_varTable;
+	Q3Table* m_varTable;
 	KListBox* m_varList;
 
         KListView* listAddress;

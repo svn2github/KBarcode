@@ -19,9 +19,9 @@
 #define BARCODEDIALOGS_H
 
 #include <qmap.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #include <qwidget.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <kdialogbase.h>
 
 class Barkode;
@@ -64,7 +64,7 @@ class AdvancedBarcodeDialog : public KDialogBase {
         void getData( Barkode* b );
 
     private:
-        QPtrList<BarcodeDlgBase> list;
+        Q3PtrList<BarcodeDlgBase> list;
 };
 
 /** A configuration widget for TBarcode settings.
@@ -148,7 +148,7 @@ class SequenceDlg : public QWidget, public BarcodeDlgBase {
 /** A configuration widget for colors in pure postscript barcodes
   * @author Dominik Seichter
   */
-class ColorDlg : public QVBox, public BarcodeDlgBase {
+class ColorDlg : public Q3VBox, public BarcodeDlgBase {
     Q_OBJECT
     public:
         ColorDlg(QWidget *parent=0, const char *name=0);
@@ -165,7 +165,7 @@ class ColorDlg : public QVBox, public BarcodeDlgBase {
 /** A configuration widget for colors in pure postscript barcodes
   * @author Dominik Seichter
   */
-class PurePostscriptDlg : public QVBox, public BarcodeDlgBase {
+class PurePostscriptDlg : public Q3VBox, public BarcodeDlgBase {
     Q_OBJECT
     public:
         PurePostscriptDlg(QWidget *parent=0, const char *name=0);

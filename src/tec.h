@@ -24,13 +24,13 @@
 // QT includes
 #include <qclipboard.h>
 #include <qcursor.h>
-#include <qgroupbox.h>
-#include <qhbox.h>
+#include <q3groupbox.h>
+#include <q3hbox.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qprogressdialog.h>
-#include <qsqlcursor.h>
+#include <q3paintdevicemetrics.h>
+#include <q3progressdialog.h>
+#include <q3sqlcursor.h>
 #include <qvalidator.h>
 
 // KDE includes

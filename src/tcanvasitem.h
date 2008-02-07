@@ -2,7 +2,7 @@
 #ifndef TCANVASITEM_H
 #define TCANVASITEM_H
 #include <qstring.h>
-#include <qcanvas.h>
+#include <q3canvas.h>
 
 #include "documentitem.h"
 #include "referencecounted.h"
@@ -16,7 +16,7 @@ class MyCanvasView;
  *
  * The class is also ReferenceCounted!!!
  */
-class TCanvasItem : public QCanvasRectangle, public ReferenceCounted {
+class TCanvasItem : public Q3CanvasRectangle, public ReferenceCounted {
 public:
 
     TCanvasItem ( MyCanvasView* cv );

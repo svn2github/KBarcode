@@ -19,12 +19,17 @@
 #define CONFWIZARD_H
 
 #include <kwizard.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <QLabel>
 
-class QButtonGroup;
+class Q3ButtonGroup;
 class QCheckBox;
-class QVBoxLayout;
-class QHBoxLayout; 
-class QGridLayout;
+class Q3VBoxLayout;
+class Q3HBoxLayout; 
+class Q3GridLayout;
 class QRadioButton;
 class KComboBox;
 class KLineEdit;
@@ -82,20 +87,20 @@ class ConfWizard : public KWizard
         QLabel* TextLabel1_2;
         KPushButton* buttonCreate;
         KPushButton* buttonExample;
-        QButtonGroup* groupDatabase;
+        Q3ButtonGroup* groupDatabase;
 
     protected:
-        QVBoxLayout* pageLayout;
-        QHBoxLayout* Layout8;
-        QVBoxLayout* Layout7;
-        QVBoxLayout* pageLayout_2;
-        QVBoxLayout* pageLayout_4;
-        QHBoxLayout* Layout5;
-        QVBoxLayout* Layout3;
-        QVBoxLayout* Layout4;
-        QVBoxLayout* Layout6;
-        QVBoxLayout* pageLayout_3;
-        QVBoxLayout* Layout5_2;
+        Q3VBoxLayout* pageLayout;
+        Q3HBoxLayout* Layout8;
+        Q3VBoxLayout* Layout7;
+        Q3VBoxLayout* pageLayout_2;
+        Q3VBoxLayout* pageLayout_4;
+        Q3HBoxLayout* Layout5;
+        Q3VBoxLayout* Layout3;
+        Q3VBoxLayout* Layout4;
+        Q3VBoxLayout* Layout6;
+        Q3VBoxLayout* pageLayout_3;
+        Q3VBoxLayout* Layout5_2;
 };
 
 #endif // CONFWIZARD_H

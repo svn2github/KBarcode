@@ -21,16 +21,20 @@
 #include "tbarcode2.h"
 
 // Qt includes
-#include <qbuttongroup.h>
+#include <q3buttongroup.h>
 #include <qcheckbox.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qmap.h>
 #include <qradiobutton.h>
 #include <qtooltip.h>
-#include <qvbox.h>
-#include <qvgroupbox.h>
+#include <q3vbox.h>
+#include <q3vgroupbox.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <kcombobox.h>
@@ -46,36 +50,36 @@ AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent, con
     list.setAutoDelete( false );
     
     if( Barkode::hasFeature( type, PDF417BARCODE ) ) {
-        QVBox* box = addVBoxPage( i18n("PDF417") );
+        Q3VBox* box = addVBoxPage( i18n("PDF417") );
         PDF417BarcodeDlg* dlg = new PDF417BarcodeDlg( box );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, DATAMATRIX ) ) {
-        QVBox* box = addVBoxPage( i18n("DataMatrix") );
+        Q3VBox* box = addVBoxPage( i18n("DataMatrix") );
         DataMatrixDlg* dlg = new DataMatrixDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
     if( Barkode::hasFeature( type, TBARCODEADV ) ) {
-        QVBox* box = addVBoxPage( i18n("TBarcode") );
+        Q3VBox* box = addVBoxPage( i18n("TBarcode") );
         TBarcodeDlg* dlg = new TBarcodeDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
     if( Barkode::hasFeature( type, PUREADV ) ) {
-        QVBox* box = addVBoxPage( i18n("Barcode Writer in Pure Postscript") );
+        Q3VBox* box = addVBoxPage( i18n("Barcode Writer in Pure Postscript") );
         PurePostscriptDlg* dlg = new PurePostscriptDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
     if( Barkode::hasFeature( type, COLORED ) ) {
-        QVBox* box = addVBoxPage( i18n("Colors") );
+        Q3VBox* box = addVBoxPage( i18n("Colors") );
         ColorDlg* dlg = new ColorDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
-    QVBox* box = addVBoxPage( i18n("Sequence") );
+    Q3VBox* box = addVBoxPage( i18n("Sequence") );
     SequenceDlg* dlg = new SequenceDlg( box );
     list.append( (BarcodeDlgBase*)dlg );
 }
@@ -103,14 +107,14 @@ void AdvancedBarcodeDialog::getData( Barkode* b )
 TBarcodeDlg::TBarcodeDlg(QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this, 6, 6 );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( this, 6, 6 );
 
-    QGroupBox* gb  = new QGroupBox( i18n("TBarcode"), this );
+    Q3GroupBox* gb  = new Q3GroupBox( i18n("TBarcode"), this );
     gb->setColumnLayout(0, Qt::Vertical );
     gb->layout()->setSpacing( 6 );
     gb->layout()->setMargin( 11 );
     gb->setEnabled( Barkode::haveTBarcode() || Barkode::haveTBarcode2() );
-    QVBoxLayout* gbLayout = new QVBoxLayout( gb->layout() );
+    Q3VBoxLayout* gbLayout = new Q3VBoxLayout( gb->layout() );
 
     spinModule = new KDoubleNumInput( gb );
     spinModule->setLabel( i18n("Module width (mm):"), AlignLeft | AlignVCenter );
@@ -129,7 +133,7 @@ TBarcodeDlg::TBarcodeDlg(QWidget *parent, const char *name )
     QLabel* label = new QLabel( i18n("&Checksum calculation method:"), gb );
     label->setBuddy( comboCheckSum );
 
-    QHBoxLayout * hbox = new QHBoxLayout( 0, 6, 6 );
+    Q3HBoxLayout * hbox = new Q3HBoxLayout( 0, 6, 6 );
     hbox->addWidget( label );
     hbox->addWidget( comboCheckSum );
             
@@ -253,14 +257,14 @@ void TBarcodeDlg::getData( Barkode* b ) const
 PDF417BarcodeDlg::PDF417BarcodeDlg(QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this, 6, 6 );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( this, 6, 6 );
 
-    QGroupBox* gpdf  = new QGroupBox( i18n("PDF417"), this );
+    Q3GroupBox* gpdf  = new Q3GroupBox( i18n("PDF417"), this );
     gpdf->setColumnLayout(0, Qt::Vertical );
     gpdf->layout()->setSpacing( 6 );
     gpdf->layout()->setMargin( 11 );
     gpdf->setEnabled( Barkode::haveTBarcode() || Barkode::havePDFBarcode() );
-    QVBoxLayout* gpdfLayout = new QVBoxLayout( gpdf->layout() );
+    Q3VBoxLayout* gpdfLayout = new Q3VBoxLayout( gpdf->layout() );
 
     spinRow = new KIntNumInput( gpdf );
     spinRow->setLabel( i18n("Rows:"),  AlignLeft | AlignVCenter );
@@ -307,7 +311,7 @@ void PDF417BarcodeDlg::getData( Barkode* b ) const
 DataMatrixDlg::DataMatrixDlg(QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-    QHBoxLayout* datamLayout = new QHBoxLayout( this, 6, 6 );
+    Q3HBoxLayout* datamLayout = new Q3HBoxLayout( this, 6, 6 );
 
     comboDataMatrix = new KComboBox( false, this );
 
@@ -361,13 +365,13 @@ void DataMatrixDlg::getData( Barkode* b ) const
 SequenceDlg::SequenceDlg( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-    QVBoxLayout* main = new QVBoxLayout( this, 6, 6 );
+    Q3VBoxLayout* main = new Q3VBoxLayout( this, 6, 6 );
 
-    QButtonGroup* group = new QButtonGroup( i18n("Sequence"), this );
+    Q3ButtonGroup* group = new Q3ButtonGroup( i18n("Sequence"), this );
     group->setColumnLayout(0, Qt::Vertical );
     group->layout()->setSpacing( 6 );
     group->layout()->setMargin( 11 );
-    QVBoxLayout* layout = new QVBoxLayout( group->layout() );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( group->layout() );
 
     checkSequence = new QCheckBox( i18n("&Enable sequence"), group );
                                                                                                         
@@ -439,14 +443,14 @@ void SequenceDlg::enableControls()
 }
 
 ColorDlg::ColorDlg(QWidget *parent, const char *name)
-    : QVBox( parent, name )
+    : Q3VBox( parent, name )
 {
-    QGroupBox* gb  = new QGroupBox( i18n("Colors"), this );
+    Q3GroupBox* gb  = new Q3GroupBox( i18n("Colors"), this );
     gb->setColumnLayout(0, Qt::Vertical );
     gb->layout()->setSpacing( 6 );
     gb->layout()->setMargin( 11 );
     gb->setEnabled( Barkode::havePurePostscriptBarcode() );
-    QGridLayout* gbLayout = new QGridLayout( gb->layout() );
+    Q3GridLayout* gbLayout = new Q3GridLayout( gb->layout() );
 
     buttonBarColor = new KColorButton( gb );
     buttonBackColor = new KColorButton( gb );
@@ -475,9 +479,9 @@ void ColorDlg::getData( Barkode* b ) const
 }
 
 PurePostscriptDlg::PurePostscriptDlg(QWidget *parent, const char *name)
-    : QVBox( parent, name )
+    : Q3VBox( parent, name )
 {
-    QVGroupBox* gb  = new QVGroupBox( i18n("Barcode Writer in Pure Postscript"), this );
+    Q3VGroupBox* gb  = new Q3VGroupBox( i18n("Barcode Writer in Pure Postscript"), this );
     gb->setEnabled( Barkode::havePurePostscriptBarcode() );
     
     checkChecksum = new QCheckBox( i18n("Enable &Checksum"), gb );

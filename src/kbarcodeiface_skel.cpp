@@ -9,7 +9,9 @@
 #include "/home/dominik/Desktop/Programming/kbarcode/kbarcode/kbarcodeiface.h"
 
 #include <kdatastream.h>
-#include <qasciidict.h>
+#include <q3asciidict.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 
 static const int KBarcodeIface_fhash = 13;
@@ -43,11 +45,11 @@ static const int KBarcodeIface_ftable_hiddens[12] = {
     0,
 };
 
-bool KBarcodeIface::process(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
+bool KBarcodeIface::process(const Q3CString &fun, const QByteArray &data, Q3CString& replyType, QByteArray &replyData)
 {
-    static QAsciiDict<int>* fdict = 0;
+    static Q3AsciiDict<int>* fdict = 0;
     if ( !fdict ) {
-	fdict = new QAsciiDict<int>( KBarcodeIface_fhash, true, false );
+	fdict = new Q3AsciiDict<int>( KBarcodeIface_fhash, true, false );
 	for ( int i = 0; KBarcodeIface_ftable[i][1]; i++ )
 	    fdict->insert( KBarcodeIface_ftable[i][1],  new int( i ) );
     }
@@ -87,12 +89,12 @@ bool KBarcodeIface::process(const QCString &fun, const QByteArray &data, QCStrin
     } break;
     case 8: { // bool isSQLConnected()
 	replyType = KBarcodeIface_ftable[8][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << isSQLConnected( );
     } break;
     case 9: { // bool connectSQL()
 	replyType = KBarcodeIface_ftable[9][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << connectSQL( );
     } break;
     case 10: { // void showWizard()
@@ -122,7 +124,7 @@ QCStringList KBarcodeIface::functions()
     for ( int i = 0; KBarcodeIface_ftable[i][2]; i++ ) {
 	if (KBarcodeIface_ftable_hiddens[i])
 	    continue;
-	QCString func = KBarcodeIface_ftable[i][0];
+	Q3CString func = KBarcodeIface_ftable[i][0];
 	func += ' ';
 	func += KBarcodeIface_ftable[i][2];
 	funcs << func;

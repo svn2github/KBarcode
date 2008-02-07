@@ -25,13 +25,13 @@
 
 #include <qapplication.h>
 #include <qdom.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
-#include <qpicture.h>
-#include <qsimplerichtext.h>
+#include <q3picture.h>
+#include <q3simplerichtext.h>
 
 #include <kapplication.h>
-#include <qwmatrix.h>
+#include <qmatrix.h>
 
 TextItem::TextItem() 
     : DocumentItem()
@@ -56,13 +56,13 @@ void TextItem::draw(QPainter* painter)
     if( t != m_text )    
         autosize = true;
     
-    QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
+    Q3PaintDeviceMetrics metrics( DocumentItem::paintDevice() );
     
     double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
     double scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
 
     QColorGroup cg;
-    QSimpleRichText srt( t, painter->font() );
+    Q3SimpleRichText srt( t, painter->font() );
 
     /*
     int width = (rect().width() < (int)((double)srt.widthUsed()*scalex) && autosize) ? srt.widthUsed() : rect().width();
@@ -107,7 +107,7 @@ void TextItem::draw(QPainter* painter)
     else
     {
         QRect r( 0, 0, width, height );
-        QPicture picture;
+        Q3Picture picture;
         QPainter p( &picture );
         LabelUtils::renderString( &p, t, r, scalex, scaley );
         p.end();
@@ -119,7 +119,7 @@ void TextItem::draw(QPainter* painter)
     DocumentItem::drawBorder( painter );    
 }
 
-void TextItem::drawZpl( QTextStream* stream )
+void TextItem::drawZpl( Q3TextStream* stream )
 {
     // simply remove all html tags....
     QString data = m_text.replace( QRegExp("<[^>]*>"), "" );
@@ -127,7 +127,7 @@ void TextItem::drawZpl( QTextStream* stream )
     *stream << ZPLUtils::font( QFont() ); // todo: select a valid font
 }
 
-void TextItem::drawIpl( QTextStream* stream, IPLUtils* utils )
+void TextItem::drawIpl( Q3TextStream* stream, IPLUtils* utils )
 {
     int counter = utils->counter();
     
@@ -147,7 +147,7 @@ void TextItem::drawIpl( QTextStream* stream, IPLUtils* utils )
     utils->addValue( data );
 }
 
-void TextItem::drawEPcl( QTextStream* stream )
+void TextItem::drawEPcl( Q3TextStream* stream )
 {
     // TODO: parse text field HTML
 

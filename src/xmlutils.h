@@ -19,7 +19,7 @@
 #define XMLUTILS_H
 
 #include <qmap.h>
-#include <qsortedlist.h>
+#include <q3sortedlist.h>
 
 class DocumentItem;
 class BarcodeItem;
@@ -34,7 +34,7 @@ class QDomNode;
 class QRect;
 class QString;
 class QWidget;
-typedef QSortedList<DocumentItem> DocumentItemList;
+typedef Q3SortedList<DocumentItem> DocumentItemList;
 
 /** This class provides helper function for saving and reading to XML files.
   *

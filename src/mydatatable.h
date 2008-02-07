@@ -19,11 +19,11 @@
 #define MYDATATABLE_H
 
 #include <qwidget.h>
-#include <qdatatable.h>
+#include <q3datatable.h>
 
 /** A table to modify SQL tables.
   */
-class MyDataTable : public QDataTable  {
+class MyDataTable : public Q3DataTable  {
    Q_OBJECT
    public:
         MyDataTable(QWidget *parent=0, const char *name=0);

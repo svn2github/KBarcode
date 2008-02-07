@@ -30,6 +30,8 @@
 
 // Qt includes
 #include <qdom.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 // KDE includes
 #include <kapplication.h>
@@ -191,7 +193,7 @@ void XMLUtils::readDocumentItems( DocumentItemList* list, QDomDocument* doc, Tok
                     
                     cl->setZ( e.attribute( "z", "0" ).toInt() );
                     cl->setPen( QPen( readXMLColor( &e, "color", Qt::black ),
-                                e.attribute( "width", "0" ).toInt(), (QPen::PenStyle)e.attribute( "style", "0" ).toInt() ) );
+                                e.attribute( "width", "0" ).toInt(), (Qt::PenStyle)e.attribute( "style", "0" ).toInt() ) );
                     list->append( cl );
                 }
             n = n.nextSibling();

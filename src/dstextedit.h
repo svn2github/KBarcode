@@ -23,14 +23,14 @@
 #if QT_VERSION >= 0x030100
     #include <ktextedit.h>
 #else
-    #include <qtextedit.h>
+    #include <q3textedit.h>
 #endif
 
 // Otherwise moc will complain
 #if QT_VERSION >= 0x030100
   #define TextEditBase KTextEdit
 #else
-  #define TextEditBase QTextEdit
+  #define TextEditBase Q3TextEdit
 #endif 
 
 class DSTextEdit : public TextEditBase {

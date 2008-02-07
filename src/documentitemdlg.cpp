@@ -18,7 +18,9 @@
 #include "documentitemdlg.h"
 #include "tokenprovider.h"
 
-#include <qvbox.h>
+#include <q3vbox.h>
+//Added by qt3to4:
+#include <QPixmap>
 
 #include <kcommand.h>
 #include <klocale.h>
@@ -31,7 +33,7 @@ DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, KCom
     m_history = history;
     //m_list.setAutoDelete( false );
     
-     QVBox* boxBorder = addVBoxPage(i18n("&Position && Size"), QString::null, QPixmap() );
+     Q3VBox* boxBorder = addVBoxPage(i18n("&Position && Size"), QString::null, QPixmap() );
      addPage( new PropertySize( boxBorder ) );
     
      boxBorder = addVBoxPage(i18n("&Border"), QString::null, QPixmap() );

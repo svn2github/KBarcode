@@ -21,10 +21,14 @@
 
 // Qt includes
 #include <qcheckbox.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qsqlquery.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <klocale.h>
@@ -35,14 +39,14 @@
     #define I2S(x) QString("%1").arg(x)
 #endif // I2S
 
-NewLabel::NewLabel( QWidget* parent,  const char* name, bool change, WFlags fl )
+NewLabel::NewLabel( QWidget* parent,  const char* name, bool change, Qt::WFlags fl )
     : QDialog( parent, name, true, fl )
 {
     setCaption( i18n( "New Label" ) );
     curid = 0;
     types = 0;
     
-    NewLabelLayout = new QVBoxLayout( this, 11, 6, "NewLabelLayout"); 
+    NewLabelLayout = new Q3VBoxLayout( this, 11, 6, "NewLabelLayout"); 
 
     TextLabel1 = new QLabel( this, "TextLabel1" );
     if( !change )
@@ -52,12 +56,12 @@ NewLabel::NewLabel( QWidget* parent,  const char* name, bool change, WFlags fl )
 
     NewLabelLayout->addWidget( TextLabel1 );
 
-    QGroupBox* group1 = new QGroupBox( this );
+    Q3GroupBox* group1 = new Q3GroupBox( this );
     group1->setTitle( i18n( "Label" ) );
     group1->setColumnLayout(0, Qt::Vertical );
     group1->layout()->setSpacing( 6 );
     group1->layout()->setMargin( 11 );
-    QGridLayout* group1Layout = new QGridLayout( group1->layout() );
+    Q3GridLayout* group1Layout = new Q3GridLayout( group1->layout() );
     group1Layout->setAlignment( Qt::AlignTop );
     
     TextLabel2 = new QLabel( group1, "TextLabel2" );
@@ -80,7 +84,7 @@ NewLabel::NewLabel( QWidget* parent,  const char* name, bool change, WFlags fl )
     
     NewLabelLayout->addWidget( group1 );
 
-    Layout2 = new QHBoxLayout( 0, 0, 6, "Layout2"); 
+    Layout2 = new Q3HBoxLayout( 0, 0, 6, "Layout2"); 
 
     QSpacerItem* spacer_2 = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout2->addItem( spacer_2 );
@@ -89,14 +93,14 @@ NewLabel::NewLabel( QWidget* parent,  const char* name, bool change, WFlags fl )
     TextLabel4 = new QLabel( this, "TextLabel4" );
     preview = new LabelPreview( this, "preview" );
 
-    QHBoxLayout* hlayout = new QHBoxLayout( 0, 6, 6 );    
+    Q3HBoxLayout* hlayout = new Q3HBoxLayout( 0, 6, 6 );    
     hlayout->addWidget( TextLabel4 );
     hlayout->addWidget( preview );
     NewLabelLayout->addLayout( hlayout );
     QSpacerItem* spacer_3 = new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding );
     NewLabelLayout->addItem( spacer_3 );
 
-    Layout1 = new QHBoxLayout( 0, 0, 6, "Layout1"); 
+    Layout1 = new Q3HBoxLayout( 0, 0, 6, "Layout1"); 
 
     buttonOwnFormat = new KPushButton( this, "buttonOwnFormat" );
     buttonOwnFormat->setText( i18n( "&Add own Label Definition" ) );

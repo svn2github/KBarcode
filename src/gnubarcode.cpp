@@ -26,7 +26,7 @@
 
 #include <qfont.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 
 #include <klocale.h>
 
@@ -91,7 +91,7 @@ void GnuBarcode::update( const QPaintDevice* device )
 
     delete [] value;
  
-    QPaintDeviceMetrics metrics( device );
+    Q3PaintDeviceMetrics metrics( device );
     m_scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
     m_scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
    

@@ -21,7 +21,12 @@
 // Qt includes
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qsqlcursor.h>
+#include <q3sqlcursor.h>
+//Added by qt3to4:
+#include <QSqlQuery>
+#include <Q3HBoxLayout>
+#include <Q3VBoxLayout>
+#include <Q3Frame>
 
 // KDE includes
 #include <knuminput.h>
@@ -35,7 +40,7 @@ AddAllDialog::AddAllDialog(QWidget *parent, const char *name )
     : KDialogBase( KDialogBase::Plain, i18n("Add Barcode_basic"),
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
 {
-    QVBoxLayout* layout = new QVBoxLayout( plainPage(), 6, 6 );
+    Q3VBoxLayout* layout = new Q3VBoxLayout( plainPage(), 6, 6 );
 
     group = new KLineEdit( plainPage() );
     number = new KIntNumInput( plainPage() );
@@ -76,10 +81,10 @@ AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWi
 
 void AddItemsDialog::init()
 {
-    plainPage()->setFrameStyle( QFrame::GroupBoxPanel | QFrame::Sunken );
+    plainPage()->setFrameStyle( QFrame::StyledPanel | Q3Frame::Sunken );
     plainPage()->setLineWidth( 2 );
 
-    QHBoxLayout* layout = new QHBoxLayout( plainPage(), 6, 6 );
+    Q3HBoxLayout* layout = new Q3HBoxLayout( plainPage(), 6, 6 );
 
     group = new KLineEdit( plainPage() );
     article = new KLineEdit( plainPage() );

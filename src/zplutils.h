@@ -27,7 +27,7 @@ class QColor;
 class QFont;
 class QImage;
 class QSize;
-class QTextStream;
+class Q3TextStream;
 
 class BarcodePrinterDevice : public QPaintDevice {
     public:
@@ -118,7 +118,7 @@ class EPCLUtils {
         static QString field( const QString & data );
         
         
-        EPCLUtils( QTextStream* stream, QPaintDevice* source );
+        EPCLUtils( Q3TextStream* stream, QPaintDevice* source );
 
         void setTextField( int x, int y, int width, int height, const QString & text );
         void setBarcode( int x, int y, int h, const QString & value, const QString & type );

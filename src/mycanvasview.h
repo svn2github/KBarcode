@@ -18,18 +18,22 @@
 #ifndef MYCANVASVIEW_H
 #define MYCANVASVIEW_H
 
-#include <qcanvas.h>
-#include <qvaluelist.h>
+#include <q3canvas.h>
+#include <q3valuelist.h>
+//Added by qt3to4:
+#include <QResizeEvent>
+#include <QLabel>
+#include <QMouseEvent>
 #include "documentitem.h"
 
 class TCanvasItem;
 
-typedef QValueList<TCanvasItem*> TCanvasItemList;
+typedef Q3ValueList<TCanvasItem*> TCanvasItemList;
 
 
 class QRect;
 class QPainter;
-class MyCanvas : public QCanvas {
+class MyCanvas : public Q3Canvas {
     Q_OBJECT
 
     public:
@@ -66,7 +70,7 @@ class KCommandHistory;
 class KMacroCommand;
 class KRuler;
 class KStatusBar;
-class MyCanvasView : public QCanvasView
+class MyCanvasView : public Q3CanvasView
 {
     Q_OBJECT
 
@@ -85,7 +89,7 @@ class MyCanvasView : public QCanvasView
     };
     
     public:
-        MyCanvasView( Definition* d, MyCanvas *c, QWidget* parent=0, const char* name=0, WFlags f=0);
+        MyCanvasView( Definition* d, MyCanvas *c, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
         ~MyCanvasView();
 
 	/** return a list of all DocumentItems on the canvas
@@ -95,9 +99,9 @@ class MyCanvasView : public QCanvasView
         TCanvasItemList getSelected();
 
         TCanvasItem* getActive();
-        void setActive( QCanvasItem* item = 0, bool control = false );
+        void setActive( Q3CanvasItem* item = 0, bool control = false );
 
-        void setCurrent( QCanvasItem* item );
+        void setCurrent( Q3CanvasItem* item );
 
         void setHistory( KCommandHistory* hist ) {
             history = hist;
@@ -113,8 +117,8 @@ class MyCanvasView : public QCanvasView
             statusbar = s;
         }
 
-        static int getLowestZ( QCanvasItemList list );
-        static int getHighestZ( QCanvasItemList list );
+        static int getLowestZ( Q3CanvasItemList list );
+        static int getHighestZ( Q3CanvasItemList list );
         
         void snapPoint(QPoint* point, TCanvasItem* item) ;
         
@@ -143,7 +147,7 @@ class MyCanvasView : public QCanvasView
         void showContextMenu( QPoint );
         
     private:
-        void setSelected( QCanvasItem* item = 0, bool control = false );
+        void setSelected( Q3CanvasItem* item = 0, bool control = false );
         KMacroCommand* getMoveCommand();
         
         Definition* def;
@@ -163,8 +167,8 @@ class MyCanvasView : public QCanvasView
 
         QRect old;
 
-        bool isInside( QPoint p, QCanvasItem* item );
-        int isEdge(  QPoint p, QCanvasItem* item  );
+        bool isInside( QPoint p, Q3CanvasItem* item );
+        int isEdge(  QPoint p, Q3CanvasItem* item  );
         void reposition();
         void updateRuler();
         int updateCursor( QPoint pos, bool pressed = false );

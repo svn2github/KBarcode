@@ -32,8 +32,10 @@
 
 // KDE includes
 #include <kapplication.h>
+//Added by qt3to4:
+#include <QPixmap>
 
-QPoint getFreePos( QCanvas* c )
+QPoint getFreePos( Q3Canvas* c )
 {
     MyCanvas* canvas = (MyCanvas*)c;
     
@@ -72,7 +74,7 @@ bool CommandUtils::canvasHasItem()
 {
     if( m_canvas_item && c )
     {
-        QCanvasItemList list = c->allItems();
+        Q3CanvasItemList list = c->allItems();
         for( unsigned int i=0;i<list.count();i++)
             if( m_canvas_item == list[i] )
                 return true;

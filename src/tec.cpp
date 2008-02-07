@@ -24,14 +24,16 @@
 // QT includes
 #include <qclipboard.h>
 #include <qcursor.h>
-#include <qgroupbox.h>
-#include <qhbox.h>
+#include <q3groupbox.h>
+#include <q3hbox.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qprogressdialog.h>
-#include <qsqlcursor.h>
+#include <q3paintdevicemetrics.h>
+#include <q3progressdialog.h>
+#include <q3sqlcursor.h>
 #include <qvalidator.h>
+//Added by qt3to4:
+#include <QSqlQuery>
 
 // KDE includes
 #include <kapplication.h>
@@ -66,7 +68,7 @@ QString tec452(const QString &url, int count, const QString &art, const QString 
     //setCaption( filename, false );
 
     QFile f( filename );
-    if ( !f.open( IO_ReadOnly ) )
+    if ( !f.open( QIODevice::ReadOnly ) )
         return false;
 
     //clearLabel();

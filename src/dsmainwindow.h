@@ -33,7 +33,7 @@ class KPopupMenu;
 class DSMainWindow : public KMainWindow {
     Q_OBJECT
     public:
-        DSMainWindow(QWidget *parent=0, const char *name=0, WFlags f = WType_TopLevel | WDestructiveClose );
+        DSMainWindow(QWidget *parent=0, const char *name=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
         ~DSMainWindow();
 
         /** Is this the first start of KBarcode ?

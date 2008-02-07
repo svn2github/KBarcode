@@ -18,10 +18,12 @@
 #ifndef MYCANVASITEM_H
 #define MYCANVASITEM_H
 
-#include <qcanvas.h>
+#include <q3canvas.h>
 #include <qpoint.h>
 #include <qimage.h>
-#include <qpicture.h>
+#include <q3picture.h>
+//Added by qt3to4:
+#include <QPixmap>
 #include "tokenprovider.h"
 
 #define SPOTSIZE 7

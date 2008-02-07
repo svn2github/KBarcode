@@ -26,8 +26,14 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <qscrollview.h>
-#include <qsqlcursor.h>
+#include <q3scrollview.h>
+#include <q3sqlcursor.h>
+//Added by qt3to4:
+#include <Q3HBoxLayout>
+#include <Q3GridLayout>
+#include <QPixmap>
+#include <QSqlQuery>
+#include <Q3VBoxLayout>
 
 // KDE includes
 #include <kabc/addresseedialog.h>
@@ -46,7 +52,7 @@ QString PreviewDialog::group = "";
 QString PreviewDialog::article = "";
         
 PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename, QWidget *parent, const char *name )
-    : QDialog( parent, name, true, WDestructiveClose )
+    : QDialog( parent, name, true, Qt::WDestructiveClose )
 {
     file = device;
     def = d;
@@ -54,10 +60,10 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
 
-    QHBoxLayout* Layout = new QHBoxLayout( this, 6, 6 );
-    QVBoxLayout* vbox = new QVBoxLayout( 0, 6, 6 );
-    QVBoxLayout* buttons = new QVBoxLayout( 0, 6, 6 );
-    QGridLayout* grid = new QGridLayout( 0 );
+    Q3HBoxLayout* Layout = new Q3HBoxLayout( this, 6, 6 );
+    Q3VBoxLayout* vbox = new Q3VBoxLayout( 0, 6, 6 );
+    Q3VBoxLayout* buttons = new Q3VBoxLayout( 0, 6, 6 );
+    Q3GridLayout* grid = new Q3GridLayout( 0 );
 
     customerName = new KComboBox( false, this );
     customerId = new KComboBox( false, this );
@@ -108,7 +114,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     grid->addWidget( new QLabel( i18n( "Addressbook entry:" ), this ), 6, 0 );
     grid->addWidget( lineAddr, 6, 1 );
     grid->addWidget( buttonAddr, 6, 2 );
-    QScrollView* sv = new QScrollView( this );
+    Q3ScrollView* sv = new Q3ScrollView( this );
 
     preview = new QLabel( sv->viewport() );
     sv->addChild( preview );
@@ -158,7 +164,7 @@ PreviewDialog::~PreviewDialog()
 
 void PreviewDialog::setupSql()
 {
-    QSqlCursor cur( "customer" );
+    Q3SqlCursor cur( "customer" );
     cur.select();
     customerId->clear();
     customerName->clear();

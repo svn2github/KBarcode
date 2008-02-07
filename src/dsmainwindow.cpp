@@ -25,7 +25,7 @@
 
 // Qt includes
 #include <qcheckbox.h>
-#include <qtextbrowser.h>
+#include <q3textbrowser.h>
 #include <qsqldatabase.h>
 
 // KDE includes
@@ -43,7 +43,7 @@
 bool DSMainWindow::autoconnect = true;
 bool DSMainWindow::startwizard = true;
 
-DSMainWindow::DSMainWindow(QWidget *parent, const char *name, WFlags f)
+DSMainWindow::DSMainWindow(QWidget *parent, const char *name, Qt::WFlags f)
     : KMainWindow(parent,name,f)
 {
     connectAct = 0;
@@ -187,7 +187,7 @@ void DSMainWindow::appHelpActivated()
 
 void DSMainWindow::showCheck()
 {
-    QTextBrowser* b = new QTextBrowser( 0, "b" );
+    Q3TextBrowser* b = new Q3TextBrowser( 0, "b" );
     b->setText( DSMainWindow::systemCheck() );
     b->resize( 320, 240 );
     b->show();

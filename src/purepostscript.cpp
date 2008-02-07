@@ -22,7 +22,7 @@
 
 #include <qdom.h>
 #include <qfile.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 
 #include <kstandarddirs.h>
 #include <ktempfile.h>
@@ -76,7 +76,7 @@ PurePostscriptBarcode::PurePostscriptBarcode()
     }
 
     QFile pureFile( s_path );
-    if( pureFile.open( IO_ReadOnly ) )
+    if( pureFile.open( QIODevice::ReadOnly ) )
     {
         while( pureFile.readLine( line, MAX_LINE_LENGTH ) != -1 )
         {
@@ -125,7 +125,7 @@ void PurePostscriptBarcode::initInfo( TBarcodeInfoList* info )
     PurePostscriptBarcode::init();
 
     QFile pureFile( s_path );
-    if( pureFile.open( IO_ReadOnly ) )
+    if( pureFile.open( QIODevice::ReadOnly ) )
     {
         QString encoder;
         QString description;

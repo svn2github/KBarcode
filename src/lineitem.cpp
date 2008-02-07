@@ -41,17 +41,17 @@ void LineItem::draw(QPainter* painter)
     painter->restore();
 }
 
-void LineItem::drawZpl( QTextStream* )
+void LineItem::drawZpl( Q3TextStream* )
 {
     qDebug("LineItem not implemented for ZPL");
 }
 
-void LineItem::drawEPcl( QTextStream* )
+void LineItem::drawEPcl( Q3TextStream* )
 {
     qDebug("LineItem not implemented for EPCL");
 }
 
-void LineItem::drawIpl(  QTextStream*, IPLUtils* )
+void LineItem::drawIpl(  Q3TextStream*, IPLUtils* )
 {
     qDebug("LineItem not implemented for IPL");
 }

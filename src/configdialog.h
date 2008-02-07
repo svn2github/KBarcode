@@ -19,6 +19,8 @@
 #define CONFIGDIALOG_H
 
 #include <kdialogbase.h>
+//Added by qt3to4:
+#include <QLabel>
 
 struct labelprinterdata;
 struct mysqldata;

@@ -22,6 +22,8 @@
 #include "labelutils.h"
 #include <qmap.h>
 #include <qstring.h>
+//Added by qt3to4:
+#include <QSqlQuery>
 
 #ifndef I2S
     #define I2S(x) QString::number(x)
@@ -34,7 +36,7 @@ class QString;
 class QStringList;
 class QSqlQuery;
 class Measurements;
-class QProgressDialog;
+class Q3ProgressDialog;
 /** @short A label definition;
   *
   * Represents a label definition. The definition is either read from
@@ -87,7 +89,7 @@ class Definition : private LabelUtils {
         static QMap<QString,QStringList> mapTypes;
         static QFile* file;
         static QByteArray* array;
-	static QProgressDialog* m_progress;
+	static Q3ProgressDialog* m_progress;
 
 	QWidget* m_parent;
         int id;

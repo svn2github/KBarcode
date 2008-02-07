@@ -23,6 +23,9 @@
 
 #include <qcolor.h>
 #include <qstring.h>
+//Added by qt3to4:
+#include <Q3ValueList>
+#include <QPixmap>
 
 #include "barkodeengine.h"
 
@@ -81,11 +84,11 @@ typedef struct tBarcodeInfo
     QString validatorNot;
 };
 
-typedef QValueList<tBarcodeInfo> TBarcodeInfoList;
+typedef Q3ValueList<tBarcodeInfo> TBarcodeInfoList;
 
 class BarkodeEngine;
 class QPainter;
-class QPicture;
+class Q3Picture;
 class QSize;
 class QPaintDevice;
 class TokenProvider;
@@ -115,7 +118,7 @@ class Barkode {
     const QString parsedValue();
  
     const QPixmap pixmap( double scalex = 1.0, double scaley = 1.0 );
-    const QPicture picture();
+    const Q3Picture picture();
     const QSize size() const;
     bool isValid() const;
 

@@ -21,7 +21,7 @@
 #include "measurements.h"
 
 #include <qmap.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 
 namespace KABC {
     class AddresseeList;
@@ -33,11 +33,11 @@ class KPrinter;
 class Measurements;
 class QBuffer;
 class QPainter;
-class QProgressDialog;
+class Q3ProgressDialog;
 class QWidget;
 class QPaintDevice;
 
-typedef QValueList< QMap<QString,QString> > TVariableList;
+typedef Q3ValueList< QMap<QString,QString> > TVariableList;
 /**
     This class is responsible for batch printing of articles.
     It is also responsible for creating images of all articles.
@@ -86,7 +86,7 @@ class BatchPrinter
         /** set the sql data for the batchprinter
          *  @p list will be deleted by the batchprinter
          */
-        void setData( QValueList<data>* list );
+        void setData( Q3ValueList<data>* list );
 
         /** set the variable data for the batchprinter
          *  @p list will be deleted by the batchprinter
@@ -140,19 +140,19 @@ class BatchPrinter
 
 	/** print the labels using data from the m_data structure
 	  */
-	void startPrintData( QProgressDialog* progress );
+	void startPrintData( Q3ProgressDialog* progress );
 	/** print the labels using data from the m_vardata or m_addrdata structure
 	  */
-	void startPrintVarData( QProgressDialog* progress );
+	void startPrintVarData( Q3ProgressDialog* progress );
 
         /** Create and return a progressdialog
           */
-        QProgressDialog* createProgressDialog( const QString & caption );
-        bool checkProgressDialog( QProgressDialog* progress );
+        Q3ProgressDialog* createProgressDialog( const QString & caption );
+        bool checkProgressDialog( Q3ProgressDialog* progress );
 
         Definition* def;
         Measurements m_measure;
-        QValueList<data>* m_data;
+        Q3ValueList<data>* m_data;
 	TVariableList* m_vardata;
         KABC::AddresseeList* m_addrdata;
 

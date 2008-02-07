@@ -9,7 +9,9 @@
 #include "/home/dominik/Desktop/Programming/kbarcode/kbarcode/batchiface.h"
 
 #include <kdatastream.h>
-#include <qasciidict.h>
+#include <q3asciidict.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 
 static const int BatchIface_fhash = 13;
@@ -41,11 +43,11 @@ static const int BatchIface_ftable_hiddens[11] = {
     0,
 };
 
-bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
+bool BatchIface::process(const Q3CString &fun, const QByteArray &data, Q3CString& replyType, QByteArray &replyData)
 {
-    static QAsciiDict<int>* fdict = 0;
+    static Q3AsciiDict<int>* fdict = 0;
     if ( !fdict ) {
-	fdict = new QAsciiDict<int>( BatchIface_fhash, true, false );
+	fdict = new Q3AsciiDict<int>( BatchIface_fhash, true, false );
 	for ( int i = 0; BatchIface_ftable[i][1]; i++ )
 	    fdict->insert( BatchIface_ftable[i][1],  new int( i ) );
     }
@@ -53,7 +55,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
     switch ( fp?*fp:-1) {
     case 0: { // void setFilename(QString)
 	QString arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = BatchIface_ftable[0][0]; 
@@ -61,7 +63,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
     } break;
     case 1: { // void setImportCsvFile(QString)
 	QString arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = BatchIface_ftable[1][0]; 
@@ -69,7 +71,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
     } break;
     case 2: { // void setImportSqlQuery(QString)
 	QString arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = BatchIface_ftable[2][0]; 
@@ -77,7 +79,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
     } break;
     case 3: { // void setNumLabels(int)
 	int arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = BatchIface_ftable[3][0]; 
@@ -85,7 +87,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
     } break;
     case 4: { // void setOutputFormat(int)
 	int arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = BatchIface_ftable[4][0]; 
@@ -94,7 +96,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
     case 5: { // void setSerialNumber(QString,int)
 	QString arg0;
 	int arg1;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	if (arg.atEnd()) return false;
@@ -107,7 +109,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
 	QString arg1;
 	int arg2;
 	bool arg3;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	if (arg.atEnd()) return false;
@@ -117,21 +119,21 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
 	if (arg.atEnd()) return false;
 	arg >> arg3;
 	replyType = BatchIface_ftable[6][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << addItem(arg0, arg1, arg2, arg3 );
     } break;
     case 7: { // bool existsArticle(QString)
 	QString arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = BatchIface_ftable[7][0]; 
-	QDataStream _replyStream( replyData, IO_WriteOnly );
+	QDataStream _replyStream( replyData, QIODevice::WriteOnly );
 	_replyStream << existsArticle(arg0 );
     } break;
     case 8: { // void loadFromFile(QString)
 	QString arg0;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	replyType = BatchIface_ftable[8][0]; 
@@ -144,7 +146,7 @@ bool BatchIface::process(const QCString &fun, const QByteArray &data, QCString& 
     case 10: { // void printNow(QString,bool)
 	QString arg0;
 	bool arg1;
-	QDataStream arg( data, IO_ReadOnly );
+	QDataStream arg( data, QIODevice::ReadOnly );
 	if (arg.atEnd()) return false;
 	arg >> arg0;
 	if (arg.atEnd()) return false;
@@ -171,7 +173,7 @@ QCStringList BatchIface::functions()
     for ( int i = 0; BatchIface_ftable[i][2]; i++ ) {
 	if (BatchIface_ftable_hiddens[i])
 	    continue;
-	QCString func = BatchIface_ftable[i][0];
+	Q3CString func = BatchIface_ftable[i][0];
 	func += ' ';
 	func += BatchIface_ftable[i][2];
 	funcs << func;

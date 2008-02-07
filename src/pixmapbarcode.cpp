@@ -30,9 +30,9 @@
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qpainter.h>
-#include <qpaintdevicemetrics.h>
+#include <q3paintdevicemetrics.h>
 #include <qpixmap.h>
-#include <qtextstream.h>
+#include <q3textstream.h>
 
 /* Margin added by GNU Barcode to the barcodes */
 #define BARCODE_MARGIN 10     
@@ -237,10 +237,10 @@ QRect PixmapBarcode::bbox( const char* data, long size )
     array.setRawData( data, size );
     
     QBuffer b( array );
-    if( !b.open( IO_ReadOnly ) )
+    if( !b.open( QIODevice::ReadOnly ) )
         return s;
     
-    QTextStream t( &b );
+    Q3TextStream t( &b );
         
     QString text = t.readLine();
     while( !text.isNull() )
@@ -306,7 +306,7 @@ bool PixmapBarcode::readFromPipe( const char* command, char** buffer, long* buff
 
 void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
 {
-    QPaintDeviceMetrics pdm( device );
+    Q3PaintDeviceMetrics pdm( device );
     int resx = pdm.logicalDpiX();
     int resy = pdm.logicalDpiY();
 
@@ -325,11 +325,11 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
         // we have to scale to the correct resolution.
         // we scale already here and not at the end,
         // so that the addMargin function does not get a scaled margin.
-        QPaintDeviceMetrics pdm( KApplication::desktop() );
+        Q3PaintDeviceMetrics pdm( KApplication::desktop() );
         int screenresx = pdm.logicalDpiX();
         int screenresy = pdm.logicalDpiY();
     
-        QWMatrix m;
+        QMatrix m;
         double scalex = (resx/screenresx)*barkode->scaling();
         double scaley = (resy/screenresy)*barkode->scaling();
         m.scale( scalex, scaley );
@@ -339,7 +339,7 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
     *target = addMargin( target );
 
     // Rotate
-    QWMatrix m;
+    QMatrix m;
     m.rotate( (double)barkode->rotation() );
     *target = target->xForm( m );
 
@@ -357,7 +357,7 @@ bool PixmapBarcode::createPdf417( KTempFile* output )
     }
 
     KTempFile text( QString::null, ".txt" );
-    QTextStream t( text.file() );
+    Q3TextStream t( text.file() );
     t << barkode->parsedValue();
     text.file()->close();
 
@@ -434,7 +434,7 @@ QPixmap PixmapBarcode::cut( QPixmap* pic, double cut)
     QPixmap pcut( pic->width(), int((double)pic->height() * cut) );
     pcut.fill( Qt::white ); // barcode.bg
 
-    QWMatrix m;
+    QMatrix m;
     /*
      * if text is above the barcode cut from
      * below the barcode.

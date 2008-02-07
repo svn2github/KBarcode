@@ -49,8 +49,11 @@
 #include <qpainter.h>
 #include <qradiobutton.h>
 #include <qsqlquery.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 #include <qvbuttongroup.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <QPixmap>
 #include <kmessagebox.h>
 
 #define IMAGE_INTERNAL i18n("Image Saved in KBarcode")
@@ -80,7 +83,7 @@ void FillLineCombo( KComboBox* box )
 PropertyWidget::PropertyWidget(QWidget* parent )
  : QWidget( parent, 0 )
 {
-    grid = new QGridLayout( this, 2, 2 );
+    grid = new Q3GridLayout( this, 2, 2 );
 }
 
 PropertyBorder::PropertyBorder( QWidget* parent )
@@ -341,7 +344,7 @@ PropertySize::PropertySize( QWidget* parent )
 {   
     const double low = -1000.0;
     const double max = 1000.0;
-    QVBox* box = new QVBox( this );
+    Q3VBox* box = new Q3VBox( this );
 
     checkLock = new QCheckBox( i18n("&Protect item from being moved or resized"), box );    
     numTop = new KDoubleNumInput( low, max, 0.0, 0.2, 3, box );
@@ -467,26 +470,26 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     comboRotation = new KComboBox( FALSE, this );
     label->setBuddy( comboRotation );
 
-    QVButtonGroup* groupFile = new QVButtonGroup( i18n("&Image"), this );
+    Q3VButtonGroup* groupFile = new Q3VButtonGroup( i18n("&Image"), this );
     radioImagePath = new QRadioButton( i18n("&Load image from path"), groupFile );
     imgUrl = new KURLRequester( groupFile );
     imgUrl->setFilter( KImageIO::pattern( KImageIO::Reading ) );
     imgUrl->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
     radioImageExpression = new QRadioButton( i18n("&Read image path from expression"), groupFile );
 
-    imgHBox = new QHBox( groupFile );
+    imgHBox = new Q3HBox( groupFile );
     imgHBox->setSpacing( 5 );
 
     imgExpression = new KLineEdit( imgHBox );
     buttonToken = new KPushButton( i18n("&Insert Data Field..."), imgHBox );
-    buttonToken->setIconSet( QIconSet( SmallIcon("contents") ) );
+    buttonToken->setIconSet( QIcon( SmallIcon("contents") ) );
 
     comboRotation->insertItem( i18n("0") );
     comboRotation->insertItem( i18n("90") );
     comboRotation->insertItem( i18n("180") );
     comboRotation->insertItem( i18n("270") );
     
-    QVButtonGroup* group = new QVButtonGroup( i18n("&Size"), this );
+    Q3VButtonGroup* group = new Q3VButtonGroup( i18n("&Size"), this );
     
     radioOriginal = new QRadioButton( i18n("&None"), group );
     radioZoomed = new QRadioButton( i18n("&Zoom"), group );

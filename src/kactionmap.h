@@ -28,7 +28,7 @@ class KActionMap;
 class KListViewSearchLineWidget;
 #endif 
 class KListView;
-class QListViewItem;
+class Q3ListViewItem;
 
 /** Open a simple dialog containing an action map.
  */
@@ -85,7 +85,7 @@ class KActionMap : public QWidget {
 
  private slots:
     void slotActionCollectionChanged();
-    void slotExecuteAction( QListViewItem* item );
+    void slotExecuteAction( Q3ListViewItem* item );
 
  private:
     KActionCollection*         m_actions;

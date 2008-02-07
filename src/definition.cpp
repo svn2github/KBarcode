@@ -19,7 +19,7 @@
 #include "sqltables.h"
 
 // Qt includes
-#include <qtextstream.h>
+#include <q3textstream.h>
 #include <qsqlquery.h>
 #include <qregexp.h>
 
@@ -29,7 +29,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
-#include <qprogressdialog.h>
+#include <q3progressdialog.h>
 
 // a simple helper function
 // that copies a file
@@ -186,7 +186,7 @@ QFile* Definition::file = 0;
 QByteArray* Definition::array = 0;
 QStringList* Definition::listProducers = 0;
 QMap<QString,QStringList> Definition::mapTypes;
-QProgressDialog* Definition::m_progress = 0;
+Q3ProgressDialog* Definition::m_progress = 0;
 
 void Definition::initProgress()
 {
@@ -268,7 +268,7 @@ void Definition::getFileMeasurements( const QString & label_def_id )
 
     initProgress();
 
-    QTextStream stream(*array, IO_ReadOnly );
+    Q3TextStream stream(*array, QIODevice::ReadOnly );
     while( !stream.atEnd() ) {
         QString s = stream.readLine();
         if( s.isEmpty() || s.startsWith( "#" ) )
@@ -311,7 +311,7 @@ bool Definition::openFile()
     }
 
     file = new QFile( f );
-    if( !file->open( IO_ReadOnly ) ) {
+    if( !file->open( QIODevice::ReadOnly ) ) {
         delete file;
         file = 0;
         return ( showFileError() ? openFile() : false );
@@ -344,7 +344,7 @@ const QStringList Definition::getProducers()
 
 	initProgress();
 
-        QTextStream stream(*array, IO_ReadOnly );
+        Q3TextStream stream(*array, QIODevice::ReadOnly );
         while( !stream.atEnd() ) {
             QString s = stream.readLine();
             if( s.isEmpty() || s.startsWith( "#" ) )
@@ -382,7 +382,7 @@ const QStringList Definition::getTypes( QString producer )
 
 	initProgress();
 
-        QTextStream stream(*array, IO_ReadOnly );
+        Q3TextStream stream(*array, QIODevice::ReadOnly );
         while( !stream.atEnd() ) {
             QString s = stream.readLine();
             if( s.isEmpty() || s.startsWith( "#" ) )
@@ -479,18 +479,18 @@ int Definition::writeFile( const Measurements & c, QString type, QString produce
     }
     
     file->close();
-    if( !file->open( IO_WriteOnly ) ) {
-        file->open( IO_ReadOnly );
+    if( !file->open( QIODevice::WriteOnly ) ) {
+        file->open( QIODevice::ReadOnly );
         return -1;
     }
 
-    QTextStream t( file );
+    Q3TextStream t( file );
     for( unsigned int i = 0; i < data.count(); i++ )
         t << data[i].replace( QRegExp("\\n"), "" ) << "\n";
 
     // get the file back to the normal stage
     file->close();
-    file->open( IO_ReadOnly );
+    file->open( QIODevice::ReadOnly );
 
     return index + 1;
 }

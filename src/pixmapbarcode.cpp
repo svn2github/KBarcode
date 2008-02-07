@@ -22,8 +22,8 @@
 #include <stdlib.h>
 
 #include <kapplication.h>
-#include <kprocess.h>
-#include <ktempfile.h>
+#include <k3process.h>
+#include <ktemporaryfile.h>
 
 #include <qbuffer.h>
 #include <qdom.h>
@@ -136,7 +136,7 @@ bool PixmapBarcode::createPixmap( QPixmap* target, int resx, int resy )
                    barkode->background() == Qt::white &&
                    barkode->textColor() == Qt::black );
 
-    KTempFile* input = new KTempFile( QString::null, bMonocrome ? ".pbm" : ".ppm" );
+    KTemporaryFile* input = new KTemporaryFile( QString::null, bMonocrome ? ".pbm" : ".ppm" );
     input->file()->close();
 
     if( Barkode::engineForType( barkode->type() ) == PDF417 ) {
@@ -216,7 +216,7 @@ bool PixmapBarcode::createPostscript( char** postscript, long* postscript_size )
     */
     {
         cmd = "barcode -E -b ";
-        cmd += KShellProcess::quote( barkode->parsedValue() ) + (barkode->textVisible() ? "" : " -n");
+        cmd += K3ShellProcess::quote( barkode->parsedValue() ) + (barkode->textVisible() ? "" : " -n");
         cmd += " -e " + barkode->type();
     }
     
@@ -346,7 +346,7 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
     //barcode.valid = true;
 }
 
-bool PixmapBarcode::createPdf417( KTempFile* output )
+bool PixmapBarcode::createPdf417( KTemporaryFile* output )
 {
     const PDF417Options* options = (dynamic_cast<const PDF417Options*>(barkode->engine()->options()));
 
@@ -356,7 +356,7 @@ bool PixmapBarcode::createPdf417( KTempFile* output )
         return false;
     }
 
-    KTempFile text( QString::null, ".txt" );
+    KTemporaryFile text( QString::null, ".txt" );
     Q3TextStream t( text.file() );
     t << barkode->parsedValue();
     text.file()->close();
@@ -364,13 +364,13 @@ bool PixmapBarcode::createPdf417( KTempFile* output )
     // ps does not work because bounding box information is missing
     // pbm cannot be loaded by KImgIO (works fine in GIMP)
     // gif is the only other option
-    KShellProcess proc;
+    K3ShellProcess proc;
     proc << "pdf417_enc" << "-tgif" << text.name() << output->name()
          << options->row()
          << options->col()
          << options->err();
          
-    proc.start( KProcess::Block, KProcess::NoCommunication );
+    proc.start( K3Process::Block, K3Process::NoCommunication );
     proc.resume();
 
     if( proc.exitStatus() ) {
@@ -412,13 +412,13 @@ QString PixmapBarcode::createTBarcodeCmd()
                                            .arg( barkode->pdf417Options()->err() );
         
     cmd += " " + barkode->type() + QString(" tPS c%1").arg( barkode->tbarcodeOptions()->checksum() );
-    cmd += flag + " d" + KShellProcess::quote(  barkode->parsedValue() );
+    cmd += flag + " d" + K3ShellProcess::quote(  barkode->parsedValue() );
 
     return cmd;
 }
 #endif // 0
 
-void PixmapBarcode::cleanUp( KTempFile* file, QPixmap* target )
+void PixmapBarcode::cleanUp( KTemporaryFile* file, QPixmap* target )
 {
     target->resize( 0, 0 );
 

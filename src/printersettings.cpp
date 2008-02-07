@@ -93,7 +93,7 @@ PrinterSettings* PrinterSettings::getInstance()
 
 void PrinterSettings::loadConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     config->setGroup("Printer");
     lpdata->articleEvent1 = (enum linebreak)config->readNumEntry("articleEvent1", NO_BREAK );
@@ -128,7 +128,7 @@ void PrinterSettings::loadConfig()
 
 void PrinterSettings::saveConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     config->setGroup("Printer");
     config->writeEntry("articleEvent1", lpdata->articleEvent1 );
@@ -157,7 +157,7 @@ int PrinterSettings::getQuality() const
     return lpdata->quality == Middle || lpdata->quality == VeryHigh? High : lpdata->quality;
 };
 
-KPrinter* PrinterSettings::setupPrinter( const KURL & url, QWidget* parent, bool immediately, const QString & prn )
+KPrinter* PrinterSettings::setupPrinter( const KUrl & url, QWidget* parent, bool immediately, const QString & prn )
 {
     KPrinter* printer = new KPrinter( true, (enum QPrinter::PrinterMode)getQuality() );
     if( getData()->quality == Middle )

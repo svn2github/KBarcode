@@ -21,7 +21,7 @@
 #include "commands.h"
 #include "xmlutils.h"
 
-#include <kcommand.h>
+#include <k3command.h>
 
 #include <qbuffer.h>
 #include <q3cstring.h>
@@ -86,7 +86,7 @@ bool DocumentItemDrag::canDecode( QMimeSource* e )
     return e->provides( DocumentItemDrag::mimeType() );
 }
 
-bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvider* token, KCommandHistory* history )
+bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history )
 {
     QByteArray data = mime->encodedData( DocumentItemDrag::mimeType() );
     QDomDocument doc( "KBarcodeClipboard" );
@@ -95,7 +95,7 @@ bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvide
     
     QDomNode n = doc.documentElement();
     QDomNodeList list = n.childNodes();
-    KMacroCommand* commands = new KMacroCommand( i18n("Paste") );
+    K3MacroCommand* commands = new K3MacroCommand( i18n("Paste") );
     
     for( unsigned int i=0;i<list.length();i++)
     {

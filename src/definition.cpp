@@ -30,6 +30,7 @@
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 #include <q3progressdialog.h>
+#include <kglobal.h>
 
 // a simple helper function
 // that copies a file
@@ -296,9 +297,9 @@ bool Definition::openFile()
         return true;        
     }
 
-    QString f = locateLocal( "data", "kbarcode/labeldefinitions.sql" );
+    QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
-        KConfig* config = kapp->config();
+        KConfig* config = KGlobal::config();
         config->setGroup( "Definitions" );
 
         // copy file to new location
@@ -552,7 +553,7 @@ bool Definition::showFileError()
 
         QString f = KFileDialog::getOpenFileName( QString::null, QString::null, 0 );
         if( !f.isEmpty() && QFile::exists( f ) ) {
-            KConfig* config = kapp->config();
+            KConfig* config = KGlobal::config();
             config->setGroup( "Definitions" );
             config->writeEntry( "defpath", f );
             config->sync();

@@ -22,7 +22,7 @@
 #include <kmainwindow.h>
 
 class KAction;
-class KPopupMenu;
+class KMenu;
 /** The base class of all main windows of KBarcode. It provides standard menu items
   * for database connections, preferences, help, the first start wizard and donations.
   * It checks also if this is the first start of KBarcode and if the configuration wizard
@@ -83,8 +83,8 @@ class DSMainWindow : public KMainWindow {
         KAction* importLabelDefAct;
         KAction* importExampleAct;
         
-        KPopupMenu* file;
-        KPopupMenu* settings;
-        KPopupMenu* hlpMenu;
+        KMenu* file;
+        KMenu* settings;
+        KMenu* hlpMenu;
 };
 #endif

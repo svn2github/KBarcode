@@ -135,11 +135,13 @@ DefinitionDialog::DefinitionDialog( QWidget* parent,  const char* name, bool mod
     Layout17->addLayout( Layout13 );
     Layout14 = new Q3VBoxLayout( 0, 0, 6, "Layout14"); 
 
-    comboProducer = new KComboBox( FALSE, this, "comboProducer" );
+    comboProducer = new KComboBox( FALSE, this );
+    comboProducer->setObjectName( "comboProducer" );
     comboProducer->setEditable( TRUE );
     Layout14->addWidget( comboProducer );
 
-    comboType = new KComboBox( FALSE, this, "type" );
+    comboType = new KComboBox( FALSE, this );
+    comboType->setObjectName( "type" );
     comboType->setEditable( TRUE );
     Layout14->addWidget( comboType );
 

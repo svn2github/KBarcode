@@ -22,7 +22,7 @@
 #include <QLabel>
 
 class KComboBox;
-class KURLRequester;
+class KUrlRequester;
 class QCheckBox;
 class QLabel;
 
@@ -47,7 +47,7 @@ class BarcodePrinterDlg : public KDialogBase
     private:
         KComboBox* comboFormat;
         KComboBox* comboDevice;
-        KURLRequester* requester;
+        KUrlRequester* requester;
         
         QCheckBox* checkFile;
         QLabel* label2;

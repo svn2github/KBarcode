@@ -34,7 +34,7 @@
 
 #include <kcolorbutton.h>
 #include <kcombobox.h>
-#include <kcommand.h>
+#include <k3command.h>
 #include <kiconloader.h>
 #include <kimageio.h>
 #include <klineedit.h>
@@ -112,7 +112,7 @@ PropertyBorder::PropertyBorder( QWidget* parent )
     connect( checkBorder, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 }
 
-void PropertyBorder::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyBorder::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     BorderCommand* bc = new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentItem() + 1) ), item );
     bc->execute();
@@ -154,7 +154,7 @@ PropertyRotation::PropertyRotation( QWidget* parent )
 
 }
 
-void PropertyRotation::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyRotation::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     TextItem* text = static_cast<TextItem*>(item);
     double rot = 0.0;
@@ -194,7 +194,7 @@ PropertyFill::PropertyFill( QWidget* parent )
     grid->addWidget( buttonColor, 0, 1 );
 }
 
-void PropertyFill::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyFill::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     RectItem* rect = static_cast<RectItem*>(item);
     FillCommand* fc = new FillCommand( buttonColor->color(), rect );
@@ -260,7 +260,7 @@ void PropertyBarcode::changedCombo()
     barcode->setStandardEnabled( v );
 }
 
-void PropertyBarcode::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyBarcode::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     BarcodeItem* bcode = static_cast<BarcodeItem*>(item);
 
@@ -297,7 +297,7 @@ PropertyText::PropertyText( TokenProvider* token, QWidget* parent )
     grid->addWidget( m_editor, 0, 0 );
 }
 
-void PropertyText::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyText::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     TextItem* text = static_cast<TextItem*>(item);
     
@@ -320,7 +320,7 @@ PropertyTextLine::PropertyTextLine( TokenProvider* token, QWidget* parent )
     grid->addWidget( m_editor, 0, 0 );
 }
 
-void PropertyTextLine::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyTextLine::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     TextLineItem* text = static_cast<TextLineItem*>(item);
     
@@ -375,7 +375,7 @@ void PropertySize::enableControls()
     numWidth->setEnabled( !checkLock->isChecked() );
 }
         
-void PropertySize::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertySize::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     QRect r = item->rect();
     QPoint translation( 0, 0 );
@@ -472,7 +472,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
 
     Q3VButtonGroup* groupFile = new Q3VButtonGroup( i18n("&Image"), this );
     radioImagePath = new QRadioButton( i18n("&Load image from path"), groupFile );
-    imgUrl = new KURLRequester( groupFile );
+    imgUrl = new KUrlRequester( groupFile );
     imgUrl->setFilter( KImageIO::pattern( KImageIO::Reading ) );
     imgUrl->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
     radioImageExpression = new QRadioButton( i18n("&Read image path from expression"), groupFile );
@@ -510,7 +510,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     connect( buttonToken, SIGNAL( clicked() ), this, SLOT( slotTokens() ) );
 }
 
-void PropertyImage::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyImage::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     ImageItem* img = static_cast<ImageItem*>(item);
     EImageScaling scaling = eImage_Original;
@@ -618,7 +618,7 @@ PropertyVisible::PropertyVisible( QWidget* parent )
     grid->addMultiCellWidget( m_script, 1, 8, 0, 2 );
 }
 
-void PropertyVisible::applySettings( DocumentItem* item, KMacroCommand* command )
+void PropertyVisible::applySettings( DocumentItem* item, K3MacroCommand* command )
 {
     TCanvasItem* canvasItem = item->canvasItem();
     ScriptCommand* sc = new ScriptCommand( m_script->text(), canvasItem );

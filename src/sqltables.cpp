@@ -41,6 +41,7 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kstandarddirs.h>
+#include <kglobal.h>
 
 QMap<QString,SqlDescription*> drivers;
 
@@ -285,9 +286,9 @@ void SqlTables::importLabelDef()
     QSqlQuery query( QString::null, db );
     exec( &query, "delete from " TABLE_LABEL_DEF );
 
-    QString f = locateLocal( "data", "kbarcode/labeldefinitions.sql" );
+    QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
-        KConfig* config = kapp->config();
+        KConfig* config = KGlobal::config();
         config->setGroup( "Definitions" );
         f = config->readEntry( "defpath", locate( "data", "kbarcode/labeldefinitions.sql" ) );
     }
@@ -346,7 +347,7 @@ void SqlTables::exec( QSqlQuery* query, const QString & text )
 
 void SqlTables::loadConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     config->setGroup("SQL");
     sqldata.username = config->readEntry("username", "root");
@@ -359,7 +360,7 @@ void SqlTables::loadConfig()
 
 void SqlTables::saveConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     config->setGroup("SQL");
     config->writeEntry("username", sqldata.username );

@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
     // setup standard dirs
     setupDirs();
 
-    KImageIO::registerFormats();
+    
     a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
     KBarcode* kbc = new KBarcode( 0, "KBarcodeMainWindow" );

@@ -38,13 +38,12 @@
 #include <kcombobox.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
-#include <klistview.h>
+#include <k3listview.h>
 #include <klineedit.h>
-#include <klineeditdlg.h>
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <knuminput.h>
 #include <kprinter.h>
 #include <kurlrequester.h>

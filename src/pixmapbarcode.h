@@ -21,7 +21,7 @@
 #include "barkodeengine.h"
 #include <qpixmap.h>
 
-class KTempFile;
+class KTemporaryFile;
 class QPainter;
 
 class PDF417Options : public BarkodeEngineOptions {
@@ -75,7 +75,7 @@ class PixmapBarcode : public BarkodeEngine
     private:
         bool createPixmap( QPixmap* target, int resx, int resy );
         void createBarcode( QPixmap* target, const QPaintDevice* device );
-        bool createPdf417( KTempFile* output );
+        bool createPdf417( KTemporaryFile* output );
         //QString createTBarcodeCmd();
 
         virtual bool createPostscript( char** postscript, long* postscript_size );
@@ -83,7 +83,7 @@ class PixmapBarcode : public BarkodeEngine
         /** Mage sure the temporaray file @p file 
           * gets closed and deleted properly
           */
-        void cleanUp( KTempFile* file, QPixmap* target );
+        void cleanUp( KTemporaryFile* file, QPixmap* target );
         /**
           * Cut the barcode either on the top or
           * on the bottom, depending on the text position.

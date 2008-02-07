@@ -8,4 +8,6 @@ find_package(KDE4 REQUIRED)
 #include (KDE4Defaults)
 #include (MacroLibrary)
 
+add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
+
 add_subdirectory(src)

@@ -34,7 +34,7 @@ class QRadioButton;
 class KComboBox;
 class KLineEdit;
 class KPushButton;
-class KURLLabel;
+class KUrlLabel;
 class QLabel;
 class QWidget;
 class SqlWidget;
@@ -74,7 +74,7 @@ class ConfWizard : public KWizard
         QWidget* page;
         QLabel* logo;
         QLabel* TextLabel2_2;
-        KURLLabel* KURLLabel1;
+        KUrlLabel* KUrlLabel1;
         QWidget* page_2;
         QLabel* TextLabel1;
         QLabel* TextLabel2;

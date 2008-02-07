@@ -24,8 +24,8 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 
-class KListBox;
-class KListView;
+class K3ListBox;
+class K3ListView;
 class Q3ListBoxItem;
 class Q3ListViewItem;
 class KLineEdit;
@@ -96,7 +96,7 @@ class TokenDialog : public KWizard {
     QRadioButton* radioVariableExisting;
     
     KLineEdit* editVariable;
-    KListBox* listVariable;
+    K3ListBox* listVariable;
 
     KLineEdit* editQuery;
     Q3TextBrowser* textQueryResults;
@@ -121,11 +121,11 @@ class TokenDialog : public KWizard {
     Q3ValueList<tToken> m_tokens;
     TokenProvider* m_token;
 
-    KListBox* category;
-    KListView* allList;
+    K3ListBox* category;
+    K3ListView* allList;
     KLineEdit* lineEdit;
 
-    KListView* labelList;
+    K3ListView* labelList;
 };
 
 #endif

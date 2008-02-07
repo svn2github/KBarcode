@@ -29,10 +29,10 @@ class KComboBox;
 class KCompletion;
 class KIntNumInput;
 class KLineEdit;
-class KListBox;
-class KListView;
+class K3ListBox;
+class K3ListView;
 class KPushButton;
-class KURLRequester;
+class KUrlRequester;
 class QCheckBox;
 class Q3HBox;
 class QLabel;
@@ -222,10 +222,10 @@ class BatchWizard : public KWizard, public BatchIface {
 	QRadioButton* radioImageFilenameBarcode;
 	QRadioButton* radioImageFilenameCustom;
 	KLineEdit* editImageFilename;
-	KURLRequester* imageDirPath;
+	KUrlRequester* imageDirPath;
 
 	KLineEdit* importSqlQuery;
-	KURLRequester* importCsvFile;
+	KUrlRequester* importCsvFile;
 
 	KComboBox* customerName;
 	KComboBox* customerId;
@@ -238,12 +238,12 @@ class BatchWizard : public KWizard, public BatchIface {
 	KIntNumInput* numLabels;
 
 	Q3Table* m_varTable;
-	KListBox* m_varList;
+	K3ListBox* m_varList;
 
-        KListView* listAddress;
-        KListView* listSelectedAddress;
+        K3ListView* listAddress;
+        K3ListView* listSelectedAddress;
 
-	KListView* sqlList;
+	K3ListView* sqlList;
 	KLineEdit* serialStart;
 
         QCheckBox* checkKeepOpen;
@@ -262,7 +262,7 @@ class BatchWizard : public KWizard, public BatchIface {
 	KPushButton* buttonTableInsert;
 	KPushButton* buttonTableRemove;
 
-	KURLRequester* m_url;
+	KUrlRequester* m_url;
 };
 
 #endif // BATCHWIZARD_H

@@ -35,7 +35,7 @@ class KToolBar;
 class KIntNumInput;
 class KLineEdit;
 class KPushButton;
-class KPopupMenu;
+class KMenu;
 class QCheckBox;
 class QLabel;
 class QPixmap;

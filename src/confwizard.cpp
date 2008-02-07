@@ -108,10 +108,10 @@ void ConfWizard::setupPage1()
 
     pageLayout->addLayout( Layout8 );
 
-    KURLLabel1 = new KURLLabel( page, "KURLLabel1" );
-    KURLLabel1->setText( "http://www.kbarcode.net" );
-    KURLLabel1->setURL("http://www.kbarcode.net");
-    pageLayout->addWidget( KURLLabel1 );
+    KUrlLabel1 = new KUrlLabel( page, "KUrlLabel1" );
+    KUrlLabel1->setText( "http://www.kbarcode.net" );
+    KUrlLabel1->setURL("http://www.kbarcode.net");
+    pageLayout->addWidget( KUrlLabel1 );
     addPage( page, i18n( "Welcome" ) );
 }
 

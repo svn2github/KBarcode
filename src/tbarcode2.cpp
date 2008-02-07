@@ -23,8 +23,8 @@
 #include <qdom.h>
 #include <qfile.h>
 
-#include <kprocess.h>
-#include <ktempfile.h>
+#include <k3process.h>
+#include <ktemporaryfile.h>
 
 TBarcodeOptions::TBarcodeOptions()
 {
@@ -115,7 +115,7 @@ bool TBarcode2::createPostscript( char** postscript, long* postscript_size )
         text = "below";
 
     cmd = cmd.sprintf( "tbarcode -f PS -b %s -d %s  -t %s --translation=%s --autocorrect=%s --modulewidth=%.3f -h %i --checkdigit=%i --72dpiraster\n", 
-                       barkode->type().toLatin1(), KShellProcess::quote(  barkode->parsedValue() ).toLatin1(), 
+                       barkode->type().toLatin1(), K3ShellProcess::quote(  barkode->parsedValue() ).toLatin1(), 
                        text, tbarcode->escape() ? "on" : "off", 
                        tbarcode->autocorrect() ? "on" : "off", 
                        tbarcode->moduleWidth(), 
@@ -137,7 +137,7 @@ QRect TBarcode2::bbox( const char* postscript, long postscript_size )
     long    len    = 0;
     QRect   size;
 
-    KTempFile psfile( QString::null, ".ps" );
+    KTemporaryFile psfile( QString::null, ".ps" );
     psfile.file()->write( postscript, postscript_size );
     psfile.file()->close();
 

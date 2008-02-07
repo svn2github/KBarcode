@@ -31,20 +31,20 @@
 
 #include <kaction.h>
 #include <kapplication.h>
-#include <klistview.h>
+#include <k3listview.h>
 #if KDE_VERSION >= 0x030500
-#include <klistviewsearchline.h>
+#include <k3listviewsearchline.h>
 #endif
 #include <klocale.h>
 
-class KListViewActionItem : public KListViewItem {
+class KListViewActionItem : public K3ListViewItem {
 public:
-    KListViewActionItem( KListView* parent, KAction* action )
-        : KListViewItem( parent ), m_action( action )
+    KListViewActionItem( K3ListView* parent, KAction* action )
+        : K3ListViewItem( parent ), m_action( action )
         {
             QPixmap  pix;
             QSize    size    = QIcon::iconSize( QIcon::Large );
-            QIcon iconset = m_action->iconSet( KIcon::Panel, KIcon::SizeLarge );
+            QIcon iconset = m_action->iconSet( KIconLoader::Panel, KIconLoader::SizeLarge );
             QRegExp  regtag( "<[^>]*>" );
 
             pix = iconset.pixmap( QIcon::Large, QIcon::Normal ); // m_action->isEnabled() ? QIconSet::Normal : QIconSet::Disabled );
@@ -76,7 +76,7 @@ public:
             if( m_action && !m_action->isEnabled() )
                 _cg.setColor( QColorGroup::Text, Qt::gray );
             
-            KListViewItem::paintCell( p, _cg, column, width, alignment );
+            K3ListViewItem::paintCell( p, _cg, column, width, alignment );
             _cg.setColor( QColorGroup::Text, c );
         }
 
@@ -92,7 +92,7 @@ private:
 KActionMapDlg::KActionMapDlg( KActionCollection* actions, QWidget* parent, const char* name )
     : KDialogBase( parent, name, false, i18n("Action Map"), KDialogBase::Close, KDialogBase::Close )
 {
-    Q3VBox *page = makeVBoxMainWidget();
+    KVBox *page = makeVBoxMainWidget();
 
     new QLabel( i18n("Find and execute actions."), page );
     m_map = new KActionMap( actions, page );
@@ -110,7 +110,7 @@ KActionMap::KActionMap( KActionCollection* actions, QWidget* parent, const char*
 {
     Q3VBoxLayout* layout = new Q3VBoxLayout( this );
 
-    m_listView   = new KListView( this );
+    m_listView   = new K3ListView( this );
 #if KDE_VERSION >= 0x030500
     m_searchLine = new KListViewSearchLineWidget( m_listView, this );
 #endif

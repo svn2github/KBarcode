@@ -754,7 +754,7 @@ QString TokenProvider::processAddresses( const QString & t )
     }
     else if( t == TOK_ADDRESS_URL )
     {
-        ret = m_address->url().prettyURL();
+        ret = m_address->url().prettyUrl();
         found = true;
     }
     else if( t == TOK_ADDRESS_NICK )

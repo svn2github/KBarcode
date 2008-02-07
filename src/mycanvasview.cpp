@@ -278,10 +278,10 @@ void MyCanvasView::contentsMouseReleaseEvent(QMouseEvent* e)
     updateCursor( e->pos() );
 }
 
-KMacroCommand* MyCanvasView::getMoveCommand()
+K3MacroCommand* MyCanvasView::getMoveCommand()
 {
     if( !m_commov )
-        m_commov = new KMacroCommand( i18n("Item Moved") );
+        m_commov = new K3MacroCommand( i18n("Item Moved") );
 
     return m_commov;
 }
@@ -376,7 +376,7 @@ void MyCanvasView::deleteCurrent()
 {
     TCanvasItemList list = getSelected();
     if( !list.isEmpty() ) {
-        KMacroCommand* mc = new KMacroCommand( i18n("Delete") );
+        K3MacroCommand* mc = new K3MacroCommand( i18n("Delete") );
 
         for( unsigned int i = 0; i < list.count(); i++ ) {
             DeleteCommand* dc = new DeleteCommand( list[i] );

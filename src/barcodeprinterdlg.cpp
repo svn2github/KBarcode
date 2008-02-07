@@ -42,7 +42,7 @@ BarcodePrinterDlg::BarcodePrinterDlg(QWidget *parent, const char *name)
     checkFile = new QCheckBox( i18n("&Print to File"), plainPage() );
     
     label2 = new QLabel( i18n("&Filename:"), plainPage() );
-    requester = new KURLRequester( plainPage() );
+    requester = new KUrlRequester( plainPage() );
     label2->setBuddy( requester );
 
     label3 = new QLabel( i18n("&Device:"), plainPage() );

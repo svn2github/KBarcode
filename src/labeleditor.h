@@ -39,19 +39,19 @@
 #include <Q3VBoxLayout>
 
 class BatchPrinter;
-class KURL;
+class KUrl;
 class KAction;
 class KActionMenu;
 class KActionSeparator;
 class KToggleAction;
 class KRecentFilesAction;
 class KToolBarPopupAction;
-class KListBox;
+class K3ListBox;
 class KMenuBar;
-class KPopupMenu;
+class KMenu;
 class KRuler;
 class KToolBar;
-class KCommandHistory;
+class K3CommandHistory;
 class MyCanvasText;
 class MyCanvasRectangle;
 class MyCanvasView;
@@ -109,7 +109,7 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
         
     private:
 
-	/** Creates a KCommandHistory object which will be 
+	/** Creates a K3CommandHistory object which will be 
 	 *  pointed to by history.
 	 *  Make sure to delete history by yourself when needed.
 	 */
@@ -174,7 +174,7 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
         void startBarcodeGen();
         void saveConfig();
         void loadConfig();
-        void startLoadRecentEditor( const KURL& url );
+        void startLoadRecentEditor( const KUrl& url );
         void startLoadEditor();
         void batchPrint();
         void closeLabel();
@@ -185,7 +185,7 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
     protected:
         void closeEvent( QCloseEvent* e );
 
-        KCommandHistory* history;
+        K3CommandHistory* history;
 
         KAction* saveAct;
         KAction* saveAsAct;
@@ -220,9 +220,9 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
 	/**
 	 * Undo/Redo actins get pluged into this menu
 	 */
-	KPopupMenu* editMenu;        
-        KPopupMenu* exportMenu;        
-        KPopupMenu* m_mnuContext;
+	KMenu* editMenu;        
+        KMenu* exportMenu;        
+        KMenu* m_mnuContext;
         
         KToolBar* tools;
         
@@ -243,7 +243,7 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
         QString description;    // description
         QString filename;       // current file
 
-        KListBox* listFields;
+        K3ListBox* listFields;
         KPushButton* buttonText;
 
         Q3VBoxLayout* pageLayout;

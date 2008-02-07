@@ -29,6 +29,7 @@
 
 // QT includes
 #include <qcheckbox.h>
+#include <kglobal.h>
 
 KBarcodeSettings* KBarcodeSettings::m_instance = 0;
 int KBarcodeSettings::gridsize = 30;
@@ -56,7 +57,7 @@ KBarcodeSettings::~KBarcodeSettings()
 
 void KBarcodeSettings::saveConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     config->setGroup("LabelEditor");
     config->writeEntry("grid", gridsize );
@@ -67,7 +68,7 @@ void KBarcodeSettings::saveConfig()
 
 void KBarcodeSettings::loadConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     QColor tmpc( Qt::lightGray );
     config->setGroup("LabelEditor");

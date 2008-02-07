@@ -34,6 +34,7 @@
 #include <kapplication.h>
 //Added by qt3to4:
 #include <QPixmap>
+#include <krandom.h>
 
 QPoint getFreePos( Q3Canvas* c )
 {
@@ -43,8 +44,8 @@ QPoint getFreePos( Q3Canvas* c )
         return QPoint( canvas->rect().x(), canvas->rect().y() );
 
     // TODO: fix for positions on label        
-    int x = KApplication::random() % canvas->rect().width() - 20;
-    int y = KApplication::random() % canvas->rect().height() - 20;
+    int x = KRandom::random() % canvas->rect().width() - 20;
+    int y = KRandom::random() % canvas->rect().height() - 20;
 
     if( x > 0 && y > 0 )
         return QPoint( canvas->rect().x() + x, canvas->rect().y() + y );
@@ -99,7 +100,7 @@ void CommandUtils::documentItemDeleted()
 }
 
 NewItemCommand::NewItemCommand( MyCanvasView* view, const QString & name )
-    : QObject(), KCommand()
+    : QObject(), K3Command()
 {
     cv = view;
     m_name = name;

@@ -30,7 +30,7 @@ class KComboBox;
 class KIntNumInput;
 class KLineEdit;
 class KPushButton;
-class KURLRequester;
+class KUrlRequester;
 class QCheckBox;
 class Q3Frame;
 class Q3GroupBox;
@@ -100,7 +100,7 @@ class CSVImportDlg : public KDialogBase  {
         EncodingCombo* comboEncoding;
         KIntNumInput* spinCol;
         KPushButton* buttonSet;
-        KURLRequester* requester;
+        KUrlRequester* requester;
         Q3Frame* frame;
         Q3Table* table;
         KLineEdit* databaseName;
@@ -115,7 +115,7 @@ class CSVImportDlg : public KDialogBase  {
         Q3GroupBox* groupCSV;
         Q3GroupBox* groupFixed;
 
-        KListBox* listWidth;
+        K3ListBox* listWidth;
         KPushButton* buttonAdd;
         KPushButton* buttonRemove;
         KIntNumInput* spinNumber;

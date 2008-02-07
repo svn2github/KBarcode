@@ -21,7 +21,7 @@
 #include <q3dragobject.h>
 #include "documentitem.h"
 
-class KCommandHistory;
+class K3CommandHistory;
 class TokenProvider;
 class MyCanvasView;
 
@@ -35,7 +35,7 @@ class DocumentItemDrag : public Q3StoredDrag {
         void setDocumentItem( DocumentItemList* list );
 
         static bool canDecode( QMimeSource * );
-        static bool decode( QMimeSource *, MyCanvasView* cv, TokenProvider* token, KCommandHistory* history );
+        static bool decode( QMimeSource *, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history );
 };
 
 #endif

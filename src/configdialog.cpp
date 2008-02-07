@@ -47,6 +47,7 @@
 #include <knuminput.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
+#include <kglobal.h>
 
 const QString cached = I18N_NOOP("There are currently %1 cached barcodes.");
 using namespace KABC;
@@ -68,7 +69,7 @@ ConfigDialog::~ConfigDialog()
 
 void ConfigDialog::setupTab1( )
 {
-    Q3Frame* box = addPage( i18n("SQL Settings"), "", BarIcon("connect_no") );
+    QFrame* box = addPage( i18n("SQL Settings"), "", BarIcon("connect_no") );
     Q3VBoxLayout* layout = new Q3VBoxLayout( box, 6, 6 );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
 
@@ -82,7 +83,7 @@ void ConfigDialog::setupTab2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
     
-    Q3Frame* box = addPage( i18n("Print Settings"), "", BarIcon("fileprint") );
+    QFrame* box = addPage( i18n("Print Settings"), "", BarIcon("fileprint") );
 
     Q3VBoxLayout* tabLayout = new Q3VBoxLayout( box, 11, 6 );
     Q3HBoxLayout* Layout0 = new Q3HBoxLayout( 0, 6, 6 );
@@ -125,7 +126,7 @@ void ConfigDialog::setupTab3()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
 
-    Q3Frame* box = addPage( i18n("Import"), "", BarIcon("fileimport") );
+    QFrame* box = addPage( i18n("Import"), "", BarIcon("fileimport") );
     Q3GridLayout* grid = new Q3GridLayout( box, 2, 2 );
 
     QLabel* label = new QLabel( box );
@@ -179,7 +180,7 @@ void ConfigDialog::setupTab3()
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
     grid->addItem( spacer, 5, 0 );    
 
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
     config->setGroup("FileFormat");
     combo1->setCurrentItem( config->readNumEntry("Data0", 0 ) );
     combo2->setCurrentItem( config->readNumEntry("Data1", 1 ) );
@@ -188,7 +189,7 @@ void ConfigDialog::setupTab3()
 
 void ConfigDialog::setupTab4()
 {
-    Q3Frame* box = addPage( i18n("Label Editor"), "", BarIcon("kbarcode") );
+    QFrame* box = addPage( i18n("Label Editor"), "", BarIcon("kbarcode") );
     Q3GridLayout* tabLayout = new Q3GridLayout( box, 11, 6 );
 
     checkNewDlg = new QCheckBox( box );
@@ -217,7 +218,7 @@ void ConfigDialog::setupTab4()
 void ConfigDialog::setupTab5()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
-    Q3Frame* box = addPage( i18n("On New"), "", BarIcon("filenew") );
+    QFrame* box = addPage( i18n("On New"), "", BarIcon("filenew") );
 
     Q3VBoxLayout* tabLayout = new Q3VBoxLayout( box, 11, 6 );
 
@@ -306,7 +307,7 @@ void ConfigDialog::setupTab5()
 
 void ConfigDialog::accept()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
     config->setGroup("FileFormat");
     config->writeEntry("Data0", combo1->currentItem() );
     config->writeEntry("Data1", combo2->currentItem() );

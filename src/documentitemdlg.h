@@ -23,13 +23,13 @@
 #include "propertywidget.h"
 #include <list> 
 
-class KCommandHistory;
+class K3CommandHistory;
 
 class DocumentItemDlg : public KDialogBase
 {
  Q_OBJECT
  public:
-    DocumentItemDlg( TokenProvider* token, DocumentItem* item, KCommandHistory* history, QWidget* parent );
+    DocumentItemDlg( TokenProvider* token, DocumentItem* item, K3CommandHistory* history, QWidget* parent );
     ~DocumentItemDlg();
     
     void addPage( PropertyWidget* widget );
@@ -41,7 +41,7 @@ class DocumentItemDlg : public KDialogBase
     DocumentItem* m_item;
     std::list<PropertyWidget*> m_list;
     
-    KCommandHistory* m_history;
+    K3CommandHistory* m_history;
 };
 
 #endif

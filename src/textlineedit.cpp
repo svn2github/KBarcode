@@ -78,24 +78,24 @@ void TextLineEditor::setupActions()
     ac = new KActionCollection( this );
 
    
-    KAction *action_undo = KStdAction::undo( editor, SLOT( undo() ), ac );
+    KAction *action_undo = KStandardAction::undo( editor, SLOT( undo() ), ac );
     action_undo->setEnabled( false );
     connect( editor, SIGNAL( undoAvailable(bool) ), action_undo, SLOT( setEnabled(bool) ) );
 
     
-    KAction *action_redo = KStdAction::redo( editor, SLOT( redo() ), ac );
+    KAction *action_redo = KStandardAction::redo( editor, SLOT( redo() ), ac );
     action_redo->setEnabled( false );
     connect( editor, SIGNAL( redoAvailable(bool) ), action_redo, SLOT( setEnabled(bool) ) );
 
-    KAction *action_cut = KStdAction::cut( editor, SLOT( cut() ), ac );
+    KAction *action_cut = KStandardAction::cut( editor, SLOT( cut() ), ac );
     action_cut->setEnabled( false );
     connect( editor, SIGNAL( copyAvailable(bool) ), action_cut, SLOT( setEnabled(bool) ) );
 
-    KAction *action_copy = KStdAction::copy( editor, SLOT( copy() ), ac );
+    KAction *action_copy = KStandardAction::copy( editor, SLOT( copy() ), ac );
     action_copy->setEnabled( false );
     connect( editor, SIGNAL( copyAvailable(bool) ), action_copy, SLOT( setEnabled(bool) ) );
 
-    KAction* action_paste = KStdAction::paste( editor, SLOT( paste() ), ac );
+    KAction* action_paste = KStandardAction::paste( editor, SLOT( paste() ), ac );
 
     KAction* textDataAct = new KAction( i18n("Insert &Data Field"), "contents", 0, this, SLOT( insertNewField() ), ac, "text_data_act");
    

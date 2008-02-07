@@ -36,9 +36,11 @@
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kstandarddirs.h>
 #include <krun.h>
+#include <kglobal.h>
+#include <ktoolinvocation.h>
 
 bool DSMainWindow::autoconnect = true;
 bool DSMainWindow::startwizard = true;
@@ -66,9 +68,9 @@ DSMainWindow::~DSMainWindow()
 
 void DSMainWindow::setupActions()
 {
-    KAction* quitAct = KStdAction::quit(kapp, SLOT(quit()), actionCollection());
-    KAction* closeAct = KStdAction::close( this, SLOT( close() ), actionCollection(), "close" );
-    KAction* configureAct = KStdAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );
+    KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );
+    KAction* configureAct = KStandardAction::preferences( KBarcodeSettings::getInstance(), SLOT(configure()), actionCollection() );
     KAction* wizardAct = new KAction( i18n("&Start Configuration Wizard..."), BarIcon("wizard"), 0, this,
                                 SLOT(wizard()), actionCollection(), "wizard" );
     connectAct = new KAction(i18n("&Connect to Database"), BarIcon("connect_no"), 0, this, SLOT(connectMySQL()),
@@ -84,9 +86,9 @@ void DSMainWindow::setupActions()
     importExampleAct = new KAction( i18n("&Import Example Data"), "", 0, SqlTables::getInstance(),
                                 SLOT(importExampleData()), actionCollection(), "import" );
                                 
-    KPopupMenu* file = new KPopupMenu( this );
-    KPopupMenu* settings = new KPopupMenu( this );
-    KPopupMenu* hlpMenu = helpMenu();
+    KMenu* file = new KMenu( this );
+    KMenu* settings = new KMenu( this );
+    KMenu* hlpMenu = helpMenu();
     int helpid = hlpMenu->idAt( 0 );
     hlpMenu->removeItem( helpid );
     hlpMenu->insertItem( SmallIconSet("contents"), i18n("&Help"),
@@ -126,7 +128,7 @@ void DSMainWindow::setupActions()
 
 void DSMainWindow::loadConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     config->setGroup("Wizard");
     first = config->readBoolEntry("firststart2", true );
@@ -145,7 +147,7 @@ void DSMainWindow::loadConfig()
 
 void DSMainWindow::saveConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     config->setGroup("Wizard");
     config->writeEntry("firststart2", false );
@@ -197,7 +199,7 @@ void DSMainWindow::startInfo()
 {
     QString info = locate("appdata", "barcodes.html");
     if( !info.isEmpty() )
-        kapp->invokeBrowser( info );
+        KToolInvocation::invokeBrowser( info );
 }
 
 bool DSMainWindow::newTables()

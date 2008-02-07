@@ -32,7 +32,7 @@
 #include <keditcl.h>
 #include <klocale.h>
 #include <kmenubar.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kstatusbar.h>
 
 #define CUR_TABLE_ID 6666
@@ -81,12 +81,12 @@ DatabaseBrowser::~DatabaseBrowser()
 void DatabaseBrowser::setupActions()
 {
     DSMainWindow::setupActions();
-    KPopupMenu* editMenu = new KPopupMenu( this );
+    KMenu* editMenu = new KMenu( this );
 
-    KAction* acut = KStdAction::cut( this, SLOT( cut() ), actionCollection() );
-    KAction* acopy = KStdAction::copy( this, SLOT( copy() ), actionCollection() );
-    KAction* apaste = KStdAction::paste( this, SLOT( paste() ), actionCollection() );
-    KAction* afind = KStdAction::find( this, SLOT( find() ), actionCollection() );
+    KAction* acut = KStandardAction::cut( this, SLOT( cut() ), actionCollection() );
+    KAction* acopy = KStandardAction::copy( this, SLOT( copy() ), actionCollection() );
+    KAction* apaste = KStandardAction::paste( this, SLOT( paste() ), actionCollection() );
+    KAction* afind = KStandardAction::find( this, SLOT( find() ), actionCollection() );
     menuBar()->insertItem( i18n("&Edit"), editMenu, -1, 1 );
 
     acut->plug( editMenu );
@@ -95,7 +95,7 @@ void DatabaseBrowser::setupActions()
     
     editMenu->insertSeparator();
     afind->plug( editMenu );
-    KStdAction::findNext( this, SLOT( findNext() ), actionCollection() )->plug( editMenu );
+    KStandardAction::findNext( this, SLOT( findNext() ), actionCollection() )->plug( editMenu );
     editMenu->insertSeparator();
     KAction* aimport = new KAction( i18n("&Import CSV File..."), "",
                                 0, this, SLOT(import()), actionCollection(), "import" );

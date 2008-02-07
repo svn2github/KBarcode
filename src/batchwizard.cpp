@@ -62,22 +62,23 @@
 #include <kiconloader.h>
 #include <kimageio.h>
 #include <klineedit.h>
-#include <klistbox.h>
-#include <klistview.h>
+#include <k3listbox.h>
+#include <k3listview.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kpushbutton.h>
 #include <kurlrequester.h>
 #include <q3table.h>
 #include <q3vbox.h>
+#include <kglobal.h>
 
 #define PNG_FORMAT "PNG"
 
-class AddressListViewItem : public KListViewItem {
+class AddressListViewItem : public K3ListViewItem {
 public:
     AddressListViewItem(Q3ListView *parent, KABC::Addressee & addr )
-        : KListViewItem( parent ), m_address( addr )
+        : K3ListViewItem( parent ), m_address( addr )
         {
             this->setText( 0, m_address.givenName() );
             this->setText( 1, m_address.familyName() );
@@ -127,7 +128,7 @@ void BatchWizard::setupPage1()
 				     "is to select the KBarcode label file you want to print.</qt>"), page1 );
     pageLayout->addWidget( label );
    
-    m_url = new KURLRequester( page1 );
+    m_url = new KUrlRequester( page1 );
     m_url->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
     m_url->setFilter( "*.kbarcode" );
 
@@ -249,7 +250,7 @@ void BatchWizard::setupPage10()
     Q3HBox* directoryBox = new Q3HBox( imageBox );
     directoryBox->setSpacing( 5 );
     QLabel* label = new QLabel( i18n("Output &Directory:"), directoryBox );
-    imageDirPath = new KURLRequester( directoryBox );
+    imageDirPath = new KUrlRequester( directoryBox );
     imageDirPath->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     label->setBuddy( directoryBox );
 
@@ -316,13 +317,13 @@ void BatchWizard::setupStackPage1()
     buttonRemove = new KPushButton( i18n("&Remove" ), hButtonBox );
     buttonRemoveAll = new KPushButton( i18n("R&emove All"), hButtonBox );
 
-    KPopupMenu* mnuImport = new KPopupMenu( this );
+    KMenu* mnuImport = new KMenu( this );
     mnuImport->insertItem( i18n("Import from File ..."), this, SLOT( loadFromFile() ) );
     mnuImport->insertItem( i18n("Import from Clipboard ..."), this, SLOT( loadFromClipboard() ) );
     mnuImport->insertItem( i18n("Import barcode_basic"), this, SLOT( addAllItems() ) );
     buttonImport->setPopup( mnuImport );
 
-    sqlList = new KListView( stack1 );
+    sqlList = new K3ListView( stack1 );
     sqlList->addColumn( i18n("Index") );
     sqlList->addColumn( i18n("Number of Labels") );
     sqlList->addColumn( i18n("Article Number") );
@@ -356,7 +357,7 @@ void BatchWizard::setupStackPage2()
 
     radioImportCSV = new QRadioButton( i18n("Import from a &CSV file"), group );
     labelCsvFile= new QLabel( i18n("Please select a csv &file:"), group );
-    importCsvFile = new KURLRequester( group );
+    importCsvFile = new KUrlRequester( group );
     labelCsvFile->setBuddy( importCsvFile );
     labelEncoding = new QLabel( i18n("&Encoding:"), group );
     comboEncoding = new EncodingCombo( group );
@@ -368,7 +369,7 @@ void BatchWizard::setupStackPage2()
     box->setSpacing( 5 );
 
     new QLabel( i18n("Available Variables:"), box );
-    m_varList = new KListBox( box );
+    m_varList = new K3ListBox( box );
 
     connect( radioImportManual, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioImportSql, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -438,7 +439,7 @@ void BatchWizard::setupStackPage4()
     new QLabel( i18n("All Addresses"), list1 );
     new QLabel( i18n("Selected Addresses"), list2 );
 
-    listAddress = new KListView( list1 );
+    listAddress = new K3ListView( list1 );
     listAddress->addColumn( i18n("Given Name"), 0 );
     listAddress->addColumn( i18n("Family Name"), 1 );
     listAddress->addColumn( i18n("Email Address"), 2 );
@@ -449,7 +450,7 @@ void BatchWizard::setupStackPage4()
     listAddress->setColumnWidthMode( 1, Q3ListView::Maximum );
     listAddress->setColumnWidthMode( 2, Q3ListView::Maximum );
 
-    listSelectedAddress = new KListView( list2 );
+    listSelectedAddress = new K3ListView( list2 );
     listSelectedAddress->addColumn( i18n("Given Name"), 0 );
     listSelectedAddress->addColumn( i18n("Family Name"), 1 );
     listSelectedAddress->addColumn( i18n("Email Address"), 2 );
@@ -755,7 +756,7 @@ bool BatchWizard::addItem( const QString & article, const QString & group, int c
     QString temp;
     temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
 
-    KListViewItem* item = new KListViewItem( sqlList, temp, QString( "%1" ).arg( count ),
+    K3ListViewItem* item = new K3ListViewItem( sqlList, temp, QString( "%1" ).arg( count ),
                           article, group );
     sqlList->insertItem( item );
 
@@ -865,7 +866,7 @@ void BatchWizard::addAllItems()
 	while( query.next() ) 
 	{
 	    temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
-	    new KListViewItem( sqlList, temp, num, query.value( 0 ).toString(), group );
+	    new K3ListViewItem( sqlList, temp, num, query.value( 0 ).toString(), group );
 	}
 
         enableControls();
@@ -911,7 +912,7 @@ void BatchWizard::loadData( const QString & data )
     }
 
     // new config entry!!!
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
     config->setGroup("FileFormat");
     int pos[3] = { config->readNumEntry("Data0", 0 ),
                    config->readNumEntry("Data1", 1 ),

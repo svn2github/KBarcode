@@ -27,7 +27,7 @@
 #include <QPixmap>
 
 #include <klocale.h>
-#include <kmdcodec.h> 
+#include <kcodecs.h> 
 
 ImageItem::ImageItem()
     : DocumentItem()

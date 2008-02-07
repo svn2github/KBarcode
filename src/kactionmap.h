@@ -27,7 +27,7 @@ class KActionMap;
 #if KDE_VERSION >= 0x030500
 class KListViewSearchLineWidget;
 #endif 
-class KListView;
+class K3ListView;
 class Q3ListViewItem;
 
 /** Open a simple dialog containing an action map.
@@ -89,7 +89,7 @@ class KActionMap : public QWidget {
 
  private:
     KActionCollection*         m_actions;
-    KListView*                 m_listView;
+    K3ListView*                 m_listView;
 #if KDE_VERSION >= 0x030500
     KListViewSearchLineWidget* m_searchLine;
 #endif

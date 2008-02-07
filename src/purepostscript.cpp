@@ -25,7 +25,7 @@
 #include <q3textstream.h>
 
 #include <kstandarddirs.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 
 #define MAX_LINE_LENGTH 256
 #define BEGIN_TEMPLATE "--BEGIN TEMPLATE--"
@@ -202,7 +202,7 @@ QRect PurePostscriptBarcode::bbox( const char* postscript, long postscript_size 
     long    len    = 0;
     QRect   size;
 
-    KTempFile psfile( QString::null, ".ps" );
+    KTemporaryFile psfile( QString::null, ".ps" );
     psfile.file()->write( postscript, postscript_size );
     psfile.file()->close();
 

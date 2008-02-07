@@ -70,8 +70,10 @@ NewLabel::NewLabel( QWidget* parent,  const char* name, bool change, Qt::WFlags 
     TextLabel3 = new QLabel( group1, "TextLabel3" );
     TextLabel3->setText( i18n( "Type:" ) );
 
-    comboProducer = new KComboBox( FALSE, group1, "comboProducer" );
-    comboType = new KComboBox( FALSE, group1, "comboType" );
+    comboProducer = new KComboBox( FALSE, group1 );
+    comboProducer->setObjectName( "comboProducer" );
+    comboType = new KComboBox( FALSE, group1 );
+    comboType->setObjectName( "comboType" );
 
     checkEmpty = new QCheckBox( i18n("&Start with an empty label"), group1 );
     checkEmpty->setEnabled( !change );

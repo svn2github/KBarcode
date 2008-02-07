@@ -22,10 +22,10 @@
 //Added by qt3to4:
 #include <QPixmap>
 
-#include <kcommand.h>
+#include <k3command.h>
 #include <klocale.h>
 
-DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, KCommandHistory* history, QWidget* parent )
+DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, K3CommandHistory* history, QWidget* parent )
     : KDialogBase( Tabbed, i18n("Properties"), KDialogBase::Ok|KDialogBase::Cancel,
       KDialogBase::Ok, parent, 0, true, true )
 {
@@ -33,7 +33,7 @@ DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, KCom
     m_history = history;
     //m_list.setAutoDelete( false );
     
-     Q3VBox* boxBorder = addVBoxPage(i18n("&Position && Size"), QString::null, QPixmap() );
+     KVBox* boxBorder = addVBoxPage(i18n("&Position && Size"), QString::null, QPixmap() );
      addPage( new PropertySize( boxBorder ) );
     
      boxBorder = addVBoxPage(i18n("&Border"), QString::null, QPixmap() );
@@ -108,7 +108,7 @@ void DocumentItemDlg::addPage( PropertyWidget* widget )
 
 void DocumentItemDlg::accept()
 {
-    KMacroCommand* mc = new KMacroCommand( i18n("Property changed") );
+    K3MacroCommand* mc = new K3MacroCommand( i18n("Property changed") );
     std::list<PropertyWidget*>::iterator it;
     for( it=m_list.begin();it!=m_list.end();it++)
     {

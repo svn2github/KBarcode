@@ -63,7 +63,7 @@ CSVImportDlg::CSVImportDlg(QWidget *parent, const char *name )
     : KDialogBase( KDialogBase::Tabbed, i18n("Import"),
       KDialogBase::Ok | KDialogBase::Close, KDialogBase::Ok, parent,name,false,true)
 {
-    setButtonOKText( i18n("&Import"), i18n("Import the selected file into your tables.") );
+    setButtonOK( i18n("&Import"), i18n("Import the selected file into your tables.") );
     
     createPage1();
     createPage2();
@@ -95,11 +95,11 @@ CSVImportDlg::~CSVImportDlg()
 
 void CSVImportDlg::createPage1()
 {
-    Q3Frame* box = addPage( i18n("&Import Data") );
+    QFrame* box = addPage( i18n("&Import Data") );
     Q3VBoxLayout* layout = new Q3VBoxLayout( box, 6, 6 );
     Q3GridLayout* grid = new Q3GridLayout( 2 );
 
-    requester = new KURLRequester( box );
+    requester = new KUrlRequester( box );
     comboEncoding = new EncodingCombo( box );
     comboSQL = new KComboBox( false, box );
     comboSQL->insertItem( TABLE_BASIC );
@@ -153,7 +153,7 @@ void CSVImportDlg::createPage1()
 void CSVImportDlg::createPage2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
-    Q3Frame* mainBox = addPage( i18n("&Import Settings") );
+    QFrame* mainBox = addPage( i18n("&Import Settings") );
     Q3VBoxLayout* layout = new Q3VBoxLayout( mainBox, 6, 6 );
     QSpacerItem* spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     QSpacerItem* spacer2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
@@ -206,7 +206,7 @@ void CSVImportDlg::createPage2()
     Q3HBoxLayout* groupFixedLayout = new Q3HBoxLayout( groupFixed->layout() );
     groupFixedLayout->setAlignment( Qt::AlignTop );
 
-    listWidth = new KListBox( groupFixed );
+    listWidth = new K3ListBox( groupFixed );
 
     buttonAdd = new KPushButton( groupFixed );
     buttonAdd->setText( i18n( "&Add Field" ) );
@@ -323,7 +323,7 @@ void CSVImportDlg::enableControls()
 
     spinLoadOnly->setEnabled( !checkLoadAll->isChecked() );
 
-    enableButtonOK( b );
+    enableButtonOk( b );
     frame->setEnabled( b );
 }
 

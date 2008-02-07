@@ -58,7 +58,7 @@ RectSettingsDlg::RectSettingsDlg(QWidget *parent, const char *name )
     : KDialogBase( KDialogBase::Plain, i18n("Settings"),
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
 {
-    Q3Frame* frame = plainPage();
+    QFrame* frame = plainPage();
     Q3GridLayout* grid = new Q3GridLayout( frame, 6, 6 );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
 
@@ -149,7 +149,7 @@ LineSettingsDlg::LineSettingsDlg(QWidget *parent, const char *name )
     : KDialogBase( KDialogBase::Plain, i18n("Settings"),
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
 {
-    Q3Frame* frame = plainPage();
+    QFrame* frame = plainPage();
     Q3GridLayout* grid = new Q3GridLayout( frame, 6, 6 );
 
     buttonColor = new KColorButton( frame );

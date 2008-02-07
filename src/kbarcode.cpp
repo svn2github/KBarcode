@@ -37,7 +37,7 @@
 #include <kcmdlineargs.h>
 #include <kiconloader.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 
@@ -89,7 +89,7 @@ KBarcode::KBarcode( QWidget *parent, const char *name, Qt::WFlags f)
     KAction* importCSVAct = new KAction(i18n("&Import CSV File..."), "",
                                 0, this, SLOT(importCSV()), actionCollection() );
                                 
-    KPopupMenu* data = new KPopupMenu( buttonData );
+    KMenu* data = new KMenu( buttonData );
     editLabelDefAct->plug( data );
     editArticleAct->plug( data );
     editCustomerAct->plug( data );

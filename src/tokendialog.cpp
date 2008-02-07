@@ -21,8 +21,8 @@
 #include "dstextedit.h"
 
 #include <klineedit.h>
-#include <klistbox.h>
-#include <klistview.h>
+#include <k3listbox.h>
+#include <k3listview.h>
 #include <klocale.h>
 
 #include <q3hbox.h> 
@@ -135,11 +135,11 @@ void TokenDialog::setupStack2Page1()
     Q3VBox* right = new Q3VBox( splitter );
     
     QLabel* label = new QLabel( i18n("&Category:"), left );
-    category = new KListBox( left );
+    category = new K3ListBox( left );
     label->setBuddy( category );
 
     label = new QLabel( i18n("&Token:"), right );
-    allList = new KListView( right );
+    allList = new K3ListView( right );
     allList->addColumn( i18n("Token"), 0 );
     allList->addColumn( i18n("Description"), 1 );
     allList->setColumnWidthMode( 0, Q3ListView::Maximum );
@@ -174,7 +174,7 @@ void TokenDialog::setupStack2Page2()
 {
     stack2Page2 = new Q3VBox();
 
-    labelList = new KListView( stack2Page2 );
+    labelList = new K3ListView( stack2Page2 );
     labelList->addColumn( i18n("Token"), 0 );
     labelList->addColumn( i18n("Description"), 1 );
     labelList->setColumnWidthMode( 0, Q3ListView::Maximum );
@@ -194,7 +194,7 @@ void TokenDialog::setupStack2Page3()
     editVariable = new KLineEdit( stack2Page3 );
 
     radioVariableExisting = new QRadioButton( i18n("&Insert an existing custom variable"), stack2Page3 );
-    listVariable = new KListBox( stack2Page3 );
+    listVariable = new K3ListBox( stack2Page3 );
 
     radioVariableNew->setChecked( true );
 
@@ -380,7 +380,7 @@ void TokenDialog::initStackPage2()
         if( (*categories)[i].category == cat )
         {
             for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
-                labelList->insertItem( new KListViewItem( labelList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
+                labelList->insertItem( new K3ListViewItem( labelList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                                      (*categories)[i].tokens[z].description ) );
             
             break;
@@ -398,7 +398,7 @@ void TokenDialog::categoryChanged( Q3ListBoxItem* item )
     if( item->prev() == 0 )
     {
         for( i = 0; i < m_tokens.count(); i++ )
-	    allList->insertItem( new KListViewItem( allList, QString( "[%1]").arg( m_tokens[i].token ),
+	    allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( m_tokens[i].token ),
 						 m_tokens[i].description ) );
     } 
     else
@@ -408,7 +408,7 @@ void TokenDialog::categoryChanged( Q3ListBoxItem* item )
             if( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) == item->text() )
             {
                 for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
-                    allList->insertItem( new KListViewItem( allList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
+                    allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                       (*categories)[i].tokens[z].description ) );
                 
                 break;
@@ -418,7 +418,7 @@ void TokenDialog::categoryChanged( Q3ListBoxItem* item )
 	// TODO: comparing by a user visible string cries for bugs!!!
 	if( item->text() == i18n("Custom Values") )
 	    for( i=0;i<m_custom_tokens.count();i++ )
-		allList->insertItem( new KListViewItem( allList, QString( "[%1]").arg( m_custom_tokens[i] ), 
+		allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( m_custom_tokens[i] ), 
 						     i18n("Variable defined by the user for this label.") ) );
     }
 }

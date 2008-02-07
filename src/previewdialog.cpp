@@ -45,6 +45,7 @@
 #include <klocale.h>
 #include <knuminput.h>
 #include <kpushbutton.h>
+#include <kglobal.h>
 
 int PreviewDialog::customer_index = 0;
 int PreviewDialog::m_index = 1;
@@ -145,7 +146,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );
 
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
     config->setGroup( "PreviewDialog" );
     resize( config->readNumEntry( "width", width() ), config->readNumEntry( "height", height() ) );
     
@@ -155,7 +156,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
 
 PreviewDialog::~PreviewDialog()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
     config->setGroup( "PreviewDialog" );
     config->writeEntry( "width", width() );
     config->writeEntry( "height", height() );

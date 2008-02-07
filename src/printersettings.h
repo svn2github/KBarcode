@@ -22,7 +22,7 @@
 #include <qstring.h>
 #include <kprinter.h>
 
-class KURL;
+class KUrl;
 
 typedef struct labelprinterdata {
    int articleEvent1;
@@ -80,7 +80,7 @@ class PrinterSettings: public QObject  {
         static PrinterSettings* getInstance();
 
         // don't forget to delete printer
-        KPrinter* setupPrinter( const KURL & url, QWidget* parent, bool immediately = false, const QString & prn = QString::null );
+        KPrinter* setupPrinter( const KUrl & url, QWidget* parent, bool immediately = false, const QString & prn = QString::null );
         
     public slots:
         void loadConfig();

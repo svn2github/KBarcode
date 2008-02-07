@@ -88,26 +88,27 @@
 #include <kaction.h>
 #include <kapplication.h>
 #include <kcolordialog.h>
-#include <kcommand.h>
+#include <k3command.h>
 #include <kcombobox.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
 #include <kimageio.h>
 #include <klineedit.h>
-#include <klistbox.h>
+#include <k3listbox.h>
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kpushbutton.h>
 #include <kprinter.h>
 #include <krun.h>
 #include <kspell.h>
 #include <kstatusbar.h>
 #include <kstandarddirs.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <dcopclient.h>
+#include <kglobal.h>
 
 #include "tcanvasitem.h"
 #include "rectitem.h"
@@ -188,7 +189,7 @@ LabelEditor::~LabelEditor()
 
 void LabelEditor::loadConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
     recentAct->loadEntries( config, "RecentFiles" );
 
     gridAct->setChecked( config->readBoolEntry("gridenabled", false ) );
@@ -197,7 +198,7 @@ void LabelEditor::loadConfig()
 
 void LabelEditor::saveConfig()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     recentAct->saveEntries( config, "RecentFiles" );
 
@@ -211,7 +212,7 @@ void LabelEditor::saveConfig()
 
 void LabelEditor::createCommandHistory()
 {
-    KConfig* config = kapp->config();
+    KConfig* config = KGlobal::config();
 
     if( undoAct && redoAct )
     {
@@ -223,7 +224,7 @@ void LabelEditor::createCommandHistory()
 	actionCollection()->remove( redoAct );
     }
 
-    history = new KCommandHistory( actionCollection(), false );
+    history = new K3CommandHistory( actionCollection(), false );
     cv->setHistory( history );
 
     config->setGroup("LabelEditor");
@@ -280,9 +281,9 @@ bool LabelEditor::save()
     else
         ret = save( filename );
 
-    KURL url;
+    KUrl url;
     url.setPath( filename );
-    recentAct->addURL( url );
+    recentAct->addUrl( url );
 
     updateInfo();
 
@@ -405,9 +406,9 @@ bool LabelEditor::openUrl( const QString & url )
     }
     list.clear();
 
-    KURL murl;
+    KUrl murl;
     murl.setPath( filename );
-    recentAct->addURL( murl );
+    recentAct->addUrl( murl );
 
     enableActions();
     cv->repaintContents( true );
@@ -444,22 +445,22 @@ bool LabelEditor::newLabel()
 
 void LabelEditor::setupActions()
 {
-    KAction* newAct = KStdAction::openNew( this, SLOT(startEditor()), actionCollection() );
-    KAction* loadAct = KStdAction::open( this, SLOT(startLoadEditor()), actionCollection() );
-    KAction* quitAct = KStdAction::quit(kapp, SLOT(quit()), actionCollection());
-    KAction* closeAct = KStdAction::close( this, SLOT( close() ), actionCollection(), "close" );
+    KAction* newAct = KStandardAction::openNew( this, SLOT(startEditor()), actionCollection() );
+    KAction* loadAct = KStandardAction::open( this, SLOT(startLoadEditor()), actionCollection() );
+    KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+    KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );
     closeLabelAct = new KAction( i18n("Close &Label" ), 0, 0, this, SLOT( closeLabel() ), actionCollection() );
 
-    recentAct = new KRecentFilesAction( i18n("&Recent Files"), 0, this, SLOT( loadRecentEditor( const KURL& ) ) );
+    recentAct = new KRecentFilesAction( i18n("&Recent Files"), 0, this, SLOT( loadRecentEditor( const KUrl& ) ) );
 
     KAction* importPrintFileAct = new KAction( i18n("&Import and Print Batch File..."), BarIconSet( "fileprint" ), 0, this, SLOT( batchPrint() ), actionCollection() );
 
-    saveAct = KStdAction::save( this, SLOT( save() ), actionCollection(), "save" );
-    saveAsAct = KStdAction::saveAs( this, SLOT( saveas() ), actionCollection(), "saveas" );
+    saveAct = KStandardAction::save( this, SLOT( save() ), actionCollection(), "save" );
+    saveAsAct = KStandardAction::saveAs( this, SLOT( saveas() ), actionCollection(), "saveas" );
     descriptionAct = new KAction( i18n("&Change description..."), 0, 0, this, SLOT(changeDes()), actionCollection() );
     deleteAct = new KAction( i18n("&Delete Object"), QIcon( BarIcon("editdelete") ), Key_Delete, cv, SLOT( deleteCurrent() ), actionCollection() );
     editPropAct = new KAction( i18n("&Properties..."), 0, 0, this, SLOT( doubleClickedCurrent() ), actionCollection() );
-    printAct = KStdAction::print( this, SLOT( print() ), actionCollection(), "print" );
+    printAct = KStandardAction::print( this, SLOT( print() ), actionCollection(), "print" );
     bcpAct = new KAction( i18n("Print to &Barcode Printer..."), 0, 0, this, SLOT( printBCP() ), actionCollection() );
     imgAct = new KAction( i18n("Print to &Image..."), 0, 0, this, SLOT(printImage() ), actionCollection() );
     changeSizeAct = new KAction( i18n("&Change Label..."), 0, 0, this, SLOT( changeSize() ), actionCollection() );
@@ -473,15 +474,15 @@ void LabelEditor::setupActions()
     lineAct = new KAction( i18n("Insert &Line"), QIcon( BarIcon("kbarcodelinetool") ), 0, this, SLOT( insertLine() ), actionCollection() );
     rectAct = new KAction( i18n("Insert &Rectangle"), QIcon( BarIcon("kbarcoderect") ), 0, this, SLOT( insertRect() ), actionCollection() );
     circleAct = new KAction( i18n("Insert &Ellipse"), QIcon( BarIcon("kbarcodeellipse") ), 0, this, SLOT( insertCircle() ), actionCollection() );
-    spellAct = KStdAction::spelling( this, SLOT(spellCheck()), actionCollection(), "spell" );
+    spellAct = KStandardAction::spelling( this, SLOT(spellCheck()), actionCollection(), "spell" );
     gridAct = new KToggleAction( i18n("&Grid"), QIcon( BarIcon("kbarcodegrid") ), 0, this, SLOT( toggleGrid() ), actionCollection() );
     previewAct = new KAction( i18n("&Preview..."), 0, 0, this, SLOT( preview() ), actionCollection() );
     sep = new KActionSeparator( this );
-    cutAct = KStdAction::cut( this, SLOT( cut() ), actionCollection(), "cut" );
-    copyAct = KStdAction::copy( this, SLOT( copy() ), actionCollection(), "copy" );
-    pasteAct = KStdAction::paste( this, SLOT( paste() ), actionCollection(), "paste" );
-    selectAllAct = KStdAction::selectAll( cv, SLOT( selectAll() ), actionCollection(), "select_all" );
-    deSelectAllAct = KStdAction::deselect( cv, SLOT( deSelectAll() ), actionCollection(), "de_select_all" );
+    cutAct = KStandardAction::cut( this, SLOT( cut() ), actionCollection(), "cut" );
+    copyAct = KStandardAction::copy( this, SLOT( copy() ), actionCollection(), "copy" );
+    pasteAct = KStandardAction::paste( this, SLOT( paste() ), actionCollection(), "paste" );
+    selectAllAct = KStandardAction::selectAll( cv, SLOT( selectAll() ), actionCollection(), "select_all" );
+    deSelectAllAct = KStandardAction::deselect( cv, SLOT( deSelectAll() ), actionCollection(), "de_select_all" );
     addressBookAct = new KAction( i18n("Address&book"), QIcon( BarIcon("kaddressbook") ), 0, this, SLOT( launchAddressBook() ), actionCollection() );
     KAction* singleBarcodeAct = new KAction(i18n("&Create Single Barcode..."), "",
                                 0, this, SLOT(startBarcodeGen()),
@@ -512,14 +513,14 @@ void LabelEditor::setupActions()
     gridAct->plug( tools );
 
     DSMainWindow::setupActions();
-    connect( recentAct, SIGNAL( urlSelected( const KURL& ) ), this, SLOT( startLoadRecentEditor( const KURL& ) ) );
+    connect( recentAct, SIGNAL( urlSelected( const KUrl& ) ), this, SLOT( startLoadRecentEditor( const KUrl& ) ) );
 
-    KPopupMenu* fileMenu = new KPopupMenu( this );
-    editMenu = new KPopupMenu( this );
-    KPopupMenu* viewMenu = new KPopupMenu( this );
-    KPopupMenu* insMenu = new KPopupMenu( this );
-    KPopupMenu* toolMenu = new KPopupMenu( this );
-    KPopupMenu* barMenu = new KPopupMenu( this );
+    KMenu* fileMenu = new KMenu( this );
+    editMenu = new KMenu( this );
+    KMenu* viewMenu = new KMenu( this );
+    KMenu* insMenu = new KMenu( this );
+    KMenu* toolMenu = new KMenu( this );
+    KMenu* barMenu = new KMenu( this );
 
     menuBar()->removeItemAt( 0 );
     menuBar()->insertItem( i18n("&File"), fileMenu, -1, 0 );
@@ -582,16 +583,16 @@ void LabelEditor::setupActions()
 
 void LabelEditor::setupContextMenu()
 {
-    m_mnuContext = new KPopupMenu( this );
+    m_mnuContext = new KMenu( this );
     m_mnuContext->setCheckable( true );
     
-    KPopupMenu* orderMenu = new KPopupMenu( m_mnuContext );
+    KMenu* orderMenu = new KMenu( m_mnuContext );
     orderMenu->insertItem( i18n("&On Top"), this, SLOT( onTopCurrent() ) );
     orderMenu->insertItem( i18n("&Raise"), this, SLOT( raiseCurrent() ) );
     orderMenu->insertItem( i18n("&Lower"), this, SLOT( lowerCurrent() ) );
     orderMenu->insertItem( i18n("&To Background"), this, SLOT( backCurrent() ) );
 
-    KPopupMenu* centerMenu = new KPopupMenu( m_mnuContext );
+    KMenu* centerMenu = new KMenu( m_mnuContext );
     centerMenu->insertItem( i18n("Center &Horizontally"), this, SLOT( centerHorizontal() ) );
     centerMenu->insertItem( i18n("Center &Vertically"), this, SLOT( centerVertical() ) );
 
@@ -743,7 +744,7 @@ void LabelEditor::showContextMenu( QPoint pos )
 void LabelEditor::lockItem()
 {
     TCanvasItemList list = cv->getSelected();
-    KMacroCommand* mc = new KMacroCommand( i18n("Protected Item") );
+    K3MacroCommand* mc = new K3MacroCommand( i18n("Protected Item") );
     
     DocumentItem* item = NULL;
     LockCommand* lc = NULL;
@@ -766,7 +767,7 @@ void LabelEditor::print()
 
     PrinterSettings::getInstance()->getData()->border = pld.border();
 
-    KPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KURL( filename ), this );
+    KPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl( filename ), this );
     if( !printer )
         return;
 
@@ -842,7 +843,7 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
 
 void LabelEditor::spellCheck()
 {
-    KMacroCommand* sc = new KMacroCommand( i18n("Spellchecking") );
+    K3MacroCommand* sc = new K3MacroCommand( i18n("Spellchecking") );
     Q3CanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->rtti() == eRtti_Text ) {
@@ -1013,7 +1014,7 @@ void LabelEditor::startBarcodeGen()
     new BarCodeDialog();
 }
 
-void LabelEditor::startLoadRecentEditor( const KURL& url )
+void LabelEditor::startLoadRecentEditor( const KUrl& url )
 {
     if( !QFile::exists( url.path() ) ) {
         KMessageBox::information( this, i18n("The file %1 does not exist.").arg( url.path() ) );

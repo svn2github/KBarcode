@@ -50,36 +50,36 @@ AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent, con
     list.setAutoDelete( false );
     
     if( Barkode::hasFeature( type, PDF417BARCODE ) ) {
-        Q3VBox* box = addVBoxPage( i18n("PDF417") );
+        KVBox* box = addVBoxPage( i18n("PDF417") );
         PDF417BarcodeDlg* dlg = new PDF417BarcodeDlg( box );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, DATAMATRIX ) ) {
-        Q3VBox* box = addVBoxPage( i18n("DataMatrix") );
+        KVBox* box = addVBoxPage( i18n("DataMatrix") );
         DataMatrixDlg* dlg = new DataMatrixDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
     if( Barkode::hasFeature( type, TBARCODEADV ) ) {
-        Q3VBox* box = addVBoxPage( i18n("TBarcode") );
+        KVBox* box = addVBoxPage( i18n("TBarcode") );
         TBarcodeDlg* dlg = new TBarcodeDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
     if( Barkode::hasFeature( type, PUREADV ) ) {
-        Q3VBox* box = addVBoxPage( i18n("Barcode Writer in Pure Postscript") );
+        KVBox* box = addVBoxPage( i18n("Barcode Writer in Pure Postscript") );
         PurePostscriptDlg* dlg = new PurePostscriptDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
     if( Barkode::hasFeature( type, COLORED ) ) {
-        Q3VBox* box = addVBoxPage( i18n("Colors") );
+        KVBox* box = addVBoxPage( i18n("Colors") );
         ColorDlg* dlg = new ColorDlg( box );
         list.append( (BarcodeDlgBase*)dlg );        
     }
 
-    Q3VBox* box = addVBoxPage( i18n("Sequence") );
+    KVBox* box = addVBoxPage( i18n("Sequence") );
     SequenceDlg* dlg = new SequenceDlg( box );
     list.append( (BarcodeDlgBase*)dlg );
 }

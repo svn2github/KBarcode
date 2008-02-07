@@ -25,7 +25,7 @@ class KEdFind;
 class KMenuBar;
 class KToolBar;
 class KPushButton;
-class KPopupMenu;
+class KMenu;
 class MyDataTable;
 /** A database browser widget. Allows small changes to SQL tables
   * and is mostly used for having a quick look on the tables.

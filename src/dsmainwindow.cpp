@@ -92,7 +92,7 @@ void DSMainWindow::setupActions()
     int helpid = hlpMenu->idAt( 0 );
     hlpMenu->removeItem( helpid );
     hlpMenu->insertItem( SmallIconSet("contents"), i18n("&Help"),
-        this, SLOT(appHelpActivated()), Key_F1, -1, 0 );
+        this, SLOT(appHelpActivated()), Qt::Key_F1, -1, 0 );
     hlpMenu->insertSeparator(-1);
     hlpMenu->insertItem( i18n("&Action Map..."), this, SLOT( slotFunctionMap() ), 0, -1, 0 );
     hlpMenu->insertSeparator(-2);

@@ -201,7 +201,7 @@ void ConfigDialog::setupTab4()
     connect( date, SIGNAL( textChanged( const QString & ) ), this, SLOT( updateDatePreview() ) );
 
     spinGrid = new KIntNumInput( 0, box );
-    spinGrid->setLabel( i18n("Grid:" ), AlignLeft | AlignVCenter );
+    spinGrid->setLabel( i18n("Grid:" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinGrid->setRange(2, 100, 1, false );
 
     colorGrid = new KColorButton( box );

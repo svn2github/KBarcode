@@ -111,7 +111,7 @@ void CSVImportDlg::createPage1()
     databaseName = new KLineEdit( box );
     checkLoadAll = new QCheckBox( i18n("&Load complete file into preview"), box );
     spinLoadOnly = new KIntNumInput( box );
-    spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), AlignLeft | AlignVCenter );
+    spinLoadOnly->setLabel( i18n("Load only a number of datasets:"), Qt::AlignLeft | Qt::AlignVCenter );
     spinLoadOnly->setRange( 0, 10000, 1, false );
     checkLoadAll->setChecked( true );
 
@@ -122,7 +122,7 @@ void CSVImportDlg::createPage1()
     Q3HBoxLayout* layout2 = new Q3HBoxLayout( frame, 6, 6 );
     
     spinCol = new KIntNumInput( frame );
-    spinCol->setLabel( i18n("Column:"), AlignLeft | AlignVCenter );
+    spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignVCenter );
     spinCol->setRange( 0, 0, 0, false );
 
     comboField = new KComboBox( false, frame );

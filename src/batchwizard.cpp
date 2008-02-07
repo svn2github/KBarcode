@@ -226,7 +226,7 @@ void BatchWizard::setupPage5()
     serialStart = new KLineEdit( serial.serial(), hbox );
 
     serialInc = new KIntNumInput( 1, hbox );
-    serialInc->setLabel( i18n( "Serial increment:" ), KNumInput::AlignLeft | KNumInput::AlignVCenter );
+    serialInc->setLabel( i18n( "Serial increment:" ), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
     serialInc->setRange( 1, 10000, 1, false );
 
     addPage( page5, i18n("Serial Number") );
@@ -386,7 +386,7 @@ void BatchWizard::setupStackPage3()
 
     numLabels = new KIntNumInput( 1, stack3 );
     numLabels->setRange( 1, 100000, 1, true );
-    numLabels->setLabel( i18n("&Number of labels to print:"), AlignLeft | AlignVCenter );
+    numLabels->setLabel( i18n("&Number of labels to print:"), Qt::AlignLeft | Qt::AlignVCenter );
 
     page3->addWidget( stack3 );
 }

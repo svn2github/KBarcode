@@ -458,7 +458,7 @@ void LabelEditor::setupActions()
     saveAct = KStandardAction::save( this, SLOT( save() ), actionCollection(), "save" );
     saveAsAct = KStandardAction::saveAs( this, SLOT( saveas() ), actionCollection(), "saveas" );
     descriptionAct = new KAction( i18n("&Change description..."), 0, 0, this, SLOT(changeDes()), actionCollection() );
-    deleteAct = new KAction( i18n("&Delete Object"), QIcon( BarIcon("editdelete") ), Key_Delete, cv, SLOT( deleteCurrent() ), actionCollection() );
+    deleteAct = new KAction( i18n("&Delete Object"), QIcon( BarIcon("editdelete") ), Qt::Key_Delete, cv, SLOT( deleteCurrent() ), actionCollection() );
     editPropAct = new KAction( i18n("&Properties..."), 0, 0, this, SLOT( doubleClickedCurrent() ), actionCollection() );
     printAct = KStandardAction::print( this, SLOT( print() ), actionCollection(), "print" );
     bcpAct = new KAction( i18n("Print to &Barcode Printer..."), 0, 0, this, SLOT( printBCP() ), actionCollection() );

@@ -155,7 +155,7 @@ void ConfWizard::setupPage3()
 
     TextLabel1_2 = new QLabel( page_3, "TextLabel1_2" );
     TextLabel1_2->setText( i18n( "KBarcode can create the required SQL tables for you.<br>KBarcode will add also some Label Definitions to the tables.<br>After that you can fill the tables with some example data." ) );
-    TextLabel1_2->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter ) );
+    TextLabel1_2->setAlignment( int( QLabel::WordBreak | Qt::AlignVCenter ) );
     pageLayout_3->addWidget( TextLabel1_2 );
 
     Layout5_2 = new Q3VBoxLayout( 0, 0, 6, "Layout5_2");

@@ -50,9 +50,9 @@ class MultiLineEditor : public QWidget {
         void updateAligment();
         void formatColor();
         void checkSpelling();
-        void setAlignLeft( bool yes );
-        void setAlignRight( bool yes );
-        void setAlignCenter( bool yes );
+        void setQt::AlignLeft( bool yes );
+        void setQt::AlignRight( bool yes );
+        void setQt::AlignCenter( bool yes );
         void setAlignJustify( bool yes );               
         void insertNewField();
         

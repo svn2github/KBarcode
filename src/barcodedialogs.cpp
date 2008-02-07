@@ -117,11 +117,11 @@ TBarcodeDlg::TBarcodeDlg(QWidget *parent, const char *name )
     Q3VBoxLayout* gbLayout = new Q3VBoxLayout( gb->layout() );
 
     spinModule = new KDoubleNumInput( gb );
-    spinModule->setLabel( i18n("Module width (mm):"), AlignLeft | AlignVCenter );
+    spinModule->setLabel( i18n("Module width (mm):"), Qt::AlignLeft | Qt::AlignVCenter );
     spinModule->setRange( 0.190, 1.500, 0.001, true );
 
     spinHeight = new KIntNumInput( gb );
-    spinHeight->setLabel( i18n("Barcode Height (mm):"), AlignLeft | AlignVCenter );
+    spinHeight->setLabel( i18n("Barcode Height (mm):"), Qt::AlignLeft | Qt::AlignVCenter );
     spinHeight->setRange( 1, 1000, 10, false );
 
     checkEscape = new QCheckBox( i18n("&Translate escape sequences"), gb );
@@ -267,15 +267,15 @@ PDF417BarcodeDlg::PDF417BarcodeDlg(QWidget *parent, const char *name )
     Q3VBoxLayout* gpdfLayout = new Q3VBoxLayout( gpdf->layout() );
 
     spinRow = new KIntNumInput( gpdf );
-    spinRow->setLabel( i18n("Rows:"),  AlignLeft | AlignVCenter );
+    spinRow->setLabel( i18n("Rows:"),  Qt::AlignLeft | Qt::AlignVCenter );
     spinRow->setRange( 0, 90, 1, true );
 
     spinCol = new KIntNumInput( spinRow, 0, gpdf );
-    spinCol->setLabel( i18n("Columns:"),  AlignLeft | AlignVCenter );
+    spinCol->setLabel( i18n("Columns:"),  Qt::AlignLeft | Qt::AlignVCenter );
     spinCol->setRange( 0, 30, 1, true );
 
     spinErr = new KIntNumInput( spinCol, 0, gpdf );
-    spinErr->setLabel( i18n("Error correction level:"),  AlignLeft | AlignVCenter );
+    spinErr->setLabel( i18n("Error correction level:"),  Qt::AlignLeft | Qt::AlignVCenter );
     spinErr->setRange( 1, 8, 1, true );
 
     gpdfLayout->addWidget( spinRow );
@@ -380,11 +380,11 @@ SequenceDlg::SequenceDlg( QWidget *parent, const char *name )
     radioAlphaNum = new QRadioButton( i18n("Iterate over A-Z, 0-9"), group );
 
     spinStep = new KIntNumInput( group );
-    spinStep->setLabel( i18n("Step:"), AlignLeft | AlignVCenter );
+    spinStep->setLabel( i18n("Step:"), Qt::AlignLeft | Qt::AlignVCenter );
     spinStep->setRange( -100, 100, 1, false );
 
     spinStart = new KIntNumInput( spinStep, 1, group );
-    spinStart->setLabel( i18n("Start:"), AlignLeft | AlignVCenter );
+    spinStart->setLabel( i18n("Start:"), Qt::AlignLeft | Qt::AlignVCenter );
     spinStart->setRange( -100000, 100000, 1, false );
     
     layout->addWidget( checkSequence );

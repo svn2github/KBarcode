@@ -22,7 +22,7 @@
 #include <q3ptrlist.h>
 #include <qwidget.h>
 #include <q3vbox.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class Barkode;
 class KColorButton;

@@ -227,10 +227,10 @@ void ImageItem::createImage()
 	    {
 		if( DocumentItem::paintDevice()->isExtDev() )
 		    img = img.smoothScale( rect().width(), rect().height(), 
-					   (m_scaling == eImage_Scaled ? QImage::ScaleMin : QImage::ScaleFree) );
+					   (m_scaling == eImage_Scaled ? Qt::ScaleMin : QImage::ScaleFree) );
 		else
 		    img = img.scale( rect().width(), rect().height(), 
-				     (m_scaling == eImage_Scaled ? QImage::ScaleMin : QImage::ScaleFree) );
+				     (m_scaling == eImage_Scaled ? Qt::ScaleMin : QImage::ScaleFree) );
 	    }
 	    else
 	    {
@@ -241,7 +241,7 @@ void ImageItem::createImage()
 		    
 		    img = img.smoothScale( (int)(img.width() * ((double)metrics.logicalDpiX()/QPaintDevice::x11AppDpiX())),
 					   (int)(img.height() * ((double)metrics.logicalDpiY()/QPaintDevice::x11AppDpiY())),
-					   QImage::ScaleMin );
+					   Qt::ScaleMin );
 		}
 	    }
 

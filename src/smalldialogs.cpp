@@ -90,7 +90,7 @@ void AddItemsDialog::init()
     article = new KLineEdit( plainPage() );
 
     number = new KIntNumInput( plainPage() );
-    number->setLabel( i18n( "Number of labels:" ), KNumInput::AlignLeft | KNumInput::AlignVCenter );
+    number->setLabel( i18n( "Number of labels:" ), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
     number->setRange( 1, 10000, 1, false );
 
     layout->addWidget( number );

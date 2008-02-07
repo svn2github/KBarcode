@@ -357,10 +357,10 @@ PropertySize::PropertySize( QWidget* parent )
     numHeight->setSuffix( Measurements::system() );
     numWidth->setSuffix( Measurements::system() );
     
-    numTop->setLabel( i18n("&Top:"), AlignLeft | AlignCenter );
-    numLeft->setLabel( i18n("&Left:"), AlignLeft | AlignCenter );
-    numHeight->setLabel( i18n("&Height:"), AlignLeft | AlignCenter );
-    numWidth->setLabel( i18n("&Width:"), AlignLeft | AlignCenter );
+    numTop->setLabel( i18n("&Top:"), Qt::AlignLeft | Qt::AlignCenter );
+    numLeft->setLabel( i18n("&Left:"), Qt::AlignLeft | Qt::AlignCenter );
+    numHeight->setLabel( i18n("&Height:"), Qt::AlignLeft | Qt::AlignCenter );
+    numWidth->setLabel( i18n("&Width:"), Qt::AlignLeft | Qt::AlignCenter );
     
     grid->addWidget( box, 0, 0 );
     

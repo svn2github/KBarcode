@@ -11,7 +11,7 @@
 //
 #ifndef TEC_H
 #define TEC_H
-#include "dsmainwindow.h"
+#include "mainwindow.h"
 #include "labelutils.h"
 #include "xmlutils.h"
 #include "definition.h"

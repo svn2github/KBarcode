@@ -18,7 +18,7 @@
 #ifndef DATABASEBROWSER_H
 #define DATABASEBROWSER_H
 
-#include "dsmainwindow.h"
+#include "mainwindow.h"
 
 class KAction;
 class KEdFind;
@@ -30,10 +30,10 @@ class MyDataTable;
 /** A database browser widget. Allows small changes to SQL tables
   * and is mostly used for having a quick look on the tables.
   */
-class DatabaseBrowser : public DSMainWindow{
+class DatabaseBrowser : public MainWindow{
     Q_OBJECT
     public:
-        DatabaseBrowser( QString _database, QWidget *parent=0, const char *name=0);
+        DatabaseBrowser( QString _database, QWidget *parent=0);
         ~DatabaseBrowser();
 
     private:

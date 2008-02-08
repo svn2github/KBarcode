@@ -18,7 +18,7 @@
 #include "confwizard.h"
 #include "sqltables.h"
 #include "printersettings.h"
-#include "dsmainwindow.h"
+#include "mainwindow.h"
 
 // Qt includes
 #include <q3buttongroup.h>
@@ -121,7 +121,7 @@ void ConfWizard::setupPage0()
     Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page_0, 11, 6, "pageLayout");
 
     Q3TextBrowser* b = new Q3TextBrowser( page_0, "b" );
-    b->setText( DSMainWindow::systemCheck() );
+    b->setText( MainWindow::systemCheck() );
 
     pageLayout->addWidget( b );
     

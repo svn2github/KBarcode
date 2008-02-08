@@ -32,7 +32,7 @@ enum linebreak {
     ARTICLE_GROUP_NO
 };
 
-#include "dsmainwindow.h"
+#include "mainwindow.h"
 #include "kbarcodeiface.h"
 
 class KAction;
@@ -42,10 +42,10 @@ class KPushButton;
   * LabelPrinter (Batchprinting), DatabaseBrowser and BarcodeDialog.
   * There are also a few smaller modules.
   */
-class KBarcode: public DSMainWindow, public KBarcodeIface {
+class KBarcode: public MainWindow, public KBarcodeIface {
     Q_OBJECT
     public:
-        KBarcode( QWidget *parent=0, const char *name="kbarcode", Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
+        KBarcode( QWidget *parent=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
         ~KBarcode();
 
         /** Parse all commandline options and start batchprinting
@@ -71,6 +71,8 @@ class KBarcode: public DSMainWindow, public KBarcodeIface {
     private:
         void setupActions();
 
+		// TODO: DCOP must die!
+		
         /** allow the DCOP interface
           * to check for an SQL connection.
           */

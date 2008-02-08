@@ -43,7 +43,7 @@
 
 KBarcode::KBarcode( QWidget *parent, const char *name, Qt::WFlags f)
     : DCOPObject("KBarcode"),
-      DSMainWindow( parent, name, f )
+      MainWindow( parent, name, f )
 {
     Q3GroupBox* w = new Q3GroupBox( this );
     w->setColumnLayout(0, Qt::Vertical );
@@ -103,12 +103,12 @@ KBarcode::KBarcode( QWidget *parent, const char *name, Qt::WFlags f)
 
 KBarcode::~KBarcode()
 {
-    DSMainWindow::saveConfig();
+    MainWindow::saveConfig();
 }
 
 void KBarcode::setupActions()
 {
-    DSMainWindow::setupActions();
+    MainWindow::setupActions();
 }
 
 void KBarcode::startBarcode()
@@ -282,7 +282,7 @@ bool KBarcode::connectSQL()
 
 void KBarcode::showWizard()
 {
-    DSMainWindow::wizard();
+    MainWindow::wizard();
 }
 
 void KBarcode::showConfigure()

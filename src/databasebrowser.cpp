@@ -37,8 +37,8 @@
 
 #define CUR_TABLE_ID 6666
 
-DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent, const char *name )
-    : DSMainWindow(parent,name)
+DatabaseBrowser::DatabaseBrowser( QString _database, QWidget *parent)
+    : MainWindow(parent)
 {
     m_direction = m_case = false;
 
@@ -72,7 +72,7 @@ DatabaseBrowser::~DatabaseBrowser()
     // add selction here to only update
     // if neccessary!
     Definition::updateProducer();
-    DSMainWindow::saveConfig();    
+    MainWindow::saveConfig();    
 
     if( findDlg )
         delete findDlg;
@@ -80,7 +80,7 @@ DatabaseBrowser::~DatabaseBrowser()
 
 void DatabaseBrowser::setupActions()
 {
-    DSMainWindow::setupActions();
+    MainWindow::setupActions();
     KMenu* editMenu = new KMenu( this );
 
     KAction* acut = KStandardAction::cut( this, SLOT( cut() ), actionCollection() );
@@ -108,7 +108,7 @@ void DatabaseBrowser::setupActions()
     toolBar()->insertSeparator();
     afind->plug( toolBar() );
 
-    DSMainWindow::loadConfig();
+    MainWindow::loadConfig();
 }
 
 void DatabaseBrowser::setupSql()

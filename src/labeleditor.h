@@ -25,7 +25,7 @@
 #include "sqltables.h"
 #include "labelutils.h"
 #include "definition.h"
-#include "dsmainwindow.h"
+#include "mainwindow.h"
 #include "xmlutils.h"
 #include "editoriface.h"
 
@@ -84,7 +84,7 @@ class TokenProvider;
   * and save them. Labels can also be printed directly, but without database
   * support. Use Batchprinting (LabelPrinter) for this.
   */
-class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils, private XMLUtils {
+class LabelEditor : public MainWindow, public EditorIface, private LabelUtils, private XMLUtils {
     Q_OBJECT
     public:
         enum ELabelEditorMode {
@@ -93,7 +93,7 @@ class LabelEditor : public DSMainWindow, public EditorIface, private LabelUtils,
         };
 
         LabelEditor( QWidget *parent=0, QString _filename = QString::null,
-            const char *name="labeleditor", Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
+             Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
         ~LabelEditor();
         bool startupDlg( ELabelEditorMode mode, QString f = QString::null );
 

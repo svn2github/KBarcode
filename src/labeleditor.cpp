@@ -131,7 +131,7 @@ using namespace KABC;
 
 LabelEditor::LabelEditor( QWidget *parent, QString _filename, const char *name, Qt::WFlags f )
     : DCOPObject( "LabelEditor" ),
-      DSMainWindow( parent, name, f )
+      MainWindow( parent, f )
 {
     undoAct = 
 	redoAct = NULL; 
@@ -207,7 +207,7 @@ void LabelEditor::saveConfig()
 
     config->sync();
 
-    DSMainWindow::saveConfig();
+    MainWindow::saveConfig();
 }
 
 void LabelEditor::createCommandHistory()
@@ -512,7 +512,7 @@ void LabelEditor::setupActions()
 //    spellAct->plug( tools );  // KDE 3.2
     gridAct->plug( tools );
 
-    DSMainWindow::setupActions();
+    MainWindow::setupActions();
     connect( recentAct, SIGNAL( urlSelected( const KUrl& ) ), this, SLOT( startLoadRecentEditor( const KUrl& ) ) );
 
     KMenu* fileMenu = new KMenu( this );

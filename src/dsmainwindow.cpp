@@ -1,26 +1,20 @@
-/***************************************************************************
-                          dsmainwindow.cpp  -  description
-                             -------------------
-    begin                : Fri Jan 17 2003
-    copyright            : (C) 2003 by Dominik Seichter
-    email                : domseichter@web.de
- ***************************************************************************/
+/* mainwindow.cpp - KBarcode Main Window Base
+ * 
+ * Copyright 2003-2008 Dominik Seichter, domseichter@web.de
+ * Copyright 2008 Váradi Zsolt Gyula, karmaxxl@gmail.com
+ * 
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
-#include "dsmainwindow.h"
+#include "mainwindow.h"
 #include "sqltables.h"
 #include "confwizard.h"
 #include "printersettings.h"
 #include "kbarcodesettings.h"
-#include "kactionmap.h"
+// #include "kactionmap.h" - is it neccessary?
 #include "barkode.h"
 
 // Qt includes
@@ -42,11 +36,11 @@
 #include <kglobal.h>
 #include <ktoolinvocation.h>
 
-bool DSMainWindow::autoconnect = true;
-bool DSMainWindow::startwizard = true;
+bool MainWindow::autoconnect = true;
+bool MainWindow::startassistant = true;
 
-DSMainWindow::DSMainWindow(QWidget *parent, const char *name, Qt::WFlags f)
-    : KMainWindow(parent,name,f)
+MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags f)
+    : KMainWindow(parent,f)
 {
     connectAct = 0;
     first = false;
@@ -55,18 +49,18 @@ DSMainWindow::DSMainWindow(QWidget *parent, const char *name, Qt::WFlags f)
     setAutoSaveSettings( QString("Window") + name, true );
     connect( kapp, SIGNAL( aboutToQuit() ), this, SLOT( saveConfig() ) );
 
-    if( first && startwizard ) {
-        wizard();
-        startwizard = false;
+    if( first && startassistant ) {
+        assistant();
+        startassistant = false;
     }
     
 }
 
-DSMainWindow::~DSMainWindow()
+MainWindow::~MainWindow()
 {
 }
 
-void DSMainWindow::setupActions()
+void MainWindow::setupActions()
 {
     KAction* quitAct = KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
     KAction* closeAct = KStandardAction::close( this, SLOT( close() ), actionCollection(), "close" );
@@ -126,8 +120,9 @@ void DSMainWindow::setupActions()
     importExampleAct->setEnabled( !connectAct->isEnabled() );
 }
 
-void DSMainWindow::loadConfig()
+void MainWindow::loadConfig()
 {
+	// TODO: rewrite with KConfigGroup
     KConfig* config = KGlobal::config();
 
     config->setGroup("Wizard");
@@ -145,8 +140,9 @@ void DSMainWindow::loadConfig()
     KBarcodeSettings::getInstance()->loadConfig();
 }
 
-void DSMainWindow::saveConfig()
+void MainWindow::saveConfig()
 {
+	// TODO: rewrite with KConfigGroup
     KConfig* config = KGlobal::config();
 
     config->setGroup("Wizard");
@@ -159,16 +155,17 @@ void DSMainWindow::saveConfig()
     config->sync();
 }
 
-void DSMainWindow::wizard()
+void MainWindow::assistant()
 {
-    ConfWizard* wiz = new ConfWizard( 0, "wiz", true );
+	// TODO: create an assistant
+    /* ConfWizard* wiz = new ConfWizard( 0, "wiz", true );
     if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() )
         SqlTables::getInstance()->connectMySQL();
 
-    delete wiz;
+    delete wiz; */
 }
 
-void DSMainWindow::connectMySQL()
+void MainWindow::connectMySQL()
 {
     connectAct->setEnabled( !SqlTables::getInstance()->connectMySQL() );
     importLabelDefAct->setEnabled( !connectAct->isEnabled() );
@@ -178,36 +175,37 @@ void DSMainWindow::connectMySQL()
         emit connectedSQL();
 }
 
-void DSMainWindow::appHelpActivated()
+void MainWindow::appHelpActivated()
 {
+	// TODO: the documentation should be rewritten, along with this link
     KMessageBox::information( this, i18n(
-        "<qt>The KBarcode documentation is avaible as PDF for download on our webpage.<br><br>") +
+        "<qt>The KBarcode2 documentation is available as PDF for download on our webpage.<br><br>") +
         "<a href=\"http://www.kbarcode.net/17.0.html\">" +
         i18n("Download Now") + "</a></qt>",
         QString::null, QString::null, KMessageBox::AllowLink );
 }
 
-void DSMainWindow::showCheck()
+void MainWindow::showCheck()
 {
     Q3TextBrowser* b = new Q3TextBrowser( 0, "b" );
-    b->setText( DSMainWindow::systemCheck() );
+    b->setText( MainWindow::systemCheck() );
     b->resize( 320, 240 );
     b->show();
 }
 
-void DSMainWindow::startInfo()
+void MainWindow::startInfo()
 {
-    QString info = locate("appdata", "barcodes.html");
+	QString info = locate("appdata", "barcodes.html");
     if( !info.isEmpty() )
         KToolInvocation::invokeBrowser( info );
 }
 
-bool DSMainWindow::newTables()
+bool MainWindow::newTables()
 {
     return SqlTables::getInstance()->newTables();
 }
 
-void DSMainWindow::donations()
+void MainWindow::donations()
 {
     // orig =https://www.paypal.com/xclick/business=domseichter%40web.de&item_name=Support+KBarcode+Development&item_number=0&image_url=http%3A//www.kbarcode.net/themes/DeepBlue/images/logo.gif&no_shipping=1&return=http%3A//www.kbarcode.net&cancel_return=http%3A//www.kbarcode.net&cn=Suggestions%2C+Comments%3F&tax=0&currency_code=EUR
     QString url = "https://www.paypal.com/xclick/business=domseichter@web.de&item_name=Support+KBarcode+Development&item_number=0&image_url=www.kbarcode.net/themes/DeepBlue/images/logo.gif&no_shipping=1&return=www.kbarcode.net&cancel_return=www.kbarcode.net&cn=Suggestions,+Comments,&tax=0&currency_code=EUR";
@@ -219,8 +217,11 @@ void DSMainWindow::donations()
         i18n("Donate Now") + "</a></qt>", QString::null, QString::null, KMessageBox::AllowLink );
 }
 
-QString DSMainWindow::systemCheck()
+QString MainWindow::systemCheck()
 {
+	// TODO: break i18n puzzles
+	// TODO: rename Barkode to something more visual
+	
     bool gnubarcode = !Barkode::haveGNUBarcode();
     bool pdf = !Barkode::havePDFBarcode();
     bool tbarcode = !Barkode::haveTBarcode();
@@ -262,9 +263,12 @@ QString DSMainWindow::systemCheck()
     return text;
 }
 
-void DSMainWindow::slotFunctionMap()
+// TODO: Do something about action maps, after porting to the new KAction API
+/*
+void MainWindow::slotFunctionMap()
 {
     new KActionMapDlg( actionCollection(), this );
 }
+*/
 
-#include "dsmainwindow.moc"
+#include "mainwindow.moc"

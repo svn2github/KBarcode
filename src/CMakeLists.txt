@@ -29,7 +29,6 @@ set(kbarcode_SRCS
   definitiondialog.cpp
   documentitem.cpp
   documentitemdlg.cpp
-  dsmainwindow.cpp
   dsrichtext.cpp
   dstextedit.cpp
   editoriface_skel.cpp
@@ -47,6 +46,7 @@ set(kbarcode_SRCS
   labelutils.cpp
   lineitem.cpp
   main.cpp
+  mainwindow.cpp
   measurements.cpp
   mimesources.cpp
   multilineeditdlg.cpp

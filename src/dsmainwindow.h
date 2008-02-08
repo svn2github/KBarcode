@@ -1,28 +1,23 @@
-/***************************************************************************
-                          dsmainwindow.h  -  description
-                             -------------------
-    begin                : Fre Jan 17 2003
-    copyright            : (C) 2003 by Dominik Seichter
-    email                : domseichter@web.de
- ***************************************************************************/
+/* mainwindow.h - KBarcode Main Window Base
+ * 
+ * Copyright 2003-2008 Dominik Seichter, domseichter@web.de
+ * Copyright 2008 Váradi Zsolt Gyula, karmaxxl@gmail.com
+ * 
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ */
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
-#ifndef DSMAINWINDOW_H
-#define DSMAINWINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <qwidget.h>
 #include <kmainwindow.h>
 
 class KAction;
 class KMenu;
+
 /** The base class of all main windows of KBarcode. It provides standard menu items
   * for database connections, preferences, help, the first start wizard and donations.
   * It checks also if this is the first start of KBarcode and if the configuration wizard
@@ -30,11 +25,12 @@ class KMenu;
   *
   * @author Dominik Seichter
   */
-class DSMainWindow : public KMainWindow {
+
+class MainWindow : public KMainWindow {
     Q_OBJECT
     public:
-        DSMainWindow(QWidget *parent=0, const char *name=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
-        ~DSMainWindow();
+        MainWindow(QWidget *parent=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );
+        ~MainWindow();
 
         /** Is this the first start of KBarcode ?
           * If true, the configuration wizard will
@@ -53,7 +49,7 @@ class DSMainWindow : public KMainWindow {
         static QString systemCheck();
 
     public slots:
-        void wizard();
+        void assistant();
 
     signals:
         void connectedSQL();
@@ -75,7 +71,7 @@ class DSMainWindow : public KMainWindow {
         void setupActions();
 
         static bool autoconnect;
-        static bool startwizard;
+        static bool startassistant;
 
         bool first;
         

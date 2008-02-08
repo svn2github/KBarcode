@@ -50,8 +50,10 @@ class ConfWizard : public KWizard
 
         void showPage( QWidget* page );
 
-        // used in dsmainwindow.cpp
+        // used in mainwindow.cpp
         // not a clean API, but I am lazy :-(
+        
+        // TODO: rewrite it cleanly
         QCheckBox* checkDatabase;
 
     private slots:

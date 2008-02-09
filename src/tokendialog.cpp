@@ -42,7 +42,7 @@
 #include <kpushbutton.h>
 
 TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent, const char *name)
-    : KWizard( parent, name ), m_token( token )
+    : QWizard( parent, name ), m_token( token )
 {
     m_custom_tokens = m_token->listUserVars();
 

@@ -40,6 +40,8 @@ class QRadioButton;
   */
 class BarcodeDlgBase {
     public:
+        virtual ~BarcodeDlgBase() { }
+
         virtual void setData( Barkode* b ) = 0;
         virtual void getData( Barkode* b ) const = 0;
 };

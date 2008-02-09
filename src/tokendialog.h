@@ -18,7 +18,7 @@
 #ifndef TOKENDIALOG_H
 #define TOKENDIALOG_H
 
-#include <kwizard.h>
+#include <QWizard>
 #include "documentitem.h"
 #include "tokenprovider.h"
 //Added by qt3to4:
@@ -39,7 +39,7 @@ class Q3TextBrowser;
 class KPushButton;
 class DSTextEdit;
 
-class TokenDialog : public KWizard {
+class TokenDialog : public QWizard {
     
  Q_OBJECT
 

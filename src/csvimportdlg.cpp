@@ -102,11 +102,11 @@ void CSVImportDlg::createPage1()
     requester = new KUrlRequester( box );
     comboEncoding = new EncodingCombo( box );
     comboSQL = new KComboBox( false, box );
-    comboSQL->insertItem( TABLE_BASIC );
-    comboSQL->insertItem( TABLE_CUSTOMER );
-    comboSQL->insertItem( TABLE_CUSTOMER_TEXT );
-    comboSQL->insertItem( TABLE_LABEL_DEF );
-    comboSQL->insertItem( i18n("Other table...") );
+    comboSQL->addItem( TABLE_BASIC );
+    comboSQL->addItem( TABLE_CUSTOMER );
+    comboSQL->addItem( TABLE_CUSTOMER_TEXT );
+    comboSQL->addItem( TABLE_LABEL_DEF );
+    comboSQL->addItem( i18n("Other table...") );
 
     databaseName = new KLineEdit( box );
     checkLoadAll = new QCheckBox( i18n("&Load complete file into preview"), box );
@@ -305,10 +305,10 @@ void CSVImportDlg::updateFields()
     QString name = getDatabaseName();
 
     comboField->clear();
-    comboField->insertItem( NOFIELD );
+    comboField->add( NOFIELD );
     QSqlQuery query( SqlTables::getInstance()->driver()->showColumns( name ) );
     while( query.next() )
-        comboField->insertItem( query.value( 0 ).toString() );
+        comboField->addItem( query.value( 0 ).toString() );
 
     for( int i = 0; i < table->horizontalHeader()->count(); i++ )
         table->horizontalHeader()->setLabel( i, QString::number( i + 1 ) );

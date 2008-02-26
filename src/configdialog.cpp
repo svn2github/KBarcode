@@ -91,9 +91,9 @@ void ConfigDialog::setupTab2()
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
 
     printerQuality = new KComboBox( false, box );
-    printerQuality->insertItem( i18n("Medium Resolution (300dpi)") );
-    printerQuality->insertItem( i18n("High Resolution (600dpi)") );
-    printerQuality->insertItem( i18n("Very High Resolution (1200dpi)") );
+    printerQuality->addItem( i18n("Medium Resolution (300dpi)") );
+    printerQuality->addItem( i18n("High Resolution (600dpi)") );
+    printerQuality->addItem( i18n("Very High Resolution (1200dpi)") );
 
     switch( lb->quality ) {
         case PrinterSettings::Middle:
@@ -159,21 +159,21 @@ void ConfigDialog::setupTab3()
     Layout1->addWidget( new QLabel( i18n("File Format:"), box ) );
 
     combo1 = new KComboBox( box );
-    combo1->insertItem( i18n("Quantity") );
-    combo1->insertItem( i18n("Article Number") );
-    combo1->insertItem( i18n("Group") );
+    combo1->addItem( i18n("Quantity") );
+    combo1->addItem( i18n("Article Number") );
+    combo1->addItem( i18n("Group") );
     Layout1->addWidget( combo1 );
 
     combo2 = new KComboBox( box );
-    combo2->insertItem( i18n("Quantity") );
-    combo2->insertItem( i18n("Article Number") );
-    combo2->insertItem( i18n("Group") );
+    combo2->addItem( i18n("Quantity") );
+    combo2->addItem( i18n("Article Number") );
+    combo2->addItem( i18n("Group") );
     Layout1->addWidget( combo2 );
 
     combo3 = new KComboBox( box );
-    combo3->insertItem( i18n("Quantity") );
-    combo3->insertItem( i18n("Article Number") );
-    combo3->insertItem( i18n("Group") );
+    combo3->addItem( i18n("Quantity") );
+    combo3->addItem( i18n("Article Number") );
+    combo3->addItem( i18n("Group") );
     Layout1->addWidget( combo3 );
 
     grid->addMultiCellLayout( Layout1, 4, 4, 0, 2 );

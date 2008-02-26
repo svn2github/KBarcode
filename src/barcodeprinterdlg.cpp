@@ -57,18 +57,18 @@ BarcodePrinterDlg::BarcodePrinterDlg(QWidget *parent, const char *name)
     layout->addWidget( label3, 3, 0 );
     layout->addMultiCellWidget( comboDevice, 3, 3, 1, 2 );
     
-    comboFormat->insertItem( i18n("TEC Printer (TEC)") );
-    comboFormat->insertItem( i18n("Zebra Printer (ZPL)") );
-    comboFormat->insertItem( i18n("Intermec Printer (IPL)") );
-    comboFormat->insertItem( i18n("EPCL Printer (EPCL)") );
+    comboFormat->addItem( i18n("TEC Printer (TEC)") );
+    comboFormat->addItem( i18n("Zebra Printer (ZPL)") );
+    comboFormat->addItem( i18n("Intermec Printer (IPL)") );
+    comboFormat->addItem( i18n("EPCL Printer (EPCL)") );
     
     // do not translate unix devicenames...
-    comboDevice->insertItem( "/dev/lp0" );
-    comboDevice->insertItem( "/dev/lp1" );
-    comboDevice->insertItem( "/dev/lp2" );
-    comboDevice->insertItem( "/dev/usb/lp0" );
-    comboDevice->insertItem( "/dev/usb/lp1" );
-    comboDevice->insertItem( "/dev/usb/lp2" );
+    comboDevice->addItem( "/dev/lp0" );
+    comboDevice->addItem( "/dev/lp1" );
+    comboDevice->addItem( "/dev/lp2" );
+    comboDevice->addItem( "/dev/usb/lp0" );
+    comboDevice->addItem( "/dev/usb/lp1" );
+    comboDevice->addItem( "/dev/usb/lp2" );
     
     connect( checkFile, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 

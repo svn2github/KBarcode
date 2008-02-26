@@ -182,7 +182,7 @@ QPrinter* PrinterSettings::setupPrinter( const KUrl & url, QWidget* parent, bool
 void PrinterSettings::insertPageFormat( KComboBox* combo )
 {
     for( unsigned int i = 0; i < sizeof( pageFormatInfo ) / sizeof( PageFormatInfo ); i++ )
-        combo->insertItem( pageFormatInfo[i].descriptiveName );
+        combo->addItem( pageFormatInfo[i].descriptiveName );
 }
 
 double PrinterSettings::pageWidth() const

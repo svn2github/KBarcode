@@ -338,10 +338,10 @@ void TokenDialog::initAll()
     unsigned int i, z;
     Q3ValueList<tCategories>* categories = TokenProvider::getTokens();
 
-    category->insertItem( i18n("All") );
+    category->addItem( i18n("All") );
     
     for( i = 0; i < categories->count(); i++ )
-        category->insertItem( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) );
+        category->addItem( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) );
 
     for( i = 0; i < categories->count(); i++ )
 	for( z = 0; z < (*categories)[i].tokens.count(); z++ )

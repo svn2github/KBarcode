@@ -170,8 +170,8 @@ void PreviewDialog::setupSql()
     customerId->clear();
     customerName->clear();
     while ( cur.next() ) {
-        customerId->insertItem( cur.value("customer_no" ).toString() );
-        customerName->insertItem( cur.value("customer_name" ).toString() );
+        customerId->addItem( cur.value("customer_no" ).toString() );
+        customerName->addItem( cur.value("customer_name" ).toString() );
     }
 
     customerId->setCurrentItem( customer_index );

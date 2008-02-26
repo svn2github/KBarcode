@@ -144,10 +144,10 @@ PropertyRotation::PropertyRotation( QWidget* parent )
     comboRotation = new KComboBox( FALSE, this );
     label->setBuddy( comboRotation );
 
-    comboRotation->insertItem( i18n("0") );
-    comboRotation->insertItem( i18n("90") );
-    comboRotation->insertItem( i18n("180") );
-    comboRotation->insertItem( i18n("270") );
+    comboRotation->addItem( i18n("0") );
+    comboRotation->addItem( i18n("90") );
+    comboRotation->addItem( i18n("180") );
+    comboRotation->addItem( i18n("270") );
 
     grid->addWidget( label, 0, 0 );
     grid->addWidget( comboRotation, 0, 1  );
@@ -219,17 +219,17 @@ PropertyBarcode::PropertyBarcode( TokenProvider* token, QWidget* parent )
     {
         QSqlQuery* query = new QSqlQuery("select encoding_type from barcode_basic group by encoding_type");
         while( query->next() )
-            comboComplex->insertItem( "Main:" + query->value( 0 ).toString() );
+            comboComplex->addItem( "Main:" + query->value( 0 ).toString() );
         
         delete query;
         
         query = new QSqlQuery("select customer_no, encoding_type from customer_text group by customer_no, encoding_type");
         while( query->next() )
-            comboComplex->insertItem( query->value( 0 ).toString() + ":" + query->value( 1 ).toString() );
+            comboComplex->addItem( query->value( 0 ).toString() + ":" + query->value( 1 ).toString() );
         delete query;
     }
         
-    comboComplex->insertItem( "Static" );
+    comboComplex->addItem( "Static" );
 
     barcode = new BarcodeWidget( this, "barcode" );
     barcode->setTokenProvider( token );
@@ -484,10 +484,10 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     buttonToken = new KPushButton( i18n("&Insert Data Field..."), imgHBox );
     buttonToken->setIconSet( QIcon( SmallIcon("contents") ) );
 
-    comboRotation->insertItem( i18n("0") );
-    comboRotation->insertItem( i18n("90") );
-    comboRotation->insertItem( i18n("180") );
-    comboRotation->insertItem( i18n("270") );
+    comboRotation->addItem( i18n("0") );
+    comboRotation->addItem( i18n("90") );
+    comboRotation->addItem( i18n("180") );
+    comboRotation->addItem( i18n("270") );
     
     Q3VButtonGroup* group = new Q3VButtonGroup( i18n("&Size"), this );
     

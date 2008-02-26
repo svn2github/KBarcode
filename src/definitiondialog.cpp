@@ -267,7 +267,7 @@ void DefinitionDialog::updateType()
     if( comboProducer->currentText() == comboProducer->text( comboProducer->currentItem() ) )
         if( comboProducer->currentItem() < comboProducer->count())
             comboType->insertStringList( types[ comboProducer->currentItem() ] );
-    comboType->insertItem( i18n( "Custom" ), 0 );
+    comboType->addItem( i18n( "Custom" ), 0 );
 }
 
 const Measurements DefinitionDialog::getCurrentMeasure()

@@ -565,7 +565,7 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     QStringList drList = QSqlDatabase::drivers();
     QStringList::Iterator it = drList.begin();
     while( it != drList.end() ) {
-        m_driver->insertItem( *it );
+        m_driver->addItem( *it );
         ++it;
     }
     grid->addWidget( m_driver, 4, 1 );

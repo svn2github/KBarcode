@@ -20,7 +20,7 @@
 
 #include <qobject.h>
 #include <qstring.h>
-#include <kprinter.h>
+#include <qprinter.h>
 
 class KUrl;
 
@@ -48,14 +48,14 @@ typedef struct labelprinterdata {
 
 typedef struct PageFormatInfo
 {
-    KPrinter::PageSize kprinter;
+    QPrinter::PageSize qprinter;
     const char* shortName; // Short name
     const char* descriptiveName; // Full name, which will be translated
     double width; // in mm
     double height; // in mm
 };
 
-class KPrinter;
+class QPrinter;
 class KComboBox;
 class PrinterSettings: public QObject  {
     Q_OBJECT
@@ -80,7 +80,7 @@ class PrinterSettings: public QObject  {
         static PrinterSettings* getInstance();
 
         // don't forget to delete printer
-        KPrinter* setupPrinter( const KUrl & url, QWidget* parent, bool immediately = false, const QString & prn = QString::null );
+        QPrinter* setupPrinter( const KUrl & url, QWidget* parent, bool immediately = false, const QString & prn = QString::null );
         
     public slots:
         void loadConfig();

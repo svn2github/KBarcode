@@ -36,35 +36,35 @@
 
 const PageFormatInfo pageFormatInfo[]=
 {
-    { KPrinter::A3,           "A3",           I18N_NOOP("ISO A3"),       297.0,  420.0 },
-    { KPrinter::A4,           "A4",           I18N_NOOP("ISO A4"),       210.0,  297.0 },
-    { KPrinter::A5,           "A5",           I18N_NOOP("ISO A5"),       148.0,  210.0 },
-    { KPrinter::Letter,       "Letter",       I18N_NOOP("US Letter"),    216.0,  279.0 }, // should be 215.9 mm x 279.4 mm
-    { KPrinter::Legal,        "Legal",        I18N_NOOP("US Legal"),     216.0,  356.0 }, // should be 215.9 mm x 335.6 mm
-    { KPrinter::A4,           "Screen",       I18N_NOOP("Screen"),       297.0,  210.0 }, // Custom, so fall back to A4
-    { KPrinter::A4,           "Custom",       I18N_NOOP("Custom"),       210.0,  297.0 }, // Custom, so fall back to A4
-    { KPrinter::B5,           "B5",           I18N_NOOP("ISO B5"),       182.0,  257.0 },
-    { KPrinter::Executive,    "Executive",    I18N_NOOP("US Executive"), 191.0,  254.0 }, // should be 190.5 mm x 254.0 mm
-    { KPrinter::A0,           "A0",           I18N_NOOP("ISO A0"),       841.0, 1189.0 },
-    { KPrinter::A1,           "A1",           I18N_NOOP("ISO A1"),       594.0,  841.0 },
-    { KPrinter::A2,           "A2",           I18N_NOOP("ISO A2"),       420.0,  594.0 },
-    { KPrinter::A6,           "A6",           I18N_NOOP("ISO A6"),       105.0,  148.0 },
-    { KPrinter::A7,           "A7",           I18N_NOOP("ISO A7"),        74.0,  105.0 },
-    { KPrinter::A8,           "A8",           I18N_NOOP("ISO A8"),        52.0,   74.0 },
-    { KPrinter::A9,           "A9",           I18N_NOOP("ISO A9"),        37.0,   52.0 },
-    { KPrinter::B0,           "B0",           I18N_NOOP("ISO B0"),      1030.0, 1456.0 },
-    { KPrinter::B1,           "B1",           I18N_NOOP("ISO B1"),       728.0, 1030.0 },
-    { KPrinter::B10,          "B10",          I18N_NOOP("ISO B10"),       32.0,   45.0 },
-    { KPrinter::B2,           "B2",           I18N_NOOP("ISO B2"),       515.0,  728.0 },
-    { KPrinter::B3,           "B3",           I18N_NOOP("ISO B3"),       364.0,  515.0 },
-    { KPrinter::B4,           "B4",           I18N_NOOP("ISO B4"),       257.0,  364.0 },
-    { KPrinter::B6,           "B6",           I18N_NOOP("ISO B6"),       128.0,  182.0 },
-    { KPrinter::C5E,          "C5",           I18N_NOOP("ISO C5"),       163.0,  229.0 }, // Some sources tells: 162 mm x 228 mm
-    { KPrinter::Comm10E,      "Comm10",       I18N_NOOP("US Common 10"), 105.0,  241.0 }, // should be 104.775 mm x 241.3 mm
-    { KPrinter::DLE,          "DL",           I18N_NOOP("ISO DL"),       110.0,  220.0 },
-    { KPrinter::Folio,        "Folio",        I18N_NOOP("US Folio"),     210.0,  330.0 }, // should be 209.54 mm x 330.2 mm
-    { KPrinter::Ledger,       "Ledger",       I18N_NOOP("US Ledger"),    432.0,  279.0 }, // should be 431.8 mm x 297.4 mm
-    { KPrinter::Tabloid,      "Tabloid",      I18N_NOOP("US Tabloid"),   279.0,  432.0 }  // should be 297.4 mm x 431.8 mm
+    { QPrinter::A3,           "A3",           I18N_NOOP("ISO A3"),       297.0,  420.0 },
+    { QPrinter::A4,           "A4",           I18N_NOOP("ISO A4"),       210.0,  297.0 },
+    { QPrinter::A5,           "A5",           I18N_NOOP("ISO A5"),       148.0,  210.0 },
+    { QPrinter::Letter,       "Letter",       I18N_NOOP("US Letter"),    216.0,  279.0 }, // should be 215.9 mm x 279.4 mm
+    { QPrinter::Legal,        "Legal",        I18N_NOOP("US Legal"),     216.0,  356.0 }, // should be 215.9 mm x 335.6 mm
+    { QPrinter::A4,           "Screen",       I18N_NOOP("Screen"),       297.0,  210.0 }, // Custom, so fall back to A4
+    { QPrinter::A4,           "Custom",       I18N_NOOP("Custom"),       210.0,  297.0 }, // Custom, so fall back to A4
+    { QPrinter::B5,           "B5",           I18N_NOOP("ISO B5"),       182.0,  257.0 },
+    { QPrinter::Executive,    "Executive",    I18N_NOOP("US Executive"), 191.0,  254.0 }, // should be 190.5 mm x 254.0 mm
+    { QPrinter::A0,           "A0",           I18N_NOOP("ISO A0"),       841.0, 1189.0 },
+    { QPrinter::A1,           "A1",           I18N_NOOP("ISO A1"),       594.0,  841.0 },
+    { QPrinter::A2,           "A2",           I18N_NOOP("ISO A2"),       420.0,  594.0 },
+    { QPrinter::A6,           "A6",           I18N_NOOP("ISO A6"),       105.0,  148.0 },
+    { QPrinter::A7,           "A7",           I18N_NOOP("ISO A7"),        74.0,  105.0 },
+    { QPrinter::A8,           "A8",           I18N_NOOP("ISO A8"),        52.0,   74.0 },
+    { QPrinter::A9,           "A9",           I18N_NOOP("ISO A9"),        37.0,   52.0 },
+    { QPrinter::B0,           "B0",           I18N_NOOP("ISO B0"),      1030.0, 1456.0 },
+    { QPrinter::B1,           "B1",           I18N_NOOP("ISO B1"),       728.0, 1030.0 },
+    { QPrinter::B10,          "B10",          I18N_NOOP("ISO B10"),       32.0,   45.0 },
+    { QPrinter::B2,           "B2",           I18N_NOOP("ISO B2"),       515.0,  728.0 },
+    { QPrinter::B3,           "B3",           I18N_NOOP("ISO B3"),       364.0,  515.0 },
+    { QPrinter::B4,           "B4",           I18N_NOOP("ISO B4"),       257.0,  364.0 },
+    { QPrinter::B6,           "B6",           I18N_NOOP("ISO B6"),       128.0,  182.0 },
+    { QPrinter::C5E,          "C5",           I18N_NOOP("ISO C5"),       163.0,  229.0 }, // Some sources tells: 162 mm x 228 mm
+    { QPrinter::Comm10E,      "Comm10",       I18N_NOOP("US Common 10"), 105.0,  241.0 }, // should be 104.775 mm x 241.3 mm
+    { QPrinter::DLE,          "DL",           I18N_NOOP("ISO DL"),       110.0,  220.0 },
+    { QPrinter::Folio,        "Folio",        I18N_NOOP("US Folio"),     210.0,  330.0 }, // should be 209.54 mm x 330.2 mm
+    { QPrinter::Ledger,       "Ledger",       I18N_NOOP("US Ledger"),    432.0,  279.0 }, // should be 431.8 mm x 297.4 mm
+    { QPrinter::Tabloid,      "Tabloid",      I18N_NOOP("US Tabloid"),   279.0,  432.0 }  // should be 297.4 mm x 431.8 mm
 };
 // end stolen
 
@@ -119,7 +119,7 @@ void PrinterSettings::loadConfig()
     // get default page size from KDE
     if( lpdata->format == -1 )
         for( unsigned int i = 0; i < sizeof( pageFormatInfo ) / sizeof( PageFormatInfo ); i++ )
-            if( pageFormatInfo[i].kprinter == KGlobal::locale()->pageSize() ) {
+            if( pageFormatInfo[i].qprinter == KGlobal::locale()->pageSize() ) {
                 lpdata->format = i;
                 break;
             }
@@ -157,9 +157,9 @@ int PrinterSettings::getQuality() const
     return lpdata->quality == Middle || lpdata->quality == VeryHigh? High : lpdata->quality;
 };
 
-KPrinter* PrinterSettings::setupPrinter( const KUrl & url, QWidget* parent, bool immediately, const QString & prn )
+QPrinter* PrinterSettings::setupPrinter( const KUrl & url, QWidget* parent, bool immediately, const QString & prn )
 {
-    KPrinter* printer = new KPrinter( true, (enum QPrinter::PrinterMode)getQuality() );
+    QPrinter* printer = new QPrinter( true, (enum QPrinter::PrinterMode)getQuality() );
     if( getData()->quality == Middle )
         printer->setResolution( 300 );
     else if( getData()->quality == VeryHigh )

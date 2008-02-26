@@ -101,7 +101,7 @@
 #include <knuminput.h>
 #include <kmenu.h>
 #include <kpushbutton.h>
-#include <kprinter.h>
+#include <qprinter.h>
 #include <krun.h>
 #include <kspell.h>
 #include <kstatusbar.h>
@@ -767,7 +767,7 @@ void LabelEditor::print()
 
     PrinterSettings::getInstance()->getData()->border = pld.border();
 
-    KPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl( filename ), this );
+    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl( filename ), this );
     if( !printer )
         return;
 

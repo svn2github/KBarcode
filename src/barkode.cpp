@@ -693,6 +693,7 @@ void Barkode::initInfo()
     s_havePurePostscript = !KStandardDirs::findExe( "gs" ).isNull() 
                              && PurePostscriptBarcode::hasPurePostscriptBarcode();
 
+// TODO: I think this functionality should be moved to the engines. - VZsolt
     if( s_haveGnuBarcode )
     {
         s_info.append( createInfo( "128raw", i18n("Raw code 128"), GNU_BARCODE, 0, BARCODE_128RAW ) );

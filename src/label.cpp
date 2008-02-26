@@ -41,7 +41,7 @@
 // KDE includes
 #include <kapplication.h>
 #include <klocale.h>
-#include <kprinter.h>
+#include <qprinter.h>
 
 Label::Label( Definition* _def, QIODevice* device, QString labelname, QPaintDevice* _printer, QString customer_id, QString _article_no, QString _group )
     : TokenProvider( _printer )

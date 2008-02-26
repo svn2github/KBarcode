@@ -561,7 +561,7 @@ void BatchWizard::accept()
 void BatchWizard::printNow( const QString & printer, bool bUserInteraction )
 {
     BatchPrinter* batch = NULL;
-    KPrinter* prn = NULL;
+    QPrinter* prn = NULL;
     int batchType = 0;
 
     // let's check if the label file does even exist!

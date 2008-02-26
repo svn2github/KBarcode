@@ -45,7 +45,7 @@
 #include <kmessagebox.h>
 #include <kmenu.h>
 #include <knuminput.h>
-#include <kprinter.h>
+#include <qprinter.h>
 #include <kurlrequester.h>
 
 QString tec452(const QString &file, int count, const QString &art, const QString &group, const QString &id);

@@ -22,7 +22,7 @@
 #define LABELUTILS_H
 
 class Definition;
-class KPrinter;
+class QPrinter;
 class QDomElement;
 class QFont;
 class QImage;

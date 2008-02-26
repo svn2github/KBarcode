@@ -29,7 +29,7 @@
 #include <kimageio.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kprinter.h>
+#include <qprinter.h>
 #include <kpushbutton.h>
 
 // Qt includes
@@ -168,7 +168,7 @@ void BarCodeDialog::print()
     if( d.isValid() )
         return;
 
-    KPrinter* printer = PrinterSettings::getInstance()->setupPrinter( "kbarcode", this );
+    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( "kbarcode", this );
     if( !printer )
         return;
 

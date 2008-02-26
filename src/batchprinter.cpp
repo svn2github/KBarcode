@@ -40,7 +40,7 @@
 #include <kimageio.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kprinter.h>
+#include <qprinter.h>
 
 // Other includes
 #include <stdlib.h>
@@ -49,7 +49,7 @@
 #include <krun.h>
 #define MAXDATASIZE 32550
 
-BatchPrinter::BatchPrinter( KPrinter* p, QWidget* _parent )
+BatchPrinter::BatchPrinter( QPrinter* p, QWidget* _parent )
     : printer( p ), parent( _parent )
 {
     m_events = true;

@@ -29,7 +29,7 @@ namespace KABC {
 
 class Definition;
 class Label;
-class KPrinter;
+class QPrinter;
 class Measurements;
 class QBuffer;
 class QPainter;
@@ -58,7 +58,7 @@ class BatchPrinter
         /** Use this constructor if you want to print to
           * a printer.
           */
-        BatchPrinter( KPrinter* p, QWidget* _parent );
+        BatchPrinter( QPrinter* p, QWidget* _parent );
         /** This constructor is used in image gernaration mode.
           * @p path is the path to an existing directory where
           * the images are saved.
@@ -202,7 +202,7 @@ class BatchPrinter
 	QPaintDevice* m_paintDevice;
 
         QBuffer* buffer;
-        KPrinter* printer;
+        QPrinter* printer;
         QPainter* painter;
         /** parent for dialogs
           */

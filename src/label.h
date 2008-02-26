@@ -33,7 +33,7 @@ class QString;
 class QPainter;
 class QPaintDevice;
 class Q3TextStream;
-class KPrinter;
+class QPrinter;
 /** Creates a QPicture from the XML KBarcode file. If a SQL connections is available
   * the data from the SQL tables will be used, too.
   */
@@ -52,7 +52,7 @@ class Label : private LabelUtils, private XMLUtils, public TokenProvider {
         int getId() const;  
         static void getXLabel( double x, double y, double width, double height, QPainter* painter, int mode, QString value = "" );
 
-        //void setPrinter( KPrinter* p ) { m_printer = p; }
+        //void setPrinter( QPrinter* p ) { m_printer = p; }
 
 	/** reimplemented from TokenProvider
 	 *  returns wether this label has to be regenerated everytime

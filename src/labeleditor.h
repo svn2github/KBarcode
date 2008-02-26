@@ -72,7 +72,7 @@ class QRect;
 class QPaintDevice;
 class QString;
 class KPushButton;
-class KPrinter;
+class QPrinter;
 class Q3CanvasItem;
 class TCanvasItem;
 class RectItem;

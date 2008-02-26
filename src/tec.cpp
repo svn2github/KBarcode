@@ -47,7 +47,7 @@
 #include <kmessagebox.h>
 #include <kmenu.h>
 #include <knuminput.h>
-#include <kprinter.h>
+#include <qprinter.h>
 #include <kurlrequester.h>
 
 #define MAXDATASIZE 32550

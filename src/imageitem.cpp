@@ -60,7 +60,7 @@ void ImageItem::draw(QPainter* painter)
     DocumentItem::drawBorder(painter);
 }
 
-void ImageItem::drawZpl( Q3TextStream* stream )
+void ImageItem::drawZpl( QTextStream* stream )
 {
     createImage();
     
@@ -83,12 +83,12 @@ void ImageItem::drawZpl( Q3TextStream* stream )
     }        
 }
 
-void ImageItem::drawIpl( Q3TextStream*, IPLUtils* )
+void ImageItem::drawIpl( QTextStream*, IPLUtils* )
 {
     qDebug("ImageItem is not implemented for IPL!");
 }
 
-void ImageItem::drawEPcl( Q3TextStream* stream )
+void ImageItem::drawEPcl( QTextStream* stream )
 {
     createImage();
     
@@ -237,7 +237,7 @@ void ImageItem::createImage()
 		// we have to scale because of the bigger printer resolution
 		if( DocumentItem::paintDevice()->isExtDev() )
 		{
-		    Q3PaintDeviceMetrics metrics( DocumentItem::paintDevice() );
+		    QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
 		    
 		    img = img.smoothScale( (int)(img.width() * ((double)metrics.logicalDpiX()/QPaintDevice::x11AppDpiX())),
 					   (int)(img.height() * ((double)metrics.logicalDpiY()/QPaintDevice::x11AppDpiY())),

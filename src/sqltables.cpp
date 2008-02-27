@@ -28,9 +28,9 @@
 #include <q3progressdialog.h>
 #include <qsqldatabase.h>
 //Added by qt3to4:
-#include <Q3GridLayout>
+#include <QGridLayout>
 #include <QSqlQuery>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // KDE includes
 #include <kapplication.h>
@@ -322,7 +322,7 @@ void SqlTables::importData( const QString & filename, QSqlDatabase* db )
     }
 
     QFile data( filename);
-    Q3ProgressDialog* dlg = new Q3ProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );
+    QProgressDialog* dlg = new QProgressDialog( i18n("SQL import progress:"),  QString::null, data.size(), 0, "dlg", true );
 
     if( data.open( QIODevice::ReadOnly ) ) {
         QString s;
@@ -516,17 +516,17 @@ const QString SqlTables::getBarcodeMaxLength( const QString & name )
 SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     : QWidget( parent, name )
 {
-    Q3VBoxLayout* layout = new Q3VBoxLayout( this );
+    QVBoxLayout* layout = new QVBoxLayout( this );
 
-    Q3GroupBox* groupDatabase = new Q3GroupBox( this );
+    QGroupBox* groupDatabase = new QGroupBox( this );
     groupDatabase->setTitle( i18n( "Database Settings" ) );
     groupDatabase->setColumnLayout(0, Qt::Vertical );
     groupDatabase->layout()->setSpacing( 6 );
     groupDatabase->layout()->setMargin( 11 );
-    Q3VBoxLayout* groupDatabaseLayout = new Q3VBoxLayout( groupDatabase->layout() );
+    QVBoxLayout* groupDatabaseLayout = new QVBoxLayout( groupDatabase->layout() );
     groupDatabaseLayout->setAlignment( Qt::AlignTop );
 
-    Q3GridLayout* grid = new Q3GridLayout( 2, 2 );
+    QGridLayout* grid = new QGridLayout( 2, 2 );
 
     QLabel* label = new QLabel( groupDatabase );
     label->setText( i18n("Username :") );

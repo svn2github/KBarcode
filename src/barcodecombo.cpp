@@ -29,7 +29,7 @@
 #include <qregexp.h>
 #include <qstring.h>
 //Added by qt3to4:
-#include <Q3GridLayout>
+#include <QGridLayout>
 #if QT_VERSION >= 0x030100
     #include <ktextedit.h>
 #else
@@ -122,7 +122,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
 {
     m_token = NULL;
 
-    Q3GridLayout* grid = new Q3GridLayout( this, 6, 6 );
+    QGridLayout* grid = new QGridLayout( this, 6, 6 );
 
     labelStandard = new QLabel( i18n( "&Encoding Type:" ), this );
     grid->addWidget( labelStandard, 1, 0 );
@@ -146,13 +146,13 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
 #if QT_VERSION >= 0x030100
         multi = new KTextEdit( this );
 #else
-        multi = new Q3TextEdit( this );
+        multi = new QTextEdit( this );
 #endif
     multi->setTextFormat( Qt::PlainText );
-    multi->setWordWrap( Q3TextEdit::NoWrap );
+    multi->setWordWrap( QTextEdit::NoWrap );
     multi->setEnabled( false );
-    multi->setVScrollBarMode( Q3ScrollView::AlwaysOn );
-    multi->setHScrollBarMode( Q3ScrollView::AlwaysOn );
+    multi->setVScrollBarMode( QScrollView::AlwaysOn );
+    multi->setHScrollBarMode( QScrollView::AlwaysOn );
     multi->hide();
     connect( multi, SIGNAL( textChanged() ), this, SLOT( changed() ) );    
     grid->addMultiCellWidget( multi, 3, 3, 1, 3 );

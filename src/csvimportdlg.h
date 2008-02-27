@@ -20,8 +20,8 @@
 
 #include <qwidget.h>
 //Added by qt3to4:
-#include <Q3Frame>
-#include <Q3ValueList>
+#include <QFrame>
+#include <QValueList>
 #include <kdialogbase.h>
 
 class CSVFile;
@@ -32,9 +32,9 @@ class KLineEdit;
 class KPushButton;
 class KUrlRequester;
 class QCheckBox;
-class Q3Frame;
-class Q3GroupBox;
-class Q3Table;
+class QFrame;
+class QGroupBox;
+class QTable;
 class QRadioButton;
 
 /** Import a CSV (comma separated value) file into
@@ -77,7 +77,7 @@ class CSVImportDlg : public KDialogBase  {
         /** Get the field with from listWidth
          *  as an integer list.
          */
-        Q3ValueList<int> getFieldWidth();
+        QValueList<int> getFieldWidth();
 
         /** Create the first tab of the dialog 
          *  to set the import data.
@@ -101,8 +101,8 @@ class CSVImportDlg : public KDialogBase  {
         KIntNumInput* spinCol;
         KPushButton* buttonSet;
         KUrlRequester* requester;
-        Q3Frame* frame;
-        Q3Table* table;
+        QFrame* frame;
+        QTable* table;
         KLineEdit* databaseName;
 
         QRadioButton* radioCSVFile;
@@ -112,10 +112,10 @@ class CSVImportDlg : public KDialogBase  {
         KLineEdit* quote;
         KLineEdit* separator;
 
-        Q3GroupBox* groupCSV;
-        Q3GroupBox* groupFixed;
+        QGroupBox* groupCSV;
+        QGroupBox* groupFixed;
 
-        K3ListBox* listWidth;
+        KListBox* listWidth;
         KPushButton* buttonAdd;
         KPushButton* buttonRemove;
         KIntNumInput* spinNumber;

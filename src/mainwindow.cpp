@@ -187,7 +187,7 @@ void MainWindow::appHelpActivated()
 
 void MainWindow::showCheck()
 {
-    Q3TextBrowser* b = new Q3TextBrowser( 0, "b" );
+    QTextBrowser* b = new QTextBrowser( 0, "b" );
     b->setText( MainWindow::systemCheck() );
     b->resize( 320, 240 );
     b->show();

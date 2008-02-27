@@ -22,20 +22,20 @@
 #include "documentitem.h"
 #include "tokenprovider.h"
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QValueList>
 
-class K3ListBox;
-class K3ListView;
-class Q3ListBoxItem;
-class Q3ListViewItem;
+class KListBox;
+class KListView;
+class QListBoxItem;
+class QListViewItem;
 class KLineEdit;
 class TokenProvider;
 
 class QRadioButton;
-class Q3WidgetStack;
-class Q3HBox;
+class QWidgetStack;
+class QHBox;
 class KComboBox;
-class Q3TextBrowser;
+class QTextBrowser;
 class KPushButton;
 class DSTextEdit;
 
@@ -49,8 +49,8 @@ class TokenDialog : public QWizard {
     inline const QString & token() const { return m_result; }
 
  private slots:
-    void categoryChanged( Q3ListBoxItem* item );
-    void itemChanged( Q3ListViewItem* item );
+    void categoryChanged( QListBoxItem* item );
+    void itemChanged( QListViewItem* item );
 
  private:
     void initAll();
@@ -96,18 +96,18 @@ class TokenDialog : public QWizard {
     QRadioButton* radioVariableExisting;
     
     KLineEdit* editVariable;
-    K3ListBox* listVariable;
+    KListBox* listVariable;
 
     KLineEdit* editQuery;
-    Q3TextBrowser* textQueryResults;
+    QTextBrowser* textQueryResults;
     KPushButton* buttonQuery;
 
     DSTextEdit* editJavaScript;
 
     QString m_result;
 
-    Q3WidgetStack* page2;
-    Q3WidgetStack* page3;
+    QWidgetStack* page2;
+    QWidgetStack* page3;
 
     QWidget* stackPage1;
     QWidget* stackPage2;
@@ -118,14 +118,14 @@ class TokenDialog : public QWizard {
     QWidget* stack2Page4;
     QWidget* stack2Page5;
 
-    Q3ValueList<tToken> m_tokens;
+    QValueList<tToken> m_tokens;
     TokenProvider* m_token;
 
-    K3ListBox* category;
-    K3ListView* allList;
+    KListBox* category;
+    KListView* allList;
     KLineEdit* lineEdit;
 
-    K3ListView* labelList;
+    KListView* labelList;
 };
 
 #endif

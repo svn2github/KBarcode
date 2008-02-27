@@ -46,7 +46,7 @@ LabelUtils::~LabelUtils()
 
 double LabelUtils::pixelToMm( double pixel, const QPaintDevice* device, int mode )
 {
-    Q3PaintDeviceMetrics pdm( device ? device : KApplication::desktop() );
+    QPaintDeviceMetrics pdm( device ? device : KApplication::desktop() );
     if( mode == DpiX )
 	return (pixel * CONVERSION_FACTOR) / (double)pdm.logicalDpiX();
     else
@@ -61,7 +61,7 @@ double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
     // We don't get valid metrics from the printer - and we want a better resolution
     // anyway (it's the PS driver that takes care of the printer resolution).
 
-    Q3PaintDeviceMetrics pdm( device ? device : KApplication::desktop() );
+    QPaintDeviceMetrics pdm( device ? device : KApplication::desktop() );
     
 //    qDebug("DpiX=%i", pdm.logicalDpiX());
 //    qDebug("DpiY=%i", pdm.logicalDpiY());
@@ -73,16 +73,16 @@ double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
 
 double LabelUtils::pixelToPixelX( double unit, const QPaintDevice* src, const QPaintDevice* dest )
 {
-    Q3PaintDeviceMetrics p1( src );
-    Q3PaintDeviceMetrics p2( dest );
+    QPaintDeviceMetrics p1( src );
+    QPaintDeviceMetrics p2( dest );
 
     return ( unit * (double)p2.logicalDpiX() ) / (double)p1.logicalDpiX();
 }
 
 double LabelUtils::pixelToPixelY( double unit, const QPaintDevice* src, const QPaintDevice* dest )
 {
-    Q3PaintDeviceMetrics p1( src );
-    Q3PaintDeviceMetrics p2( dest );
+    QPaintDeviceMetrics p1( src );
+    QPaintDeviceMetrics p2( dest );
 
     //return pixelToPixelX( unit, src, dest );
     return ( unit * (double)p2.logicalDpiY() ) / (double)p1.logicalDpiY();
@@ -102,7 +102,7 @@ const QString LabelUtils::getModeFromCaption( const QString & cap )
 
 QSize LabelUtils::stringSize( const QString & t )
 {
-    Q3SimpleRichText srt( t, KApplication::font() );
+    QSimpleRichText srt( t, KApplication::font() );
     QSize s;
     s.setWidth( srt.widthUsed() );
     s.setHeight( srt.height() );
@@ -113,7 +113,7 @@ QSize LabelUtils::stringSize( const QString & t )
 void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect & rect, double scalex, double scaley )
 {
     // DSRichText cannot calculate the width on its own
-    Q3SimpleRichText srt( t, KApplication::font() );
+    QSimpleRichText srt( t, KApplication::font() );
     int width = (rect.width() > 0) ? rect.width() : srt.widthUsed();
     int height = (rect.height() > 0) ? rect.height() : srt.height();
     
@@ -128,7 +128,7 @@ void LabelUtils::renderString( QPainter* painter, const QString & t, const QRect
 
 QPixmap* LabelUtils::drawString( const QString & t, int w, int h, double rot )
 {
-    Q3SimpleRichText srt( t, KApplication::font() );
+    QSimpleRichText srt( t, KApplication::font() );
 
     int width = (w > 0) ? w : srt.widthUsed();
     int height = (h > 0) ? h : srt.height();

@@ -38,10 +38,10 @@
 #include <q3textstream.h>
 #include <q3vbox.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
-#include <Q3GridLayout>
-#include <Q3ValueList>
-#include <Q3VBoxLayout>
+#include <QHBoxLayout>
+#include <QGridLayout>
+#include <QValueList>
+#include <QVBoxLayout>
 
 // KDE includes
 #include <kapplication.h>
@@ -96,8 +96,8 @@ CSVImportDlg::~CSVImportDlg()
 void CSVImportDlg::createPage1()
 {
     QFrame* box = addPage( i18n("&Import Data") );
-    Q3VBoxLayout* layout = new Q3VBoxLayout( box, 6, 6 );
-    Q3GridLayout* grid = new Q3GridLayout( 2 );
+    QVBoxLayout* layout = new QVBoxLayout( box, 6, 6 );
+    QGridLayout* grid = new QGridLayout( 2 );
 
     requester = new KUrlRequester( box );
     comboEncoding = new EncodingCombo( box );
@@ -115,11 +115,11 @@ void CSVImportDlg::createPage1()
     spinLoadOnly->setRange( 0, 10000, 1, false );
     checkLoadAll->setChecked( true );
 
-    table = new Q3Table( box );
+    table = new QTable( box );
     table->setReadOnly( true );
 
-    frame = new Q3Frame( box );
-    Q3HBoxLayout* layout2 = new Q3HBoxLayout( frame, 6, 6 );
+    frame = new QFrame( box );
+    QHBoxLayout* layout2 = new QHBoxLayout( frame, 6, 6 );
     
     spinCol = new KIntNumInput( frame );
     spinCol->setLabel( i18n("Column:"), Qt::AlignLeft | Qt::AlignVCenter );
@@ -154,25 +154,25 @@ void CSVImportDlg::createPage2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
     QFrame* mainBox = addPage( i18n("&Import Settings") );
-    Q3VBoxLayout* layout = new Q3VBoxLayout( mainBox, 6, 6 );
+    QVBoxLayout* layout = new QVBoxLayout( mainBox, 6, 6 );
     QSpacerItem* spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     QSpacerItem* spacer2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
 
-    Q3HButtonGroup* buttonGroup = new Q3HButtonGroup( i18n("File Format:"), mainBox );
+    QHButtonGroup* buttonGroup = new QHButtonGroup( i18n("File Format:"), mainBox );
     radioCSVFile = new QRadioButton( i18n("&CSV File"), buttonGroup );
     radioFixedFile = new QRadioButton( i18n("File with &fixed field width"), buttonGroup );
 
-    Q3HBox* hboxFrame = new Q3HBox( mainBox );
+    QHBox* hboxFrame = new QHBox( mainBox );
 
-    groupCSV = new Q3GroupBox( i18n("CSV File"), hboxFrame );
-    groupFixed = new Q3GroupBox( i18n("Fixed Field Width File"), hboxFrame );
+    groupCSV = new QGroupBox( i18n("CSV File"), hboxFrame );
+    groupFixed = new QGroupBox( i18n("Fixed Field Width File"), hboxFrame );
 
     groupCSV->setColumnLayout(0, Qt::Vertical );
     groupCSV->layout()->setSpacing( 6 );
     groupCSV->layout()->setMargin( 11 );
 
-    Q3VBoxLayout* vbox = new Q3VBoxLayout( groupCSV->layout() );
-    Q3GridLayout* grid = new Q3GridLayout( 2, 2 );
+    QVBoxLayout* vbox = new QVBoxLayout( groupCSV->layout() );
+    QGridLayout* grid = new QGridLayout( 2, 2 );
     grid->setSpacing( 6 );
     grid->setMargin( 11 );
     
@@ -203,10 +203,10 @@ void CSVImportDlg::createPage2()
     groupFixed->setColumnLayout(0, Qt::Horizontal );
     groupFixed->layout()->setSpacing( 6 );
     groupFixed->layout()->setMargin( 11 );
-    Q3HBoxLayout* groupFixedLayout = new Q3HBoxLayout( groupFixed->layout() );
+    QHBoxLayout* groupFixedLayout = new QHBoxLayout( groupFixed->layout() );
     groupFixedLayout->setAlignment( Qt::AlignTop );
 
-    listWidth = new K3ListBox( groupFixed );
+    listWidth = new KListBox( groupFixed );
 
     buttonAdd = new KPushButton( groupFixed );
     buttonAdd->setText( i18n( "&Add Field" ) );
@@ -219,7 +219,7 @@ void CSVImportDlg::createPage2()
     spinNumber->setValue( 1 );
     spinNumber->setFocus();
 
-    Q3VBoxLayout* layout2 = new Q3VBoxLayout( 0, 6, 6 );
+    QVBoxLayout* layout2 = new QVBoxLayout( 0, 6, 6 );
     layout2->addWidget( buttonAdd );
     layout2->addWidget( buttonRemove );
     layout2->addWidget( spinNumber );
@@ -335,8 +335,8 @@ void CSVImportDlg::updateCol( int c )
 void CSVImportDlg::accept()
 {
     CSVFile file( requester->url() );
-    Q3Header* h = table->horizontalHeader();
-    Q3ValueList<int> headers;
+    QHeader* h = table->horizontalHeader();
+    QValueList<int> headers;
     QStringList list;
     QString name = getDatabaseName();
     int i = 0;
@@ -409,9 +409,9 @@ void CSVImportDlg::removeWidth()
     settingsChanged();
 }
 
-Q3ValueList<int> CSVImportDlg::getFieldWidth()
+QValueList<int> CSVImportDlg::getFieldWidth()
 {
-    Q3ValueList<int> list;
+    QValueList<int> list;
 
     for( unsigned int i=0;i<listWidth->count();i++ ) 
         list << listWidth->text( i ).toInt();
@@ -421,7 +421,7 @@ Q3ValueList<int> CSVImportDlg::getFieldWidth()
 
 void CSVImportDlg::initCsvFile( CSVFile* file )
 {
-    Q3ValueList<int> width = getFieldWidth();
+    QValueList<int> width = getFieldWidth();
 
     file->setEncoding( comboEncoding->currentText() );
     file->setCSVFile( radioCSVFile->isChecked() );

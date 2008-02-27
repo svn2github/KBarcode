@@ -16,7 +16,7 @@ class MyCanvasView;
  *
  * The class is also ReferenceCounted!!!
  */
-class TCanvasItem : public Q3CanvasRectangle, public ReferenceCounted {
+class TCanvasItem : public QCanvasRectangle, public ReferenceCounted {
 public:
 
     TCanvasItem ( MyCanvasView* cv );

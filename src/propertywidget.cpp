@@ -52,7 +52,7 @@
 #include <q3vbox.h>
 #include <qvbuttongroup.h>
 //Added by qt3to4:
-#include <Q3GridLayout>
+#include <QGridLayout>
 #include <QPixmap>
 #include <kmessagebox.h>
 
@@ -83,7 +83,7 @@ void FillLineCombo( KComboBox* box )
 PropertyWidget::PropertyWidget(QWidget* parent )
  : QWidget( parent, 0 )
 {
-    grid = new Q3GridLayout( this, 2, 2 );
+    grid = new QGridLayout( this, 2, 2 );
 }
 
 PropertyBorder::PropertyBorder( QWidget* parent )
@@ -112,7 +112,7 @@ PropertyBorder::PropertyBorder( QWidget* parent )
     connect( checkBorder, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 }
 
-void PropertyBorder::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyBorder::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     BorderCommand* bc = new BorderCommand( checkBorder->isChecked(), QPen( buttonColor->color(), spinWidth->value(), (Qt::PenStyle)(comboLine->currentItem() + 1) ), item );
     bc->execute();
@@ -154,7 +154,7 @@ PropertyRotation::PropertyRotation( QWidget* parent )
 
 }
 
-void PropertyRotation::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyRotation::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     TextItem* text = static_cast<TextItem*>(item);
     double rot = 0.0;
@@ -194,7 +194,7 @@ PropertyFill::PropertyFill( QWidget* parent )
     grid->addWidget( buttonColor, 0, 1 );
 }
 
-void PropertyFill::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyFill::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     RectItem* rect = static_cast<RectItem*>(item);
     FillCommand* fc = new FillCommand( buttonColor->color(), rect );
@@ -260,7 +260,7 @@ void PropertyBarcode::changedCombo()
     barcode->setStandardEnabled( v );
 }
 
-void PropertyBarcode::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyBarcode::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     BarcodeItem* bcode = static_cast<BarcodeItem*>(item);
 
@@ -297,7 +297,7 @@ PropertyText::PropertyText( TokenProvider* token, QWidget* parent )
     grid->addWidget( m_editor, 0, 0 );
 }
 
-void PropertyText::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyText::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     TextItem* text = static_cast<TextItem*>(item);
     
@@ -320,7 +320,7 @@ PropertyTextLine::PropertyTextLine( TokenProvider* token, QWidget* parent )
     grid->addWidget( m_editor, 0, 0 );
 }
 
-void PropertyTextLine::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyTextLine::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     TextLineItem* text = static_cast<TextLineItem*>(item);
     
@@ -344,7 +344,7 @@ PropertySize::PropertySize( QWidget* parent )
 {   
     const double low = -1000.0;
     const double max = 1000.0;
-    Q3VBox* box = new Q3VBox( this );
+    QVBox* box = new QVBox( this );
 
     checkLock = new QCheckBox( i18n("&Protect item from being moved or resized"), box );    
     numTop = new KDoubleNumInput( low, max, 0.0, 0.2, 3, box );
@@ -375,7 +375,7 @@ void PropertySize::enableControls()
     numWidth->setEnabled( !checkLock->isChecked() );
 }
         
-void PropertySize::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertySize::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     QRect r = item->rect();
     QPoint translation( 0, 0 );
@@ -470,14 +470,14 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     comboRotation = new KComboBox( FALSE, this );
     label->setBuddy( comboRotation );
 
-    Q3VButtonGroup* groupFile = new Q3VButtonGroup( i18n("&Image"), this );
+    QVButtonGroup* groupFile = new QVButtonGroup( i18n("&Image"), this );
     radioImagePath = new QRadioButton( i18n("&Load image from path"), groupFile );
     imgUrl = new KUrlRequester( groupFile );
     imgUrl->setFilter( KImageIO::pattern( KImageIO::Reading ) );
     imgUrl->setMode( KFile::File | KFile::ExistingOnly | KFile::LocalOnly );
     radioImageExpression = new QRadioButton( i18n("&Read image path from expression"), groupFile );
 
-    imgHBox = new Q3HBox( groupFile );
+    imgHBox = new QHBox( groupFile );
     imgHBox->setSpacing( 5 );
 
     imgExpression = new KLineEdit( imgHBox );
@@ -489,7 +489,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     comboRotation->addItem( i18n("180") );
     comboRotation->addItem( i18n("270") );
     
-    Q3VButtonGroup* group = new Q3VButtonGroup( i18n("&Size"), this );
+    QVButtonGroup* group = new QVButtonGroup( i18n("&Size"), this );
     
     radioOriginal = new QRadioButton( i18n("&None"), group );
     radioZoomed = new QRadioButton( i18n("&Zoom"), group );
@@ -510,7 +510,7 @@ PropertyImage::PropertyImage( TokenProvider* token, QWidget* parent )
     connect( buttonToken, SIGNAL( clicked() ), this, SLOT( slotTokens() ) );
 }
 
-void PropertyImage::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyImage::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     ImageItem* img = static_cast<ImageItem*>(item);
     EImageScaling scaling = eImage_Original;
@@ -618,7 +618,7 @@ PropertyVisible::PropertyVisible( QWidget* parent )
     grid->addMultiCellWidget( m_script, 1, 8, 0, 2 );
 }
 
-void PropertyVisible::applySettings( DocumentItem* item, K3MacroCommand* command )
+void PropertyVisible::applySettings( DocumentItem* item, KMacroCommand* command )
 {
     TCanvasItem* canvasItem = item->canvasItem();
     ScriptCommand* sc = new ScriptCommand( m_script->text(), canvasItem );

@@ -177,7 +177,7 @@ TokenProvider::~TokenProvider()
 {
 }
 
-Q3ValueList<tCategories> TokenProvider::s_categories;
+QValueList<tCategories> TokenProvider::s_categories;
 QMap<TokenProvider::ECategories,QString> TokenProvider::s_captions;
 #ifdef NO_KJS_EMBED
 KJS::Interpreter* TokenProvider::s_interpreter = NULL;
@@ -194,7 +194,7 @@ bool TokenProvider::hasJavaScript()
 #endif // USE_JAVASCRIPT
 }
 
-Q3ValueList<tCategories>* TokenProvider::getTokens()
+QValueList<tCategories>* TokenProvider::getTokens()
 {
     TokenProvider::init(); 
     return &s_categories;
@@ -557,7 +557,7 @@ QString TokenProvider::process( const QString & t )
 
     if( m_printer && t == TOK_RESOLUTION ) 
     {
-	Q3PaintDeviceMetrics metrics( m_printer );
+	QPaintDeviceMetrics metrics( m_printer );
 	ret = QString( "%1dpi" ).arg( metrics.logicalDpiY() );
     }
 

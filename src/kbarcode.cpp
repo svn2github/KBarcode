@@ -29,7 +29,7 @@
 #include <q3groupbox.h>
 #include <qlayout.h>
 //Added by qt3to4:
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // KDE includes
 #include <kaction.h>
@@ -44,9 +44,9 @@
 KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
     : MainWindow( parent, f )
 {
-    Q3GroupBox* w = new Q3GroupBox( this );
+    QGroupBox* w = new QGroupBox( this );
     w->setColumnLayout(0, Qt::Vertical );
-    Q3VBoxLayout* layout = new Q3VBoxLayout( w->layout() );
+    QVBoxLayout* layout = new QVBoxLayout( w->layout() );
     setCentralWidget( w );
 
     buttonSingle = new KPushButton( i18n("Barcode &Generator..."), w );

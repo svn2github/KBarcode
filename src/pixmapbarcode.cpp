@@ -216,7 +216,7 @@ bool PixmapBarcode::createPostscript( char** postscript, long* postscript_size )
     */
     {
         cmd = "barcode -E -b ";
-        cmd += K3ShellProcess::quote( barkode->parsedValue() ) + (barkode->textVisible() ? "" : " -n");
+        cmd += KShellProcess::quote( barkode->parsedValue() ) + (barkode->textVisible() ? "" : " -n");
         cmd += " -e " + barkode->type();
     }
     
@@ -240,7 +240,7 @@ QRect PixmapBarcode::bbox( const char* data, long size )
     if( !b.open( QIODevice::ReadOnly ) )
         return s;
     
-    Q3TextStream t( &b );
+    QTextStream t( &b );
         
     QString text = t.readLine();
     while( !text.isNull() )
@@ -306,7 +306,7 @@ bool PixmapBarcode::readFromPipe( const char* command, char** buffer, long* buff
 
 void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
 {
-    Q3PaintDeviceMetrics pdm( device );
+    QPaintDeviceMetrics pdm( device );
     int resx = pdm.logicalDpiX();
     int resy = pdm.logicalDpiY();
 
@@ -325,7 +325,7 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
         // we have to scale to the correct resolution.
         // we scale already here and not at the end,
         // so that the addMargin function does not get a scaled margin.
-        Q3PaintDeviceMetrics pdm( KApplication::desktop() );
+        QPaintDeviceMetrics pdm( KApplication::desktop() );
         int screenresx = pdm.logicalDpiX();
         int screenresy = pdm.logicalDpiY();
     
@@ -357,20 +357,20 @@ bool PixmapBarcode::createPdf417( KTemporaryFile* output )
     }
 
     KTemporaryFile text( QString::null, ".txt" );
-    Q3TextStream t( text.file() );
+    QTextStream t( text.file() );
     t << barkode->parsedValue();
     text.file()->close();
 
     // ps does not work because bounding box information is missing
     // pbm cannot be loaded by KImgIO (works fine in GIMP)
     // gif is the only other option
-    K3ShellProcess proc;
+    KShellProcess proc;
     proc << "pdf417_enc" << "-tgif" << text.name() << output->name()
          << options->row()
          << options->col()
          << options->err();
          
-    proc.start( K3Process::Block, K3Process::NoCommunication );
+    proc.start( KProcess::Block, KProcess::NoCommunication );
     proc.resume();
 
     if( proc.exitStatus() ) {
@@ -412,7 +412,7 @@ QString PixmapBarcode::createTBarcodeCmd()
                                            .arg( barkode->pdf417Options()->err() );
         
     cmd += " " + barkode->type() + QString(" tPS c%1").arg( barkode->tbarcodeOptions()->checksum() );
-    cmd += flag + " d" + K3ShellProcess::quote(  barkode->parsedValue() );
+    cmd += flag + " d" + KShellProcess::quote(  barkode->parsedValue() );
 
     return cmd;
 }

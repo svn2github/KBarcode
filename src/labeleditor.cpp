@@ -78,8 +78,8 @@
 #if QT_VERSION <= 0x030100
     #include <qregexp.h>
 //Added by qt3to4:
-#include <Q3ValueList>
-#include <Q3CString>
+#include <QValueList>
+#include <QCString>
 #include <QCloseEvent>
 #endif
 
@@ -222,7 +222,7 @@ void LabelEditor::createCommandHistory()
 	actionCollection()->remove( redoAct );
     }
 
-    history = new K3CommandHistory( actionCollection(), false );
+    history = new KCommandHistory( actionCollection(), false );
     cv->setHistory( history );
 
     config->setGroup("LabelEditor");
@@ -245,7 +245,7 @@ void LabelEditor::createCommandHistoryActions()
 void LabelEditor::clearLabel()
 {
     TCanvasItem* citem;
-    Q3CanvasItemList::Iterator it;
+    QCanvasItemList::Iterator it;
 
     description = QString::null;
 
@@ -258,7 +258,7 @@ void LabelEditor::clearLabel()
 
     m_edited = false;
 
-    Q3CanvasItemList list = c->allItems();
+    QCanvasItemList list = c->allItems();
     it = list.begin();
     for (; it != list.end(); ++it)
     {
@@ -335,7 +335,7 @@ void LabelEditor::save( QIODevice* device )
 
     writeXMLHeader( &root, description, d );
 
-    Q3CanvasItemList list = c->allItems();
+    QCanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
     {
         TCanvasItem* item = static_cast<TCanvasItem*>(list[i]);
@@ -344,7 +344,7 @@ void LabelEditor::save( QIODevice* device )
         writeXMLDocumentItem( &root, &ditem );
     }
 
-    Q3CString xml = doc.toCString();
+    QCString xml = doc.toCString();
     device->write( xml, xml.length() );
     device->close();
 }
@@ -742,7 +742,7 @@ void LabelEditor::showContextMenu( QPoint pos )
 void LabelEditor::lockItem()
 {
     TCanvasItemList list = cv->getSelected();
-    K3MacroCommand* mc = new K3MacroCommand( i18n("Protected Item") );
+    KMacroCommand* mc = new KMacroCommand( i18n("Protected Item") );
     
     DocumentItem* item = NULL;
     LockCommand* lc = NULL;
@@ -816,7 +816,7 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
     batch->setCustomer( QString::null );
     batch->setEvents( false );
 
-    Q3ValueList<BatchPrinter::data>* list = new Q3ValueList<BatchPrinter::data>;
+    QValueList<BatchPrinter::data>* list = new QValueList<BatchPrinter::data>;
     BatchPrinter::data m_data;
     m_data.number = copies;
     m_data.article_no = QString::null;
@@ -841,8 +841,8 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
 
 void LabelEditor::spellCheck()
 {
-    K3MacroCommand* sc = new K3MacroCommand( i18n("Spellchecking") );
-    Q3CanvasItemList list = c->allItems();
+    KMacroCommand* sc = new KMacroCommand( i18n("Spellchecking") );
+    QCanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->rtti() == eRtti_Text ) {
             TCanvasItem* item = (TCanvasItem*)list[i];
@@ -916,7 +916,7 @@ void LabelEditor::onTopCurrent()
 
     int z = 0;
 
-    Q3CanvasItemList list = c->allItems();
+    QCanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->z() > z )
             z = (int)list[i]->z();
@@ -933,7 +933,7 @@ void LabelEditor::backCurrent()
 
     int z = 0;
 
-    Q3CanvasItemList list = c->allItems();
+    QCanvasItemList list = c->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->z() < z )
             z = (int)list[i]->z();

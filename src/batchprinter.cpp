@@ -29,7 +29,7 @@
 #include <q3paintdevicemetrics.h>
 #include <q3progressdialog.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QValueList>
 #include <QPixmap>
 
 // KDE includes
@@ -102,7 +102,7 @@ void BatchPrinter::start()
     painter = new QPainter( printer );
     m_cur_data_count = 0;
 
-    Q3PaintDeviceMetrics pdm( painter->device() );
+    QPaintDeviceMetrics pdm( painter->device() );
 
     pageh = pdm.height();   // in pixel
 
@@ -111,7 +111,7 @@ void BatchPrinter::start()
     c_h = 0;
     c_w = 0;
 
-    Q3ProgressDialog* progress = createProgressDialog( i18n("Printing...") );
+    QProgressDialog* progress = createProgressDialog( i18n("Printing...") );
 
     m_measure = def->getMeasurements();
 
@@ -126,7 +126,7 @@ void BatchPrinter::start()
     delete painter;
 }
 
-void BatchPrinter::startPrintData( Q3ProgressDialog* progress )
+void BatchPrinter::startPrintData( QProgressDialog* progress )
 {
     labelprinterdata* lpdata = PrinterSettings::getInstance()->getData();
 
@@ -197,7 +197,7 @@ void BatchPrinter::startPrintData( Q3ProgressDialog* progress )
     }
 }
 
-void BatchPrinter::startPrintVarData( Q3ProgressDialog* progress )
+void BatchPrinter::startPrintVarData( QProgressDialog* progress )
 {
     Label* l;
     while( ( l = initLabel() ) != NULL )
@@ -273,7 +273,7 @@ Label* BatchPrinter::initLabel( int* number )
 
 void BatchPrinter::startImages()
 {
-    Q3ProgressDialog* progress = createProgressDialog( i18n("Creating Images...") );
+    QProgressDialog* progress = createProgressDialog( i18n("Creating Images...") );
 
     int number       = 0;
     m_cur_data_count = 0;
@@ -341,7 +341,7 @@ void BatchPrinter::startBCP()
         return;        
     }
         
-    Q3ProgressDialog* progress = createProgressDialog( i18n("Printing...") );
+    QProgressDialog* progress = createProgressDialog( i18n("Printing...") );
         
     if( m_bcp_format == PrinterSettings::ZEBRA )
         // Zebra printers are printed at 304dpi, this should
@@ -358,7 +358,7 @@ void BatchPrinter::startBCP()
         m_paintDevice = new BarcodePrinterDevice( 304.0, 304.0 );
     
     
-    Q3TextStream stream( &file );
+    QTextStream stream( &file );
     Label* l;
     while( ( l = initLabel( &number ) ) != NULL )
     {
@@ -503,15 +503,15 @@ void BatchPrinter::moveLabels()
     }
 }
 
-Q3ProgressDialog* BatchPrinter::createProgressDialog( const QString & caption )
+QProgressDialog* BatchPrinter::createProgressDialog( const QString & caption )
 {
-    Q3ProgressDialog* progress = new Q3ProgressDialog( caption, i18n("&Cancel"), m_labels+1, parent );
+    QProgressDialog* progress = new QProgressDialog( caption, i18n("&Cancel"), m_labels+1, parent );
     progress->setProgress( 0 );
     progress->show();
     return progress;
 }
 
-bool BatchPrinter::checkProgressDialog( Q3ProgressDialog* progress )
+bool BatchPrinter::checkProgressDialog( QProgressDialog* progress )
 {
     kapp->processEvents( 0 );
     progress->setProgress( progress->progress() + 1 );
@@ -522,7 +522,7 @@ bool BatchPrinter::checkProgressDialog( Q3ProgressDialog* progress )
     return true;
 }
 
-void BatchPrinter::setData( Q3ValueList<data>* list ) 
+void BatchPrinter::setData( QValueList<data>* list ) 
 {
     if( m_data )
 	delete m_data;

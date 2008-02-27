@@ -71,7 +71,7 @@ class KPushButton;
 #if QT_VERSION >= 0x030100
     class KTextEdit;
 #else
-    class Q3TextEdit;
+    class QTextEdit;
 #endif
 class QCheckBox;
 class QLabel;
@@ -117,7 +117,7 @@ class BarcodeWidget : public QWidget {
 #if QT_VERSION >= 0x030100
         KTextEdit* multi;
 #else
-        Q3TextEdit* multi;
+        QTextEdit* multi;
 #endif
         
         KIntNumInput* spinMargin;

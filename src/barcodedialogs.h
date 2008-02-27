@@ -66,7 +66,7 @@ class AdvancedBarcodeDialog : public KDialogBase {
         void getData( Barkode* b );
 
     private:
-        Q3PtrList<BarcodeDlgBase> list;
+        QPtrList<BarcodeDlgBase> list;
 };
 
 /** A configuration widget for TBarcode settings.
@@ -150,7 +150,7 @@ class SequenceDlg : public QWidget, public BarcodeDlgBase {
 /** A configuration widget for colors in pure postscript barcodes
   * @author Dominik Seichter
   */
-class ColorDlg : public Q3VBox, public BarcodeDlgBase {
+class ColorDlg : public QVBox, public BarcodeDlgBase {
     Q_OBJECT
     public:
         ColorDlg(QWidget *parent=0);
@@ -167,7 +167,7 @@ class ColorDlg : public Q3VBox, public BarcodeDlgBase {
 /** A configuration widget for colors in pure postscript barcodes
   * @author Dominik Seichter
   */
-class PurePostscriptDlg : public Q3VBox, public BarcodeDlgBase {
+class PurePostscriptDlg : public QVBox, public BarcodeDlgBase {
     Q_OBJECT
     public:
         PurePostscriptDlg(QWidget *parent=0);

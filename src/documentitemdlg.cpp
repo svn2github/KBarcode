@@ -25,7 +25,7 @@
 #include <k3command.h>
 #include <klocale.h>
 
-DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, K3CommandHistory* history, QWidget* parent )
+DocumentItemDlg::DocumentItemDlg( TokenProvider* token, DocumentItem* item, KCommandHistory* history, QWidget* parent )
     : KDialogBase( Tabbed, i18n("Properties"), KDialogBase::Ok|KDialogBase::Cancel,
       KDialogBase::Ok, parent, 0, true, true )
 {
@@ -108,7 +108,7 @@ void DocumentItemDlg::addPage( PropertyWidget* widget )
 
 void DocumentItemDlg::accept()
 {
-    K3MacroCommand* mc = new K3MacroCommand( i18n("Property changed") );
+    KMacroCommand* mc = new KMacroCommand( i18n("Property changed") );
     std::list<PropertyWidget*>::iterator it;
     for( it=m_list.begin();it!=m_list.end();it++)
     {

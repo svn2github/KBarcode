@@ -52,30 +52,30 @@ int BarcodePrinterDevice::metric( int e ) const
 {
     int val = 0;
     switch ( e ) {
-        case Q3PaintDeviceMetrics::PdmPhysicalDpiX:
+        case QPaintDeviceMetrics::PdmPhysicalDpiX:
             val = (int)m_resolution_y;
             break;
-        case Q3PaintDeviceMetrics::PdmPhysicalDpiY:
+        case QPaintDeviceMetrics::PdmPhysicalDpiY:
             val = (int)m_resolution_x;
             break;
-        case Q3PaintDeviceMetrics::PdmDpiX:
+        case QPaintDeviceMetrics::PdmDpiX:
             val = (int)m_resolution_x;
             break;
-        case Q3PaintDeviceMetrics::PdmDpiY:
+        case QPaintDeviceMetrics::PdmDpiY:
             val = (int)m_resolution_y;
             break;
 
-        case Q3PaintDeviceMetrics::PdmNumColors:
+        case QPaintDeviceMetrics::PdmNumColors:
             val = 2; // black and white
             break;
-        case Q3PaintDeviceMetrics::PdmDepth:
+        case QPaintDeviceMetrics::PdmDepth:
             val = 1; // black and white
             break;
 
-        case Q3PaintDeviceMetrics::PdmWidth:
-        case Q3PaintDeviceMetrics::PdmHeight:
-        case Q3PaintDeviceMetrics::PdmWidthMM:
-        case Q3PaintDeviceMetrics::PdmHeightMM:
+        case QPaintDeviceMetrics::PdmWidth:
+        case QPaintDeviceMetrics::PdmHeight:
+        case QPaintDeviceMetrics::PdmWidthMM:
+        case QPaintDeviceMetrics::PdmHeightMM:
         default:
             break;
     }

@@ -52,9 +52,9 @@ class ImageItem : public DocumentItem
     
     virtual int rtti() const { return eRtti_Image;}
     virtual void draw(QPainter* painter);
-    virtual void drawZpl( Q3TextStream* stream );
-    virtual void drawIpl( Q3TextStream* stream, IPLUtils* utils );
-    virtual void drawEPcl( Q3TextStream* stream );
+    virtual void drawZpl( QTextStream* stream );
+    virtual void drawIpl( QTextStream* stream, IPLUtils* utils );
+    virtual void drawEPcl( QTextStream* stream );
     virtual void loadXML(QDomElement* element);
     virtual void saveXML(QDomElement* element);
  

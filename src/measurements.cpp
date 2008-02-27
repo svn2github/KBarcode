@@ -78,7 +78,7 @@ void Measurements::operator=( const Measurements & m ) {
 }
 
 double Measurements::mmToPixel( double mm, const QPaintDevice* device, int mode ) const {
-    Q3PaintDeviceMetrics pdm( device );
+    QPaintDeviceMetrics pdm( device );
     if( mode == DpiX )
         return (mm / 25.4) * pdm.logicalDpiX();
     else

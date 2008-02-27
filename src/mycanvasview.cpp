@@ -34,7 +34,7 @@
 #include <kstatusbar.h>
 
 MyCanvas::MyCanvas( QObject* parent )
-    : Q3Canvas( parent )
+    : QCanvas( parent )
 {
     m_grid = false;
 
@@ -49,7 +49,7 @@ MyCanvas::~MyCanvas()
 
 void MyCanvas::drawBackground( QPainter & painter, const QRect & clip )
 {
-    Q3Canvas::drawBackground( painter, clip );
+    QCanvas::drawBackground( painter, clip );
 
     QRect shadow1( int(m_rect.x() + m_rect.width()), m_rect.y() + 5, 5, m_rect.height() );
     QRect shadow2( m_rect.x()+ 5, int(m_rect.y() + m_rect.height()), m_rect.width(), 5 );
@@ -78,7 +78,7 @@ void MyCanvas::drawBackground( QPainter & painter, const QRect & clip )
 }
 
 MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, Qt::WFlags f)
-    : Q3CanvasView(c,parent,f)
+    : QCanvasView(c,parent,f)
 {
     statusbar = 0;
     m_commov = 0;
@@ -248,7 +248,7 @@ void MyCanvasView::contentsMousePressEvent(QMouseEvent* e)
 {
     setActive( 0, e->state() & Qt::ControlModifier  );
 
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( int z = MyCanvasView::getLowestZ( list ); z <= MyCanvasView::getHighestZ( list ); z++ )
         for( unsigned int i = 0; i < list.count(); i++ )
             if( list[i]->z() == z && isInside( e->pos(), list[i] ) )
@@ -278,10 +278,10 @@ void MyCanvasView::contentsMouseReleaseEvent(QMouseEvent* e)
     updateCursor( e->pos() );
 }
 
-K3MacroCommand* MyCanvasView::getMoveCommand()
+KMacroCommand* MyCanvasView::getMoveCommand()
 {
     if( !m_commov )
-        m_commov = new K3MacroCommand( i18n("Item Moved") );
+        m_commov = new KMacroCommand( i18n("Item Moved") );
 
     return m_commov;
 }
@@ -289,7 +289,7 @@ K3MacroCommand* MyCanvasView::getMoveCommand()
 void MyCanvasView::contentsMouseDoubleClickEvent(QMouseEvent* e)
 {
     setActive( 0 );
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( int z = MyCanvasView::getHighestZ( list ); z >= MyCanvasView::getLowestZ( list ); z-- )    
         for( unsigned int i = 0; i < list.count(); i++ )
             if( list[i]->z() == z && isInside( e->pos(), list[i] ) ) {
@@ -299,7 +299,7 @@ void MyCanvasView::contentsMouseDoubleClickEvent(QMouseEvent* e)
             }
 }
 
-bool MyCanvasView::isInside( QPoint p, Q3CanvasItem* item )
+bool MyCanvasView::isInside( QPoint p, QCanvasItem* item )
 {
     if( !item->isVisible() )
         return false;
@@ -307,7 +307,7 @@ bool MyCanvasView::isInside( QPoint p, Q3CanvasItem* item )
     return item->boundingRect().contains( p );
 }
 
-int MyCanvasView::isEdge( QPoint p, Q3CanvasItem* item )
+int MyCanvasView::isEdge( QPoint p, QCanvasItem* item )
 {
     if( !isInside( p, item ) )
         return Outside;
@@ -376,7 +376,7 @@ void MyCanvasView::deleteCurrent()
 {
     TCanvasItemList list = getSelected();
     if( !list.isEmpty() ) {
-        K3MacroCommand* mc = new K3MacroCommand( i18n("Delete") );
+        KMacroCommand* mc = new KMacroCommand( i18n("Delete") );
 
         for( unsigned int i = 0; i < list.count(); i++ ) {
             DeleteCommand* dc = new DeleteCommand( list[i] );
@@ -390,7 +390,7 @@ void MyCanvasView::deleteCurrent()
     }
 }
 
-void MyCanvasView::setCurrent( Q3CanvasItem* item )
+void MyCanvasView::setCurrent( QCanvasItem* item )
 {
     setSelected( item );
     setActive( item );
@@ -408,7 +408,7 @@ void MyCanvasView::updateRuler()
         rulerh->setMaxValue( width() );
 
 
-        Q3PaintDeviceMetrics pdm( this );
+        QPaintDeviceMetrics pdm( this );
         if( Measurements::measurementSystem() == Measurements::Metric ) {
             rulerh->setPixelPerMark( (1/ 25.4)* pdm.logicalDpiX() );
             rulerv->setPixelPerMark( (1/25.4)* pdm.logicalDpiY() );
@@ -422,7 +422,7 @@ void MyCanvasView::resizeEvent( QResizeEvent * r )
     setUpdatesEnabled( false );
     QPoint old = translation;
 
-    Q3CanvasView::resizeEvent( r );
+    QCanvasView::resizeEvent( r );
 
     reposition();
     updateRuler();
@@ -430,7 +430,7 @@ void MyCanvasView::resizeEvent( QResizeEvent * r )
     repaintContents();
 
     old = translation - old;
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         list[i]->moveBy( old.x(), old.y() );
 
@@ -473,7 +473,7 @@ void MyCanvasView::setDefinition( Definition* d )
 
 void MyCanvasView::selectAll()
 {
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         setSelected( list[i], true );
 }
@@ -483,7 +483,7 @@ void MyCanvasView::deSelectAll()
     setSelected( 0 );
 }
 
-int MyCanvasView::getLowestZ( Q3CanvasItemList list )
+int MyCanvasView::getLowestZ( QCanvasItemList list )
 {
     int v = 0;
     for( unsigned int i = 0; i < list.count(); i++ )
@@ -493,7 +493,7 @@ int MyCanvasView::getLowestZ( Q3CanvasItemList list )
     return v;
 }
 
-int MyCanvasView::getHighestZ( Q3CanvasItemList list )
+int MyCanvasView::getHighestZ( QCanvasItemList list )
 {
     int v = 0;
     for( unsigned int i = 0; i < list.count(); i++ )
@@ -505,7 +505,7 @@ int MyCanvasView::getHighestZ( Q3CanvasItemList list )
 
 TCanvasItem* MyCanvasView::getActive()
 {
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->isActive() )
             return (TCanvasItem*)list[i];
@@ -513,10 +513,10 @@ TCanvasItem* MyCanvasView::getActive()
     return 0;
 }
 
-void MyCanvasView::setActive( Q3CanvasItem* item, bool control )
+void MyCanvasView::setActive( QCanvasItem* item, bool control )
 {
     emit selectionChanged();
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         list[i]->setActive( false );
 
@@ -530,7 +530,7 @@ DocumentItemList MyCanvasView::getAllItems()
 {
     DocumentItemList l;
 
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
 	l.append( ((TCanvasItem*)list[i])->item() );
 
@@ -540,7 +540,7 @@ DocumentItemList MyCanvasView::getAllItems()
 TCanvasItemList MyCanvasView::getSelected()
 {
     TCanvasItemList l;
-    Q3CanvasItemList list = canvas()->allItems();
+    QCanvasItemList list = canvas()->allItems();
     for( unsigned int i = 0; i < list.count(); i++ )
         if( list[i]->isSelected() )
             l.append( (TCanvasItem*)list[i] );
@@ -548,10 +548,10 @@ TCanvasItemList MyCanvasView::getSelected()
     return l;
 }
 
-void MyCanvasView::setSelected( Q3CanvasItem* item, bool control )
+void MyCanvasView::setSelected( QCanvasItem* item, bool control )
 {
     if( !control ) {
-        Q3CanvasItemList list = canvas()->allItems();
+        QCanvasItemList list = canvas()->allItems();
         for( unsigned int i = 0; i < list.count(); i++ )
             list[i]->setSelected( false );
     }

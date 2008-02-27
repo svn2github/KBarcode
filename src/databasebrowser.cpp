@@ -24,7 +24,7 @@
 // Qt includes
 #include <qclipboard.h>
 //Added by qt3to4:
-#include <Q3SqlCursor>
+#include <QSqlCursor>
 
 // KDE includes
 #include <kaction.h>
@@ -113,7 +113,7 @@ void DatabaseBrowser::setupActions()
 
 void DatabaseBrowser::setupSql()
 {
-    Q3SqlCursor* cur = new Q3SqlCursor( database, true );
+    QSqlCursor* cur = new QSqlCursor( database, true );
     cur->select();
     unsigned int i = 0;
     unsigned int c = 0;
@@ -132,7 +132,7 @@ void DatabaseBrowser::setupSql()
     table->setSorting( true );
     table->setConfirmDelete( true );
     table->setAutoEdit( true );
-    table->refresh( Q3DataTable::RefreshAll );
+    table->refresh( QDataTable::RefreshAll );
 }
 
 void DatabaseBrowser::find()

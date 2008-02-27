@@ -43,7 +43,7 @@ enum ERtti {
 class QDomElement;
 class QPainter;
 class QPaintDevice;
-class Q3TextStream;
+class QTextStream;
 class TCanvasItem;
 class TokenProvider;
 
@@ -85,17 +85,17 @@ public:
     /** 
      * Write a ZPL string for drawing this item onto a zebra printer to a QTextStream
      */
-    virtual void drawZpl( Q3TextStream* stream ) = 0;
+    virtual void drawZpl( QTextStream* stream ) = 0;
 
     /** 
      * Write a IPL string for drawing this item onto a zebra printer to a QTextStream
      */
-    virtual void drawIpl( Q3TextStream* stream, IPLUtils* utils ) = 0;
+    virtual void drawIpl( QTextStream* stream, IPLUtils* utils ) = 0;
         
     /** 
      * Write a EPCL string for drawing this item onto a zebra printer to a QTextStream
      */
-    virtual void drawEPcl( Q3TextStream* stream ) = 0;
+    virtual void drawEPcl( QTextStream* stream ) = 0;
     
     void setCanvasItem( TCanvasItem* item );
     TCanvasItem* canvasItem() const;
@@ -224,7 +224,7 @@ const QString DocumentItem::visibilityScript() const
     return m_visibilityScript;
 }
 
-typedef Q3SortedList<DocumentItem> DocumentItemList;
+typedef QSortedList<DocumentItem> DocumentItemList;
 
 #endif //DOCUMENTITEM_H
 

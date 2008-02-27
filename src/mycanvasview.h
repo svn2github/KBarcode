@@ -28,12 +28,12 @@
 
 class TCanvasItem;
 
-typedef Q3ValueList<TCanvasItem*> TCanvasItemList;
+typedef QValueList<TCanvasItem*> TCanvasItemList;
 
 
 class QRect;
 class QPainter;
-class MyCanvas : public Q3Canvas {
+class MyCanvas : public QCanvas {
     Q_OBJECT
 
     public:
@@ -66,11 +66,11 @@ class Definition;
 class QColor;
 class QLabel;
 class QPoint;
-class K3CommandHistory;
-class K3MacroCommand;
+class KCommandHistory;
+class KMacroCommand;
 class KRuler;
 class KStatusBar;
-class MyCanvasView : public Q3CanvasView
+class MyCanvasView : public QCanvasView
 {
     Q_OBJECT
 
@@ -99,11 +99,11 @@ class MyCanvasView : public Q3CanvasView
         TCanvasItemList getSelected();
 
         TCanvasItem* getActive();
-        void setActive( Q3CanvasItem* item = 0, bool control = false );
+        void setActive( QCanvasItem* item = 0, bool control = false );
 
-        void setCurrent( Q3CanvasItem* item );
+        void setCurrent( QCanvasItem* item );
 
-        void setHistory( K3CommandHistory* hist ) {
+        void setHistory( KCommandHistory* hist ) {
             history = hist;
         }
 
@@ -117,8 +117,8 @@ class MyCanvasView : public Q3CanvasView
             statusbar = s;
         }
 
-        static int getLowestZ( Q3CanvasItemList list );
-        static int getHighestZ( Q3CanvasItemList list );
+        static int getLowestZ( QCanvasItemList list );
+        static int getHighestZ( QCanvasItemList list );
         
         void snapPoint(QPoint* point, TCanvasItem* item) ;
         
@@ -147,16 +147,16 @@ class MyCanvasView : public Q3CanvasView
         void showContextMenu( QPoint );
         
     private:
-        void setSelected( Q3CanvasItem* item = 0, bool control = false );
-        K3MacroCommand* getMoveCommand();
+        void setSelected( QCanvasItem* item = 0, bool control = false );
+        KMacroCommand* getMoveCommand();
         
         Definition* def;
 
         KRuler* rulerv;
         KRuler* rulerh;
 
-        K3CommandHistory* history;
-        K3MacroCommand* m_commov;
+        KCommandHistory* history;
+        KMacroCommand* m_commov;
         MyCanvas* canv;
 
         int mouseid;
@@ -167,8 +167,8 @@ class MyCanvasView : public Q3CanvasView
 
         QRect old;
 
-        bool isInside( QPoint p, Q3CanvasItem* item );
-        int isEdge(  QPoint p, Q3CanvasItem* item  );
+        bool isInside( QPoint p, QCanvasItem* item );
+        int isEdge(  QPoint p, QCanvasItem* item  );
         void reposition();
         void updateRuler();
         int updateCursor( QPoint pos, bool pressed = false );

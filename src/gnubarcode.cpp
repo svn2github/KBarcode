@@ -91,7 +91,7 @@ void GnuBarcode::update( const QPaintDevice* device )
 
     delete [] value;
  
-    Q3PaintDeviceMetrics metrics( device );
+    QPaintDeviceMetrics metrics( device );
     m_scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
     m_scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
    

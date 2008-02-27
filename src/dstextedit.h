@@ -30,7 +30,7 @@
 #if QT_VERSION >= 0x030100
   #define TextEditBase KTextEdit
 #else
-  #define TextEditBase Q3TextEdit
+  #define TextEditBase QTextEdit
 #endif 
 
 class DSTextEdit : public TextEditBase {

@@ -31,9 +31,9 @@ public:
     TextItem ();
         
     void draw (QPainter* painter);
-    void drawZpl( Q3TextStream* stream );
-    void drawIpl( Q3TextStream* stream, IPLUtils* utils );
-    void drawEPcl( Q3TextStream* stream );
+    void drawZpl( QTextStream* stream );
+    void drawIpl( QTextStream* stream, IPLUtils* utils );
+    void drawEPcl( QTextStream* stream );
     
     int  rtti () const { return eRtti_Text; }
 

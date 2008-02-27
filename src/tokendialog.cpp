@@ -36,7 +36,7 @@
 #include <q3widgetstack.h>
 #include <qradiobutton.h>
 //Added by qt3to4:
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 #include <kcombobox.h>
 #include <q3textbrowser.h>
 #include <kpushbutton.h>
@@ -64,7 +64,7 @@ TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
 
 void TokenDialog::setupPage1()
 {
-    Q3VButtonGroup* page = new Q3VButtonGroup( i18n("What do you want to insert?") );
+    QVButtonGroup* page = new QVButtonGroup( i18n("What do you want to insert?") );
 
     radioFixed = new QRadioButton( i18n("Insert a &fixed data field"), page );
     radioCustom = new QRadioButton( i18n("Insert a &custom SQL query, variable or JavaScript function"), page );
@@ -76,23 +76,23 @@ void TokenDialog::setupPage1()
 
 void TokenDialog::setupPage2()
 {
-    page2 = new Q3WidgetStack();
+    page2 = new QWidgetStack();
 
     addPage( page2, i18n("Step 2 of 3") );
 }
 
 void TokenDialog::setupPage3()
 {
-    page3 = new Q3WidgetStack();
+    page3 = new QWidgetStack();
 
     addPage( page3, i18n("Step 3 of 3") );
 }
 
 void TokenDialog::setupStackPage1()
 {
-    stackPage1 = new Q3VBox();
+    stackPage1 = new QVBox();
 
-    Q3VButtonGroup* group = new Q3VButtonGroup( i18n("What do you want to insert?"), stackPage1 );
+    QVButtonGroup* group = new QVButtonGroup( i18n("What do you want to insert?"), stackPage1 );
     radioAll = new QRadioButton( i18n("&Select from a list of all tokens"), group );
     radioLabel = new QRadioButton( i18n("Insert printing &informations"), group );
     radioSQL = new QRadioButton( i18n("&Insert a database field"), group );
@@ -106,9 +106,9 @@ void TokenDialog::setupStackPage1()
 
 void TokenDialog::setupStackPage2()
 {
-    stackPage2 = new Q3VBox();
+    stackPage2 = new QVBox();
 
-    Q3VButtonGroup* group = new Q3VButtonGroup( i18n("What do you want to insert?"), stackPage2 );
+    QVButtonGroup* group = new QVButtonGroup( i18n("What do you want to insert?"), stackPage2 );
 
     radioVariable = new QRadioButton( i18n("Insert a custom &variable"), group );
     radioSQLQuery = new QRadioButton( i18n("Insert a &SQL query"), group );
@@ -127,23 +127,23 @@ void TokenDialog::setupStack2Page1()
 {
     stack2Page1 = new QWidget();
 
-    Q3VBoxLayout* layout = new Q3VBoxLayout( stack2Page1 );
+    QVBoxLayout* layout = new QVBoxLayout( stack2Page1 );
     QSplitter* splitter = new QSplitter( stack2Page1 );
     layout->addWidget( splitter );
     
-    Q3VBox* left = new Q3VBox( splitter );
-    Q3VBox* right = new Q3VBox( splitter );
+    QVBox* left = new QVBox( splitter );
+    QVBox* right = new QVBox( splitter );
     
     QLabel* label = new QLabel( i18n("&Category:"), left );
-    category = new K3ListBox( left );
+    category = new KListBox( left );
     label->setBuddy( category );
 
     label = new QLabel( i18n("&Token:"), right );
-    allList = new K3ListView( right );
+    allList = new KListView( right );
     allList->addColumn( i18n("Token"), 0 );
     allList->addColumn( i18n("Description"), 1 );
-    allList->setColumnWidthMode( 0, Q3ListView::Maximum );
-    allList->setColumnWidthMode( 1, Q3ListView::Maximum );
+    allList->setColumnWidthMode( 0, QListView::Maximum );
+    allList->setColumnWidthMode( 1, QListView::Maximum );
     label->setBuddy( allList );
     label = new QLabel( i18n("&Custom Expression to be inserted in the token."), right );
     lineEdit = new KLineEdit( right );
@@ -154,7 +154,7 @@ void TokenDialog::setupStack2Page1()
 				  "In the case of the sqlquery token, the sure has to enter a sql query in "
 				  "this text field.</qt>" ) );
 
-    Q3ValueList<int> sizes;
+    QValueList<int> sizes;
     int w = (width() / 4);
     sizes << w << w * 3;
     
@@ -162,8 +162,8 @@ void TokenDialog::setupStack2Page1()
     right->setStretchFactor( allList, 2 );
     splitter->setSizes( sizes );
 
-    connect( category, SIGNAL( executed( Q3ListBoxItem* ) ), this, SLOT( categoryChanged( Q3ListBoxItem* ) ) );
-    connect( allList, SIGNAL( clicked( Q3ListViewItem* ) ), this, SLOT( itemChanged( Q3ListViewItem* ) ) );
+    connect( category, SIGNAL( executed( QListBoxItem* ) ), this, SLOT( categoryChanged( QListBoxItem* ) ) );
+    connect( allList, SIGNAL( clicked( QListViewItem* ) ), this, SLOT( itemChanged( QListViewItem* ) ) );
 
     initAll();
 
@@ -172,29 +172,29 @@ void TokenDialog::setupStack2Page1()
 
 void TokenDialog::setupStack2Page2()
 {
-    stack2Page2 = new Q3VBox();
+    stack2Page2 = new QVBox();
 
-    labelList = new K3ListView( stack2Page2 );
+    labelList = new KListView( stack2Page2 );
     labelList->addColumn( i18n("Token"), 0 );
     labelList->addColumn( i18n("Description"), 1 );
-    labelList->setColumnWidthMode( 0, Q3ListView::Maximum );
-    labelList->setColumnWidthMode( 1, Q3ListView::Maximum );
+    labelList->setColumnWidthMode( 0, QListView::Maximum );
+    labelList->setColumnWidthMode( 1, QListView::Maximum );
 
     connect( labelList, SIGNAL( selectionChanged() ), this, SLOT( enableControls() ) );
-    connect( labelList, SIGNAL( doubleClicked( Q3ListViewItem *, const QPoint &, int ) ), this, SLOT( accept() ) );
+    connect( labelList, SIGNAL( doubleClicked( QListViewItem *, const QPoint &, int ) ), this, SLOT( accept() ) );
 
     page3->addWidget( stack2Page2 );
 }
 
 void TokenDialog::setupStack2Page3() 
 {
-    stack2Page3 = new Q3VButtonGroup();
+    stack2Page3 = new QVButtonGroup();
 
     radioVariableNew = new QRadioButton( i18n("&Create a new custom variable"), stack2Page3 );
     editVariable = new KLineEdit( stack2Page3 );
 
     radioVariableExisting = new QRadioButton( i18n("&Insert an existing custom variable"), stack2Page3 );
-    listVariable = new K3ListBox( stack2Page3 );
+    listVariable = new KListBox( stack2Page3 );
 
     radioVariableNew->setChecked( true );
 
@@ -208,20 +208,20 @@ void TokenDialog::setupStack2Page3()
     connect( radioVariableExisting, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( editVariable, SIGNAL( textChanged( const QString & ) ), this, SLOT( enableControls() ) );
     connect( listVariable, SIGNAL( highlighted( int ) ), this, SLOT( enableControls() ) );
-    connect( listVariable, SIGNAL( doubleClicked( Q3ListBoxItem*, const QPoint & ) ), this, SLOT( accept() ) );
+    connect( listVariable, SIGNAL( doubleClicked( QListBoxItem*, const QPoint & ) ), this, SLOT( accept() ) );
 
     page3->addWidget( stack2Page3 );
 }
 
 void TokenDialog::setupStack2Page4() 
 {
-    stack2Page4 = new Q3VBox();
+    stack2Page4 = new QVBox();
 
     if( !SqlTables::isConnected() )
         new QLabel( i18n("<qt><b>No SQL connection found!</b><br>You can build a query, "
                          "but you will not be able to execute or test it right now.<br></qt>"), stack2Page4 );
     
-    Q3HBox* hbox = new Q3HBox( stack2Page4 );
+    QHBox* hbox = new QHBox( stack2Page4 );
 
     QLabel* label = new QLabel( i18n("&SQL Query:"), hbox );
     editQuery = new KLineEdit( hbox );
@@ -231,7 +231,7 @@ void TokenDialog::setupStack2Page4()
     hbox->setStretchFactor( editQuery, 2 );
 
     new QLabel( i18n("Query test results:"), stack2Page4 );
-    textQueryResults = new Q3TextBrowser( stack2Page4 );
+    textQueryResults = new QTextBrowser( stack2Page4 );
     textQueryResults->setReadOnly( true );
 
     connect( buttonQuery, SIGNAL( clicked() ), this, SLOT( testQuery() ) );
@@ -242,7 +242,7 @@ void TokenDialog::setupStack2Page4()
 
 void TokenDialog::setupStack2Page5() 
 {
-    stack2Page5 = new Q3VBox();
+    stack2Page5 = new QVBox();
 
     editJavaScript = new DSTextEdit( stack2Page5 );
     editJavaScript->setText( i18n("/* Place your JavaScript code into this text field. */\n") );
@@ -276,7 +276,7 @@ void TokenDialog::accept()
     }
     else
     {
-        Q3ListViewItem* item = ( radioAll->isChecked() ? allList->selectedItem() : labelList->selectedItem() );
+        QListViewItem* item = ( radioAll->isChecked() ? allList->selectedItem() : labelList->selectedItem() );
 
         if( item )
         {
@@ -336,7 +336,7 @@ void TokenDialog::showPage( QWidget* w )
 void TokenDialog::initAll()
 {
     unsigned int i, z;
-    Q3ValueList<tCategories>* categories = TokenProvider::getTokens();
+    QValueList<tCategories>* categories = TokenProvider::getTokens();
 
     category->addItem( i18n("All") );
     
@@ -374,13 +374,13 @@ void TokenDialog::initStackPage2()
     else
         return;
 
-    Q3ValueList<tCategories>* categories = TokenProvider::getTokens();
+    QValueList<tCategories>* categories = TokenProvider::getTokens();
     for( int i = 0; i < (int)categories->count(); i++ )
     {
         if( (*categories)[i].category == cat )
         {
             for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
-                labelList->insertItem( new K3ListViewItem( labelList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
+                labelList->insertItem( new KListViewItem( labelList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                                      (*categories)[i].tokens[z].description ) );
             
             break;
@@ -388,17 +388,17 @@ void TokenDialog::initStackPage2()
     }
 }
 
-void TokenDialog::categoryChanged( Q3ListBoxItem* item )
+void TokenDialog::categoryChanged( QListBoxItem* item )
 {
     unsigned int i;
-    Q3ValueList<tCategories>* categories = TokenProvider::getTokens();
+    QValueList<tCategories>* categories = TokenProvider::getTokens();
     allList->clear();
     lineEdit->setEnabled( false );
 
     if( item->prev() == 0 )
     {
         for( i = 0; i < m_tokens.count(); i++ )
-	    allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( m_tokens[i].token ),
+	    allList->insertItem( new KListViewItem( allList, QString( "[%1]").arg( m_tokens[i].token ),
 						 m_tokens[i].description ) );
     } 
     else
@@ -408,7 +408,7 @@ void TokenDialog::categoryChanged( Q3ListBoxItem* item )
             if( TokenProvider::captionForCategory( (TokenProvider::ECategories)(*categories)[i].category ) == item->text() )
             {
                 for( unsigned int z = 0; z < (*categories)[i].tokens.count(); z++ )
-                    allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
+                    allList->insertItem( new KListViewItem( allList, QString( "[%1]").arg( (*categories)[i].tokens[z].token ),
                                       (*categories)[i].tokens[z].description ) );
                 
                 break;
@@ -418,12 +418,12 @@ void TokenDialog::categoryChanged( Q3ListBoxItem* item )
 	// TODO: comparing by a user visible string cries for bugs!!!
 	if( item->text() == i18n("Custom Values") )
 	    for( i=0;i<m_custom_tokens.count();i++ )
-		allList->insertItem( new K3ListViewItem( allList, QString( "[%1]").arg( m_custom_tokens[i] ), 
+		allList->insertItem( new KListViewItem( allList, QString( "[%1]").arg( m_custom_tokens[i] ), 
 						     i18n("Variable defined by the user for this label.") ) );
     }
 }
 
-void TokenDialog::itemChanged( Q3ListViewItem* item )
+void TokenDialog::itemChanged( QListViewItem* item )
 {
     for( unsigned int i = 0; i < m_tokens.count(); i++ )
     {

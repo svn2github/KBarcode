@@ -36,7 +36,7 @@
 #include <QPixmap>
 #include <krandom.h>
 
-QPoint getFreePos( Q3Canvas* c )
+QPoint getFreePos( QCanvas* c )
 {
     MyCanvas* canvas = (MyCanvas*)c;
     
@@ -75,7 +75,7 @@ bool CommandUtils::canvasHasItem()
 {
     if( m_canvas_item && c )
     {
-        Q3CanvasItemList list = c->allItems();
+        QCanvasItemList list = c->allItems();
         for( unsigned int i=0;i<list.count();i++)
             if( m_canvas_item == list[i] )
                 return true;
@@ -100,7 +100,7 @@ void CommandUtils::documentItemDeleted()
 }
 
 NewItemCommand::NewItemCommand( MyCanvasView* view, const QString & name )
-    : QObject(), K3Command()
+    : QObject(), KCommand()
 {
     cv = view;
     m_name = name;

@@ -47,7 +47,7 @@ class DragCommand : public NewItemCommand {
 
 
 DocumentItemDrag::DocumentItemDrag( QWidget* dragSource )
-    : Q3StoredDrag( DocumentItemDrag::mimeType(), dragSource )
+    : QStoredDrag( DocumentItemDrag::mimeType(), dragSource )
 {
 }
 
@@ -73,7 +73,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
             xml.writeXMLDocumentItem( &root, &item );
         }
                 
-        Q3TextStream t( &buffer );
+        QTextStream t( &buffer );
         doc.save( t, 0 );
         
         buffer.close();
@@ -86,7 +86,7 @@ bool DocumentItemDrag::canDecode( QMimeSource* e )
     return e->provides( DocumentItemDrag::mimeType() );
 }
 
-bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvider* token, K3CommandHistory* history )
+bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvider* token, KCommandHistory* history )
 {
     QByteArray data = mime->encodedData( DocumentItemDrag::mimeType() );
     QDomDocument doc( "KBarcodeClipboard" );
@@ -95,7 +95,7 @@ bool DocumentItemDrag::decode( QMimeSource* mime, MyCanvasView* cv, TokenProvide
     
     QDomNode n = doc.documentElement();
     QDomNodeList list = n.childNodes();
-    K3MacroCommand* commands = new K3MacroCommand( i18n("Paste") );
+    KMacroCommand* commands = new KMacroCommand( i18n("Paste") );
     
     for( unsigned int i=0;i<list.length();i++)
     {

@@ -43,13 +43,13 @@
 #include <qvbuttongroup.h>
 #include <q3widgetstack.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
-#include <Q3ValueList>
+#include <QHBoxLayout>
+#include <QValueList>
 #include <QSqlQuery>
-#include <Q3SqlCursor>
-#include <Q3Frame>
+#include <QSqlCursor>
+#include <QFrame>
 #include <QSqlError>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 #include <kabc/addressee.h>
 #include <kabc/addresseelist.h>
@@ -75,10 +75,10 @@
 
 #define PNG_FORMAT "PNG"
 
-class AddressListViewItem : public K3ListViewItem {
+class AddressListViewItem : public KListViewItem {
 public:
-    AddressListViewItem(Q3ListView *parent, KABC::Addressee & addr )
-        : K3ListViewItem( parent ), m_address( addr )
+    AddressListViewItem(QListView *parent, KABC::Addressee & addr )
+        : KListViewItem( parent ), m_address( addr )
         {
             this->setText( 0, m_address.givenName() );
             this->setText( 1, m_address.familyName() );
@@ -120,7 +120,7 @@ BatchWizard::~BatchWizard()
 void BatchWizard::setupPage1()
 {
     page1 = new QWidget( this );
-    Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page1, 11, 6, "pageLayout");
+    QVBoxLayout* pageLayout = new QVBoxLayout( page1, 11, 6, "pageLayout");
 
     QLabel* label = new QLabel( i18n("<qt>This wizard will guide you through the process "
 				     "of printing many labels with KBarcode.<br>The first step "
@@ -148,9 +148,9 @@ void BatchWizard::setupPage1()
 void BatchWizard::setupPage2()
 {
     page2 = new QWidget( this );
-    Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page2, 11, 6, "pageLayout");
+    QVBoxLayout* pageLayout = new QVBoxLayout( page2, 11, 6, "pageLayout");
 
-    Q3VButtonGroup* group = new Q3VButtonGroup( page2 );
+    QVButtonGroup* group = new QVButtonGroup( page2 );
     
     radioSimple = new QRadioButton( i18n("Print &labels without data"), group );
     radioSqlArticles = new QRadioButton( i18n("Print &articles from KBarcodes SQL database"), group );
@@ -172,7 +172,7 @@ void BatchWizard::setupPage2()
 
 void BatchWizard::setupPage3()
 {
-    page3 = new Q3WidgetStack( this );
+    page3 = new QWidgetStack( this );
 
     setupStackPage1();
     setupStackPage2();
@@ -184,10 +184,10 @@ void BatchWizard::setupPage3()
 
 void BatchWizard::setupPage4()
 {
-    page4 = new Q3VBox( this );
+    page4 = new QVBox( this );
     page4->setSpacing( 5 );
 
-    Q3HBox* hbox = new Q3HBox( page4 );
+    QHBox* hbox = new QHBox( page4 );
     hbox->setSpacing( 5 );
     
     buttonTableInsert = new KPushButton( i18n("Insert Row"), hbox );
@@ -195,9 +195,9 @@ void BatchWizard::setupPage4()
     buttonTableRemove = new KPushButton( i18n("Delete Row"), hbox );
     buttonTableRemove->setIconSet( BarIconSet( "editdelete") );
 
-    m_varTable = new Q3Table( page4 );
+    m_varTable = new QTable( page4 );
     m_varTable->setReadOnly( false );
-    m_varTable->setSelectionMode( Q3Table::SingleRow );
+    m_varTable->setSelectionMode( QTable::SingleRow );
 
     addPage( page4, i18n("Import Variables") );
 
@@ -209,7 +209,7 @@ void BatchWizard::setupPage5()
 {
     TokenProvider serial( this );
 
-    page5 = new Q3VBox( this );
+    page5 = new QVBox( this );
 
     new QLabel( i18n( "<qt>KBarcode has support for placing serial numbers on labels. "
 		      "If you did not use the [serial] token on your label in "
@@ -218,7 +218,7 @@ void BatchWizard::setupPage5()
 		      "number. This number is increased for every printed label on the "
 		      "print out.</qt>"), page5 );
 
-    Q3HBox* hbox = new Q3HBox( page5 );
+    QHBox* hbox = new QHBox( page5 );
     hbox->setSpacing( 5 );
     
     new QLabel( i18n( "Serial start:" ), hbox );
@@ -234,26 +234,26 @@ void BatchWizard::setupPage5()
 void BatchWizard::setupPage10()
 {
     page10 = new QWidget( this );
-    Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page10, 11, 6, "pageLayout");
+    QVBoxLayout* pageLayout = new QVBoxLayout( page10, 11, 6, "pageLayout");
 
-    Q3VButtonGroup* group = new Q3VButtonGroup( page10 );
+    QVButtonGroup* group = new QVButtonGroup( page10 );
     
     radioPrinter = new QRadioButton( i18n("&Print to a system printer or to a file"), group );
     radioImage = new QRadioButton( i18n("&Create images"), group );
 
-    imageBox = new Q3VBox( group );
+    imageBox = new QVBox( group );
     imageBox->setMargin( 10 );
 
     radioBarcode = new QRadioButton( i18n("Print to a special &barcode printer"), group );
 
-    Q3HBox* directoryBox = new Q3HBox( imageBox );
+    QHBox* directoryBox = new QHBox( imageBox );
     directoryBox->setSpacing( 5 );
     QLabel* label = new QLabel( i18n("Output &Directory:"), directoryBox );
     imageDirPath = new KUrlRequester( directoryBox );
     imageDirPath->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     label->setBuddy( directoryBox );
 
-    Q3HBox* formatBox = new Q3HBox( imageBox );
+    QHBox* formatBox = new QHBox( imageBox );
     label = new QLabel( i18n("Output File &Format:"), formatBox );
 
     QStringList formats = KImageIO::types( KImageIO::Writing );
@@ -263,7 +263,7 @@ void BatchWizard::setupPage10()
 	comboFormat->setCurrentItem( formats.findIndex( PNG_FORMAT ) );
     label->setBuddy( comboFormat );
 
-    Q3VButtonGroup* imageNameGroup = new  Q3VButtonGroup( i18n("&Filename:"), imageBox );
+    QVButtonGroup* imageNameGroup = new  QVButtonGroup( i18n("&Filename:"), imageBox );
     radioImageFilenameArticle = new QRadioButton( i18n("Use &article number for filename"), imageNameGroup );
     radioImageFilenameBarcode = new QRadioButton( i18n("Use &barcode number for filename"), imageNameGroup );
     radioImageFilenameCustom  = new QRadioButton( i18n("Use &custom filename:"), imageNameGroup );
@@ -297,17 +297,17 @@ void BatchWizard::setupPage10()
 
 void BatchWizard::setupStackPage1()
 {
-    stack1 = new Q3VBox( page3, "stack1" );
+    stack1 = new QVBox( page3, "stack1" );
     stack1->setSpacing( 5 );
 
-    Q3HBox* hbox = new Q3HBox( stack1 );
+    QHBox* hbox = new QHBox( stack1 );
     hbox->setSpacing( 5 );
 
     new QLabel( i18n( "Customer name and no.:" ), hbox );
     customerName = new KComboBox( false, hbox );
     customerId = new KComboBox( false, hbox );
 
-    Q3HBox* hButtonBox = new Q3HBox( stack1 );
+    QHBox* hButtonBox = new QHBox( stack1 );
     hButtonBox->setSpacing( 5 );
 
     buttonAdd = new KPushButton( i18n( "&Add..." ), hButtonBox );
@@ -322,14 +322,14 @@ void BatchWizard::setupStackPage1()
     mnuImport->insertItem( i18n("Import barcode_basic"), this, SLOT( addAllItems() ) );
     buttonImport->setPopup( mnuImport );
 
-    sqlList = new K3ListView( stack1 );
+    sqlList = new KListView( stack1 );
     sqlList->addColumn( i18n("Index") );
     sqlList->addColumn( i18n("Number of Labels") );
     sqlList->addColumn( i18n("Article Number") );
     sqlList->addColumn( i18n("Group") );
     sqlList->setAllColumnsShowFocus( true );
-    connect( sqlList, SIGNAL(doubleClicked(Q3ListViewItem*,const QPoint &,int)),
-             this, SLOT(changeItem(Q3ListViewItem*,const QPoint &,int)));
+    connect( sqlList, SIGNAL(doubleClicked(QListViewItem*,const QPoint &,int)),
+             this, SLOT(changeItem(QListViewItem*,const QPoint &,int)));
 
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );
@@ -344,10 +344,10 @@ void BatchWizard::setupStackPage1()
 
 void BatchWizard::setupStackPage2()
 {
-    stack2 = new Q3HBox( page3, "stack2" );
+    stack2 = new QHBox( page3, "stack2" );
     stack2->setSpacing( 5 );
 
-    Q3VButtonGroup* group = new Q3VButtonGroup( stack2 );
+    QVButtonGroup* group = new QVButtonGroup( stack2 );
     radioImportManual = new QRadioButton( i18n("Enter &data manually"), group );
     radioImportSql = new QRadioButton( i18n("Import variables from a &SQL table"), group );
     labelSqlQuery = new QLabel( i18n("Please enter a sql &query:"), group );
@@ -364,11 +364,11 @@ void BatchWizard::setupStackPage2()
 
     radioImportManual->setChecked( true );
 
-    Q3VBox* box = new Q3VBox( stack2 );
+    QVBox* box = new QVBox( stack2 );
     box->setSpacing( 5 );
 
     new QLabel( i18n("Available Variables:"), box );
-    m_varList = new K3ListBox( box );
+    m_varList = new KListBox( box );
 
     connect( radioImportManual, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioImportSql, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -381,7 +381,7 @@ void BatchWizard::setupStackPage2()
 
 void BatchWizard::setupStackPage3()
 {
-    stack3 = new Q3VBox( page3, "stack3" );
+    stack3 = new QVBox( page3, "stack3" );
 
     numLabels = new KIntNumInput( 1, stack3 );
     numLabels->setRange( 1, 100000, 1, true );
@@ -394,15 +394,15 @@ void BatchWizard::setupStackPage4()
 {
     stack4 = new QWidget( page3, "stack4" );
     
-    Q3HBoxLayout* mainLayout = new Q3HBoxLayout( stack4 );
+    QHBoxLayout* mainLayout = new QHBoxLayout( stack4 );
 
-    Q3VBox* list1 = new Q3VBox( stack4 );
-    Q3VBox* list2 = new Q3VBox( stack4 );
+    QVBox* list1 = new QVBox( stack4 );
+    QVBox* list2 = new QVBox( stack4 );
 
-    Q3Frame* buttons = new Q3Frame( stack4 );
+    QFrame* buttons = new QFrame( stack4 );
     buttons->setMargin( 10 );
 
-    Q3VBoxLayout* layout = new Q3VBoxLayout( buttons );
+    QVBoxLayout* layout = new QVBoxLayout( buttons );
     QSpacerItem* spacer1 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     QSpacerItem* spacer2 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
 
@@ -438,27 +438,27 @@ void BatchWizard::setupStackPage4()
     new QLabel( i18n("All Addresses"), list1 );
     new QLabel( i18n("Selected Addresses"), list2 );
 
-    listAddress = new K3ListView( list1 );
+    listAddress = new KListView( list1 );
     listAddress->addColumn( i18n("Given Name"), 0 );
     listAddress->addColumn( i18n("Family Name"), 1 );
     listAddress->addColumn( i18n("Email Address"), 2 );
     listAddress->setMultiSelection( true );
     listAddress->setAllColumnsShowFocus( true );
 
-    listAddress->setColumnWidthMode( 0, Q3ListView::Maximum );
-    listAddress->setColumnWidthMode( 1, Q3ListView::Maximum );
-    listAddress->setColumnWidthMode( 2, Q3ListView::Maximum );
+    listAddress->setColumnWidthMode( 0, QListView::Maximum );
+    listAddress->setColumnWidthMode( 1, QListView::Maximum );
+    listAddress->setColumnWidthMode( 2, QListView::Maximum );
 
-    listSelectedAddress = new K3ListView( list2 );
+    listSelectedAddress = new KListView( list2 );
     listSelectedAddress->addColumn( i18n("Given Name"), 0 );
     listSelectedAddress->addColumn( i18n("Family Name"), 1 );
     listSelectedAddress->addColumn( i18n("Email Address"), 2 );
     listSelectedAddress->setMultiSelection( true );
     listSelectedAddress->setAllColumnsShowFocus( true );
 
-    listSelectedAddress->setColumnWidthMode( 0, Q3ListView::Maximum );
-    listSelectedAddress->setColumnWidthMode( 1, Q3ListView::Maximum );
-    listSelectedAddress->setColumnWidthMode( 2, Q3ListView::Maximum );
+    listSelectedAddress->setColumnWidthMode( 0, QListView::Maximum );
+    listSelectedAddress->setColumnWidthMode( 1, QListView::Maximum );
+    listSelectedAddress->setColumnWidthMode( 2, QListView::Maximum );
 
     connect( buttonAddAddress, SIGNAL( clicked() ), this, SLOT( slotAddAddress() ) );
     connect( buttonRemoveAddress, SIGNAL( clicked() ), this, SLOT( slotRemoveAddress() ) );
@@ -474,7 +474,7 @@ void BatchWizard::setupSql()
     if( !tables->isConnected() )
         return;
 
-    Q3SqlCursor cur( TABLE_CUSTOMER );
+    QSqlCursor cur( TABLE_CUSTOMER );
     cur.select();
     customerId->clear();
     customerName->clear();
@@ -663,8 +663,8 @@ void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
 	sqlList->setSorting( 3, true );
 	sqlList->sort();
 
-	Q3ValueList<BatchPrinter::data>* dlist = new Q3ValueList<BatchPrinter::data>;
-	Q3ListViewItem* item = sqlList->firstChild();
+	QValueList<BatchPrinter::data>* dlist = new QValueList<BatchPrinter::data>;
+	QListViewItem* item = sqlList->firstChild();
 	while( item ) 
 	{
 	    BatchPrinter::data m_data;
@@ -685,7 +685,7 @@ void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
 	batch->setLabels( numLabels->value() );
 
 	// do a dirty drick, TODO: refactor BatchPrinter in the future
-	Q3ValueList<BatchPrinter::data>* dlist = new Q3ValueList<BatchPrinter::data>;
+	QValueList<BatchPrinter::data>* dlist = new QValueList<BatchPrinter::data>;
 	BatchPrinter::data m_data;
 	m_data.number = numLabels->value();
 	dlist->append( m_data );
@@ -708,7 +708,7 @@ void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
     else if( radioAddressBook->isChecked() )
     {
         KABC::AddresseeList* list = new KABC::AddresseeList;
-        Q3ListViewItem* item = listSelectedAddress->firstChild();
+        QListViewItem* item = listSelectedAddress->firstChild();
         while( item ) 
         {
             list->append( static_cast<AddressListViewItem*>(item)->address() );
@@ -755,7 +755,7 @@ bool BatchWizard::addItem( const QString & article, const QString & group, int c
     QString temp;
     temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
 
-    K3ListViewItem* item = new K3ListViewItem( sqlList, temp, QString( "%1" ).arg( count ),
+    KListViewItem* item = new KListViewItem( sqlList, temp, QString( "%1" ).arg( count ),
                           article, group );
     sqlList->insertItem( item );
 
@@ -789,12 +789,12 @@ bool BatchWizard::existsArticle( const QString & article )
 
 void BatchWizard::editItem()
 {
-    Q3ListViewItem* item = sqlList->selectedItem();
+    QListViewItem* item = sqlList->selectedItem();
     if( item )
         changeItem( item, QPoint(0,0), 0 );
 }
 
-void BatchWizard::changeItem( Q3ListViewItem* item, const QPoint &, int )
+void BatchWizard::changeItem( QListViewItem* item, const QPoint &, int )
 {
     if(!item)
         return;
@@ -815,12 +815,12 @@ void BatchWizard::changeItem( Q3ListViewItem* item, const QPoint &, int )
 
 void BatchWizard::removeItem() 
 {
-    Q3ListViewItem* item = sqlList->firstChild();
+    QListViewItem* item = sqlList->firstChild();
     while( item ) 
     {
         if( item->isSelected() ) 
 	{
-            Q3ListViewItem* it = item->nextSibling();
+            QListViewItem* it = item->nextSibling();
             delete item;
 
             while( it ) 
@@ -865,7 +865,7 @@ void BatchWizard::addAllItems()
 	while( query.next() ) 
 	{
 	    temp.sprintf("%0*i", 5, sqlList->childCount() + 1 );
-	    new K3ListViewItem( sqlList, temp, num, query.value( 0 ).toString(), group );
+	    new KListViewItem( sqlList, temp, num, query.value( 0 ).toString(), group );
 	}
 
         enableControls();
@@ -1057,7 +1057,7 @@ bool BatchWizard::fillVarTable()
     {
 	int y = 0;
 	int x;
-	Q3SqlSelectCursor query( importSqlQuery->text(), SqlTables::getInstance()->database() );
+	QSqlSelectCursor query( importSqlQuery->text(), SqlTables::getInstance()->database() );
 	query.select();
 	if( query.lastError().type() != QSqlError::None )
 	{
@@ -1139,7 +1139,7 @@ void BatchWizard::slotTableInsert()
 
 void BatchWizard::slotTableRemove()
 {
-    Q3TableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
+    QTableSelection sel = m_varTable->selection( m_varTable->currentSelection() );
     m_varTable->removeRow( sel.topRow() );
 }
 
@@ -1249,10 +1249,10 @@ void BatchWizard::slotRemoveAllAddress()
     enableControls();
 }
 
-void BatchWizard::moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll )
+void BatchWizard::moveAddress( QListView* src, QListView* dst, bool bAll )
 {
-    Q3ListViewItem* item = src->firstChild();
-    Q3ListViewItem* cur;
+    QListViewItem* item = src->firstChild();
+    QListViewItem* cur;
 
     while( item ) 
     {

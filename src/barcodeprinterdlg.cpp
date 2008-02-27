@@ -27,13 +27,13 @@
 #include <qlayout.h>
 #include <qvbuttongroup.h> 
 //Added by qt3to4:
-#include <Q3GridLayout>
+#include <QGridLayout>
 
 BarcodePrinterDlg::BarcodePrinterDlg(QWidget *parent)
     : KDialogBase( KDialogBase::Plain, i18n("Barcode Printer"),
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
-    Q3GridLayout* layout = new Q3GridLayout( plainPage(), 6, 6 );
+    QGridLayout* layout = new QGridLayout( plainPage(), 6, 6 );
     
     QLabel* label = new QLabel( i18n("&Output Format:"), plainPage() );
     comboFormat = new KComboBox( false, plainPage() );

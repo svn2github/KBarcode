@@ -27,7 +27,7 @@
 #include <qregexp.h>
 #include <q3vbox.h>
 //Added by qt3to4:
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 #include <kaction.h>
 #include <kapplication.h>
@@ -37,10 +37,10 @@
 #endif
 #include <klocale.h>
 
-class KListViewActionItem : public K3ListViewItem {
+class KListViewActionItem : public KListViewItem {
 public:
-    KListViewActionItem( K3ListView* parent, KAction* action )
-        : K3ListViewItem( parent ), m_action( action )
+    KListViewActionItem( KListView* parent, KAction* action )
+        : KListViewItem( parent ), m_action( action )
         {
             QPixmap  pix;
             QSize    size    = QIcon::iconSize( QIcon::Large );
@@ -76,7 +76,7 @@ public:
             if( m_action && !m_action->isEnabled() )
                 _cg.setColor( QColorGroup::Text, Qt::gray );
             
-            K3ListViewItem::paintCell( p, _cg, column, width, alignment );
+            KListViewItem::paintCell( p, _cg, column, width, alignment );
             _cg.setColor( QColorGroup::Text, c );
         }
 
@@ -108,9 +108,9 @@ void KActionMapDlg::updateEnabledState()
 KActionMap::KActionMap( KActionCollection* actions, QWidget* parent )
     : QWidget( parent ), m_actions( actions ), m_showMenuTree( true ), m_grayOutItems( false )
 {
-    Q3VBoxLayout* layout = new Q3VBoxLayout( this );
+    QVBoxLayout* layout = new QVBoxLayout( this );
 
-    m_listView   = new K3ListView( this );
+    m_listView   = new KListView( this );
 #if KDE_VERSION >= 0x030500
     m_searchLine = new KListViewSearchLineWidget( m_listView, this );
 #endif
@@ -118,9 +118,9 @@ KActionMap::KActionMap( KActionCollection* actions, QWidget* parent )
     m_listView->addColumn( i18n("Action") );
     m_listView->addColumn( i18n("Shortcut") );
     m_listView->addColumn( i18n("Description") );
-    m_listView->setColumnWidthMode( 0, Q3ListView::Maximum );
-    m_listView->setColumnWidthMode( 1, Q3ListView::Maximum );
-    m_listView->setColumnWidthMode( 2, Q3ListView::Manual );
+    m_listView->setColumnWidthMode( 0, QListView::Maximum );
+    m_listView->setColumnWidthMode( 1, QListView::Maximum );
+    m_listView->setColumnWidthMode( 2, QListView::Manual );
     m_listView->setSorting( 0 );
     m_listView->setAllColumnsShowFocus( true );
 
@@ -129,7 +129,7 @@ KActionMap::KActionMap( KActionCollection* actions, QWidget* parent )
 #endif 
     layout->addWidget( m_listView );
 
-    connect( m_listView, SIGNAL( executed( Q3ListViewItem* ) ), this, SLOT( slotExecuteAction( Q3ListViewItem* ) ) );
+    connect( m_listView, SIGNAL( executed( QListViewItem* ) ), this, SLOT( slotExecuteAction( QListViewItem* ) ) );
     connect( actions, SIGNAL( inserted( KAction* ) ), this, SLOT( slotActionCollectionChanged() ) );
     connect( actions, SIGNAL( removed( KAction* ) ), this, SLOT( slotActionCollectionChanged() ) );
     slotActionCollectionChanged();
@@ -170,7 +170,7 @@ void KActionMap::slotActionCollectionChanged()
     
 }
 
-void KActionMap::slotExecuteAction( Q3ListViewItem* item )
+void KActionMap::slotExecuteAction( QListViewItem* item )
 {
     KListViewActionItem* action = dynamic_cast<KListViewActionItem*>(item);
     if( !action )

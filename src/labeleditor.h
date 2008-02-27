@@ -32,10 +32,10 @@
 #include <qdialog.h>
 #include <qmap.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QHBoxLayout>
 #include <QCloseEvent>
 #include <QLabel>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 class BatchPrinter;
 class KUrl;
@@ -45,34 +45,34 @@ class KActionSeparator;
 class KToggleAction;
 class KRecentFilesAction;
 class KToolBarPopupAction;
-class K3ListBox;
+class KListBox;
 class KMenuBar;
 class KMenu;
 class KRuler;
 class KToolBar;
-class K3CommandHistory;
+class KCommandHistory;
 class MyCanvasText;
 class MyCanvasRectangle;
 class MyCanvasView;
 class BarcodeItem;
 class MyCanvas;
-class Q3CanvasItemList;
+class QCanvasItemList;
 class QCheckBox;
 class KComboBox;
-class Q3DockArea;
-class Q3DockWindow;
-class Q3GroupBox;
+class QDockArea;
+class QDockWindow;
+class QGroupBox;
 class QLabel;
 class QImage;
-class Q3HBoxLayout;
-class Q3VBoxLayout;
+class QHBoxLayout;
+class QVBoxLayout;
 class QPoint;
 class QRect;
 class QPaintDevice;
 class QString;
 class KPushButton;
 class QPrinter;
-class Q3CanvasItem;
+class QCanvasItem;
 class TCanvasItem;
 class RectItem;
 class LineItem;
@@ -108,7 +108,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         
     private:
 
-	/** Creates a K3CommandHistory object which will be 
+	/** Creates a KCommandHistory object which will be 
 	 *  pointed to by history.
 	 *  Make sure to delete history by yourself when needed.
 	 */
@@ -184,7 +184,7 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
     protected:
         void closeEvent( QCloseEvent* e );
 
-        K3CommandHistory* history;
+        KCommandHistory* history;
 
         KAction* saveAct;
         KAction* saveAsAct;
@@ -242,10 +242,10 @@ class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
         QString description;    // description
         QString filename;       // current file
 
-        K3ListBox* listFields;
+        KListBox* listFields;
         KPushButton* buttonText;
 
-        Q3VBoxLayout* pageLayout;
+        QVBoxLayout* pageLayout;
 
         QMap<QString,QString> fields;
 

@@ -40,17 +40,17 @@
 #include <q3paintdevicemetrics.h>
 #include <q3picture.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
-#include <Q3VBoxLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 BarCodeDialog::BarCodeDialog( QWidget* parent )
     : QDialog( parent, false)
 {
     setCaption( i18n( "Barcode Generator" ) );
 
-    BarCodeDialogLayout = new Q3HBoxLayout( this, 11, 6, "BarCodeDialogLayout");
-    Layout5 = new Q3VBoxLayout( 0, 0, 6, "Layout5");
-    Layout6 = new Q3VBoxLayout( 0, 0, 6, "Layout2");
+    BarCodeDialogLayout = new QHBoxLayout( this, 11, 6, "BarCodeDialogLayout");
+    Layout5 = new QVBoxLayout( 0, 0, 6, "Layout5");
+    Layout6 = new QVBoxLayout( 0, 0, 6, "Layout2");
     widget = new BarcodeWidget( this );
 
     m_token = new TokenProvider( KApplication::desktop() );
@@ -81,7 +81,7 @@ BarCodeDialog::BarCodeDialog( QWidget* parent )
     buttonClose->setIconSet( SmallIconSet("fileclose") );
     
 
-    Q3ScrollView* sv = new Q3ScrollView( this );
+    QScrollView* sv = new QScrollView( this );
     
     barcode = new QLabel( sv->viewport(), "barcode" );
     sv->addChild( barcode );
@@ -175,12 +175,12 @@ void BarCodeDialog::print()
     // unless we can center the barcode
     printer->setFullPage( false );
     
-    Q3PaintDeviceMetrics metrics( printer );
+    QPaintDeviceMetrics metrics( printer );
     
     double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
     double scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
     
-    Q3Picture picture;
+    QPicture picture;
     QPainter p( printer );
     p.scale( scalex, scaley );
     // TODO: center barcode

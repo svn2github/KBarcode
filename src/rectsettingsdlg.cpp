@@ -25,8 +25,8 @@
 #include <qpen.h>
 //Added by qt3to4:
 #include <QPixmap>
-#include <Q3GridLayout>
-#include <Q3Frame>
+#include <QGridLayout>
+#include <QFrame>
 
 // KDE includes
 #include <kcolorbutton.h>
@@ -59,7 +59,7 @@ RectSettingsDlg::RectSettingsDlg(QWidget *parent )
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     QFrame* frame = plainPage();
-    Q3GridLayout* grid = new Q3GridLayout( frame, 6, 6 );
+    QGridLayout* grid = new QGridLayout( frame, 6, 6 );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
 
     
@@ -150,7 +150,7 @@ LineSettingsDlg::LineSettingsDlg(QWidget *parent )
       KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     QFrame* frame = plainPage();
-    Q3GridLayout* grid = new Q3GridLayout( frame, 6, 6 );
+    QGridLayout* grid = new QGridLayout( frame, 6, 6 );
 
     buttonColor = new KColorButton( frame );
 

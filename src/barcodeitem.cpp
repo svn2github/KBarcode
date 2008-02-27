@@ -188,7 +188,7 @@ void BarcodeItem::draw (QPainter* painter)
     DocumentItem::drawBorder( painter );
 }
 
-void BarcodeItem::drawZpl( Q3TextStream* stream )
+void BarcodeItem::drawZpl( QTextStream* stream )
 {
     QString encoding = ZPLUtils::encoding( type() );
     if( encoding.isNull() )
@@ -202,7 +202,7 @@ void BarcodeItem::drawZpl( Q3TextStream* stream )
     *stream << ZPLUtils::fieldData( value() );
 }
 
-void BarcodeItem::drawIpl(  Q3TextStream* stream, IPLUtils* utils )
+void BarcodeItem::drawIpl(  QTextStream* stream, IPLUtils* utils )
 {
     QString encoding = utils->encoding( type() );
 
@@ -225,7 +225,7 @@ void BarcodeItem::drawIpl(  Q3TextStream* stream, IPLUtils* utils )
     utils->addValue( value() );
 }
 
-void BarcodeItem::drawEPcl( Q3TextStream* stream )
+void BarcodeItem::drawEPcl( QTextStream* stream )
 {
     QString encoding = EPCLUtils::encoding( type() );
     if( encoding.isEmpty() )

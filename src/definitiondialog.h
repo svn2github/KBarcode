@@ -4,16 +4,16 @@
 #include <qwidget.h>
 #include <qdialog.h>
 //Added by qt3to4:
-#include <Q3GridLayout>
-#include <Q3HBoxLayout>
-#include <Q3VBoxLayout>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QLabel>
 #include <QPaintEvent>
 #include "measurements.h"
 
-class Q3VBoxLayout; 
-class Q3HBoxLayout; 
-class Q3GridLayout; 
+class QVBoxLayout; 
+class QHBoxLayout; 
+class QGridLayout; 
 class KComboBox;
 class KPushButton;
 class KRestrictedLine;
@@ -95,11 +95,11 @@ protected:
     LabelPreview* preview;
 
 protected:
-    Q3VBoxLayout* DefinitionDialogLayout;
-    Q3HBoxLayout* Layout17;
-    Q3VBoxLayout* Layout13;
-    Q3VBoxLayout* Layout14;
-    Q3HBoxLayout* Layout16;
+    QVBoxLayout* DefinitionDialogLayout;
+    QHBoxLayout* Layout17;
+    QVBoxLayout* Layout13;
+    QVBoxLayout* Layout14;
+    QHBoxLayout* Layout16;
 };
 
 #endif // DEFINITIONDIALOG_H

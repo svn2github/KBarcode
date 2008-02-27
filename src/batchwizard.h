@@ -27,19 +27,19 @@ class KComboBox;
 class KCompletion;
 class KIntNumInput;
 class KLineEdit;
-class K3ListBox;
-class K3ListView;
+class KListBox;
+class KListView;
 class KPushButton;
 class KUrlRequester;
 class QCheckBox;
-class Q3HBox;
+class QHBox;
 class QLabel;
-class Q3ListView;
-class Q3ListViewItem;
+class QListView;
+class QListViewItem;
 class QRadioButton;
-class Q3Table;
-class Q3VBox;
-class Q3WidgetStack;
+class QTable;
+class QVBox;
+class QWidgetStack;
 
 class BatchWizard : public KWizard {
     Q_OBJECT
@@ -131,7 +131,7 @@ class BatchWizard : public KWizard {
 	void customerNameChanged( int index );
 	void addItem();
         bool slotAddItem( const QString & article, const QString & group, int count );
-	void changeItem( Q3ListViewItem* item, const QPoint &, int );
+	void changeItem( QListViewItem* item, const QPoint &, int );
 	void editItem();
 	void removeItem();
 
@@ -145,7 +145,7 @@ class BatchWizard : public KWizard {
         void slotRemoveAllAddress();
 
     private:
-        void moveAddress( Q3ListView* src, Q3ListView* dst, bool bAll = false );
+        void moveAddress( QListView* src, QListView* dst, bool bAll = false );
 
 	void fillByteArray();
 	void fillVarList();
@@ -186,17 +186,17 @@ class BatchWizard : public KWizard {
 
 	QWidget* page1;
 	QWidget* page2;
-	Q3WidgetStack* page3;
-	Q3VBox* page4;
-	Q3VBox* page5;
+	QWidgetStack* page3;
+	QVBox* page4;
+	QVBox* page5;
 	QWidget* page10;
 
-	Q3VBox* stack1;
-	Q3HBox* stack2;
-	Q3VBox* stack3;
+	QVBox* stack1;
+	QHBox* stack2;
+	QVBox* stack3;
         QWidget* stack4;
 
-	Q3VBox* imageBox;
+	QVBox* imageBox;
 
 	QLabel* labelInfo;
 	QLabel* labelSqlQuery;
@@ -235,13 +235,13 @@ class BatchWizard : public KWizard {
 	KIntNumInput* serialInc;
 	KIntNumInput* numLabels;
 
-	Q3Table* m_varTable;
-	K3ListBox* m_varList;
+	QTable* m_varTable;
+	KListBox* m_varList;
 
-        K3ListView* listAddress;
-        K3ListView* listSelectedAddress;
+        KListView* listAddress;
+        KListView* listSelectedAddress;
 
-	K3ListView* sqlList;
+	KListView* sqlList;
 	KLineEdit* serialStart;
 
         QCheckBox* checkKeepOpen;

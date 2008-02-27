@@ -76,7 +76,7 @@ Label::~Label()
 {
 }
 
-void Label::epcl( Q3TextStream* stream )
+void Label::epcl( QTextStream* stream )
 {
     *stream << EPCLUtils::header();
     
@@ -88,7 +88,7 @@ void Label::epcl( Q3TextStream* stream )
     *stream << EPCLUtils::footer();
 }
 
-void Label::ipl( Q3TextStream* stream )
+void Label::ipl( QTextStream* stream )
 {
     IPLUtils utils;
     *stream << utils.header();
@@ -102,7 +102,7 @@ void Label::ipl( Q3TextStream* stream )
 }
 
 
-void Label::zpl( Q3TextStream* stream )
+void Label::zpl( QTextStream* stream )
 {
     *stream << ZPLUtils::header();
     

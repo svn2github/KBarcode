@@ -74,7 +74,7 @@ void RectItem::draw (QPainter* painter)
     }
 }
 
-void RectItem::drawZpl( Q3TextStream* stream )
+void RectItem::drawZpl( QTextStream* stream )
 {
     // TODO: refactor later and respect millimeters
     int thick = pen().width();
@@ -86,7 +86,7 @@ void RectItem::drawZpl( Q3TextStream* stream )
         *stream << QString("~GB%1,%2,%3,B,0").arg( rect().width() ).arg( rect().height() ).arg( thick );
 }
 
-void RectItem::drawIpl( Q3TextStream* stream, IPLUtils* utils )
+void RectItem::drawIpl( QTextStream* stream, IPLUtils* utils )
 {
     // TODO: refactor later and respect millimeters
     int thick = pen().width();
@@ -108,7 +108,7 @@ void RectItem::drawIpl( Q3TextStream* stream, IPLUtils* utils )
     }
 }
 
-void RectItem::drawEPcl( Q3TextStream* stream )
+void RectItem::drawEPcl( QTextStream* stream )
 {
     QString s = QString("C %1").arg( rect().x()+1 );
     s += QString(" %1").arg( rect().y()+1 );

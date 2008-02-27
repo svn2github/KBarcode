@@ -27,7 +27,7 @@
 #ifdef _ENABLE_NATIVE_GNU_BARCODE
 #  include <barcode.h>
 //Added by qt3to4:
-#include <Q3ValueList>
+#include <QValueList>
 #else
 #define BARCODE_DEFAULT_FLAGS 0x00000000
 
@@ -72,7 +72,7 @@ enum {
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-Q3ValueList<tBarcodeInfo> Barkode::s_info;
+QValueList<tBarcodeInfo> Barkode::s_info;
 QStringList* Barkode::s_encoding   = NULL;
 bool Barkode::s_haveGnuBarcode     = false;
 bool Barkode::s_havePdfEncode      = false;
@@ -199,9 +199,9 @@ bool Barkode::operator==( const Barkode & barkode ) const
     return b;
 }
 
-const Q3Picture Barkode::picture()
+const QPicture Barkode::picture()
 {
-    Q3Picture pic;
+    QPicture pic;
     QPainter painter( &pic );
 
     painter.fillRect( 0, 0, size().width(), size().height(), m_background );

@@ -187,7 +187,7 @@ QFile* Definition::file = 0;
 QByteArray* Definition::array = 0;
 QStringList* Definition::listProducers = 0;
 QMap<QString,QStringList> Definition::mapTypes;
-Q3ProgressDialog* Definition::m_progress = 0;
+QProgressDialog* Definition::m_progress = 0;
 
 void Definition::initProgress()
 {
@@ -269,7 +269,7 @@ void Definition::getFileMeasurements( const QString & label_def_id )
 
     initProgress();
 
-    Q3TextStream stream(*array, QIODevice::ReadOnly );
+    QTextStream stream(*array, QIODevice::ReadOnly );
     while( !stream.atEnd() ) {
         QString s = stream.readLine();
         if( s.isEmpty() || s.startsWith( "#" ) )
@@ -345,7 +345,7 @@ const QStringList Definition::getProducers()
 
 	initProgress();
 
-        Q3TextStream stream(*array, QIODevice::ReadOnly );
+        QTextStream stream(*array, QIODevice::ReadOnly );
         while( !stream.atEnd() ) {
             QString s = stream.readLine();
             if( s.isEmpty() || s.startsWith( "#" ) )
@@ -383,7 +383,7 @@ const QStringList Definition::getTypes( QString producer )
 
 	initProgress();
 
-        Q3TextStream stream(*array, QIODevice::ReadOnly );
+        QTextStream stream(*array, QIODevice::ReadOnly );
         while( !stream.atEnd() ) {
             QString s = stream.readLine();
             if( s.isEmpty() || s.startsWith( "#" ) )
@@ -485,7 +485,7 @@ int Definition::writeFile( const Measurements & c, QString type, QString produce
         return -1;
     }
 
-    Q3TextStream t( file );
+    QTextStream t( file );
     for( unsigned int i = 0; i < data.count(); i++ )
         t << data[i].replace( QRegExp("\\n"), "" ) << "\n";
 

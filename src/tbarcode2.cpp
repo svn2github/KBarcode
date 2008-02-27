@@ -115,7 +115,7 @@ bool TBarcode2::createPostscript( char** postscript, long* postscript_size )
         text = "below";
 
     cmd = cmd.sprintf( "tbarcode -f PS -b %s -d %s  -t %s --translation=%s --autocorrect=%s --modulewidth=%.3f -h %i --checkdigit=%i --72dpiraster\n", 
-                       barkode->type().toLatin1(), K3ShellProcess::quote(  barkode->parsedValue() ).toLatin1(), 
+                       barkode->type().toLatin1(), KShellProcess::quote(  barkode->parsedValue() ).toLatin1(), 
                        text, tbarcode->escape() ? "on" : "off", 
                        tbarcode->autocorrect() ? "on" : "off", 
                        tbarcode->moduleWidth(), 

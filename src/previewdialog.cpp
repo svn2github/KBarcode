@@ -29,11 +29,11 @@
 #include <q3scrollview.h>
 #include <q3sqlcursor.h>
 //Added by qt3to4:
-#include <Q3HBoxLayout>
-#include <Q3GridLayout>
+#include <QHBoxLayout>
+#include <QGridLayout>
 #include <QPixmap>
 #include <QSqlQuery>
-#include <Q3VBoxLayout>
+#include <QVBoxLayout>
 
 // KDE includes
 #include <kabc/addresseedialog.h>
@@ -61,10 +61,10 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
 
-    Q3HBoxLayout* Layout = new Q3HBoxLayout( this, 6, 6 );
-    Q3VBoxLayout* vbox = new Q3VBoxLayout( 0, 6, 6 );
-    Q3VBoxLayout* buttons = new Q3VBoxLayout( 0, 6, 6 );
-    Q3GridLayout* grid = new Q3GridLayout( 0 );
+    QHBoxLayout* Layout = new QHBoxLayout( this, 6, 6 );
+    QVBoxLayout* vbox = new QVBoxLayout( 0, 6, 6 );
+    QVBoxLayout* buttons = new QVBoxLayout( 0, 6, 6 );
+    QGridLayout* grid = new QGridLayout( 0 );
 
     customerName = new KComboBox( false, this );
     customerId = new KComboBox( false, this );
@@ -115,7 +115,7 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     grid->addWidget( new QLabel( i18n( "Addressbook entry:" ), this ), 6, 0 );
     grid->addWidget( lineAddr, 6, 1 );
     grid->addWidget( buttonAddr, 6, 2 );
-    Q3ScrollView* sv = new Q3ScrollView( this );
+    QScrollView* sv = new QScrollView( this );
 
     preview = new QLabel( sv->viewport() );
     sv->addChild( preview );
@@ -165,7 +165,7 @@ PreviewDialog::~PreviewDialog()
 
 void PreviewDialog::setupSql()
 {
-    Q3SqlCursor cur( "customer" );
+    QSqlCursor cur( "customer" );
     cur.select();
     customerId->clear();
     customerName->clear();

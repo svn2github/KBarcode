@@ -36,7 +36,7 @@ class QString;
 class QStringList;
 class QSqlQuery;
 class Measurements;
-class Q3ProgressDialog;
+class QProgressDialog;
 /** @short A label definition;
   *
   * Represents a label definition. The definition is either read from
@@ -89,7 +89,7 @@ class Definition : private LabelUtils {
         static QMap<QString,QStringList> mapTypes;
         static QFile* file;
         static QByteArray* array;
-	static Q3ProgressDialog* m_progress;
+	static QProgressDialog* m_progress;
 
 	QWidget* m_parent;
         int id;

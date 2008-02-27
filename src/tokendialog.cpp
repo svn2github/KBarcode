@@ -30,7 +30,7 @@
 #include <qlayout.h>
 #include <qsplitter.h>
 #include <qtooltip.h>
-#include <q3valuelist.h>
+#include <QList>
 #include <q3vbox.h>
 #include <qvbuttongroup.h>
 #include <q3widgetstack.h>
@@ -154,7 +154,7 @@ void TokenDialog::setupStack2Page1()
 				  "In the case of the sqlquery token, the sure has to enter a sql query in "
 				  "this text field.</qt>" ) );
 
-    QValueList<int> sizes;
+    QList<int> sizes;
     int w = (width() / 4);
     sizes << w << w * 3;
     
@@ -336,7 +336,7 @@ void TokenDialog::showPage( QWidget* w )
 void TokenDialog::initAll()
 {
     unsigned int i, z;
-    QValueList<tCategories>* categories = TokenProvider::getTokens();
+    QList<tCategories>* categories = TokenProvider::getTokens();
 
     category->addItem( i18n("All") );
     
@@ -374,7 +374,7 @@ void TokenDialog::initStackPage2()
     else
         return;
 
-    QValueList<tCategories>* categories = TokenProvider::getTokens();
+    QList<tCategories>* categories = TokenProvider::getTokens();
     for( int i = 0; i < (int)categories->count(); i++ )
     {
         if( (*categories)[i].category == cat )
@@ -391,7 +391,7 @@ void TokenDialog::initStackPage2()
 void TokenDialog::categoryChanged( QListBoxItem* item )
 {
     unsigned int i;
-    QValueList<tCategories>* categories = TokenProvider::getTokens();
+    QList<tCategories>* categories = TokenProvider::getTokens();
     allList->clear();
     lineEdit->setEnabled( false );
 

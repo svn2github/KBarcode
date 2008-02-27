@@ -22,7 +22,7 @@
 #include <qstringlist.h>
 #include <q3textstream.h>
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 
 class QBuffer;
 
@@ -67,7 +67,7 @@ class CSVFile {
 
        /** set the field widths for fixed field width files
         */
-       inline void setFieldWidth( const QValueList<int> & width );
+       inline void setFieldWidth( const QList<int> & width );
 
        /** sets wether this is a CSV file or 
         *  a file with fixed field width.
@@ -100,7 +100,7 @@ class CSVFile {
        QString m_separator;
        QString m_comment;
 
-       QValueList<int> m_width;
+       QList<int> m_width;
 
        bool m_csv;
        bool m_eof;
@@ -144,7 +144,7 @@ void CSVFile::setComment( const QString & comment )
     m_comment = comment;
 }
 
-void CSVFile::setFieldWidth( const QValueList<int> & width )
+void CSVFile::setFieldWidth( const QList<int> & width )
 {
     m_width = width;
 }

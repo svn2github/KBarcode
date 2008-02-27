@@ -19,7 +19,7 @@
 #define MYCANVASVIEW_H
 
 #include <q3canvas.h>
-#include <q3valuelist.h>
+#include <QList>
 //Added by qt3to4:
 #include <QResizeEvent>
 #include <QLabel>
@@ -28,7 +28,7 @@
 
 class TCanvasItem;
 
-typedef QValueList<TCanvasItem*> TCanvasItemList;
+typedef QList<TCanvasItem*> TCanvasItemList;
 
 
 class QRect;

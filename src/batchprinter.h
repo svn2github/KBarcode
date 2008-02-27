@@ -21,7 +21,7 @@
 #include "measurements.h"
 
 #include <qmap.h>
-#include <q3valuelist.h>
+#include <QList>
 
 namespace KABC {
     class AddresseeList;
@@ -37,7 +37,7 @@ class QProgressDialog;
 class QWidget;
 class QPaintDevice;
 
-typedef QValueList< QMap<QString,QString> > TVariableList;
+typedef QList< QMap<QString,QString> > TVariableList;
 /**
     This class is responsible for batch printing of articles.
     It is also responsible for creating images of all articles.
@@ -86,7 +86,7 @@ class BatchPrinter
         /** set the sql data for the batchprinter
          *  @p list will be deleted by the batchprinter
          */
-        void setData( QValueList<data>* list );
+        void setData( QList<data>* list );
 
         /** set the variable data for the batchprinter
          *  @p list will be deleted by the batchprinter
@@ -152,7 +152,7 @@ class BatchPrinter
 
         Definition* def;
         Measurements m_measure;
-        QValueList<data>* m_data;
+        QList<data>* m_data;
 	TVariableList* m_vardata;
         KABC::AddresseeList* m_addrdata;
 

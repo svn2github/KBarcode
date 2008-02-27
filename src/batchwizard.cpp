@@ -44,7 +44,7 @@
 #include <q3widgetstack.h>
 //Added by qt3to4:
 #include <QHBoxLayout>
-#include <QValueList>
+#include <QList>
 #include <QSqlQuery>
 #include <QSqlCursor>
 #include <QFrame>
@@ -663,7 +663,7 @@ void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
 	sqlList->setSorting( 3, true );
 	sqlList->sort();
 
-	QValueList<BatchPrinter::data>* dlist = new QValueList<BatchPrinter::data>;
+	QList<BatchPrinter::data>* dlist = new QList<BatchPrinter::data>;
 	QListViewItem* item = sqlList->firstChild();
 	while( item ) 
 	{
@@ -685,7 +685,7 @@ void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
 	batch->setLabels( numLabels->value() );
 
 	// do a dirty drick, TODO: refactor BatchPrinter in the future
-	QValueList<BatchPrinter::data>* dlist = new QValueList<BatchPrinter::data>;
+	QList<BatchPrinter::data>* dlist = new QList<BatchPrinter::data>;
 	BatchPrinter::data m_data;
 	m_data.number = numLabels->value();
 	dlist->append( m_data );

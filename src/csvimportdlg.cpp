@@ -40,7 +40,7 @@
 //Added by qt3to4:
 #include <QHBoxLayout>
 #include <QGridLayout>
-#include <QValueList>
+#include <QList>
 #include <QVBoxLayout>
 
 // KDE includes
@@ -336,7 +336,7 @@ void CSVImportDlg::accept()
 {
     CSVFile file( requester->url() );
     QHeader* h = table->horizontalHeader();
-    QValueList<int> headers;
+    QList<int> headers;
     QStringList list;
     QString name = getDatabaseName();
     int i = 0;
@@ -409,9 +409,9 @@ void CSVImportDlg::removeWidth()
     settingsChanged();
 }
 
-QValueList<int> CSVImportDlg::getFieldWidth()
+QList<int> CSVImportDlg::getFieldWidth()
 {
-    QValueList<int> list;
+    QList<int> list;
 
     for( unsigned int i=0;i<listWidth->count();i++ ) 
         list << listWidth->text( i ).toInt();
@@ -421,7 +421,7 @@ QValueList<int> CSVImportDlg::getFieldWidth()
 
 void CSVImportDlg::initCsvFile( CSVFile* file )
 {
-    QValueList<int> width = getFieldWidth();
+    QList<int> width = getFieldWidth();
 
     file->setEncoding( comboEncoding->currentText() );
     file->setCSVFile( radioCSVFile->isChecked() );

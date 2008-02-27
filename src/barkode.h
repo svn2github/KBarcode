@@ -24,7 +24,7 @@
 #include <qcolor.h>
 #include <qstring.h>
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 #include <QPixmap>
 
 #include "barkodeengine.h"
@@ -84,7 +84,7 @@ typedef struct tBarcodeInfo
     QString validatorNot;
 };
 
-typedef QValueList<tBarcodeInfo> TBarcodeInfoList;
+typedef QList<tBarcodeInfo> TBarcodeInfoList;
 
 class BarkodeEngine;
 class QPainter;
@@ -175,7 +175,7 @@ class Barkode {
     inline const BarkodeEngine* engine() const;
 
     /** Test if the encodingType @p type has a certain 
-      * @p feature, as defined in the codes QValueList.
+      * @p feature, as defined in the codes QList.
       */
     static bool hasFeature( const QString & type, unsigned int feature );
     /** Returns the internal value for the encoding type @p typedef

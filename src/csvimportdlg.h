@@ -21,7 +21,7 @@
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QFrame>
-#include <QValueList>
+#include <QList>
 #include <kdialogbase.h>
 
 class CSVFile;
@@ -77,7 +77,7 @@ class CSVImportDlg : public KDialogBase  {
         /** Get the field with from listWidth
          *  as an integer list.
          */
-        QValueList<int> getFieldWidth();
+        QList<int> getFieldWidth();
 
         /** Create the first tab of the dialog 
          *  to set the import data.

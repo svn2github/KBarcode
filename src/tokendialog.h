@@ -22,7 +22,7 @@
 #include "documentitem.h"
 #include "tokenprovider.h"
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 
 class KListBox;
 class KListView;
@@ -118,7 +118,7 @@ class TokenDialog : public QWizard {
     QWidget* stack2Page4;
     QWidget* stack2Page5;
 
-    QValueList<tToken> m_tokens;
+    QList<tToken> m_tokens;
     TokenProvider* m_token;
 
     KListBox* category;

@@ -27,7 +27,7 @@
 #ifdef _ENABLE_NATIVE_GNU_BARCODE
 #  include <barcode.h>
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 #else
 #define BARCODE_DEFAULT_FLAGS 0x00000000
 
@@ -72,7 +72,7 @@ enum {
 #include <klocale.h>
 #include <kstandarddirs.h>
 
-QValueList<tBarcodeInfo> Barkode::s_info;
+QList<tBarcodeInfo> Barkode::s_info;
 QStringList* Barkode::s_encoding   = NULL;
 bool Barkode::s_haveGnuBarcode     = false;
 bool Barkode::s_havePdfEncode      = false;

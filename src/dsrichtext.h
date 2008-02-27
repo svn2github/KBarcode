@@ -25,7 +25,7 @@
 #include <qcolor.h>
 #include <qfont.h>
 #include <qstring.h>
-#include <q3valuelist.h>
+#include <QList>
 
 class DSRichText;
 
@@ -41,7 +41,7 @@ struct formated_word {
     bool line;
 };
 
-typedef QValueList<formated_word> WordList;
+typedef QList<formated_word> WordList;
 
 /** This structure represents a single line.
   * Every line contains a list of formated_words.
@@ -59,7 +59,7 @@ struct formated_line {
 
     WordList formats;
 };
-typedef QValueList<formated_line> LineList;
+typedef QList<formated_line> LineList;
 
 class QColor;
 class QPainter;
@@ -151,8 +151,8 @@ class DSRichText {
         QString parse( const QString & t, const QString & find, const QString & end, int start );
         void parseWords( const QString & t, formated_word* w, WordList* words );
         void initFormat( formated_word* f, int alignment );
-        void initLine( QValueList<formated_line>* l );
-        void updateSpacing( QValueList<formated_line>* l, QFontMetrics* fm );
+        void initLine( QList<formated_line>* l );
+        void updateSpacing( QList<formated_line>* l, QFontMetrics* fm );
         /** draw the line @p line justified as blockquote
           */
         void drawJustified( formated_line* line );
@@ -185,8 +185,8 @@ class DSRichText {
         QColor m_color;
         QPainter* painter;
 
-        QValueList<LineList> line_p;
-        QValueList<WordList> word_p;
+        QList<LineList> line_p;
+        QList<WordList> word_p;
 };
 
 #endif // QT_TEXT_BUG

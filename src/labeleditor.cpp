@@ -78,7 +78,7 @@
 #if QT_VERSION <= 0x030100
     #include <qregexp.h>
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 #include <QCString>
 #include <QCloseEvent>
 #endif
@@ -816,7 +816,7 @@ void LabelEditor::batchPrint( BatchPrinter* batch, int copies, int mode )
     batch->setCustomer( QString::null );
     batch->setEvents( false );
 
-    QValueList<BatchPrinter::data>* list = new QValueList<BatchPrinter::data>;
+    QList<BatchPrinter::data>* list = new QList<BatchPrinter::data>;
     BatchPrinter::data m_data;
     m_data.number = copies;
     m_data.article_no = QString::null;

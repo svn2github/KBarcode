@@ -26,7 +26,7 @@
 #include <qstring.h>
 #include <qregexp.h>
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 #include <time.h>
 
 #include "documentitem.h"
@@ -60,7 +60,7 @@ class tToken {
 
 struct tCategories {
     int category;
-    QValueList<tToken> tokens;
+    QList<tToken> tokens;
 };
 
 
@@ -89,7 +89,7 @@ class TokenProvider {
 
 	static bool hasJavaScript();
 
-        static QValueList<tCategories>* getTokens();
+        static QList<tCategories>* getTokens();
         
         /**
          * Get a caption which can be displayed to the user from 
@@ -229,7 +229,7 @@ class TokenProvider {
         KABC::Addressee* m_address;
 
 	QStringList* m_findUserVarsList;
-        static QValueList<tCategories> s_categories;
+        static QList<tCategories> s_categories;
         static QMap<ECategories, QString> s_captions;
 
 #ifdef NO_KJS_EMBED

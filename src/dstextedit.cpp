@@ -19,7 +19,7 @@
 #include "dstextedit.moc"
 #include <qregexp.h>
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 
 DSTextEdit::DSTextEdit( QWidget* parent )
     : TextEditBase( parent )
@@ -41,7 +41,7 @@ void DSTextEdit::fixParagraphs()
     int i;
     int para, index;                          // needed to save the cursor position
     int paraFrom, indexFrom, paraTo, indexTo; // needed to save the selection
-    QValueList<int> chars;
+    QList<int> chars;
     QRegExp reg("<p[^>]*>");
 
     for( i = 0; i < paragraphs(); i++ )

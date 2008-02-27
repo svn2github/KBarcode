@@ -29,7 +29,7 @@
 #include <q3paintdevicemetrics.h>
 #include <q3progressdialog.h>
 //Added by qt3to4:
-#include <QValueList>
+#include <QList>
 #include <QPixmap>
 
 // KDE includes
@@ -522,7 +522,7 @@ bool BatchPrinter::checkProgressDialog( QProgressDialog* progress )
     return true;
 }
 
-void BatchPrinter::setData( QValueList<data>* list ) 
+void BatchPrinter::setData( QList<data>* list ) 
 {
     if( m_data )
 	delete m_data;

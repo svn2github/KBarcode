@@ -28,7 +28,7 @@
 #include <q3paintdevicemetrics.h>
 #include <qsqlquery.h>
 #include <qregexp.h>
-#include <q3valuelist.h>
+#include <QList>
 #include <time.h>
 
 #include <klocale.h>
@@ -177,7 +177,7 @@ TokenProvider::~TokenProvider()
 {
 }
 
-QValueList<tCategories> TokenProvider::s_categories;
+QList<tCategories> TokenProvider::s_categories;
 QMap<TokenProvider::ECategories,QString> TokenProvider::s_captions;
 #ifdef NO_KJS_EMBED
 KJS::Interpreter* TokenProvider::s_interpreter = NULL;
@@ -194,7 +194,7 @@ bool TokenProvider::hasJavaScript()
 #endif // USE_JAVASCRIPT
 }
 
-QValueList<tCategories>* TokenProvider::getTokens()
+QList<tCategories>* TokenProvider::getTokens()
 {
     TokenProvider::init(); 
     return &s_categories;

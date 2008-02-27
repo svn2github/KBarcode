@@ -119,13 +119,13 @@ void MultiLineEditor::setupActions()
     // Alignment
     //
     action_align_left = new KToggleAction( i18n("Align &Left"), "text_left", 0, ac, "format_align_left" );
-    connect( action_align_left, SIGNAL( toggled(bool) ), this, SLOT( setQt::AlignLeft(bool) ) );
+    connect( action_align_left, SIGNAL( toggled(bool) ), this, SLOT( setAlignLeft(bool) ) );
 
     action_align_center = new KToggleAction( i18n("Align &Center"), "text_center", 0, ac, "format_align_center" );
-    connect( action_align_center, SIGNAL( toggled(bool) ), this, SLOT( setQt::AlignCenter(bool) ) );
+    connect( action_align_center, SIGNAL( toggled(bool) ), this, SLOT( setAlignCenter(bool) ) );
 
     action_align_right = new KToggleAction( i18n("Align &Right"), "text_right", 0, ac, "format_align_right" );
-    connect( action_align_right, SIGNAL( toggled(bool) ), this, SLOT( setQt::AlignRight(bool) ) );
+    connect( action_align_right, SIGNAL( toggled(bool) ), this, SLOT( setAlignRight(bool) ) );
 
     action_align_justify = new KToggleAction( i18n("&Justify"), "text_block", 0, ac, "format_align_justify" );
     connect( action_align_justify, SIGNAL( toggled(bool) ), this, SLOT( setAlignJustify(bool) ) );
@@ -240,19 +240,19 @@ void MultiLineEditor::formatColor()
     editor->setColor( col );
 }
 
-void MultiLineEditor::setQt::AlignLeft( bool yes )
+void MultiLineEditor::setAlignLeft( bool yes )
 {
     if ( yes )
         editor->setAlignment( Qt::AlignLeft );
 }
 
-void MultiLineEditor::setQt::AlignRight( bool yes )
+void MultiLineEditor::setAlignRight( bool yes )
 {
     if ( yes )
         editor->setAlignment( Qt::AlignRight );
 }
 
-void MultiLineEditor::setQt::AlignCenter( bool yes )
+void MultiLineEditor::setAlignCenter( bool yes )
 {
     if ( yes )
         editor->setAlignment( Qt::AlignCenter );

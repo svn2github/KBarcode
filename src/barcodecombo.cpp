@@ -172,28 +172,28 @@ BarcodeWidget::BarcodeWidget(QWidget *parent, const char *name )
     grid->addWidget( buttonToken, 4, 3 );
     
     spinMargin = new KIntNumInput( this, "spinMargin" );
-    spinMargin->setLabel( i18n( "&Margin:" ), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
+    spinMargin->setLabel( i18n( "&Margin:" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinMargin->setRange( 0, 10000, 1, false );
     spinMargin->setValue( 10 );
     connect( spinMargin, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
     grid->addMultiCellWidget( spinMargin, 5, 5, 0, 1 );
 
     spinRotation = new KIntNumInput( this );
-    spinRotation->setLabel( i18n( "&Rotation:" ), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
+    spinRotation->setLabel( i18n( "&Rotation:" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinRotation->setRange( 0, 360, 90, false );
     spinRotation->setValue( 0 );
     connect( spinRotation, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
     grid->addMultiCellWidget( spinRotation, 5, 5, 2, 3 );
 
     spinScale = new KIntNumInput( spinMargin, 1000, this );
-    spinScale->setLabel( i18n("&Scale (in permille):"), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
+    spinScale->setLabel( i18n("&Scale (in permille):"), Qt::AlignLeft | Qt::AlignVCenter );
     spinScale->setRange( 100, 10000, 100, false );
     spinScale->setValue( 1000 );
     connect( spinScale, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
     grid->addMultiCellWidget( spinScale, 6, 6, 0, 1 );
 
     spinCut = new KIntNumInput( spinRotation, 100, this );
-    spinCut->setLabel( i18n("&Crop:"), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
+    spinCut->setLabel( i18n("&Crop:"), Qt::AlignLeft | Qt::AlignVCenter );
     spinCut->setRange( 1, 100, 1, false );
     connect( spinCut, SIGNAL( valueChanged(int) ), this, SLOT( changed() ) );
     grid->addMultiCellWidget( spinCut, 6, 6, 2, 3 );

@@ -35,11 +35,11 @@ PrintLabelDlg::PrintLabelDlg(QWidget *parent, const char *name )
     Q3VBoxLayout* box = new Q3VBoxLayout( plainPage() );
 
     numLabels  = new KIntNumInput( plainPage() );
-    numLabels->setLabel( i18n("Number of labels:" ), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
+    numLabels->setLabel( i18n("Number of labels:" ), Qt::AlignLeft | Qt::AlignVCenter );
     numLabels->setRange( 1, 100000, 1, false );
     
     numPos = new KIntNumInput( numLabels, 1, plainPage() );
-    numPos->setLabel( i18n("Start at label position:" ), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
+    numPos->setLabel( i18n("Start at label position:" ), Qt::AlignLeft | Qt::AlignVCenter );
     numPos->setRange( 1, 100, 1, false );
 
     checkBorder = new QCheckBox( i18n("&Print crop marks (borders)"), plainPage() );

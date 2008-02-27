@@ -226,7 +226,7 @@ void BatchWizard::setupPage5()
     serialStart = new KLineEdit( serial.serial(), hbox );
 
     serialInc = new KIntNumInput( 1, hbox );
-    serialInc->setLabel( i18n( "Serial increment:" ), KNumInput::Qt::AlignLeft | KNumInput::Qt::AlignVCenter );
+    serialInc->setLabel( i18n( "Serial increment:" ), Qt::AlignLeft | Qt::AlignVCenter );
     serialInc->setRange( 1, 10000, 1, false );
 
     addPage( page5, i18n("Serial Number") );

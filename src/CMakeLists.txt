@@ -30,9 +30,7 @@ set(kbarcode_SRCS
   documentitemdlg.cpp
   dsrichtext.cpp
   dstextedit.cpp
-  editoriface_skel.cpp
   encodingcombo.cpp
-  encodingcombo.moc.cpp
   gnubarcode.cpp
   gnubarkodeengine.cpp
   imageitem.cpp

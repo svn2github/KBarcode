@@ -83,7 +83,7 @@ class TokenProvider;
   * and save them. Labels can also be printed directly, but without database
   * support. Use Batchprinting (LabelPrinter) for this.
   */
-class LabelEditor : public MainWindow, public EditorIface, private LabelUtils, private XMLUtils {
+class LabelEditor : public MainWindow, private LabelUtils, private XMLUtils {
     Q_OBJECT
     public:
         enum ELabelEditorMode {

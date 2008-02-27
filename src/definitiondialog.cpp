@@ -145,42 +145,42 @@ DefinitionDialog::DefinitionDialog( QWidget* parent, bool modal, Qt::WFlags fl )
     comboType->setEditable( TRUE );
     Layout14->addWidget( comboType );
 
-    editWidth = new KRestrictedLine( this, "editWidth" );
+    editWidth = new KRestrictedLine( this );
     editWidth->setText( i18n( "0" ) );
     editWidth->setValidChars( i18n( "0123456789." ) );
     Layout14->addWidget( editWidth );
 
-    editHeight = new KRestrictedLine( this, "editHeight" );
+    editHeight = new KRestrictedLine( this );
     editHeight->setText( i18n( "0" ) );
     editHeight->setValidChars( i18n( "0123456789." ) );
     Layout14->addWidget( editHeight );
 
-    editHGap = new KRestrictedLine( this, "editHGap" );
+    editHGap = new KRestrictedLine( this );
     editHGap->setText( i18n( "0" ) );
     editHGap->setValidChars( i18n( "0123456789." ) );
     Layout14->addWidget( editHGap );
 
-    editVGap = new KRestrictedLine( this, "editVGap" );
+    editVGap = new KRestrictedLine( this );
     editVGap->setText( i18n( "0" ) );
     editVGap->setValidChars( i18n( "0123456789." ) );
     Layout14->addWidget( editVGap );
 
-    editTGap = new KRestrictedLine( this, "editTGap" );
+    editTGap = new KRestrictedLine( this );
     editTGap->setText( i18n( "0" ) );
     editTGap->setValidChars( i18n( "0123456789." ) );
     Layout14->addWidget( editTGap );
 
-    editLGap = new KRestrictedLine( this, "editLGap" );
+    editLGap = new KRestrictedLine( this );
     editLGap->setText( i18n( "0" ) );
     editLGap->setValidChars( i18n( "0123456789." ) );
     Layout14->addWidget( editLGap );
 
-    editNumH = new KRestrictedLine( this, "editNumH" );
+    editNumH = new KRestrictedLine( this );
     editNumH->setText( i18n( "0" ) );
     editNumH->setValidChars( "0123456789" );
     Layout14->addWidget( editNumH );
     
-    editNumV = new KRestrictedLine( this, "editNumV" );
+    editNumV = new KRestrictedLine( this );
     editNumV->setText( i18n( "0" ) );
     editNumV->setValidChars( "0123456789" );
     Layout14->addWidget( editNumV );
@@ -199,11 +199,11 @@ DefinitionDialog::DefinitionDialog( QWidget* parent, bool modal, Qt::WFlags fl )
     QSpacerItem* spacer_3 = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout16->addItem( spacer_3 );
 
-    buttonAdd = new KPushButton( this, "buttonAdd" );
+    buttonAdd = new KPushButton( this );
     buttonAdd->setText( i18n( "&Add" ) );
     Layout16->addWidget( buttonAdd );
 
-    buttonCancel = new KPushButton( this, "buttonCancel" );
+    buttonCancel = new KPushButton( this );
     buttonCancel->setText( i18n( "&Cancel" ) );
     Layout16->addWidget( buttonCancel );
     DefinitionDialogLayout->addLayout( Layout16 );

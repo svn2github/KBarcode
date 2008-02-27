@@ -68,7 +68,7 @@ void MultiLineEditor::setupActions()
 {
     ac = new KActionCollection( this );
 
-    KAction* action_export = new KAction( i18n("Export"), "fileexport", 0, this, SLOT( save() ), ac );
+    KAction* action_export = new KAction( i18n("Export"), 0, this, SLOT( save() ), ac );
 
     //
     // Edit Actions
@@ -266,7 +266,7 @@ void MultiLineEditor::setAlignJustify( bool yes )
 
 void MultiLineEditor::insertNewField()
 {
-    TokenDialog dlg( m_token, this, "dlg" );
+    TokenDialog dlg( m_token, this );
     if( dlg.exec() == QDialog::Accepted )
         editor->insert( dlg.token() );
 }

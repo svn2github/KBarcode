@@ -131,16 +131,16 @@ void TextLineEditor::setupActions()
 
     textDataAct->plug( tool2Bar );
 
-    action_font_type = new KComboBox(tool2Bar,"font_type") ;
+    action_font_type = new KComboBox(tool2Bar) ;
     connect( action_font_type, SIGNAL( activated(int) ), this, SLOT( setFontType(int) ) );
     action_font_type->insertStringList(fuentes) ;
     
     
     
     QLabel* labelv = new QLabel( i18n("&Mag. Vert.:"), tool3Bar );
-    mag_vert = new KIntNumInput( tool3Bar,"magvert" );
+    mag_vert = new KIntNumInput( tool3Bar);
     QLabel* labelh = new QLabel( i18n("&Mag. Hor.:"), tool3Bar );
-    mag_hor = new KIntNumInput( tool3Bar,"maghor" );
+    mag_hor = new KIntNumInput( tool3Bar );
     connect( mag_vert, SIGNAL( activated(int) ), this, SLOT( setVerMag(int) ) );
     connect( mag_hor, SIGNAL( activated(int) ), this, SLOT( setHorMag(int) ) );  
     mag_vert->setRange( 1, 9, 1, false );
@@ -176,7 +176,7 @@ void TextLineEditor::updateActions()
 
 void TextLineEditor::insertNewField()
 {
-    TokenDialog dlg( m_token, this, "dlg" );
+    TokenDialog dlg( m_token, this);
     if( dlg.exec() == QDialog::Accepted )
         editor->insert( dlg.token() ) ;
 }

@@ -89,7 +89,7 @@ class MyCanvasView : public Q3CanvasView
     };
     
     public:
-        MyCanvasView( Definition* d, MyCanvas *c, QWidget* parent=0, const char* name=0, Qt::WFlags f=0);
+        MyCanvasView( Definition* d, MyCanvas *c, QWidget* parent=0, Qt::WFlags f=0);
         ~MyCanvasView();
 
 	/** return a list of all DocumentItems on the canvas

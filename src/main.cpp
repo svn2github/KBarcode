@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
     
     a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
-    KBarcode* kbc = new KBarcode( 0, "KBarcodeMainWindow" );
+    KBarcode* kbc = new KBarcode( 0 );
     
     if( kbc->parseCmdLine() )
         return 0;

@@ -41,7 +41,7 @@ class KPushButton;
   * LabelPrinter (Batchprinting), DatabaseBrowser and BarcodeDialog.
   * There are also a few smaller modules.
   */
-class KBarcode: public MainWindow, public KBarcodeIface {
+class KBarcode: public MainWindow {
     Q_OBJECT
     public:
         KBarcode( QWidget *parent=0, Qt::WFlags f = Qt::WType_TopLevel | Qt::WDestructiveClose );

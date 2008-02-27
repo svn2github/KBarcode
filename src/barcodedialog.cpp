@@ -51,22 +51,22 @@ BarCodeDialog::BarCodeDialog( QWidget* parent )
     BarCodeDialogLayout = new Q3HBoxLayout( this, 11, 6, "BarCodeDialogLayout");
     Layout5 = new Q3VBoxLayout( 0, 0, 6, "Layout5");
     Layout6 = new Q3VBoxLayout( 0, 0, 6, "Layout2");
-    widget = new BarcodeWidget( this, "widget" );
+    widget = new BarcodeWidget( this );
 
     m_token = new TokenProvider( KApplication::desktop() );
     widget->setTokenProvider( m_token );
 
-    buttonGenerate = new KPushButton( this, "buttonGenerate" );
+    buttonGenerate = new KPushButton( this );
     buttonGenerate->setText( i18n( "&Generate" ) );
     buttonGenerate->setEnabled( Barkode::haveBarcode() );
     buttonGenerate->setIconSet( SmallIconSet("barcode") );
     
-    buttonSave = new KPushButton( this, "buttonSave" );
+    buttonSave = new KPushButton( this );
     buttonSave->setText( i18n( "&Save" ) );
     buttonSave->setEnabled( false );
     buttonSave->setIconSet( SmallIconSet("filesave") );
         
-    buttonCopy = new KPushButton( this, "buttonCopy" );
+    buttonCopy = new KPushButton( this );
     buttonCopy->setText( i18n("&Copy") );
     buttonCopy->setEnabled( false );
     buttonCopy->setIconSet( SmallIconSet("editcopy") );
@@ -139,7 +139,7 @@ void BarCodeDialog::save()
 
     if(!bc.isValid()) 
     {
-        KFileDialog fd( ":save_image", KImageIO::pattern( KImageIO::Writing ), this, "fd", true );
+        KFileDialog fd( ":save_image", KImageIO::pattern( KImageIO::Writing ), this, true );
         fd.setMode( KFile::File );
         fd.setOperationMode( KFileDialog::Saving );       
         if( fd.exec() == QDialog::Accepted ) 

@@ -574,7 +574,7 @@ SqlWidget::SqlWidget( bool showlabel, QWidget* parent, const char* name )
     m_autoconnect = new QCheckBox( i18n("&Autoconnect on program start"), groupDatabase );
     groupDatabaseLayout->addWidget( m_autoconnect );
 
-    buttonTest = new KPushButton( groupDatabase, "buttonTest" );
+    buttonTest = new KPushButton( groupDatabase );
     buttonTest->setText( i18n( "&Test Settings" ) );
 
     groupDatabaseLayout->addWidget( buttonTest );

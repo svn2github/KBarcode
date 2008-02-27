@@ -127,7 +127,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     labelStandard = new QLabel( i18n( "&Encoding Type:" ), this );
     grid->addWidget( labelStandard, 1, 0 );
 
-    comboStandard = new BarcodeCombo( this, "comboStandard" );
+    comboStandard = new BarcodeCombo( this );
     connect( comboStandard, SIGNAL( activated(int) ), this, SLOT( encodingChanged() ) );
     connect( comboStandard, SIGNAL( activated(int) ), this, SLOT( changed() ) );
     grid->addMultiCellWidget( comboStandard, 1, 1, 1, 3 );
@@ -136,7 +136,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     labelData = new QLabel( i18n( "&Value:" ), this );
     grid->addWidget( labelData, 2, 0 );
 
-    data = new KLineEdit( this, "data" );
+    data = new KLineEdit( this );
 
     labelData->setBuddy( data );
     connect( data, SIGNAL( textChanged( const QString & ) ), this, SLOT( changed() ) );
@@ -171,7 +171,7 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
     buttonToken->setIconSet( QIcon( SmallIcon("contents") ) );
     grid->addWidget( buttonToken, 4, 3 );
     
-    spinMargin = new KIntNumInput( this, "spinMargin" );
+    spinMargin = new KIntNumInput( this );
     spinMargin->setLabel( i18n( "&Margin:" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinMargin->setRange( 0, 10000, 1, false );
     spinMargin->setValue( 10 );
@@ -299,7 +299,7 @@ void BarcodeWidget::encodingChanged()
 
 void BarcodeWidget::advanced()
 {
-    AdvancedBarcodeDialog abd( comboStandard->getEncodingType(), this, "abd" );
+    AdvancedBarcodeDialog abd( comboStandard->getEncodingType(), this );
     abd.setData( &m_barcode );
     if( abd.exec() == QDialog::Accepted )
         abd.getData( &m_barcode );
@@ -307,7 +307,7 @@ void BarcodeWidget::advanced()
 
 void BarcodeWidget::tokens()
 {
-    TokenDialog tokendlg( m_token, this, "tokendlg" );
+    TokenDialog tokendlg( m_token, this );
     if( tokendlg.exec() == QDialog::Accepted )
     {
 	if( data->isEnabled() )

@@ -107,7 +107,6 @@
 #include <kstatusbar.h>
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>
-#include <dcopclient.h>
 #include <kglobal.h>
 
 #include "tcanvasitem.h"
@@ -497,7 +496,7 @@ void LabelEditor::setupActions()
     copyAct->plug( toolBar() );
     pasteAct->plug( toolBar() );
 
-    tools = new KToolBar( this, this->leftDock(), true, "tools" );
+    tools = new KToolBar( this, this->leftDock(), true);
 
     barcodeAct->plug( tools );
     pictureAct->plug( tools );
@@ -635,7 +634,7 @@ void LabelEditor::insertDataText()
 //    DocumentItemList list = cv->getAllItems();
 //    QStringList vars = m_token->listUserVars( &list );
 
-    TokenDialog dlg( m_token, this, "dlg" );
+    TokenDialog dlg( m_token, this );
     if( dlg.exec() == QDialog::Accepted )
         insertText( dlg.token() );
 }
@@ -687,7 +686,7 @@ void LabelEditor::changeDes()
 
 void LabelEditor::changeSize()
 {
-    NewLabel* nl = new NewLabel( this, "nl", true, true );
+    NewLabel* nl = new NewLabel( this, true, true );
     nl->setLabelId( d->getId() );
     if( nl->exec() == QDialog::Rejected )
     {
@@ -760,7 +759,7 @@ void LabelEditor::lockItem()
 
 void LabelEditor::print()
 {
-    PrintLabelDlg pld( this, "pld" );
+    PrintLabelDlg pld( this );
     if( pld.exec() != QDialog::Accepted )
         return;
 
@@ -792,7 +791,7 @@ void LabelEditor::printBCP()
 
 void LabelEditor::printImage()
 {
-    KFileDialog fd( ":save_image", KImageIO::pattern( KImageIO::Writing ), this, "fd", true );
+    KFileDialog fd( ":save_image", KImageIO::pattern( KImageIO::Writing ), this,  true );
     fd.setMode( KFile::File );
     fd.setOperationMode( KFileDialog::Saving );
     if( fd.exec() == QDialog::Accepted ) {
@@ -1002,7 +1001,7 @@ void LabelEditor::paste()
 void LabelEditor::startEditor()
 {
     if( isChanged() ) {
-        LabelEditor* lb = new LabelEditor( NULL, QString::null, "LabelEditorWindow" );
+        LabelEditor* lb = new LabelEditor( NULL, QString::null );
         lb->startupDlg( eCreateNewLabel, QString::null );
     } else
         newLabel();
@@ -1022,7 +1021,7 @@ void LabelEditor::startLoadRecentEditor( const KUrl& url )
     }
 
     if( isChanged() )
-        new LabelEditor( 0, url.path(), "LabelEditorWindow" );
+        new LabelEditor( 0, url.path() );
     else
         openUrl( url.path() );
 }
@@ -1030,7 +1029,7 @@ void LabelEditor::startLoadRecentEditor( const KUrl& url )
 void LabelEditor::startLoadEditor()
 {
     if( isChanged() ) {
-        LabelEditor* lb = new LabelEditor( 0, QString::null, "LabelEditorWindow" );
+        LabelEditor* lb = new LabelEditor( 0, QString::null );
         lb->startupDlg( eLoadLabel, QString::null );
     } else
         open();

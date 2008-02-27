@@ -231,7 +231,7 @@ PropertyBarcode::PropertyBarcode( TokenProvider* token, QWidget* parent )
         
     comboComplex->addItem( "Static" );
 
-    barcode = new BarcodeWidget( this, "barcode" );
+    barcode = new BarcodeWidget( this );
     barcode->setTokenProvider( token );
 
     //connect( this, SIGNAL( defaultClicked() ), this, SLOT( defaults() ) );
@@ -293,7 +293,7 @@ void PropertyBarcode::initSettings( DocumentItem* item )
 PropertyText::PropertyText( TokenProvider* token, QWidget* parent )
     : PropertyWidget( parent )
 {
-    m_editor = new MultiLineEditor( token, this, "m_editor" );
+    m_editor = new MultiLineEditor( token, this );
     grid->addWidget( m_editor, 0, 0 );
 }
 
@@ -603,7 +603,7 @@ void PropertyImage::enableControls()
 
 void PropertyImage::slotTokens()
 {
-    TokenDialog tokendlg( m_token, this, "tokendlg" );
+    TokenDialog tokendlg( m_token, this );
     if( tokendlg.exec() == QDialog::Accepted )
 	imgExpression->insert( tokendlg.token() );
 }

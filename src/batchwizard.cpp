@@ -95,8 +95,7 @@ private:
 };
 
 BatchWizard::BatchWizard( QWidget* parent )
-    : DCOPObject("BatchPrinting"),
-      KWizard( parent )
+    : KWizard( parent )
 {
     setupPage1();
     setupPage2();
@@ -120,7 +119,7 @@ BatchWizard::~BatchWizard()
 
 void BatchWizard::setupPage1()
 {
-    page1 = new QWidget( this, "page1" );
+    page1 = new QWidget( this );
     Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page1, 11, 6, "pageLayout");
 
     QLabel* label = new QLabel( i18n("<qt>This wizard will guide you through the process "
@@ -148,7 +147,7 @@ void BatchWizard::setupPage1()
 
 void BatchWizard::setupPage2()
 {
-    page2 = new QWidget( this, "page2" );
+    page2 = new QWidget( this );
     Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page2, 11, 6, "pageLayout");
 
     Q3VButtonGroup* group = new Q3VButtonGroup( page2 );
@@ -173,7 +172,7 @@ void BatchWizard::setupPage2()
 
 void BatchWizard::setupPage3()
 {
-    page3 = new Q3WidgetStack( this, "page3" );
+    page3 = new Q3WidgetStack( this );
 
     setupStackPage1();
     setupStackPage2();
@@ -185,7 +184,7 @@ void BatchWizard::setupPage3()
 
 void BatchWizard::setupPage4()
 {
-    page4 = new Q3VBox( this, "page4" );
+    page4 = new Q3VBox( this );
     page4->setSpacing( 5 );
 
     Q3HBox* hbox = new Q3HBox( page4 );
@@ -210,7 +209,7 @@ void BatchWizard::setupPage5()
 {
     TokenProvider serial( this );
 
-    page5 = new Q3VBox( this, "page5" );
+    page5 = new Q3VBox( this );
 
     new QLabel( i18n( "<qt>KBarcode has support for placing serial numbers on labels. "
 		      "If you did not use the [serial] token on your label in "
@@ -234,7 +233,7 @@ void BatchWizard::setupPage5()
 
 void BatchWizard::setupPage10()
 {
-    page10 = new QWidget( this, "page10" );
+    page10 = new QWidget( this );
     Q3VBoxLayout* pageLayout = new Q3VBoxLayout( page10, 11, 6, "pageLayout");
 
     Q3VButtonGroup* group = new Q3VButtonGroup( page10 );
@@ -576,7 +575,7 @@ void BatchWizard::printNow( const QString & printer, bool bUserInteraction )
 	int move = 0;
         if( bUserInteraction ) 
         {
-            PrintLabelDlg pld( this, "pld" );
+            PrintLabelDlg pld( this );
             pld.setLabelsEnabled( false );
             if( pld.exec() != QDialog::Accepted )
 		return;
@@ -732,7 +731,7 @@ void BatchWizard::setupBatchPrinter( BatchPrinter* batch, int m )
 
 void BatchWizard::addItem()
 {
-    DSSmallDialogs::AddItemsDialog aid( this, "aid" );
+    DSSmallDialogs::AddItemsDialog aid( this );
     aid.setGroupCompletion( compGroup );
     connect( &aid, SIGNAL( add( const QString &, const QString &, int) ),
              this, SLOT( slotAddItem( const QString &, const QString &, int) ) );
@@ -855,7 +854,7 @@ void BatchWizard::customerNameChanged( int index )
 
 void BatchWizard::addAllItems() 
 {
-    DSSmallDialogs::AddAllDialog* dlg = new DSSmallDialogs::AddAllDialog( this, "dlg" );
+    DSSmallDialogs::AddAllDialog* dlg = new DSSmallDialogs::AddAllDialog( this );
     if( dlg->exec() == QDialog::Accepted )
     {
 	QString temp;

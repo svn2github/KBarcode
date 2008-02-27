@@ -138,7 +138,7 @@ void DatabaseBrowser::setupSql()
 void DatabaseBrowser::find()
 {
     if( !findDlg )
-        findDlg = new KEdFind( this, "findDlg", false );
+        findDlg = new KEdFind( this, false );
         
     findDlg->setText( m_find );
     findDlg->setDirection( m_direction );

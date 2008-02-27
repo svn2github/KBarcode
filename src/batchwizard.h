@@ -41,7 +41,7 @@ class Q3Table;
 class Q3VBox;
 class Q3WidgetStack;
 
-class BatchWizard : public KWizard, public BatchIface {
+class BatchWizard : public KWizard {
     Q_OBJECT
     public:
         BatchWizard( QWidget* parent = NULL );

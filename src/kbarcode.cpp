@@ -117,7 +117,7 @@ void KBarcode::startBarcode()
 
 void KBarcode::startLabelEditor()
 {
-    LabelEditor* ed = new LabelEditor( NULL, QString::null, "LabelEditorWindow" );
+    LabelEditor* ed = new LabelEditor( NULL, QString::null  );
     ed->startupDlg( LabelEditor::eCreateNewLabel, QString::null );
 }
 
@@ -128,22 +128,22 @@ void KBarcode::startBatchPrint()
 
 void KBarcode::editArticles()
 {
-    new DatabaseBrowser( TABLE_BASIC, NULL, "basicbrowser" );
+    new DatabaseBrowser( TABLE_BASIC, NULL );
 }
 
 void KBarcode::editCustomers()
 {
-    new DatabaseBrowser( TABLE_CUSTOMER, NULL, "customerbrowser" );
+    new DatabaseBrowser( TABLE_CUSTOMER, NULL );
 }
 
 void KBarcode::editCustomerText()
 {
-    new DatabaseBrowser( TABLE_CUSTOMER_TEXT, NULL, "customertextbrowser" );
+    new DatabaseBrowser( TABLE_CUSTOMER_TEXT, NULL );
 }
 
 void KBarcode::editLabelDef()
 {
-    new DatabaseBrowser( TABLE_LABEL_DEF, NULL, "defbrowser" );
+    new DatabaseBrowser( TABLE_LABEL_DEF, NULL );
 }
 
 void KBarcode::enableData()
@@ -266,7 +266,7 @@ bool KBarcode::parseCmdLine()
 
 void KBarcode::importCSV()
 {
-    new CSVImportDlg( this, "csvimportdlg" );
+    new CSVImportDlg( this );
 }
 
 bool KBarcode::isSQLConnected() const

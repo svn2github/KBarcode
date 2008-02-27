@@ -92,8 +92,8 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
     Layout2->addItem( spacer_2 );
     NewLabelLayout->addLayout( Layout2 );
 
-    TextLabel4 = new QLabel( this, "TextLabel4" );
-    preview = new LabelPreview( this, "preview" );
+    TextLabel4 = new QLabel( this );
+    preview = new LabelPreview( this );
 
     Q3HBoxLayout* hlayout = new Q3HBoxLayout( 0, 6, 6 );    
     hlayout->addWidget( TextLabel4 );
@@ -104,19 +104,19 @@ NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
 
     Layout1 = new Q3HBoxLayout( 0, 0, 6, "Layout1"); 
 
-    buttonOwnFormat = new KPushButton( this, "buttonOwnFormat" );
+    buttonOwnFormat = new KPushButton( this );
     buttonOwnFormat->setText( i18n( "&Add own Label Definition" ) );
     Layout1->addWidget( buttonOwnFormat );
 
     QSpacerItem* spacer_4 = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout1->addItem( spacer_4 );
 
-    buttonOk = new KPushButton( this, "buttonOk" );
+    buttonOk = new KPushButton( this );
     buttonOk->setText( i18n( "&OK" ) );
     buttonOk->setDefault( true );
     Layout1->addWidget( buttonOk );
 
-    buttonCancel = new KPushButton( this, "buttonCancel" );
+    buttonCancel = new KPushButton( this );
     buttonCancel->setText( i18n( "&Cancel" ) );
     Layout1->addWidget( buttonCancel );
     NewLabelLayout->addLayout( Layout1 );

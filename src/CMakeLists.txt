@@ -16,7 +16,6 @@ set(kbarcode_SRCS
   barcodeprinterdlg.cpp
   barkode.cpp
   barkodeengine.cpp
-  batchiface_skel.cpp
   batchprinter.cpp
   batchwizard.cpp
   commands.cpp
@@ -39,7 +38,6 @@ set(kbarcode_SRCS
   imageitem.cpp
   kactionmap.cpp
   kbarcode.cpp
-  kbarcodeiface_skel.cpp
   kbarcodesettings.cpp
   label.cpp
   labeleditor.cpp

@@ -24,7 +24,6 @@
 #include <k3command.h>
 
 #include <qbuffer.h>
-#include <q3cstring.h>
 #include <qdom.h>
 
 class DragCommand : public NewItemCommand {

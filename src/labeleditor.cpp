@@ -74,14 +74,12 @@
 #include <q3textbrowser.h>
 #include <qtooltip.h>
 #include <qvalidator.h>
-#include <qxml.h>
-#if QT_VERSION <= 0x030100
-    #include <qregexp.h>
-//Added by qt3to4:
+#include <QtXml>
+#include <qregexp.h>
 #include <QList>
-#include <QCString>
+#include <QByteArray>
 #include <QCloseEvent>
-#endif
+#include <qprinter.h>
 
 // KDE includes
 #include <kabc/stdaddressbook.h>
@@ -101,7 +99,6 @@
 #include <knuminput.h>
 #include <kmenu.h>
 #include <kpushbutton.h>
-#include <qprinter.h>
 #include <krun.h>
 #include <kspell.h>
 #include <kstatusbar.h>
@@ -344,7 +341,7 @@ void LabelEditor::save( QIODevice* device )
         writeXMLDocumentItem( &root, &ditem );
     }
 
-    QCString xml = doc.toCString();
+    QByteArray xml = doc.toByteArray();
     device->write( xml, xml.length() );
     device->close();
 }

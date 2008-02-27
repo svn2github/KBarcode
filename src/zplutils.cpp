@@ -19,7 +19,6 @@
 
 // Qt includes
 #include <qbuffer.h>
-#include <q3cstring.h>
 #include <qimage.h>
 #include <q3paintdevicemetrics.h>
 #include <qregexp.h>

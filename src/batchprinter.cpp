@@ -26,7 +26,7 @@
 // Qt includes
 #include <qfile.h>
 #include <qpainter.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
 #include <q3progressdialog.h>
 //Added by qt3to4:
 #include <QList>
@@ -101,10 +101,8 @@ void BatchPrinter::start()
 {
     painter = new QPainter( printer );
     m_cur_data_count = 0;
-
-    QPaintDeviceMetrics pdm( painter->device() );
-
-    pageh = pdm.height();   // in pixel
+    
+    pageh = painter->device()->height();   // in pixel
 
     curw = 0;
     curh = 0;

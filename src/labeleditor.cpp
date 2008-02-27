@@ -66,7 +66,6 @@
 #include <qmap.h>
 #include <qmime.h>
 #include <qpainter.h>
-#include <q3paintdevicemetrics.h>
 #include <q3picture.h>
 #include <qpoint.h>
 #include <q3progressdialog.h>

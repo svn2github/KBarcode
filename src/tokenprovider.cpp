@@ -25,7 +25,6 @@
 
 // Qt includes
 #include <qdatetime.h>
-#include <q3paintdevicemetrics.h>
 #include <qsqlquery.h>
 #include <qregexp.h>
 #include <QList>
@@ -557,8 +556,7 @@ QString TokenProvider::process( const QString & t )
 
     if( m_printer && t == TOK_RESOLUTION ) 
     {
-	QPaintDeviceMetrics metrics( m_printer );
-	ret = QString( "%1dpi" ).arg( metrics.logicalDpiY() );
+	ret = QString( "%1dpi" ).arg( m_printer->logicalDpiY() );
     }
 
     if( !m_serial.isEmpty() && t == TOK_SERIAL )

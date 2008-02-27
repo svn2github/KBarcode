@@ -24,8 +24,6 @@
 // Qt includes
 #include <qcursor.h>
 #include <qpainter.h>
-#include <q3paintdevicemetrics.h>
-//Added by qt3to4:
 #include <QResizeEvent>
 #include <QMouseEvent>
 
@@ -407,11 +405,9 @@ void MyCanvasView::updateRuler()
         rulerv->setMaxValue( height() );
         rulerh->setMaxValue( width() );
 
-
-        QPaintDeviceMetrics pdm( this );
         if( Measurements::measurementSystem() == Measurements::Metric ) {
-            rulerh->setPixelPerMark( (1/ 25.4)* pdm.logicalDpiX() );
-            rulerv->setPixelPerMark( (1/25.4)* pdm.logicalDpiY() );
+            rulerh->setPixelPerMark( (1/ 25.4)* logicalDpiX() );
+            rulerv->setPixelPerMark( (1/25.4)* logicalDpiY() );
         } 
     }
 

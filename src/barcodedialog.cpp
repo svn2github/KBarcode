@@ -37,9 +37,9 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
 #include <q3picture.h>
-//Added by qt3to4:
+#include <QX11Info>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
@@ -175,10 +175,8 @@ void BarCodeDialog::print()
     // unless we can center the barcode
     printer->setFullPage( false );
     
-    QPaintDeviceMetrics metrics( printer );
-    
-    double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
-    double scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
+    double scalex = (double)printer->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)printer->logicalDpiY() / (double)QX11Info::appDpiY();
     
     QPicture picture;
     QPainter p( printer );

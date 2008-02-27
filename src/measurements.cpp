@@ -18,7 +18,7 @@
 #include "measurements.h"
 
 // Qt includes
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
 
 // KDE includes
 #include <kglobal.h>
@@ -78,11 +78,10 @@ void Measurements::operator=( const Measurements & m ) {
 }
 
 double Measurements::mmToPixel( double mm, const QPaintDevice* device, int mode ) const {
-    QPaintDeviceMetrics pdm( device );
     if( mode == DpiX )
-        return (mm / 25.4) * pdm.logicalDpiX();
+        return (mm / 25.4) * device->logicalDpiX();
     else
-        return (mm / 25.4 ) * pdm.logicalDpiY();
+        return (mm / 25.4 ) * device->logicalDpiY();
 }
 
 double Measurements::gapLeft( const QPaintDevice* device ) const {

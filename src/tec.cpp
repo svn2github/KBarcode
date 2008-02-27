@@ -28,7 +28,6 @@
 #include <q3hbox.h>
 #include <qlayout.h>
 #include <qpainter.h>
-#include <q3paintdevicemetrics.h>
 #include <q3progressdialog.h>
 #include <q3sqlcursor.h>
 #include <qvalidator.h>

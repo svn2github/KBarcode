@@ -21,7 +21,7 @@
 // Qt includes
 #include <qbitmap.h>
 #include <qimage.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
 #include <qpainter.h>
 #include <q3simplerichtext.h>
 //Added by qt3to4:
@@ -46,11 +46,15 @@ LabelUtils::~LabelUtils()
 
 double LabelUtils::pixelToMm( double pixel, const QPaintDevice* device, int mode )
 {
-    QPaintDeviceMetrics pdm( device ? device : KApplication::desktop() );
+    if (device == 0)
+    {
+        device = KApplication::desktop();
+    }
+    
     if( mode == DpiX )
-	return (pixel * CONVERSION_FACTOR) / (double)pdm.logicalDpiX();
+	return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiX();
     else
-	return (pixel * CONVERSION_FACTOR) / (double)pdm.logicalDpiY();
+	return (pixel * CONVERSION_FACTOR) / (double)device->logicalDpiY();
 }
 
 double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
@@ -61,31 +65,28 @@ double LabelUtils::mmToPixel( double mm, const QPaintDevice* device, int mode )
     // We don't get valid metrics from the printer - and we want a better resolution
     // anyway (it's the PS driver that takes care of the printer resolution).
 
-    QPaintDeviceMetrics pdm( device ? device : KApplication::desktop() );
+    if (device == 0)
+    {
+        device = KApplication::desktop();
+    }
     
 //    qDebug("DpiX=%i", pdm.logicalDpiX());
 //    qDebug("DpiY=%i", pdm.logicalDpiY());
     if( mode == DpiX )
-	return (mm / CONVERSION_FACTOR) * (double)pdm.logicalDpiX();
+	return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiX();
     else
-	return (mm / CONVERSION_FACTOR) * (double)pdm.logicalDpiY();
+	return (mm / CONVERSION_FACTOR) * (double)device->logicalDpiY();
 }
 
 double LabelUtils::pixelToPixelX( double unit, const QPaintDevice* src, const QPaintDevice* dest )
 {
-    QPaintDeviceMetrics p1( src );
-    QPaintDeviceMetrics p2( dest );
-
-    return ( unit * (double)p2.logicalDpiX() ) / (double)p1.logicalDpiX();
+    return ( unit * (double)dest->logicalDpiX() ) / (double)src->logicalDpiX();
 }
 
 double LabelUtils::pixelToPixelY( double unit, const QPaintDevice* src, const QPaintDevice* dest )
 {
-    QPaintDeviceMetrics p1( src );
-    QPaintDeviceMetrics p2( dest );
-
     //return pixelToPixelX( unit, src, dest );
-    return ( unit * (double)p2.logicalDpiY() ) / (double)p1.logicalDpiY();
+    return ( unit * (double)dest->logicalDpiY() ) / (double)src->logicalDpiY();
 }
 
 const QString LabelUtils::getTypeFromCaption( const QString & cap )

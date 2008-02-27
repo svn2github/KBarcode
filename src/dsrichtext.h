@@ -92,9 +92,8 @@ class QPainter;
   * <pre>
   *  QPrinter printer( QPrinter::HighResolution );
   *  QPainter painter( &printer );
-  *  QPaintDeviceMetrics metrics( &printer );
-  *  double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
-  *  double scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
+  *  m_scalex = printer->logicalDpiX() / (double)QX11Info::appDpiX();
+  *  m_scaley = printer->logicalDpiY() / (double)QX11Info::appDpiY();
   *
   *  DSRichText dsr( "&lt;html&gt;&lt;p&gt;Hallo World&lt;/p&gt;&lt;/html&gt;" );
   *  dsr.setWidth( 200 ); // in screenresolution coordinates

@@ -21,9 +21,10 @@
 #include <qbuffer.h>
 #include <qdom.h>
 #include <qimage.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
+#include <QX11Info>
+
 #include <qpainter.h>
-//Added by qt3to4:
 #include <QPixmap>
 
 #include <klocale.h>
@@ -237,11 +238,12 @@ void ImageItem::createImage()
 		// we have to scale because of the bigger printer resolution
 		if( DocumentItem::paintDevice()->isExtDev() )
 		{
-		    QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
+		    QPaintDevice* device = DocumentItem::paintDevice();
 		    
-		    img = img.smoothScale( (int)(img.width() * ((double)metrics.logicalDpiX()/QPaintDevice::x11AppDpiX())),
-					   (int)(img.height() * ((double)metrics.logicalDpiY()/QPaintDevice::x11AppDpiY())),
-					   Qt::ScaleMin );
+		    img = img.smoothScale(
+                                          (int)(img.width() * ((double)device->logicalDpiX()/QX11Info::appDpiX())),
+                                          (int)(img.height() * ((double)device->logicalDpiY()/QX11Info::appDpiY())),
+                                          Qt::ScaleMin );
 		}
 	    }
 

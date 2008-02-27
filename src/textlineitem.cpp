@@ -21,7 +21,8 @@
 
 #include <qapplication.h>
 #include <qdom.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
+#include <QX11Info>
 #include <qpainter.h>
 #include <q3simplerichtext.h>
 
@@ -55,10 +56,10 @@ void TextLineItem::draw(QPainter* painter)
     QString text = tokenProvider() ? tokenProvider()->parse( m_text ) : m_text;
     QColorGroup cg;
     QSimpleRichText srt( text, painter->font() );
-    QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
-
-    double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
-    double scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
+    
+    QPaintDevice* device = DocumentItem::paintDevice();
+    double scalex = (double)device->logicalDpiX() / (double)QX11Info::appDpiX();
+    double scaley = (double)device->logicalDpiY() / (double)QX11Info::appDpiY();
     int width = (rect().width() > 0) ? (int)((double)rect().width() / scalex) : srt.widthUsed();
     int height = (rect().height() > 0) ? (int)((double)rect().height() / scaley): srt.height();
 

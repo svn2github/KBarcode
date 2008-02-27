@@ -30,7 +30,6 @@
 // Qt includes
 #include <qimage.h>
 #include <qiodevice.h>
-#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qpen.h>
 #include <q3sqlcursor.h>

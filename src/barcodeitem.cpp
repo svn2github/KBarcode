@@ -20,7 +20,7 @@
 
 #include <qdom.h>
 #include <qpainter.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
 
 BarcodeItem::BarcodeItem()
     : Barkode(), DocumentItem()
@@ -159,6 +159,7 @@ void BarcodeItem::draw (QPainter* painter)
     {
         painter->save();
         
+        // FIXME: What's this?
         /*
         QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
         double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();

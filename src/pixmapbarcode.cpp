@@ -30,7 +30,7 @@
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qpainter.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
 #include <qpixmap.h>
 #include <q3textstream.h>
 
@@ -306,9 +306,8 @@ bool PixmapBarcode::readFromPipe( const char* command, char** buffer, long* buff
 
 void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
 {
-    QPaintDeviceMetrics pdm( device );
-    int resx = pdm.logicalDpiX();
-    int resy = pdm.logicalDpiY();
+    int resx = device->logicalDpiX();
+    int resy = device->logicalDpiY();
 
     QPixmap* cached = 0;//BarcodeCache::instance()->read( barcode, resx, resy, value );
 
@@ -325,9 +324,8 @@ void PixmapBarcode::createBarcode( QPixmap* target, const QPaintDevice* device )
         // we have to scale to the correct resolution.
         // we scale already here and not at the end,
         // so that the addMargin function does not get a scaled margin.
-        QPaintDeviceMetrics pdm( KApplication::desktop() );
-        int screenresx = pdm.logicalDpiX();
-        int screenresy = pdm.logicalDpiY();
+        int screenresx = KApplication::desktop()->logicalDpiX();
+        int screenresy = KApplication::desktop()->logicalDpiY();
     
         QMatrix m;
         double scalex = (resx/screenresx)*barkode->scaling();

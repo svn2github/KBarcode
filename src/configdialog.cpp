@@ -24,11 +24,9 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <q3paintdevicemetrics.h>
 #include <qradiobutton.h>
 #include <qsqldatabase.h>
 #include <qtooltip.h>
-//Added by qt3to4:
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QFrame>

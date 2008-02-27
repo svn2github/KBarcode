@@ -20,7 +20,7 @@
 // Qt includes
 #include <qbuffer.h>
 #include <qimage.h>
-#include <q3paintdevicemetrics.h>
+#include <QPaintDevice>
 #include <qregexp.h>
 #include <qstring.h>
 #include <q3textstream.h>
@@ -51,30 +51,30 @@ int BarcodePrinterDevice::metric( int e ) const
 {
     int val = 0;
     switch ( e ) {
-        case QPaintDeviceMetrics::PdmPhysicalDpiX:
+        case QPaintDevice::PdmPhysicalDpiX:
             val = (int)m_resolution_y;
             break;
-        case QPaintDeviceMetrics::PdmPhysicalDpiY:
+        case QPaintDevice::PdmPhysicalDpiY:
             val = (int)m_resolution_x;
             break;
-        case QPaintDeviceMetrics::PdmDpiX:
+        case QPaintDevice::PdmDpiX:
             val = (int)m_resolution_x;
             break;
-        case QPaintDeviceMetrics::PdmDpiY:
+        case QPaintDevice::PdmDpiY:
             val = (int)m_resolution_y;
             break;
 
-        case QPaintDeviceMetrics::PdmNumColors:
+        case QPaintDevice::PdmNumColors:
             val = 2; // black and white
             break;
-        case QPaintDeviceMetrics::PdmDepth:
+        case QPaintDevice::PdmDepth:
             val = 1; // black and white
             break;
 
-        case QPaintDeviceMetrics::PdmWidth:
-        case QPaintDeviceMetrics::PdmHeight:
-        case QPaintDeviceMetrics::PdmWidthMM:
-        case QPaintDeviceMetrics::PdmHeightMM:
+        case QPaintDevice::PdmWidth:
+        case QPaintDevice::PdmHeight:
+        case QPaintDevice::PdmWidthMM:
+        case QPaintDevice::PdmHeightMM:
         default:
             break;
     }

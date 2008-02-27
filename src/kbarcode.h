@@ -33,7 +33,6 @@ enum linebreak {
 };
 
 #include "mainwindow.h"
-#include "kbarcodeiface.h"
 
 class KAction;
 class KPushButton;

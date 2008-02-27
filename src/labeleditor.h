@@ -27,7 +27,6 @@
 #include "definition.h"
 #include "mainwindow.h"
 #include "xmlutils.h"
-#include "editoriface.h"
 
 #include <kdialogbase.h>
 #include <qdialog.h>

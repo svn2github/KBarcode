@@ -19,8 +19,6 @@
 #define BATCHWIZARD_H
 
 #include <kwizard.h>
-#include "batchiface.h"
-//Added by qt3to4:
 #include <QLabel>
 
 class BatchPrinter;

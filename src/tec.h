@@ -15,7 +15,6 @@
 #include "labelutils.h"
 #include "xmlutils.h"
 #include "definition.h"
-#include "batchiface.h"
 
 // Other includes
 #include <stdlib.h>

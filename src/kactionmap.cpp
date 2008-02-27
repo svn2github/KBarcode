@@ -89,8 +89,8 @@ private:
     KAction* m_action;
 };
 
-KActionMapDlg::KActionMapDlg( KActionCollection* actions, QWidget* parent, const char* name )
-    : KDialogBase( parent, name, false, i18n("Action Map"), KDialogBase::Close, KDialogBase::Close )
+KActionMapDlg::KActionMapDlg( KActionCollection* actions, QWidget* parent )
+    : KDialogBase( parent, false, i18n("Action Map"), KDialogBase::Close, KDialogBase::Close )
 {
     KVBox *page = makeVBoxMainWidget();
 
@@ -105,8 +105,8 @@ void KActionMapDlg::updateEnabledState()
     m_map->updateEnabledState();
 }
 
-KActionMap::KActionMap( KActionCollection* actions, QWidget* parent, const char* name )
-    : QWidget( parent, name ), m_actions( actions ), m_showMenuTree( true ), m_grayOutItems( false )
+KActionMap::KActionMap( KActionCollection* actions, QWidget* parent )
+    : QWidget( parent ), m_actions( actions ), m_showMenuTree( true ), m_grayOutItems( false )
 {
     Q3VBoxLayout* layout = new Q3VBoxLayout( this );
 

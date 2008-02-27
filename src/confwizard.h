@@ -45,7 +45,7 @@ class ConfWizard : public KWizard
     Q_OBJECT
 
     public:
-        ConfWizard( QWidget* parent = 0, const char* name = 0, bool modal = true );
+        ConfWizard( QWidget* parent = 0, bool modal = true );
         ~ConfWizard();
 
         void showPage( QWidget* page );

@@ -34,7 +34,7 @@ class Q3ListViewItem;
  */
 class KActionMapDlg : public KDialogBase {
  public:
-    KActionMapDlg( KActionCollection* actions, QWidget* parent = NULL, const char* name = NULL );
+    KActionMapDlg( KActionCollection* actions, QWidget* parent = NULL );
 
     /** Call this function whenever you changed the enabled/disalbed state of an action
      *  in your application.
@@ -74,7 +74,7 @@ class KActionMap : public QWidget {
      *  @param parent the parent
      *  @param name   the name
      */
-    KActionMap( KActionCollection* actions, QWidget* parent = NULL, const char* name = NULL );
+    KActionMap( KActionCollection* actions, QWidget* parent = NULL );
     ~KActionMap();
 
  public slots:

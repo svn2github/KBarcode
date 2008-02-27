@@ -30,7 +30,7 @@ namespace DSSmallDialogs {
     class AddAllDialog : public KDialogBase {
         Q_OBJECT
         public:
-            AddAllDialog(QWidget *parent=0, const char *name=0);
+            AddAllDialog(QWidget *parent=0);
 
             QString groupName() const;
             int numberLabels() const;
@@ -43,8 +43,8 @@ namespace DSSmallDialogs {
     class AddItemsDialog : public KDialogBase {
         Q_OBJECT
         public:
-            AddItemsDialog( QWidget* parent = 0, const char* name = 0 );
-            AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent = 0, const char* name = 0 );
+            AddItemsDialog( QWidget* parent = 0 );
+            AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent = 0 );
 
             void setGroupCompletion( KCompletion* c );
 

@@ -28,7 +28,7 @@ class QPaintEvent;
 class LabelPreview : public QWidget {
     Q_OBJECT
     public:
-        LabelPreview( QWidget* parent = 0, const char* name = 0 );
+        LabelPreview( QWidget* parent = 0 );
         ~LabelPreview();
 
         void setRect( QRect label ) { size = label; }
@@ -52,7 +52,7 @@ class DefinitionDialog : public QDialog
     Q_OBJECT
 
 public:
-    DefinitionDialog( QWidget* parent = 0, const char* name = 0, bool modal = true, Qt::WFlags fl = 0 );
+    DefinitionDialog( QWidget* parent = 0, bool modal = true, Qt::WFlags fl = 0 );
     ~DefinitionDialog();
 private:
     const Measurements getCurrentMeasure();

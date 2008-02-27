@@ -17,8 +17,8 @@
 
 #include "mydatatable.h"
 
-MyDataTable::MyDataTable(QWidget *parent, const char *name )
-    : Q3DataTable(parent,name)
+MyDataTable::MyDataTable(QWidget *parent )
+    : Q3DataTable(parent)
 { }
 
 MyDataTable::~MyDataTable()

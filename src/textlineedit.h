@@ -35,7 +35,7 @@ class TokenProvider;
 class TextLineEditor : public QWidget {
     Q_OBJECT
     public:
-        TextLineEditor( TokenProvider* token, QWidget *parent=0, const char *name=0);
+        TextLineEditor( TokenProvider* token, QWidget *parent=0);
         ~TextLineEditor();
         QString text();
 	KIntNumInput* mag_vert;

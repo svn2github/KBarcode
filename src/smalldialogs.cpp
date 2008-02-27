@@ -36,9 +36,9 @@
 
 using namespace DSSmallDialogs;
 
-AddAllDialog::AddAllDialog(QWidget *parent, const char *name )
+AddAllDialog::AddAllDialog(QWidget *parent)
     : KDialogBase( KDialogBase::Plain, i18n("Add Barcode_basic"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
+      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     Q3VBoxLayout* layout = new Q3VBoxLayout( plainPage(), 6, 6 );
 
@@ -62,16 +62,16 @@ int AddAllDialog::numberLabels() const
     return number->value();
 }
 
-AddItemsDialog::AddItemsDialog(QWidget *parent, const char *name )
+AddItemsDialog::AddItemsDialog(QWidget *parent)
     : KDialogBase( KDialogBase::Plain, i18n("Add Items"),
-      KDialogBase::User1 | KDialogBase::Close, KDialogBase::User1, parent,name)
+      KDialogBase::User1 | KDialogBase::Close, KDialogBase::User1, parent)
 {
     init();
 }
 
-AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent, const char* name )
+AddItemsDialog::AddItemsDialog( const QString & a, const QString & g, int c, QWidget* parent)
     : KDialogBase( KDialogBase::Plain, i18n("Edit Item"),
-      KDialogBase::Ok| KDialogBase::Close, KDialogBase::Ok, parent,name)
+      KDialogBase::Ok| KDialogBase::Close, KDialogBase::Ok, parent)
 {
     init();
     article->setText( a );

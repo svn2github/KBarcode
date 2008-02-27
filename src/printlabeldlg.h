@@ -34,7 +34,7 @@ class KIntNumInput;
 class PrintLabelDlg : public KDialogBase  {
     Q_OBJECT
     public: 
-        PrintLabelDlg(QWidget *parent=0, const char *name=0);
+        PrintLabelDlg(QWidget *parent=0);
         ~PrintLabelDlg();
 
         /**

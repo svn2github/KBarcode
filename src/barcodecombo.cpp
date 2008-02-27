@@ -43,8 +43,8 @@
 #include <klocale.h>
 #include <kpushbutton.h>
 
-BarcodeValidator::BarcodeValidator( QObject* parent, const char* name )
-    : QValidator( parent, name )
+BarcodeValidator::BarcodeValidator( QObject* parent )
+    : QValidator( parent )
 {
     m_valid    = NULL;
     m_notValid = NULL;
@@ -90,8 +90,8 @@ QValidator::State BarcodeValidator::validate( QString & input, int & pos ) const
     return Acceptable;
 }
 
-BarcodeCombo::BarcodeCombo(QWidget *parent, const char *name )
-    : KComboBox( false, parent, name )
+BarcodeCombo::BarcodeCombo(QWidget *parent)
+    : KComboBox( false, parent )
 
 {
     this->insertStringList( *Barkode::encodingTypes() );
@@ -117,8 +117,8 @@ void BarcodeCombo::setEncodingType( const QString & type )
         }
 }
 
-BarcodeWidget::BarcodeWidget(QWidget *parent, const char *name )
-    : QWidget( parent, name ), m_validator( this )
+BarcodeWidget::BarcodeWidget(QWidget *parent)
+    : QWidget( parent ), m_validator( this )
 {
     m_token = NULL;
 

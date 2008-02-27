@@ -35,8 +35,8 @@
 // KDE includes
 #include <klocale.h>
 
-LabelPreview::LabelPreview( QWidget* parent, const char* name )
-    : QWidget( parent, name)
+LabelPreview::LabelPreview( QWidget* parent )
+    : QWidget( parent )
 {
     // For old DIN A4 preview
     PrinterSettings* ps = PrinterSettings::getInstance();
@@ -80,8 +80,8 @@ void LabelPreview::paintEvent( QPaintEvent* )
 }
 
 /*****************************************/
-DefinitionDialog::DefinitionDialog( QWidget* parent,  const char* name, bool modal, Qt::WFlags fl )
-    : QDialog( parent, name, modal, fl )
+DefinitionDialog::DefinitionDialog( QWidget* parent, bool modal, Qt::WFlags fl )
+    : QDialog( parent, modal, fl )
 {
     resize( 465, 345 );
     setCaption( i18n( "Add Label Definition" ) );

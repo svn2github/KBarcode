@@ -44,7 +44,7 @@ class TokenDialog : public QWizard {
  Q_OBJECT
 
  public:
-    TokenDialog( TokenProvider* token, QWidget *parent = 0, const char *name = 0 );
+    TokenDialog( TokenProvider* token, QWidget *parent = 0 );
    
     inline const QString & token() const { return m_result; }
 

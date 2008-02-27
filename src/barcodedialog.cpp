@@ -43,8 +43,8 @@
 #include <Q3HBoxLayout>
 #include <Q3VBoxLayout>
 
-BarCodeDialog::BarCodeDialog( QWidget* parent,  const char* name )
-    : QDialog( parent, name, false)
+BarCodeDialog::BarCodeDialog( QWidget* parent )
+    : QDialog( parent, false)
 {
     setCaption( i18n( "Barcode Generator" ) );
 

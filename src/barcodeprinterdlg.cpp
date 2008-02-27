@@ -29,9 +29,9 @@
 //Added by qt3to4:
 #include <Q3GridLayout>
 
-BarcodePrinterDlg::BarcodePrinterDlg(QWidget *parent, const char *name)
+BarcodePrinterDlg::BarcodePrinterDlg(QWidget *parent)
     : KDialogBase( KDialogBase::Plain, i18n("Barcode Printer"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
+      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     Q3GridLayout* layout = new Q3GridLayout( plainPage(), 6, 6 );
     

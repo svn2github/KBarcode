@@ -44,7 +44,7 @@ class Q3WidgetStack;
 class BatchWizard : public KWizard, public BatchIface {
     Q_OBJECT
     public:
-        BatchWizard( QWidget* parent = NULL, const char* name = NULL );
+        BatchWizard( QWidget* parent = NULL );
         ~BatchWizard();
 
     	/** reimplemented DCOP method from BatchIface 

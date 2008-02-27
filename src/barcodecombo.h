@@ -31,7 +31,7 @@
  */
 class BarcodeValidator : public QValidator {
  public:
-    BarcodeValidator( QObject* parent = 0, const char* name = 0 );
+    BarcodeValidator( QObject* parent = 0);
 
     QValidator::State validate( QString & input, int & pos ) const;
 
@@ -58,7 +58,7 @@ class BarcodeValidator : public QValidator {
 class BarcodeCombo : public KComboBox  {
     Q_OBJECT
     public: 
-        BarcodeCombo(QWidget *parent=0, const char *name=0);
+        BarcodeCombo(QWidget *parent=0);
         ~BarcodeCombo();
 
         const char* getEncodingType();
@@ -87,7 +87,7 @@ class QLabel;
 class BarcodeWidget : public QWidget {
     Q_OBJECT
     public:
-        BarcodeWidget(QWidget *parent=0, const char *name=0);
+        BarcodeWidget(QWidget *parent=0);
         ~BarcodeWidget() { }
 
         void getData( Barkode & barkode );

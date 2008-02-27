@@ -28,9 +28,9 @@
 #include <knuminput.h>
 #include <klocale.h>
 
-PrintLabelDlg::PrintLabelDlg(QWidget *parent, const char *name )
+PrintLabelDlg::PrintLabelDlg(QWidget *parent )
     : KDialogBase( KDialogBase::Plain, i18n("Print"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
+      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     Q3VBoxLayout* box = new Q3VBoxLayout( plainPage() );
 

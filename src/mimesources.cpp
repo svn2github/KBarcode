@@ -46,8 +46,8 @@ class DragCommand : public NewItemCommand {
 
 
 
-DocumentItemDrag::DocumentItemDrag( QWidget* dragSource, const char* name )
-    : Q3StoredDrag( DocumentItemDrag::mimeType(), dragSource, name )
+DocumentItemDrag::DocumentItemDrag( QWidget* dragSource )
+    : Q3StoredDrag( DocumentItemDrag::mimeType(), dragSource )
 {
 }
 

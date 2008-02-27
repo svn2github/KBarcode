@@ -39,8 +39,8 @@
     #define I2S(x) QString("%1").arg(x)
 #endif // I2S
 
-NewLabel::NewLabel( QWidget* parent,  const char* name, bool change, Qt::WFlags fl )
-    : QDialog( parent, name, true, fl )
+NewLabel::NewLabel( QWidget* parent, bool change, Qt::WFlags fl )
+    : QDialog( parent, true, fl )
 {
     setCaption( i18n( "New Label" ) );
     curid = 0;

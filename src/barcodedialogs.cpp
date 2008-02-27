@@ -43,9 +43,9 @@
 #include <kcolorbutton.h>
 
 
-AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent, const char* name )
+AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent )
     : KDialogBase( KDialogBase::Tabbed, i18n("Barcode Settings"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
+      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     list.setAutoDelete( false );
     
@@ -104,8 +104,8 @@ void AdvancedBarcodeDialog::getData( Barkode* b )
     }
 }
 
-TBarcodeDlg::TBarcodeDlg(QWidget *parent, const char *name )
-    : QWidget( parent, name )
+TBarcodeDlg::TBarcodeDlg(QWidget *parent)
+    : QWidget( parent )
 {
     Q3VBoxLayout* layout = new Q3VBoxLayout( this, 6, 6 );
 
@@ -254,8 +254,8 @@ void TBarcodeDlg::getData( Barkode* b ) const
     }
 }
 
-PDF417BarcodeDlg::PDF417BarcodeDlg(QWidget *parent, const char *name )
-    : QWidget( parent, name )
+PDF417BarcodeDlg::PDF417BarcodeDlg(QWidget *parent)
+    : QWidget( parent )
 {
     Q3VBoxLayout* layout = new Q3VBoxLayout( this, 6, 6 );
 
@@ -308,8 +308,8 @@ void PDF417BarcodeDlg::getData( Barkode* b ) const
     }
 }
 
-DataMatrixDlg::DataMatrixDlg(QWidget *parent, const char *name )
-    : QWidget( parent, name )
+DataMatrixDlg::DataMatrixDlg(QWidget *parent )
+    : QWidget( parent )
 {
     Q3HBoxLayout* datamLayout = new Q3HBoxLayout( this, 6, 6 );
 
@@ -362,8 +362,8 @@ void DataMatrixDlg::getData( Barkode* b ) const
     b->setDatamatrixSize( comboDataMatrix->currentItem() );
 }
 
-SequenceDlg::SequenceDlg( QWidget *parent, const char *name )
-    : QWidget( parent, name )
+SequenceDlg::SequenceDlg( QWidget *parent )
+    : QWidget( parent )
 {
     Q3VBoxLayout* main = new Q3VBoxLayout( this, 6, 6 );
 
@@ -442,8 +442,8 @@ void SequenceDlg::enableControls()
     spinStart->setEnabled( checkSequence->isChecked() && radioNumbers->isChecked() );
 }
 
-ColorDlg::ColorDlg(QWidget *parent, const char *name)
-    : Q3VBox( parent, name )
+ColorDlg::ColorDlg(QWidget *parent)
+    : Q3VBox( parent )
 {
     Q3GroupBox* gb  = new Q3GroupBox( i18n("Colors"), this );
     gb->setColumnLayout(0, Qt::Vertical );
@@ -478,8 +478,8 @@ void ColorDlg::getData( Barkode* b ) const
     b->setTextColor( buttonTextColor->color() );
 }
 
-PurePostscriptDlg::PurePostscriptDlg(QWidget *parent, const char *name)
-    : Q3VBox( parent, name )
+PurePostscriptDlg::PurePostscriptDlg(QWidget *parent)
+    : Q3VBox( parent )
 {
     Q3VGroupBox* gb  = new Q3VGroupBox( i18n("Barcode Writer in Pure Postscript"), this );
     gb->setEnabled( Barkode::havePurePostscriptBarcode() );

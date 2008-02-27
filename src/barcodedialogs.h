@@ -59,7 +59,7 @@ class BarcodeDlgBase {
 class AdvancedBarcodeDialog : public KDialogBase {
     Q_OBJECT
     public:
-        AdvancedBarcodeDialog( QString type, QWidget* parent = 0, const char* name = 0 );
+        AdvancedBarcodeDialog( QString type, QWidget* parent = 0 );
         ~AdvancedBarcodeDialog();
 
         void setData( Barkode* b );
@@ -75,7 +75,7 @@ class AdvancedBarcodeDialog : public KDialogBase {
 class TBarcodeDlg : public QWidget, public BarcodeDlgBase {
    Q_OBJECT
     public: 
-        TBarcodeDlg(QWidget *parent=0, const char *name=0);
+        TBarcodeDlg(QWidget *parent=0 );
 
         void setData( Barkode* b );
         void getData( Barkode* b ) const;
@@ -97,7 +97,7 @@ class TBarcodeDlg : public QWidget, public BarcodeDlgBase {
 class PDF417BarcodeDlg : public QWidget, public BarcodeDlgBase {
    Q_OBJECT
     public:
-        PDF417BarcodeDlg(QWidget *parent=0, const char *name=0);
+        PDF417BarcodeDlg(QWidget *parent=0);
 
         void setData( Barkode* b );
         void getData( Barkode* b ) const;
@@ -114,7 +114,7 @@ class PDF417BarcodeDlg : public QWidget, public BarcodeDlgBase {
 class DataMatrixDlg : public QWidget, public BarcodeDlgBase {
    Q_OBJECT
     public:
-        DataMatrixDlg(QWidget *parent=0, const char *name=0);
+        DataMatrixDlg(QWidget *parent=0);
 
         void setData( Barkode* b );
         void getData( Barkode* b ) const;
@@ -129,7 +129,7 @@ class DataMatrixDlg : public QWidget, public BarcodeDlgBase {
 class SequenceDlg : public QWidget, public BarcodeDlgBase {
     Q_OBJECT
     public:
-        SequenceDlg(QWidget *parent=0, const char *name=0);
+        SequenceDlg(QWidget *parent=0);
 
         void setData( Barkode* b );
         void getData( Barkode* b ) const;
@@ -153,7 +153,7 @@ class SequenceDlg : public QWidget, public BarcodeDlgBase {
 class ColorDlg : public Q3VBox, public BarcodeDlgBase {
     Q_OBJECT
     public:
-        ColorDlg(QWidget *parent=0, const char *name=0);
+        ColorDlg(QWidget *parent=0);
 
         void setData( Barkode* b );
         void getData( Barkode* b ) const;
@@ -170,7 +170,7 @@ class ColorDlg : public Q3VBox, public BarcodeDlgBase {
 class PurePostscriptDlg : public Q3VBox, public BarcodeDlgBase {
     Q_OBJECT
     public:
-        PurePostscriptDlg(QWidget *parent=0, const char *name=0);
+        PurePostscriptDlg(QWidget *parent=0);
 
         void setData( Barkode* b );
         void getData( Barkode* b ) const;

@@ -37,7 +37,7 @@ class DSTextEdit : public TextEditBase {
     Q_OBJECT
         
   public:
-    DSTextEdit( QWidget* parent, const char* name = 0 );
+    DSTextEdit( QWidget* parent );
 
     //virtual void moveCursor( CursorAction action, bool select );
   private slots:

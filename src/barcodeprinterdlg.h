@@ -33,7 +33,7 @@ class BarcodePrinterDlg : public KDialogBase
 {
     Q_OBJECT
     public:
-        BarcodePrinterDlg(QWidget *parent = 0, const char *name = 0);
+        BarcodePrinterDlg(QWidget *parent = 0);
         ~BarcodePrinterDlg();
 
         int outputFormat() const;

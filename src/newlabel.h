@@ -42,7 +42,7 @@ class NewLabel : public QDialog
 { 
     Q_OBJECT
     public:
-        NewLabel( QWidget* parent = 0, const char* name = 0, bool change = FALSE, Qt::WFlags fl = 0 );
+        NewLabel( QWidget* parent = 0, bool change = FALSE, Qt::WFlags fl = 0 );
         ~NewLabel();
 
         int labelId() const { return curid; }

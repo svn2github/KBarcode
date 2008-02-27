@@ -54,9 +54,9 @@ void fillLineCombo( KComboBox* box )
     }
 }
 
-RectSettingsDlg::RectSettingsDlg(QWidget *parent, const char *name )
+RectSettingsDlg::RectSettingsDlg(QWidget *parent )
     : KDialogBase( KDialogBase::Plain, i18n("Settings"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
+      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     QFrame* frame = plainPage();
     Q3GridLayout* grid = new Q3GridLayout( frame, 6, 6 );
@@ -145,9 +145,9 @@ int RectSettingsDlg::penStyle() const
     return checkBorder->isChecked() ? comboLine->currentItem() + 1 : 0;
 }
 
-LineSettingsDlg::LineSettingsDlg(QWidget *parent, const char *name )
+LineSettingsDlg::LineSettingsDlg(QWidget *parent )
     : KDialogBase( KDialogBase::Plain, i18n("Settings"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent,name)
+      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
 {
     QFrame* frame = plainPage();
     Q3GridLayout* grid = new Q3GridLayout( frame, 6, 6 );

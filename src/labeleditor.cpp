@@ -129,9 +129,8 @@
 
 using namespace KABC;
 
-LabelEditor::LabelEditor( QWidget *parent, QString _filename, const char *name, Qt::WFlags f )
-    : DCOPObject( "LabelEditor" ),
-      MainWindow( parent, f )
+LabelEditor::LabelEditor( QWidget *parent, QString _filename, Qt::WFlags f )
+    : MainWindow( parent, f )
 {
     undoAct = 
 	redoAct = NULL; 

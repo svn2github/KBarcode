@@ -94,9 +94,9 @@ private:
 
 };
 
-BatchWizard::BatchWizard( QWidget* parent, const char* name )
+BatchWizard::BatchWizard( QWidget* parent )
     : DCOPObject("BatchPrinting"),
-      KWizard( parent, name )
+      KWizard( parent )
 {
     setupPage1();
     setupPage2();

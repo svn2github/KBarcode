@@ -52,8 +52,8 @@ int PreviewDialog::m_index = 1;
 QString PreviewDialog::group = "";
 QString PreviewDialog::article = "";
         
-PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename, QWidget *parent, const char *name )
-    : QDialog( parent, name, true, Qt::WDestructiveClose )
+PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename, QWidget *parent)
+    : QDialog( parent, true, Qt::WDestructiveClose )
 {
     file = device;
     def = d;

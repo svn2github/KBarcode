@@ -56,7 +56,7 @@ class BarCodeDialog : public QDialog
     Q_OBJECT
 
     public:
-        BarCodeDialog( QWidget* parent = 0, const char* name = 0 );
+        BarCodeDialog( QWidget* parent = 0 );
         ~BarCodeDialog();
 
     private:

@@ -27,7 +27,7 @@ class QCheckBox;
 class RectSettingsDlg : public KDialogBase  {
     Q_OBJECT
     public: 
-        RectSettingsDlg(QWidget *parent=0, const char *name=0);
+        RectSettingsDlg(QWidget *parent=0);
         ~RectSettingsDlg();
 
         void setBorderColor( const QColor & c );
@@ -57,7 +57,7 @@ class QPen;
 class LineSettingsDlg : public KDialogBase  {
     Q_OBJECT
     public:
-        LineSettingsDlg(QWidget *parent=0, const char *name=0);
+        LineSettingsDlg(QWidget *parent=0);
         ~LineSettingsDlg();
 
         void setPen( const QPen p );

@@ -33,8 +33,8 @@
 #include <kruler.h>
 #include <kstatusbar.h>
 
-MyCanvas::MyCanvas( QObject* parent, const char* name )
-    : Q3Canvas( parent, name )
+MyCanvas::MyCanvas( QObject* parent )
+    : Q3Canvas( parent )
 {
     m_grid = false;
 
@@ -77,8 +77,8 @@ void MyCanvas::drawBackground( QPainter & painter, const QRect & clip )
     }
 }
 
-MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, const char* name, Qt::WFlags f)
-    : Q3CanvasView(c,parent,name,f)
+MyCanvasView::MyCanvasView( Definition* d, MyCanvas* c, QWidget* parent, Qt::WFlags f)
+    : Q3CanvasView(c,parent,f)
 {
     statusbar = 0;
     m_commov = 0;

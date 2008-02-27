@@ -35,8 +35,8 @@
 //Added by qt3to4:
 #include <Q3VBoxLayout>
 
-MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent, const char *name )
-    : QWidget( parent, name ), m_token( token )
+MultiLineEditor::MultiLineEditor( TokenProvider* token, QWidget *parent )
+    : QWidget( parent ), m_token( token )
 {
     Q3VBoxLayout* layout = new Q3VBoxLayout( this, 6, 6 );
 

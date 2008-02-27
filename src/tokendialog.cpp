@@ -41,8 +41,8 @@
 #include <q3textbrowser.h>
 #include <kpushbutton.h>
 
-TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent, const char *name)
-    : QWizard( parent, name ), m_token( token )
+TokenDialog::TokenDialog(TokenProvider* token ,QWidget *parent)
+    : QWizard( parent ), m_token( token )
 {
     m_custom_tokens = m_token->listUserVars();
 

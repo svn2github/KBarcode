@@ -26,7 +26,7 @@
 class MyDataTable : public Q3DataTable  {
    Q_OBJECT
    public:
-        MyDataTable(QWidget *parent=0, const char *name=0);
+        MyDataTable(QWidget *parent=0);
         ~MyDataTable();
 
         bool update();

@@ -28,7 +28,7 @@ class MyCanvasView;
 class DocumentItemDrag : public Q3StoredDrag {
     Q_OBJECT
     public:
-        DocumentItemDrag( QWidget* dragSource = NULL, const char* name = 0 );
+        DocumentItemDrag( QWidget* dragSource = NULL );
         
         static QString mimeType();
         

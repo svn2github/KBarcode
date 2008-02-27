@@ -57,8 +57,8 @@ const char* description = I18N_NOOP(
         "replacement for the creation of barcodes. All major types of barcodes "
         "like EAN, UPC, CODE39 and ISBN are supported." );
 
-ConfWizard::ConfWizard( QWidget* parent,  const char* name, bool modal )
-    : KWizard( parent, name, modal )
+ConfWizard::ConfWizard( QWidget* parent, bool modal )
+    : KWizard( parent, modal )
 {
     setCaption( i18n( "Configure KBarcode" ) );
 

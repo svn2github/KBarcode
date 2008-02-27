@@ -36,8 +36,8 @@
 #include <qlabel.h>
 #include <qlayout.h>
 
-TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent, const char *name )
-    : QWidget( parent, name ), m_token( token )
+TextLineEditor::TextLineEditor( TokenProvider* token, QWidget *parent )
+    : QWidget( parent ), m_token( token )
 {
     Q3VBoxLayout* layout = new Q3VBoxLayout( this, 6, 6 );
 

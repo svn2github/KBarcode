@@ -34,7 +34,7 @@ class TokenProvider;
 class MultiLineEditor : public QWidget {
     Q_OBJECT
     public:
-        MultiLineEditor( TokenProvider* token, QWidget *parent=0, const char *name=0);
+        MultiLineEditor( TokenProvider* token, QWidget *parent=0 );
         ~MultiLineEditor();
         QString text();
         void setText( const QString & t );

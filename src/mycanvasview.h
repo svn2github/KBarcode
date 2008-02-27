@@ -37,7 +37,7 @@ class MyCanvas : public Q3Canvas {
     Q_OBJECT
 
     public:
-        MyCanvas( QObject* parent, const char* name = 0 );
+        MyCanvas( QObject* parent );
         ~MyCanvas();
 
         void setRect( QRect r ) {

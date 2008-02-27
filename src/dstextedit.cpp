@@ -21,8 +21,8 @@
 //Added by qt3to4:
 #include <Q3ValueList>
 
-DSTextEdit::DSTextEdit( QWidget* parent, const char* name )
-    : TextEditBase( parent, name )
+DSTextEdit::DSTextEdit( QWidget* parent )
+    : TextEditBase( parent )
 {
     connect( this, SIGNAL( textChanged() ), this, SLOT( fixParagraphs() ) );
 }

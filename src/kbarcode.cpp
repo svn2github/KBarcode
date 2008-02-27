@@ -41,9 +41,8 @@
 #include <kpushbutton.h>
 #include <kmessagebox.h>
 
-KBarcode::KBarcode( QWidget *parent, const char *name, Qt::WFlags f)
-    : DCOPObject("KBarcode"),
-      MainWindow( parent, name, f )
+KBarcode::KBarcode( QWidget *parent, Qt::WFlags f)
+    : MainWindow( parent, f )
 {
     Q3GroupBox* w = new Q3GroupBox( this );
     w->setColumnLayout(0, Qt::Vertical );

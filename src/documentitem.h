@@ -22,7 +22,7 @@
 #include <qobject.h>
 #include <q3sortedlist.h> 
 #include <qstring.h>
-#include <q3textstream.h>
+#include <QTextStream>
 
 #include <qcolor.h>
 #include <qpen.h>

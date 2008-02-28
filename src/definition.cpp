@@ -19,7 +19,7 @@
 #include "sqltables.h"
 
 // Qt includes
-#include <q3textstream.h>
+#include <QTextStream>
 #include <qsqlquery.h>
 #include <qregexp.h>
 

@@ -23,7 +23,6 @@
 #include <QPaintDevice>
 #include <qregexp.h>
 #include <qstring.h>
-#include <q3textstream.h>
 
 // font table for IPL, thanks to Erich Kitzmueller
 struct { int size; int c; int h; int w; } iplfonttable[] = {

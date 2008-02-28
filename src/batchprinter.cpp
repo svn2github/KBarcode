@@ -27,8 +27,8 @@
 #include <qfile.h>
 #include <qpainter.h>
 #include <QPaintDevice>
+#include <QTextStream>
 #include <q3progressdialog.h>
-//Added by qt3to4:
 #include <QList>
 #include <QPixmap>
 

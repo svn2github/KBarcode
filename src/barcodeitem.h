@@ -20,6 +20,7 @@
 
 #include <qmap.h>
 #include <qpixmap.h>
+#include <QTextStream>
 
 #include "barkode.h"
 #include "gnubarcode.h"

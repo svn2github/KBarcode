@@ -35,7 +35,7 @@
 #include <qsqlquery.h>
 #include <q3table.h>
 #include <qradiobutton.h>
-#include <q3textstream.h>
+#include <QTextStream>
 #include <q3vbox.h>
 //Added by qt3to4:
 #include <QHBoxLayout>

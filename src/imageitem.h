@@ -20,6 +20,7 @@
 #include "documentitem.h"
 
 #include <qpixmap.h>
+#include <QTextStream>
 
 enum EImageScaling { eImage_Original = 0, eImage_Scaled, eImage_Zoomed };
 

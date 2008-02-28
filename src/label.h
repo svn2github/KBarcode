@@ -20,6 +20,8 @@
 
 #include <qfont.h>
 #include <q3picture.h>
+#include <QTextStream>
+
 #include "labelutils.h"
 #include "xmlutils.h"
 #include "definition.h"
@@ -32,7 +34,6 @@ class QIODevice;
 class QString;
 class QPainter;
 class QPaintDevice;
-class QTextStream;
 class QPrinter;
 /** Creates a QPicture from the XML KBarcode file. If a SQL connections is available
   * the data from the SQL tables will be used, too.

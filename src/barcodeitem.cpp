@@ -21,6 +21,7 @@
 #include <qdom.h>
 #include <qpainter.h>
 #include <QPaintDevice>
+#include <QTextStream>
 
 BarcodeItem::BarcodeItem()
     : Barkode(), DocumentItem()
@@ -201,6 +202,7 @@ void BarcodeItem::drawZpl( QTextStream* stream )
     *stream << ZPLUtils::fieldOrigin( rect().x(), rect().y() );
     *stream << "^B" << encoding;
     *stream << ZPLUtils::fieldData( value() );
+    stream -> flush();
 }
 
 void BarcodeItem::drawIpl(  QTextStream* stream, IPLUtils* utils )
@@ -224,6 +226,7 @@ void BarcodeItem::drawIpl(  QTextStream* stream, IPLUtils* utils )
     
     *stream << utils->field( s );
     utils->addValue( value() );
+    stream -> flush();
 }
 
 void BarcodeItem::drawEPcl( QTextStream* stream )
@@ -243,6 +246,7 @@ void BarcodeItem::drawEPcl( QTextStream* stream )
     s += QString(" %1").arg( value() );
 
     *stream << EPCLUtils::field( s );
+    stream -> flush();
 }
 
 void BarcodeItem::updateBarcode()

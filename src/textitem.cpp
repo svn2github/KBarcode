@@ -126,6 +126,8 @@ void TextItem::drawZpl( QTextStream* stream )
     QString data = m_text.replace( QRegExp("<[^>]*>"), "" );
     *stream << ZPLUtils::fieldOrigin( rect().x(), rect().y() );
     *stream << ZPLUtils::font( QFont() ); // todo: select a valid font
+    
+    stream -> flush();
 }
 
 void TextItem::drawIpl( QTextStream* stream, IPLUtils* utils )
@@ -146,6 +148,7 @@ void TextItem::drawIpl( QTextStream* stream, IPLUtils* utils )
      
     *stream << utils->field( s );
     utils->addValue( data );
+    stream -> flush();
 }
 
 void TextItem::drawEPcl( QTextStream* stream )
@@ -171,6 +174,7 @@ void TextItem::drawEPcl( QTextStream* stream )
         s += QString(" %1").arg( *line );
         *stream << EPCLUtils::field( s );
     }
+    stream -> flush();
 }
 
 void TextItem::loadXML (QDomElement* element)

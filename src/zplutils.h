@@ -22,12 +22,12 @@
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qmap.h>
+#include <QTextStream>
 
 class QColor;
 class QFont;
 class QImage;
 class QSize;
-class QTextStream;
 
 class BarcodePrinterDevice : public QPaintDevice {
     public:

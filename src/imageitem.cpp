@@ -23,6 +23,7 @@
 #include <qimage.h>
 #include <QPaintDevice>
 #include <QX11Info>
+#include <QTextStream>
 
 #include <qpainter.h>
 #include <QPixmap>
@@ -81,7 +82,8 @@ void ImageItem::drawZpl( QTextStream* stream )
         *stream << "~DYD,p,P," << QString::number( data.size() ) + ",0,";
         for( unsigned int i=0;i<data.size();i++)
             *stream << data[i];
-    }        
+    }
+    stream -> flush();
 }
 
 void ImageItem::drawIpl( QTextStream*, IPLUtils* )
@@ -125,6 +127,8 @@ void ImageItem::drawEPcl( QTextStream* stream )
 
 		*stream << "\r\n";
 	}
+        
+        stream -> flush();
 }
 
 void ImageItem::loadXML(QDomElement* element)

@@ -84,6 +84,8 @@ void RectItem::drawZpl( QTextStream* stream )
         *stream << QString("~GE%1,%2,%3,B").arg( rect().width() ).arg( rect().height() ).arg( thick );
     else
         *stream << QString("~GB%1,%2,%3,B,0").arg( rect().width() ).arg( rect().height() ).arg( thick );
+
+    stream -> flush();
 }
 
 void RectItem::drawIpl( QTextStream* stream, IPLUtils* utils )
@@ -106,6 +108,8 @@ void RectItem::drawIpl( QTextStream* stream, IPLUtils* utils )
     
         *stream << utils->field( s );
     }
+    
+    stream -> flush();
 }
 
 void RectItem::drawEPcl( QTextStream* stream )
@@ -117,6 +121,8 @@ void RectItem::drawEPcl( QTextStream* stream )
     s += QString(" %1 2").arg( pen().width() );
 
     *stream << EPCLUtils::field( s );
+    
+    stream -> flush();
 }
 
 void RectItem::init()

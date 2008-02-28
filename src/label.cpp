@@ -85,6 +85,8 @@ void Label::epcl( QTextStream* stream )
 	    item->drawEPcl( stream );
     
     *stream << EPCLUtils::footer();
+    
+    stream -> flush();
 }
 
 void Label::ipl( QTextStream* stream )
@@ -98,6 +100,8 @@ void Label::ipl( QTextStream* stream )
 	    item->drawIpl( stream, &utils );
     
     *stream << utils.footer();
+    
+    stream -> flush();
 }
 
 
@@ -111,6 +115,8 @@ void Label::zpl( QTextStream* stream )
 	    item->drawZpl( stream );
     
     *stream << ZPLUtils::footer();
+    
+    stream -> flush();
 }
 
 void Label::InitBarcodes()

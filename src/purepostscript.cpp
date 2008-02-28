@@ -22,7 +22,7 @@
 
 #include <qdom.h>
 #include <qfile.h>
-#include <q3textstream.h>
+#include <QTextStream>
 
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>

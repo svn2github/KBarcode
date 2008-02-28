@@ -18,6 +18,8 @@
 #ifndef TEXTLINEITEM_H
 #define TEXTLINEITEM_H
 #include <qstring.h>
+#include <QTextStream>
+
 #include "documentitem.h"
 
 /**

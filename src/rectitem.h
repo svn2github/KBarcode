@@ -18,6 +18,8 @@
 #ifndef RECTITEM_H
 #define RECTITEM_H
 #include <qstring.h>
+#include <QTextStream>
+
 #include "documentitem.h"
 #include "qcolor.h"
 

@@ -19,6 +19,7 @@
 #define TEXTITEM_H
 #include <qstring.h>
 #include "documentitem.h"
+#include <QTextStream>
 
 class LabelEditor;
 

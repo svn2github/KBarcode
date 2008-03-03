@@ -18,7 +18,7 @@
 #include "labeleditor.h"
 
 #include "barcodecombo.h"
-#include "barcodedialog.h"
+#include "barcodegenerator.h"
 #include "barcodeitem.h"
 #include "barcodeprinterdlg.h"
 #include "batchprinter.h"
@@ -1005,7 +1005,7 @@ void LabelEditor::startEditor()
 
 void LabelEditor::startBarcodeGen()
 {
-    new BarCodeDialog();
+    new BarcodeGenerator();
 }
 
 void LabelEditor::startLoadRecentEditor( const KUrl& url )

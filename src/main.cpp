@@ -24,7 +24,7 @@
 
 #include "kbarcode.h"
 #include "labeleditor.h"
-#include "barcodedialog.h"
+#include "barcodegenerator.h"
 
 #ifndef VERSION
     #define VERSION "Unknown Version"

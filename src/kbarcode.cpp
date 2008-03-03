@@ -17,7 +17,7 @@
 
 #include "kbarcode.h"
 #include "barkode.h"
-#include "barcodedialog.h"
+#include "barcodegenerator.h"
 #include "batchwizard.h"
 #include "labeleditor.h"
 #include "databasebrowser.h"
@@ -112,7 +112,7 @@ void KBarcode::setupActions()
 
 void KBarcode::startBarcode()
 {
-    new BarCodeDialog();
+    new BarcodeGenerator();
 }
 
 void KBarcode::startLabelEditor()

@@ -76,12 +76,12 @@ class KPushButton;
 class QCheckBox;
 class QLabel;
 
-/** This widget is used in BarCodeDialog and BarcodeSettingsDlg and
+/** This widget is used in BarcodeGenerator and BarcodeSettingsDlg and
   * allows the user to change the data of a barcodeData struct. This powerful
   * widget is always used when the user has to change some property of
   * a barcode.
   *
-  * @see BarCodeDialog, @see BarcodeSettingsDlg
+  * @see BarcodeGenerator, @see BarcodeSettingsDlg
   * @author Dominik Seichter
   */
 class BarcodeWidget : public QWidget {

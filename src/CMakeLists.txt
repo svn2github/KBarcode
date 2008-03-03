@@ -10,7 +10,7 @@ add_definitions( ${KDE4_DEFINITIONS} )
 
 set(kbarcode_SRCS
   barcodecombo.cpp
-  barcodedialog.cpp
+  barcodegenerator.cpp
   barcodedialogs.cpp
   barcodeitem.cpp
   barcodeprinterdlg.cpp

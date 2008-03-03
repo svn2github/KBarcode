@@ -1,5 +1,5 @@
 /***************************************************************************
-                          barcodedialog.h  -  description
+                          barcodegenerator.h  -  description
                              -------------------
     begin                : Son Dez 29 2002
     copyright            : (C) 2002 by Dominik Seichter
@@ -51,13 +51,13 @@ class TokenProvider;
   * All barcoding features are available for the user. This dialog allows also
   * to just experiment a little bit with barcodes.
   */
-class BarCodeDialog : public QDialog
+class BarcodeGenerator : public QDialog
 { 
     Q_OBJECT
 
     public:
-        BarCodeDialog( QWidget* parent = 0 );
-        ~BarCodeDialog();
+        BarcodeGenerator( QWidget* parent = 0 );
+        ~BarcodeGenerator();
 
     private:
         BarcodeWidget* widget;
@@ -77,7 +77,7 @@ class BarCodeDialog : public QDialog
         void copy();
 
     protected:
-        QHBoxLayout* BarCodeDialogLayout;
+        QHBoxLayout* BarcodeGeneratorLayout;
         QVBoxLayout* Layout6;
         QVBoxLayout* Layout5;
 };

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          barcodedialog.cpp  -  description
+                          barcodegenerator.cpp  -  description
                              -------------------
     begin                : Son Dez 29 2002
     copyright            : (C) 2002 by Dominik Seichter
@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "barcodedialog.h"
+#include "barcodegenerator.h"
 #include "barcodeitem.h"
 #include "printersettings.h"
 #include "barcodecombo.h"
@@ -43,12 +43,12 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
-BarCodeDialog::BarCodeDialog( QWidget* parent )
+BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     : QDialog( parent, false)
 {
     setCaption( i18n( "Barcode Generator" ) );
 
-    BarCodeDialogLayout = new QHBoxLayout( this, 11, 6, "BarCodeDialogLayout");
+    BarcodeGeneratorLayout = new QHBoxLayout( this, 11, 6, "BarcodeGeneratorLayout");
     Layout5 = new QVBoxLayout( 0, 0, 6, "Layout5");
     Layout6 = new QVBoxLayout( 0, 0, 6, "Layout2");
     widget = new BarcodeWidget( this );
@@ -102,9 +102,9 @@ BarCodeDialog::BarCodeDialog( QWidget* parent )
     Layout6->addWidget( widget );
     Layout6->addWidget( sv );
     
-    BarCodeDialogLayout->addLayout( Layout6 );
-    BarCodeDialogLayout->addLayout( Layout5 );
-    BarCodeDialogLayout->setStretchFactor( Layout6, 2 );
+    BarcodeGeneratorLayout->addLayout( Layout6 );
+    BarcodeGeneratorLayout->addLayout( Layout5 );
+    BarcodeGeneratorLayout->setStretchFactor( Layout6, 2 );
 
     connect( buttonClose, SIGNAL( clicked() ), this, SLOT( close() ) );
     
@@ -113,12 +113,12 @@ BarCodeDialog::BarCodeDialog( QWidget* parent )
     show();
 }
 
-BarCodeDialog::~BarCodeDialog()
+BarcodeGenerator::~BarcodeGenerator()
 {
     delete m_token;
 }
 
-void BarCodeDialog::generate()
+void BarcodeGenerator::generate()
 {        
     Barkode d;
     widget->getData( d );
@@ -132,7 +132,7 @@ void BarCodeDialog::generate()
     buttonCopy->setEnabled( !barcode->pixmap()->isNull() );
 }
 
-void BarCodeDialog::save()
+void BarcodeGenerator::save()
 {
     Barkode bc;
     widget->getData( bc );
@@ -160,7 +160,7 @@ void BarCodeDialog::save()
     }        
 }
 
-void BarCodeDialog::print()
+void BarcodeGenerator::print()
 {
     Barkode d;
     widget->getData( d );
@@ -195,7 +195,7 @@ void BarCodeDialog::print()
     delete printer;
 }
 
-void BarCodeDialog::copy()
+void BarcodeGenerator::copy()
 {
     if( barcode->pixmap()->isNull() )
         return;
@@ -216,4 +216,4 @@ void BarCodeDialog::copy()
 #endif
 }
 
-#include "barcodedialog.moc"
+#include "barcodegenerator.moc"

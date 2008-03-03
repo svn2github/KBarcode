@@ -2,32 +2,25 @@
 add_subdirectory( pics )
 
 include_directories( ${CMAKE_SOURCE_DIR} ${KDE4_INCLUDE_DIR} 
-  ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+  ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} dialogs )
 add_definitions( ${KDE4_DEFINITIONS} )
 
 ########### next target ###############
 
-
 set(kbarcode_SRCS
   barcodecombo.cpp
   barcodegenerator.cpp
-  barcodedialogs.cpp
   barcodeitem.cpp
-  barcodeprinterdlg.cpp
   barkode.cpp
   barkodeengine.cpp
   batchprinter.cpp
   batchwizard.cpp
   commands.cpp
-  configdialog.cpp
   confwizard.cpp
   csvfile.cpp
-  csvimportdlg.cpp
   databasebrowser.cpp
   definition.cpp
-  definitiondialog.cpp
   documentitem.cpp
-  documentitemdlg.cpp
   dsrichtext.cpp
   dstextedit.cpp
   encodingcombo.cpp
@@ -45,20 +38,15 @@ set(kbarcode_SRCS
   mainwindow.cpp
   measurements.cpp
   mimesources.cpp
-  multilineeditdlg.cpp
   mycanvasitem.cpp
   mycanvasview.cpp
   mydatatable.cpp
   newlabel.cpp
   pixmapbarcode.cpp
-  previewdialog.cpp
   printersettings.cpp
-  printlabeldlg.cpp
   propertywidget.cpp
   purepostscript.cpp
   rectitem.cpp
-  rectsettingsdlg.cpp
-  smalldialogs.cpp
   sqltables.cpp
   tbarcode2.cpp
   tcanvasitem.cpp
@@ -66,13 +54,24 @@ set(kbarcode_SRCS
   textitem.cpp
   textlineedit.cpp
   textlineitem.cpp
-  tokendialog.cpp
   tokenprovider.cpp
   xmlutils.cpp
   zplutils.cpp
+  dialogs/barcodedialogs.cpp
+  dialogs/barcodeprinterdlg.cpp
+  dialogs/configdialog.cpp
+  dialogs/csvimportdlg.cpp
+  dialogs/definitiondialog.cpp
+  dialogs/documentitemdlg.cpp
+  dialogs/multilineeditdlg.cpp
+  dialogs/previewdialog.cpp
+  dialogs/printlabeldlg.cpp
+  dialogs/rectsettingsdlg.cpp
+  dialogs/smalldialogs.cpp
+  dialogs/tokendialog.cpp  
   )
 
-kde4_add_ui_files( kbarcode_SRCS 
+kde4_add_ui_files( kbarcode_SRCS
   )
 
 kde4_add_executable(kbarcode ${kbarcode_SRCS})

@@ -115,24 +115,24 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
 
     setEnabled( Barkode::haveTBarcode() || Barkode::haveTBarcode2() );
 
-    spinModule = new KDoubleNumInput( layout );
+    spinModule = new KDoubleNumInput( this );
     spinModule->setLabel( i18n( "Module width (mm):" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinModule->setRange( 0.190, 1.500, 0.001, true );
 
-    spinHeight = new KIntNumInput( layout );
+    spinHeight = new KIntNumInput( this );
     spinHeight->setLabel( i18n( "Barcode Height (mm):" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinHeight->setRange( 1, 1000, 10, false );
 
-    checkEscape = new QCheckBox( i18n( "&Translate escape sequences" ), layout );
-    checkAbove = new QCheckBox( i18n( "&Text above barcode" ), layout );
-    checkAutoCorrect = new QCheckBox( i18n( "&Auto correction" ), layout );
+    checkEscape = new QCheckBox( i18n( "&Translate escape sequences" ), this );
+    checkAbove = new QCheckBox( i18n( "&Text above barcode" ), this );
+    checkAutoCorrect = new QCheckBox( i18n( "&Auto correction" ), this );
 
-    comboCheckSum = new KComboBox( false, layout );
+    comboCheckSum = new KComboBox( false, this );
 
-    QLabel* label = new QLabel( i18n( "&Checksum calculation method:" ), gb );
+    QLabel* label = new QLabel( i18n( "&Checksum calculation method:" ), this );
     label->setBuddy( comboCheckSum );
 
-    QHBoxLayout * hbox = new QHBoxLayout( layout );
+    QHBoxLayout * hbox = new QHBoxLayout( this );
     hbox->setSpacing( 6 );
     hbox->setMargins( 6 );
 
@@ -149,6 +149,8 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
     QToolTip::add( spinModule, i18n( "<qt>Change the module width used by TBarcode. Take a look into the "
                                      "TBarcode documentation for details. Normally you do not want to change "
                                      "this value.</qt>" ) );
+    
+    setLayout(layout);
 }
 
 void TBarcodeDlg::setData( Barkode* b )
@@ -256,31 +258,27 @@ void TBarcodeDlg::getData( Barkode* b ) const
 PDF417BarcodeDlg::PDF417BarcodeDlg(QWidget *parent)
     : QWidget( parent )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this, 6, 6 );
+    QVBoxLayout* layout = new QVBoxLayout( this );
 
-    QGroupBox* gpdf  = new QGroupBox( i18n("PDF417"), this );
-    gpdf->setColumnLayout(0, Qt::Vertical );
-    gpdf->layout()->setSpacing( 6 );
-    gpdf->layout()->setMargin( 11 );
-    gpdf->setEnabled( Barkode::haveTBarcode() || Barkode::havePDFBarcode() );
-    QVBoxLayout* gpdfLayout = new QVBoxLayout( gpdf->layout() );
-
-    spinRow = new KIntNumInput( gpdf );
+    setEnabled( Barkode::haveTBarcode() || Barkode::havePDFBarcode() );
+    
+    spinRow = new KIntNumInput( this );
     spinRow->setLabel( i18n("Rows:"),  Qt::AlignLeft | Qt::AlignVCenter );
     spinRow->setRange( 0, 90, 1, true );
 
-    spinCol = new KIntNumInput( spinRow, 0, gpdf );
+    spinCol = new KIntNumInput( spinRow, 0, this );
     spinCol->setLabel( i18n("Columns:"),  Qt::AlignLeft | Qt::AlignVCenter );
     spinCol->setRange( 0, 30, 1, true );
 
-    spinErr = new KIntNumInput( spinCol, 0, gpdf );
+    spinErr = new KIntNumInput( spinCol, 0, this );
     spinErr->setLabel( i18n("Error correction level:"),  Qt::AlignLeft | Qt::AlignVCenter );
     spinErr->setRange( 1, 8, 1, true );
 
-    gpdfLayout->addWidget( spinRow );
-    gpdfLayout->addWidget( spinCol );
-    gpdfLayout->addWidget( spinErr );
-    layout->addWidget( gpdf );
+    layout->addWidget( spinRow );
+    layout->addWidget( spinCol );
+    layout->addWidget( spinErr );
+    
+    setLayout( layout );
 }
 
 void PDF417BarcodeDlg::setData( Barkode* b )
@@ -310,7 +308,7 @@ void PDF417BarcodeDlg::getData( Barkode* b ) const
 DataMatrixDlg::DataMatrixDlg(QWidget *parent )
     : QWidget( parent )
 {
-    QHBoxLayout* datamLayout = new QHBoxLayout( this, 6, 6 );
+    QHBoxLayout* datamLayout = new QHBoxLayout( this );
 
     comboDataMatrix = new KComboBox( false, this );
 
@@ -349,6 +347,8 @@ DataMatrixDlg::DataMatrixDlg(QWidget *parent )
     comboDataMatrix->addItem( "12 x 36" );
     comboDataMatrix->addItem( "16 x 36" );
     comboDataMatrix->addItem( "16 x 48" );
+    
+    setLayout( datamLayout );
 }
 
 void DataMatrixDlg::setData( Barkode* b )

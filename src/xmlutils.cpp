@@ -213,6 +213,7 @@ void XMLUtils::readDocumentItems( DocumentItemList* list, QDomDocument* doc, Tok
         }
     }
 
+    qSort( list->begin(), list->end() );
 }
 
 void XMLUtils::writeXMLDocumentItem( QDomElement* root, DocumentItem** item )

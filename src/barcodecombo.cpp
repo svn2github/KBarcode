@@ -65,7 +65,7 @@ bool BarcodeValidator::pcreValidate( QString* pattern, const QString & input ) c
     if( pattern->isEmpty() )
         return true;
 
-    compiled = pcre_compile( pattern->latin1(), 0, &error, &erroffset, NULL );
+    compiled = pcre_compile( pattern->toLatin1().data(), 0, &error, &erroffset, NULL );
     if( !compiled ) // ignore all errors
         return true; 
 
@@ -109,12 +109,7 @@ const char* BarcodeCombo::getEncodingType()
 void BarcodeCombo::setEncodingType( const QString & type )
 {
     const QString name = Barkode::nameFromType( type );
-    for( unsigned int z = 0; z < (unsigned int)count(); z++ )
-        if( text( z ) == name )
-        {
-            setCurrentItem( z );
-            break;
-        }
+    setCurrentItem( name, false );
 }
 
 BarcodeWidget::BarcodeWidget(QWidget *parent)

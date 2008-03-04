@@ -603,7 +603,7 @@ const QStringList* Barkode::encodingTypes()
     return s_encoding;
 }
 
-const char* Barkode::typeFromName( const QString & name )
+const QString & Barkode::typeFromName( const QString & name )
 {
     for( unsigned int i = 0; i < s_info.count(); i++ )
         if( s_info[i].name == name )
@@ -612,7 +612,7 @@ const char* Barkode::typeFromName( const QString & name )
     return NULL;
 }
 
-const char* Barkode::nameFromType( const QString & type )
+const QString & Barkode::nameFromType( const QString & type )
 {
     for( unsigned int i = 0; i < s_info.count(); i++ )
         if( s_info[i].xml == type )
@@ -908,7 +908,7 @@ void Barkode::initValidators()
     if( QFile::exists( rules ) )
         path = rules;
     else
-        path = locate( "data", "kbarcode/rules.xml" );
+        path =  KStandardDirs::locate( "data", "kbarcode/rules.xml" );
 
     QFile xml( path );
     QDomDocument doc;
@@ -920,7 +920,7 @@ void Barkode::initValidators()
 
     if( !xml.open( QIODevice::ReadOnly ) )
     {
-        qDebug( "Cannot read validation rules from %s\n", path.toLatin1() );
+        qDebug( "Cannot read validation rules from %s\n", path.toLatin1().data() );
         return;
     }
 

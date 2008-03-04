@@ -172,7 +172,7 @@ void BarcodeGenerator::print()
     if( d.isValid() )
         return;
 
-    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( "kbarcode", this );
+    QPrinter* printer = PrinterSettings::getInstance()->setupPrinter( KUrl("kfiledialog:///kbarcode"), this );
     if( !printer )
         return;
 
@@ -213,11 +213,7 @@ void BarcodeGenerator::copy()
     DocumentItemDrag* drag = new DocumentItemDrag();
     drag->setDocumentItem( &list );
 
-#if QT_VERSION >= 0x030100
-    kapp->clipboard()->setData( drag, QClipboard::Clipboard );
-#else
-    kapp->clipboard()->setData( drag );
-#endif
+    kapp->clipboard()->setMimeData( drag, QClipboard::Clipboard );
 }
 
 #include "barcodegenerator.moc"

@@ -156,37 +156,19 @@ void BarcodeItem::saveXML (QDomElement* element)
 
 void BarcodeItem::draw (QPainter* painter)
 {
-    if( DocumentItem::paintDevice() && DocumentItem::paintDevice()->isExtDev() )
+    painter->save();
+    drawBarcode( *painter, rect().x(), rect().y() );
+    painter->restore();
+    
+    TCanvasItem* citem = canvasItem();
+    if( citem ) 
     {
-        painter->save();
-        
-        // FIXME: What's this?
-        /*
-        QPaintDeviceMetrics metrics( DocumentItem::paintDevice() );
-        double scalex = (double)metrics.logicalDpiX() / (double)QPaintDevice::x11AppDpiX();
-        double scaley = (double)metrics.logicalDpiY() / (double)QPaintDevice::x11AppDpiY();
-        painter->scale( 1.0 / scalex, 1.0 / scaley );
-        */
-        
-        //painter->drawPixmap( rect().x(), rect().y(), m_pixmap );
-        drawBarcode( *painter, rect().x(), rect().y() );
-        painter->restore();
+        citem->setSize( Barkode::size().width(), Barkode::size().height() );
     }
-    else
-    {
-        painter->save();
-        drawBarcode( *painter, rect().x(), rect().y() );
-        painter->restore();
+    // TODO: do a bitBlt when device is screen
+    //painter->drawPixmap( rect().x(), rect().y(), m_pixmap );
+    //bitBlt( painter->device(), rect().x(), rect().y(), &m_pixmap, 0, 0, rect().width(), rect().height(), Qt::CopyROP );
 
-        TCanvasItem* citem = canvasItem();
-        if( citem ) 
-        {
-            citem->setSize( Barkode::size().width(), Barkode::size().height() );
-        }
-        // TODO: do a bitBlt when device is screen
-        //painter->drawPixmap( rect().x(), rect().y(), m_pixmap );
-        //bitBlt( painter->device(), rect().x(), rect().y(), &m_pixmap, 0, 0, rect().width(), rect().height(), Qt::CopyROP );
-    }
     DocumentItem::drawBorder( painter );
 }
 

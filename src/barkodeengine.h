@@ -43,6 +43,8 @@ class BarkodeEngineOptions {
 
 #include <qsize.h>
 
+class QPaintDevice;
+
 /**
   * Inherit from this class if you want to create a
   * (barkode engine) for use with KBarcode.

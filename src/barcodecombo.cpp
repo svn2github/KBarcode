@@ -101,7 +101,7 @@ BarcodeCombo::~BarcodeCombo()
 {
 }
 
-const char* BarcodeCombo::getEncodingType()
+const QString & BarcodeCombo::getEncodingType()
 {
     return Barkode::typeFromName( currentText() );
 }

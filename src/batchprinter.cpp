@@ -26,9 +26,10 @@
 // Qt includes
 #include <qfile.h>
 #include <qpainter.h>
+#include <QBuffer>
 #include <QPaintDevice>
 #include <QTextStream>
-#include <q3progressdialog.h>
+#include <QProgressDialog>
 #include <QList>
 #include <QPixmap>
 
@@ -132,7 +133,7 @@ void BatchPrinter::startPrintData( QProgressDialog* progress )
                             // labels like article_no etc. (those who are created
                             // by events.
 
-    for( unsigned int i = 0; i < m_data->count(); i++ ) 
+    for( int i = 0; i < m_data->count(); i++ ) 
     {
         Label l( def, buffer, m_name, printer, m_customer,
                  (*m_data)[i].article_no, (*m_data)[i].group );
@@ -301,7 +302,7 @@ void BatchPrinter::startImages()
 	    else
 		name += m_image_custom_filename;
 
-            QString filename = name + QString("_%1.").arg( i ) + KImageIO::suffix( m_image_format );
+            QString filename = name + QString("_%1.").arg( i ) + m_image_format; //KImageIO::suffix( m_image_format );
 
             unsigned int c = 0;
             while( QFile::exists( filename ) ) {
@@ -309,7 +310,7 @@ void BatchPrinter::startImages()
                 c++;
             }
 
-            pixmap.save( filename, m_image_format );
+            pixmap.save( filename, m_image_format.toLatin1().data() );
 
             if( !checkProgressDialog( progress ) )
 	    {
@@ -326,7 +327,7 @@ void BatchPrinter::startImages()
     delete progress;
     delete painter;
 
-    new KRun( m_path );
+    new KRun( KUrl( m_path ), NULL );
 }
 
 void BatchPrinter::startBCP()
@@ -503,8 +504,8 @@ void BatchPrinter::moveLabels()
 
 QProgressDialog* BatchPrinter::createProgressDialog( const QString & caption )
 {
-    QProgressDialog* progress = new QProgressDialog( caption, i18n("&Cancel"), m_labels+1, parent );
-    progress->setProgress( 0 );
+    QProgressDialog* progress = new QProgressDialog( caption, i18n("&Cancel"), 0, m_labels+1, parent );
+    progress->setValue( 0 );
     progress->show();
     return progress;
 }
@@ -512,8 +513,8 @@ QProgressDialog* BatchPrinter::createProgressDialog( const QString & caption )
 bool BatchPrinter::checkProgressDialog( QProgressDialog* progress )
 {
     kapp->processEvents( 0 );
-    progress->setProgress( progress->progress() + 1 );
-    if( progress->wasCancelled() ) {
+    progress->setValue( progress->value() + 1 );
+    if( progress->wasCanceled() ) {
         delete progress;
         return false;
     }

@@ -33,11 +33,14 @@ class BarcodePrinterDevice : public QPaintDevice {
     public:
         BarcodePrinterDevice( double dpix, double dpiy );
         
-        bool isExtDev() const { return true; }
         bool paintingActive() const { return false; }
 
+   protected:
         virtual int metric( int e ) const;
-        
+
+        QPaintEngine* paintEngine() { return NULL; }
+        QPaintEngine* paintEngine() const { return NULL; }
+
     private: 
         double m_resolution_x;
         double m_resolution_y;

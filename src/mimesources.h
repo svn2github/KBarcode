@@ -25,7 +25,7 @@ class KCommandHistory;
 class TokenProvider;
 class MyCanvasView;
 
-class DocumentItemDrag : public QStoredDrag {
+class DocumentItemDrag : public QMimeData {
     Q_OBJECT
     public:
         DocumentItemDrag( QWidget* dragSource = NULL );

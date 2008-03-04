@@ -34,7 +34,7 @@ class QDomNode;
 class QRect;
 class QString;
 class QWidget;
-typedef QList<DocumentItem> DocumentItemList;
+typedef QList<DocumentItem*> DocumentItemList;
 
 /** This class provides helper function for saving and reading to XML files.
   *

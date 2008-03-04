@@ -76,7 +76,7 @@ void DocumentItemDrag::setDocumentItem( DocumentItemList* list )
         doc.save( t, 0 );
         
         buffer.close();
-        setEncodedData( data );    
+        setData( data );    
     }
 }
 

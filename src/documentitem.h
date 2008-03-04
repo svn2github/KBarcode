@@ -224,7 +224,7 @@ const QString DocumentItem::visibilityScript() const
     return m_visibilityScript;
 }
 
-typedef QList<DocumentItem> DocumentItemList;
+typedef QList<DocumentItem*> DocumentItemList;
 
 #endif //DOCUMENTITEM_H
 

@@ -144,10 +144,10 @@ BarcodeWidget::BarcodeWidget(QWidget *parent)
         multi = new QTextEdit( this );
 #endif
     multi->setTextFormat( Qt::PlainText );
-    multi->setWordWrap( QTextEdit::NoWrap );
+    multi->setWordWrapMode( QTextOption::NoWrap );
     multi->setEnabled( false );
-    multi->setVScrollBarMode( QScrollView::AlwaysOn );
-    multi->setHScrollBarMode( QScrollView::AlwaysOn );
+    multi->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+    multi->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
     multi->hide();
     connect( multi, SIGNAL( textChanged() ), this, SLOT( changed() ) );    
     grid->addMultiCellWidget( multi, 3, 3, 1, 3 );
@@ -324,7 +324,7 @@ void BarcodeWidget::changed()
     if( !m_multi )
         m_barcode.setValue( data->text() );
     else
-        m_barcode.setValue( multi->text() );
+        m_barcode.setValue( multi->toPlainText() );
 
     m_barcode.setType( comboStandard->getEncodingType() );
     m_barcode.setTextVisible( checkText->isChecked() );

@@ -39,6 +39,8 @@
 #include <qpainter.h>
 #include <QPaintDevice>
 #include <q3picture.h>
+#include <QDesktopWidget>
+#include <QScrollArea>
 #include <QX11Info>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -53,7 +55,7 @@ BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     Layout6 = new QVBoxLayout( 0, 0, 6, "Layout2");
     widget = new BarcodeWidget( this );
 
-    m_token = new TokenProvider( KApplication::desktop() );
+    m_token = new TokenProvider( KApplication::desktop()->screen() );
     widget->setTokenProvider( m_token );
 
     buttonGenerate = new KPushButton( this );
@@ -81,10 +83,10 @@ BarcodeGenerator::BarcodeGenerator( QWidget* parent )
     buttonClose->setIconSet( SmallIconSet("fileclose") );
     
 
-    QScrollView* sv = new QScrollView( this );
+    QScrollArea* sv = new QScrollArea( this );
     
-    barcode = new QLabel( sv->viewport(), "barcode" );
-    sv->addChild( barcode );
+    barcode = new QLabel( NULL );
+    sv->setWidget( barcode );
     connect( buttonGenerate, SIGNAL( clicked() ), this, SLOT( generate() ) );
     connect( buttonSave, SIGNAL( clicked() ), this, SLOT( save() ) );
     connect( buttonPrint, SIGNAL( clicked() ), this, SLOT( print() ) );
@@ -139,22 +141,24 @@ void BarcodeGenerator::save()
 
     if(!bc.isValid()) 
     {
-        KFileDialog fd( ":save_image", KImageIO::pattern( KImageIO::Writing ), this, true );
-        fd.setMode( KFile::File );
+        KFileDialog fd( KUrl("kfiledialog:///save_image"), 
+                        KImageIO::pattern( KImageIO::Writing ), this );
+        fd.setMode( KFile::File | KFile::LocalOnly );
         fd.setOperationMode( KFileDialog::Saving );       
+        
         if( fd.exec() == QDialog::Accepted ) 
         {
-            QString path = fd.selectedURL().path();
-            QString extension = KImageIO::type( path );
+            QString path = fd.selectedUrl().path();
+            QString extension = KImageIO::typeForMime( path ).first();
         
             if( extension.isNull() )
-                extension = KImageIO::type( fd.currentFilter() ); 
+                extension = KImageIO::typeForMime( fd.currentFilter() ).first(); 
 
         
             bc.setTokenProvider( m_token );
             bc.update( KApplication::desktop() );
 
-            if(!bc.pixmap().save( path, extension, 0 ))
+            if(!bc.pixmap().save( path, extension.toLatin1().data(), 0 ))
                 KMessageBox::error( this, i18n("An error occurred during saving the image") );
         }
     }        

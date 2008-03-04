@@ -22,46 +22,51 @@
 #include <klocale.h>
 #include <kurlrequester.h>
 
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qvbuttongroup.h> 
-//Added by qt3to4:
+#include <QCheckBox>
+#include <QLabel>
+#include <QLayout>
 #include <QGridLayout>
 
-BarcodePrinterDlg::BarcodePrinterDlg(QWidget *parent)
-    : KDialogBase( KDialogBase::Plain, i18n("Barcode Printer"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
+BarcodePrinterDlg::BarcodePrinterDlg( QWidget *parent )
+        : KDialog( parent )
 {
-    QGridLayout* layout = new QGridLayout( plainPage(), 6, 6 );
-    
-    QLabel* label = new QLabel( i18n("&Output Format:"), plainPage() );
-    comboFormat = new KComboBox( false, plainPage() );
+    setCaption( i18n( "Barcode Printer" ) );
+    setButtons( KDialog::Ok | KDialog::Cancel );
+    setDefaultButton( KDialog::Ok );
+
+    QWidget* page = new QWidget( this );
+    setMainWidget( page );
+
+    QGridLayout* layout = new QGridLayout( page );
+
+    QLabel* label = new QLabel( i18n( "&Output Format:" ), page );
+    comboFormat = new KComboBox( false, page );
     label->setBuddy( comboFormat );
-    
-    checkFile = new QCheckBox( i18n("&Print to File"), plainPage() );
-    
-    label2 = new QLabel( i18n("&Filename:"), plainPage() );
-    requester = new KUrlRequester( plainPage() );
+
+    checkFile = new QCheckBox( i18n( "&Print to File" ), page );
+
+    label2 = new QLabel( i18n( "&Filename:" ), page );
+    requester = new KUrlRequester( page );
     label2->setBuddy( requester );
 
-    label3 = new QLabel( i18n("&Device:"), plainPage() );
-    comboDevice = new KComboBox( true, plainPage() );
+    label3 = new QLabel( i18n( "&Device:" ), page );
+    comboDevice = new KComboBox( true, page );
     label3->setBuddy( comboDevice );
-    
+
     layout->addWidget( label, 0, 0 );
-    layout->addMultiCellWidget( comboFormat, 0, 0, 1, 2 );
-    layout->addMultiCellWidget( checkFile, 1, 1, 1, 2 );
+    layout->addWidget( comboFormat, 0, 1, 1, 2 );
+
+    layout->addWidget( checkFile, 1, 1, 1, 2 );
     layout->addWidget( label2, 2, 0 );
     layout->addWidget( requester, 2, 1 );
     layout->addWidget( label3, 3, 0 );
-    layout->addMultiCellWidget( comboDevice, 3, 3, 1, 2 );
-    
-    comboFormat->addItem( i18n("TEC Printer (TEC)") );
-    comboFormat->addItem( i18n("Zebra Printer (ZPL)") );
-    comboFormat->addItem( i18n("Intermec Printer (IPL)") );
-    comboFormat->addItem( i18n("EPCL Printer (EPCL)") );
-    
+    layout->addWidget( comboDevice, 3, 1, 1, 2 );
+
+    comboFormat->addItem( i18n( "TEC Printer (TEC)" ) );
+    comboFormat->addItem( i18n( "Zebra Printer (ZPL)" ) );
+    comboFormat->addItem( i18n( "Intermec Printer (IPL)" ) );
+    comboFormat->addItem( i18n( "EPCL Printer (EPCL)" ) );
+
     // do not translate unix devicenames...
     comboDevice->addItem( "/dev/lp0" );
     comboDevice->addItem( "/dev/lp1" );
@@ -69,11 +74,13 @@ BarcodePrinterDlg::BarcodePrinterDlg(QWidget *parent)
     comboDevice->addItem( "/dev/usb/lp0" );
     comboDevice->addItem( "/dev/usb/lp1" );
     comboDevice->addItem( "/dev/usb/lp2" );
-    
+
+    page->setLayout( layout );
+
     connect( checkFile, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
 
 //    KFileDialog fd( QString::null, "*.zpl|Zebra Printer Language (*.zpl)\n*.ipl|Intermec Printer Language (*.ipl)", this, "fd", true );
-    
+
     enableControls();
 }
 
@@ -87,23 +94,28 @@ void BarcodePrinterDlg::enableControls()
     bool b = checkFile->isChecked();
     label2->setEnabled( b );
     requester->setEnabled( b );
-    
+
     label3->setEnabled( !b );
     comboDevice->setEnabled( !b );
 }
 
 int BarcodePrinterDlg::outputFormat() const
 {
-    switch( comboFormat->currentItem() )
+    switch ( comboFormat->currentIndex() )
     {
+
         case 0:
             return PrinterSettings::TEC;
+
         case 1:
             return PrinterSettings::ZEBRA;
+
         case 2:
             return PrinterSettings::INTERMEC;
+
         case 3:
             return PrinterSettings::EPCL;
+
         default:
             return -1;
     }
@@ -121,7 +133,7 @@ const QString BarcodePrinterDlg::deviceName() const
 
 const QString BarcodePrinterDlg::fileName() const
 {
-    return requester->url();
+    return requester->url().url();
 }
 
 #include "barcodeprinterdlg.moc"

@@ -17,8 +17,8 @@
 #ifndef BARCODEPRINTERDLG_H
 #define BARCODEPRINTERDLG_H
 
-#include <kdialogbase.h>
-//Added by qt3to4:
+#include <kdialog.h>
+
 #include <QLabel>
 
 class KComboBox;
@@ -29,7 +29,7 @@ class QLabel;
 /**
 @author Dominik Seichter
 */
-class BarcodePrinterDlg : public KDialogBase
+class BarcodePrinterDlg : public KDialog
 {
     Q_OBJECT
     public:

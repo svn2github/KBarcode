@@ -63,11 +63,7 @@ class PixmapBarcode : public BarkodeEngine
         PixmapBarcode();
         ~PixmapBarcode();
 
-        // This isn't right...
-        // warning: ‘virtual const PixmapBarcode& PixmapBarcode::operator=(const BarkodeEngine&)’ was hidden
-        // warning: by ‘PurePostscriptBarcode& PurePostscriptBarcode::operator=(const PurePostscriptBarcode&)’
-
-        // virtual const PixmapBarcode & operator=( const BarkodeEngine & rhs );
+        const PixmapBarcode & operator=( const BarkodeEngine & rhs );
 
         inline EEngine engine() const;
         const QSize size() const;

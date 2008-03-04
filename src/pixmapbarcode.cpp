@@ -87,19 +87,18 @@ PixmapBarcode::~PixmapBarcode()
 {
 }
 
-// FIXME: do we need this one?
-// const PixmapBarcode & PixmapBarcode::operator=( const BarkodeEngine & rhs )
-// {
-//     const PixmapBarcode* pix = dynamic_cast<const PixmapBarcode*>(&rhs);
-// 
-//     if( pix ) 
-//     {
-//         m_pdf417_options = pix->m_pdf417_options;
-//         p                = pix->p;
-//     }
-// 
-//     return *this;
-// }
+const PixmapBarcode & PixmapBarcode::operator=( const BarkodeEngine & rhs )
+{
+    const PixmapBarcode* pix = dynamic_cast<const PixmapBarcode*>(&rhs);
+
+     if( pix ) 
+     {
+         m_pdf417_options = pix->m_pdf417_options;
+         p                = pix->p;
+     }
+
+     return *this;
+}
 
 const QSize PixmapBarcode::size() const
 {

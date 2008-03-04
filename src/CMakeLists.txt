@@ -27,7 +27,6 @@ set(kbarcode_SRCS
   gnubarcode.cpp
   gnubarkodeengine.cpp
   imageitem.cpp
-  kactionmap.cpp
   kbarcode.cpp
   kbarcodesettings.cpp
   label.cpp

@@ -14,7 +14,6 @@
 #include "confwizard.h"
 #include "printersettings.h"
 #include "kbarcodesettings.h"
-// #include "kactionmap.h" - is it neccessary?
 #include "barkode.h"
 
 // Qt includes
@@ -262,13 +261,5 @@ QString MainWindow::systemCheck()
 
     return text;
 }
-
-// TODO: Do something about action maps, after porting to the new KAction API
-/*
-void MainWindow::slotFunctionMap()
-{
-    new KActionMapDlg( actionCollection(), this );
-}
-*/
 
 #include "mainwindow.moc"

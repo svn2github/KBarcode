@@ -169,7 +169,7 @@ class ColorDlg : public QVBox, public BarcodeDlgBase {
 /** A configuration widget for colors in pure postscript barcodes
   * @author Dominik Seichter
   */
-class PurePostscriptDlg : public QVBox, public BarcodeDlgBase {
+class PurePostscriptDlg : public QWidget, public BarcodeDlgBase {
     Q_OBJECT
     public:
         PurePostscriptDlg(QWidget *parent=0);

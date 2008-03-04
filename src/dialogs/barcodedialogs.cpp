@@ -437,25 +437,22 @@ void SequenceDlg::enableControls()
 }
 
 ColorDlg::ColorDlg(QWidget *parent)
-    : QVBox( parent )
+    : QWidget( parent )
 {
-    QGroupBox* gb  = new QGroupBox( i18n("Colors"), this );
-    gb->setColumnLayout(0, Qt::Vertical );
-    gb->layout()->setSpacing( 6 );
-    gb->layout()->setMargin( 11 );
-    gb->setEnabled( Barkode::havePurePostscriptBarcode() );
-    QGridLayout* gbLayout = new QGridLayout( gb->layout() );
+    QVBoxLayout* layout = new QVBoxLayout( this );
+    
+    buttonBarColor = new KColorButton( this );
+    buttonBackColor = new KColorButton( this );
+    buttonTextColor = new KColorButton( this );
 
-    buttonBarColor = new KColorButton( gb );
-    buttonBackColor = new KColorButton( gb );
-    buttonTextColor = new KColorButton( gb );
-
-    gbLayout->addWidget( new QLabel( i18n("Bar Color:"), gb ), 0, 0 );
-    gbLayout->addWidget( new QLabel( i18n("Background Color:"), gb ), 1, 0 );
-    gbLayout->addWidget( new QLabel( i18n("Text Color:"), gb ), 2, 0 );
-    gbLayout->addWidget( buttonBarColor, 0, 1 );
-    gbLayout->addWidget( buttonBackColor, 1, 1 );
-    gbLayout->addWidget( buttonTextColor, 2, 1 );
+    layout->addWidget( new QLabel( i18n("Bar Color:"), this ), 0, 0 );
+    layout->addWidget( new QLabel( i18n("Background Color:"), this ), 1, 0 );
+    layout->addWidget( new QLabel( i18n("Text Color:"), this ), 2, 0 );
+    layout->addWidget( buttonBarColor, 0, 1 );
+    layout->addWidget( buttonBackColor, 1, 1 );
+    layout->addWidget( buttonTextColor, 2, 1 );
+    
+    setLayout( layout );
 }
 
 void ColorDlg::setData( Barkode* b )

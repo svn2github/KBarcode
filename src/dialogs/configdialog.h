@@ -18,7 +18,7 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include <kdialog.h>
+#include <kpagedialog.h>
 
 struct labelprinterdata;
 struct mysqldata;
@@ -37,7 +37,7 @@ class SqlWidget;
 /** KBarcodes configuration dialog for advanced settings.
   */
 
-class ConfigDialog : public KDialog  {
+class ConfigDialog : public KPageDialog  {
     Q_OBJECT
     public:
         ConfigDialog( QWidget* parent );

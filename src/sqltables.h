@@ -71,6 +71,8 @@ typedef struct mysqldata {
   */
 class SqlDescription {
     public:
+        virtual ~SqlDescription() {}
+        
         /** return the name of the database we can always
           * use to connect to this database.
           */

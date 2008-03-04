@@ -53,43 +53,37 @@ AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent )
     setDefaultButton( KDialog::Ok );
     
     if( Barkode::hasFeature( type, PDF417BARCODE ) ) {
-        KVBox* box = nev KVBox();
-        KPageWidgetItem* item = addPage( box, i18n("PDF417") );
-        PDF417BarcodeDlg* dlg = new PDF417BarcodeDlg( box );
+        PDF417BarcodeDlg* dlg = new PDF417BarcodeDlg( this );
+        addPage( dlg, i18n("PDF417") );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, DATAMATRIX ) ) {
-        KVBox* box = new KVBox();
-        KPageWidgetItem* item = addPage( box, i18n("DataMatrix") );
-        DataMatrixDlg* dlg = new DataMatrixDlg( box );
+        DataMatrixDlg* dlg = new DataMatrixDlg( this );
+        addPage( dlg, i18n("DataMatrix") );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, TBARCODEADV ) ) {
-        KVBox* box = new KVBox();
-        KPageWidgetItem* item = addPage( box, i18n("TBarcode") );
-        TBarcodeDlg* dlg = new TBarcodeDlg( box );
+        TBarcodeDlg* dlg = new TBarcodeDlg( this );
+        addPage( dlg, i18n("TBarcode") );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, PUREADV ) ) {
-        KVBox* box = new KVBox();
-        KPageWidgetItem* item = addPage( box, i18n("Barcode Writer in Pure Postscript") );
-        PurePostscriptDlg* dlg = new PurePostscriptDlg( box );
+        PurePostscriptDlg* dlg = new PurePostscriptDlg( this );
+        addPage( dlg, i18n("Barcode Writer in Pure Postscript") );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, COLORED ) ) {
-        KVBox* box = new KVBox();
-        KPageWidgetItem* item = addPage( box, i18n("Colors") );
-        ColorDlg* dlg = new ColorDlg( box );
+        ColorDlg* dlg = new ColorDlg( this );
+        addPage( dlg, i18n("Colors") );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
-    KVBox* box = new KVBox();
-    KPageWidgetItem* item = addPage( box, i18n("Sequence") );
-    SequenceDlg* dlg = new SequenceDlg( box );
+    SequenceDlg* dlg = new SequenceDlg( this );
+    addPage( dlg, i18n("Sequence") );
     list.append( (BarcodeDlgBase*)dlg );
 }
 
@@ -113,138 +107,134 @@ void AdvancedBarcodeDialog::getData( Barkode* b )
     }
 }
 
-TBarcodeDlg::TBarcodeDlg(QWidget *parent)
-    : QWidget( parent )
+TBarcodeDlg::TBarcodeDlg( QWidget *parent )
+        : QWidget( parent )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this, 6, 6 );
+    QVBoxLayout* layout = new QVBoxLayout( this );
+    layout -> setSpacing( 6 ); // TODO: should we hardcode the spacing and margin values?
 
-    QGroupBox* gb  = new QGroupBox( i18n("TBarcode"), this );
-    gb->setColumnLayout(0, Qt::Vertical );
-    gb->layout()->setSpacing( 6 );
-    gb->layout()->setMargin( 11 );
-    gb->setEnabled( Barkode::haveTBarcode() || Barkode::haveTBarcode2() );
-    QVBoxLayout* gbLayout = new QVBoxLayout( gb->layout() );
+    setEnabled( Barkode::haveTBarcode() || Barkode::haveTBarcode2() );
 
-    spinModule = new KDoubleNumInput( gb );
-    spinModule->setLabel( i18n("Module width (mm):"), Qt::AlignLeft | Qt::AlignVCenter );
+    spinModule = new KDoubleNumInput( layout );
+    spinModule->setLabel( i18n( "Module width (mm):" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinModule->setRange( 0.190, 1.500, 0.001, true );
 
-    spinHeight = new KIntNumInput( gb );
-    spinHeight->setLabel( i18n("Barcode Height (mm):"), Qt::AlignLeft | Qt::AlignVCenter );
+    spinHeight = new KIntNumInput( layout );
+    spinHeight->setLabel( i18n( "Barcode Height (mm):" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinHeight->setRange( 1, 1000, 10, false );
 
-    checkEscape = new QCheckBox( i18n("&Translate escape sequences"), gb );
-    checkAbove = new QCheckBox( i18n("&Text above barcode"), gb );
-    checkAutoCorrect = new QCheckBox( i18n("&Auto correction"), gb );
-    
-    comboCheckSum = new KComboBox( false, gb );
-    
-    QLabel* label = new QLabel( i18n("&Checksum calculation method:"), gb );
+    checkEscape = new QCheckBox( i18n( "&Translate escape sequences" ), layout );
+    checkAbove = new QCheckBox( i18n( "&Text above barcode" ), layout );
+    checkAutoCorrect = new QCheckBox( i18n( "&Auto correction" ), layout );
+
+    comboCheckSum = new KComboBox( false, layout );
+
+    QLabel* label = new QLabel( i18n( "&Checksum calculation method:" ), gb );
     label->setBuddy( comboCheckSum );
 
-    QHBoxLayout * hbox = new QHBoxLayout( 0, 6, 6 );
+    QHBoxLayout * hbox = new QHBoxLayout( layout );
+    hbox->setSpacing( 6 );
+    hbox->setMargins( 6 );
+
     hbox->addWidget( label );
     hbox->addWidget( comboCheckSum );
-            
-    gbLayout->addWidget( spinModule );
-    gbLayout->addWidget( spinHeight );
-    gbLayout->addWidget( checkEscape );
-    gbLayout->addWidget( checkAbove );
-    gbLayout->addWidget( checkAutoCorrect );
-    gbLayout->addLayout( hbox );
-    
-    QToolTip::add( spinModule, i18n("<qt>Change the module with used by tbarcode. Take a look into the "
-                                    "tbarcode documentation for details. Normaly you do not want to change "
-                                    "this value.</qt>") );
-    
-    layout->addWidget( gb );
+
+    layout->addWidget( spinModule );
+    layout->addWidget( spinHeight );
+    layout->addWidget( checkEscape );
+    layout->addWidget( checkAbove );
+    layout->addWidget( checkAutoCorrect );
+    layout->addLayout( hbox );
+
+    QToolTip::add( spinModule, i18n( "<qt>Change the module width used by TBarcode. Take a look into the "
+                                     "TBarcode documentation for details. Normally you do not want to change "
+                                     "this value.</qt>" ) );
 }
 
 void TBarcodeDlg::setData( Barkode* b )
 {
     TBarcodeOptions* options = dynamic_cast<TBarcodeOptions*>( b->engine()->options() );
 
-    if( options ) 
+    if ( options )
     {
+        map.clear();
+
         spinModule->setValue( options->moduleWidth() );
         spinHeight->setValue( options->height() );
         checkEscape->setChecked( options->escape() );
         checkAbove->setChecked( options->above() );
         checkAutoCorrect->setChecked( options->autocorrect() );
-    
-        map.insert( i18n("No Checksum"), 0 );
-        map.insert( i18n("Default Checksum Method"), 1 );
 
-        if( Barkode::hasFeature( b->type(), MODULOALLCHECK ) ||
-            Barkode::hasFeature( b->type(), MODULO10CHECK ) )
-            map.insert( i18n("Modulo 10 Checksum"), 2 );
-    
-        if( Barkode::hasFeature( b->type(), MODULOALLCHECK ) ||
-            b->type() == "b13" || // EAN 13
-            b->type() == "b14" || // EAN 13
-            b->type() == "b15" || // EAN 13
-            b->type() == "b18" ) // CodaBar (2 width)
-            map.insert( i18n("Module 43 (suggested for Code39 and Logmars, 1 digit)"), 3 );
-        
-        if( Barkode::hasFeature( b->type(), MODULOALLCHECK ) )
-            map.insert( i18n("Modula 47 (2 digits)"), 4 );
-        
-        if( b->type() == "b21" ) // Deutsche Post Leitcode
-            map.insert( i18n("Deutsche Post Leitcode"), 5 );
-        
-        if( b->type() == "b22") // Deutsche Post Identcode
-            map.insert( i18n("Deutsche Post Identcode"), 6 );
+        map.insert( 0, i18n( "No Checksum" ) );
+        map.insert( 1, i18n( "Default Checksum Method" ) );
 
-        if( b->type() == "b1" ) { // Code11
-        map.insert( i18n("Code 11 (1 digit)"), 7 );
-        map.insert( i18n("Code 11 (2 digits)"), 8 );
+        if ( Barkode::hasFeature( b->type(), MODULOALLCHECK ) ||
+                Barkode::hasFeature( b->type(), MODULO10CHECK ) )
+            map.insert( 2, i18n( "Modulo 10 Checksum" ) );
+
+        if ( Barkode::hasFeature( b->type(), MODULOALLCHECK ) ||
+                b->type() == "b13" || // EAN 13
+                b->type() == "b14" || // EAN 13
+                b->type() == "b15" || // EAN 13
+                b->type() == "b18" ) // CodaBar (2 width)
+            map.insert( 3, i18n( "Module 43 (suggested for Code39 and Logmars, 1 digit)" ) );
+
+        if ( Barkode::hasFeature( b->type(), MODULOALLCHECK ) )
+            map.insert( 4, i18n( "Modula 47 (2 digits)" ) );
+
+        if ( b->type() == "b21" ) // Deutsche Post Leitcode
+            map.insert( 5, i18n( "Deutsche Post Leitcode" ) );
+
+        if ( b->type() == "b22" ) // Deutsche Post Identcode
+            map.insert( 6, i18n( "Deutsche Post Identcode" ) );
+
+        if ( b->type() == "b1" )  // Code11
+        {
+            map.insert( 7, i18n( "Code 11 (1 digit)" ) );
+            map.insert( 8, i18n( "Code 11 (2 digits)" ) );
         }
 
-        if( Barkode::hasFeature( b->type(), POSTNETCHECK ) )
-            map.insert( i18n("USPS Postnet"), 9 );
+        if ( Barkode::hasFeature( b->type(), POSTNETCHECK ) )
+            map.insert( 9, i18n( "USPS Postnet" ) );
 
-        if( b->type() == "b47" ) { // MSI
-            map.insert( i18n("MSI (1 digit)"), 10 );
-            map.insert( i18n("MSI (2 digits)"), 11 );
+        if ( b->type() == "b47" )  // MSI
+        {
+            map.insert( 10, i18n( "MSI (1 digit)" ) );
+            map.insert( 11, i18n( "MSI (2 digits)" ) );
         }
 
-        if( b->type() == "b46" ) // Plessey
-            map.insert( i18n("Plessey"), 12 );
+        if ( b->type() == "b46" ) // Plessey
+            map.insert( 12, i18n( "Plessey" ) );
 
-        if( Barkode::hasFeature( b->type(), EAN8CHECK ) )
-            map.insert( i18n("EAN 8"), 13 );
+        if ( Barkode::hasFeature( b->type(), EAN8CHECK ) )
+            map.insert( 13, i18n( "EAN 8" ) );
 
-        if( Barkode::hasFeature( b->type(), EAN13CHECK ) )    
-            map.insert( i18n("EAN 13"), 14 );
+        if ( Barkode::hasFeature( b->type(), EAN13CHECK ) )
+            map.insert( 14, i18n( "EAN 13" ) );
 
-        if( Barkode::hasFeature( b->type(), UPCACHECK ) )
-            map.insert( i18n("UPC A"), 15 );
-        
-        if( Barkode::hasFeature( b->type(), UPCECHECK ) )
-            map.insert( i18n("UPC E"), 16 );
+        if ( Barkode::hasFeature( b->type(), UPCACHECK ) )
+            map.insert( 15, i18n( "UPC A" ) );
 
-        if( b->type() == "b16" )  // EAN 128
-            map.insert( i18n("EAN 128"), 17 );
+        if ( Barkode::hasFeature( b->type(), UPCECHECK ) )
+            map.insert( 16, i18n( "UPC E" ) );
 
-        if( Barkode::hasFeature( b->type(),  CODE128CHECK ) )
-            map.insert( i18n("Code 128"), 18 );
-        
-        if( b->type() == "b70" ) // Royal Mail 4 State
-            map.insert( i18n("Royal Mail 4 State"), 19 );
+        if ( b->type() == "b16" ) // EAN 128
+            map.insert( 17, i18n( "EAN 128" ) );
 
-        comboCheckSum->insertStringList( map.keys() );
-        
-        QMap<QString,int>::Iterator it;
-        for ( it = map.begin(); it != map.end(); ++it ) {
-            if( it.data() == options->checksum() ) {
-                for( int i = 0; i < comboCheckSum->count(); i++ )
-                    if( comboCheckSum->text( i ) == it.key() ) {
-                        comboCheckSum->setCurrentItem( i );
-                        break;
-                    }
-                break;
-            }
-        }
+        if ( Barkode::hasFeature( b->type(),  CODE128CHECK ) )
+            map.insert( 18, i18n( "Code 128" ) );
+
+        if ( b->type() == "b70" ) // Royal Mail 4 State
+            map.insert( 19, i18n( "Royal Mail 4 State" ) );
+
+        comboCheckSum->clear();
+
+        comboCheckSum->insertItems( 0, map.values() );
+
+        int currentIndex = comboCheckSum->findText( map[options->checksum()] );
+
+        comboCheckSum->setCurrentItem( currentIndex );
+
     }
 }
 
@@ -252,13 +242,13 @@ void TBarcodeDlg::getData( Barkode* b ) const
 {
     TBarcodeOptions* options = dynamic_cast<TBarcodeOptions*>( b->engine()->options() );
 
-    if( options ) 
+    if ( options )
     {
         options->setModuleWidth( spinModule->value() );
         options->setEscape( checkEscape->isChecked() );
         options->setAbove( checkAbove->isChecked() );
         options->setAutocorrect( checkAutoCorrect->isChecked() );
-        options->setCheckSum( map[comboCheckSum->currentText()] );
+        options->setCheckSum( map.key( comboCheckSum->currentText() ) );
         options->setHeight( spinHeight->value() );
     }
 }

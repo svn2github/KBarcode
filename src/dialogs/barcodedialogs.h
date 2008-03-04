@@ -90,7 +90,7 @@ class TBarcodeDlg : public QWidget, public BarcodeDlgBase {
         QCheckBox* checkAutoCorrect;
         KComboBox* comboCheckSum;
 
-        QMap<QString,int> map;
+        QMap<int, QString> map;
 };
 
 /** A configuration Dialog for PDF417 settings.

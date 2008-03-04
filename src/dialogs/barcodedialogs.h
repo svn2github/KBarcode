@@ -151,7 +151,7 @@ class SequenceDlg : public QWidget, public BarcodeDlgBase {
 /** A configuration widget for colors in pure postscript barcodes
   * @author Dominik Seichter
   */
-class ColorDlg : public QVBox, public BarcodeDlgBase {
+class ColorDlg : public QWidget, public BarcodeDlgBase {
     Q_OBJECT
     public:
         ColorDlg(QWidget *parent=0);

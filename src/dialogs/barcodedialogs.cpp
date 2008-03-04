@@ -29,6 +29,7 @@
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QGridLayout>
 
 // KDE includes
 #include <kcombobox.h>
@@ -93,7 +94,7 @@ AdvancedBarcodeDialog::~AdvancedBarcodeDialog()
 
 void AdvancedBarcodeDialog::setData( Barkode* b )
 {
-    for ( unsigned int i = 0; i < list.count(); i++ )
+    for ( int i = 0; i < list.count(); i++ )
     {
         BarcodeDlgBase* bdb = list.at( i );
         bdb->setData( b );
@@ -102,7 +103,7 @@ void AdvancedBarcodeDialog::setData( Barkode* b )
 
 void AdvancedBarcodeDialog::getData( Barkode* b )
 {
-    for ( unsigned int i = 0; i < list.count(); i++ )
+    for ( int i = 0; i < list.count(); i++ )
     {
         BarcodeDlgBase* bdb = list.at( i );
         bdb->getData( b );
@@ -123,7 +124,8 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
 
     spinHeight = new KIntNumInput( this );
     spinHeight->setLabel( i18n( "Barcode Height (mm):" ), Qt::AlignLeft | Qt::AlignVCenter );
-    spinHeight->setRange( 1, 1000, 10, false );
+    spinHeight->setRange( 1, 1000, 10 );
+    spinHeight->setSliderEnabled( false );
 
     checkEscape = new QCheckBox( i18n( "&Translate escape sequences" ), this );
     checkAbove = new QCheckBox( i18n( "&Text above barcode" ), this );
@@ -135,8 +137,6 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
     label->setBuddy( comboCheckSum );
 
     QHBoxLayout * hbox = new QHBoxLayout( this );
-    hbox->setSpacing( 6 );
-    hbox->setMargins( 6 );
 
     hbox->addWidget( label );
     hbox->addWidget( comboCheckSum );
@@ -148,9 +148,9 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
     layout->addWidget( checkAutoCorrect );
     layout->addLayout( hbox );
 
-    QToolTip::add( spinModule, i18n( "<qt>Change the module width used by TBarcode. Take a look into the "
+    spinModule->setToolTip( "<qt>Change the module width used by TBarcode. Take a look into the "
                                      "TBarcode documentation for details. Normally you do not want to change "
-                                     "this value.</qt>" ) );
+                                     "this value.</qt>" );
 
     setLayout( layout );
 }
@@ -237,7 +237,7 @@ void TBarcodeDlg::setData( Barkode* b )
 
         int currentIndex = comboCheckSum->findText( map[options->checksum()] );
 
-        comboCheckSum->setCurrentItem( currentIndex );
+        comboCheckSum->setCurrentIndex( currentIndex );
 
     }
 }
@@ -266,16 +266,19 @@ PDF417BarcodeDlg::PDF417BarcodeDlg( QWidget *parent )
 
     spinRow = new KIntNumInput( this );
     spinRow->setLabel( i18n( "Rows:" ),  Qt::AlignLeft | Qt::AlignVCenter );
-    spinRow->setRange( 0, 90, 1, true );
-
-    spinCol = new KIntNumInput( spinRow, 0, this );
+    spinRow->setRange( 0, 90, 1 );
+    spinRow->setSliderEnabled( true );
+    
+    spinCol = new KIntNumInput( this );
     spinCol->setLabel( i18n( "Columns:" ),  Qt::AlignLeft | Qt::AlignVCenter );
-    spinCol->setRange( 0, 30, 1, true );
-
-    spinErr = new KIntNumInput( spinCol, 0, this );
+    spinCol->setRange( 0, 30, 1 );
+    spinCol->setSliderEnabled( true );
+    
+    spinErr = new KIntNumInput( this );
     spinErr->setLabel( i18n( "Error correction level:" ),  Qt::AlignLeft | Qt::AlignVCenter );
-    spinErr->setRange( 1, 8, 1, true );
-
+    spinErr->setRange( 1, 8, 1 );
+    spinCol->setSliderEnabled( true );
+    
     layout->addWidget( spinRow );
     layout->addWidget( spinCol );
     layout->addWidget( spinErr );
@@ -355,12 +358,12 @@ DataMatrixDlg::DataMatrixDlg( QWidget *parent )
 
 void DataMatrixDlg::setData( Barkode* b )
 {
-    comboDataMatrix->setCurrentItem( b->datamatrixSize() );
+    comboDataMatrix->setCurrentIndex( b->datamatrixSize() );
 }
 
 void DataMatrixDlg::getData( Barkode* b ) const
 {
-    b->setDatamatrixSize( comboDataMatrix->currentItem() );
+    b->setDatamatrixSize( comboDataMatrix->currentIndex() );
 }
 
 SequenceDlg::SequenceDlg( QWidget *parent )
@@ -376,12 +379,14 @@ SequenceDlg::SequenceDlg( QWidget *parent )
 
     spinStep = new KIntNumInput( this );
     spinStep->setLabel( i18n( "Step:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    spinStep->setRange( -100, 100, 1, false );
-
-    spinStart = new KIntNumInput( spinStep, 1, this );
+    spinStep->setRange( -100, 100, 1 );
+    spinStep->setSliderEnabled( false );
+    
+    spinStart = new KIntNumInput( 1, this );
     spinStart->setLabel( i18n( "Start:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    spinStart->setRange( -100000, 100000, 1, false );
-
+    spinStart->setRange( -100000, 100000, 1 );
+    spinStart->setSliderEnabled( false );
+    
     layout->addWidget( checkSequence );
     layout->addWidget( radioNumbers );
     layout->addWidget( radioAlpha );
@@ -441,7 +446,7 @@ void SequenceDlg::enableControls()
 ColorDlg::ColorDlg( QWidget *parent )
         : QWidget( parent )
 {
-    QVBoxLayout* layout = new QVBoxLayout( this );
+    QGridLayout* layout = new QGridLayout( this );
 
     buttonBarColor = new KColorButton( this );
     buttonBackColor = new KColorButton( this );

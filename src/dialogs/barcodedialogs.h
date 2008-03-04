@@ -19,10 +19,12 @@
 #define BARCODEDIALOGS_H
 
 #include <qmap.h>
-#include <q3ptrlist.h>
+#include <QList>
 #include <qwidget.h>
 #include <q3vbox.h>
 #include <kdialog.h>
+#include <kpagedialog.h>
+#include <kpagewidgetmodel.h>
 
 class Barkode;
 class KColorButton;
@@ -66,7 +68,7 @@ class AdvancedBarcodeDialog : public KPageDialog {
         void getData( Barkode* b );
 
     private:
-        QPtrList<BarcodeDlgBase> list;
+        QList<BarcodeDlgBase*> list;
 };
 
 /** A configuration widget for TBarcode settings.

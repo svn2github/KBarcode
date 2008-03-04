@@ -51,8 +51,6 @@ AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent )
     setCaption( i18n("Barcode Settings") );
     setButtons( KDialog::Ok | KDialog::Cancel );
     setDefaultButton( KDialog::Ok );
-
-    list.setAutoDelete( false );
     
     if( Barkode::hasFeature( type, PDF417BARCODE ) ) {
         KVBox* box = nev KVBox();

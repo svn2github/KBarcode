@@ -21,19 +21,13 @@
 #include "tbarcode2.h"
 
 // Qt includes
-#include <q3buttongroup.h>
-#include <qcheckbox.h>
-#include <q3groupbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qmap.h>
-#include <qradiobutton.h>
-#include <qtooltip.h>
-#include <q3vbox.h>
-#include <q3vgroupbox.h>
-//Added by qt3to4:
+#include <QCheckBox>
+#include <QLabel>
+#include <QLayout>
+#include <QRadioButton>
+#include <QToolTip>
+
 #include <QHBoxLayout>
-#include <QGridLayout>
 #include <QVBoxLayout>
 
 // KDE includes
@@ -44,47 +38,53 @@
 
 
 AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent )
-    : KPageDialog( parent )
+        : KPageDialog( parent )
 
 {
     setFaceType( KPageDialog::Tabbed );
-    setCaption( i18n("Barcode Settings") );
+    setCaption( i18n( "Barcode Settings" ) );
     setButtons( KDialog::Ok | KDialog::Cancel );
     setDefaultButton( KDialog::Ok );
-    
-    if( Barkode::hasFeature( type, PDF417BARCODE ) ) {
+
+    if ( Barkode::hasFeature( type, PDF417BARCODE ) )
+    {
         PDF417BarcodeDlg* dlg = new PDF417BarcodeDlg( this );
-        addPage( dlg, i18n("PDF417") );
-        list.append( (BarcodeDlgBase*)dlg );
+        addPage( dlg, i18n( "PDF417" ) );
+        list.append(( BarcodeDlgBase* )dlg );
     }
 
-    if( Barkode::hasFeature( type, DATAMATRIX ) ) {
+    if ( Barkode::hasFeature( type, DATAMATRIX ) )
+    {
         DataMatrixDlg* dlg = new DataMatrixDlg( this );
-        addPage( dlg, i18n("DataMatrix") );
-        list.append( (BarcodeDlgBase*)dlg );
+        addPage( dlg, i18n( "DataMatrix" ) );
+        list.append(( BarcodeDlgBase* )dlg );
     }
 
-    if( Barkode::hasFeature( type, TBARCODEADV ) ) {
+    if ( Barkode::hasFeature( type, TBARCODEADV ) )
+    {
         TBarcodeDlg* dlg = new TBarcodeDlg( this );
-        addPage( dlg, i18n("TBarcode") );
-        list.append( (BarcodeDlgBase*)dlg );
+        addPage( dlg, i18n( "TBarcode" ) );
+        list.append(( BarcodeDlgBase* )dlg );
     }
 
-    if( Barkode::hasFeature( type, PUREADV ) ) {
+    if ( Barkode::hasFeature( type, PUREADV ) )
+    {
         PurePostscriptDlg* dlg = new PurePostscriptDlg( this );
-        addPage( dlg, i18n("Barcode Writer in Pure Postscript") );
-        list.append( (BarcodeDlgBase*)dlg );
+        addPage( dlg, i18n( "Barcode Writer in Pure Postscript" ) );
+        list.append(( BarcodeDlgBase* )dlg );
     }
 
-    if( Barkode::hasFeature( type, COLORED ) ) {
+    if ( Barkode::hasFeature( type, COLORED ) )
+    {
         ColorDlg* dlg = new ColorDlg( this );
-        addPage( dlg, i18n("Colors") );
-        list.append( (BarcodeDlgBase*)dlg );
+        addPage( dlg, i18n( "Colors" ) );
+        list.append(( BarcodeDlgBase* )dlg );
     }
 
     SequenceDlg* dlg = new SequenceDlg( this );
-    addPage( dlg, i18n("Sequence") );
-    list.append( (BarcodeDlgBase*)dlg );
+
+    addPage( dlg, i18n( "Sequence" ) );
+    list.append(( BarcodeDlgBase* )dlg );
 }
 
 AdvancedBarcodeDialog::~AdvancedBarcodeDialog()
@@ -93,15 +93,17 @@ AdvancedBarcodeDialog::~AdvancedBarcodeDialog()
 
 void AdvancedBarcodeDialog::setData( Barkode* b )
 {
-    for( unsigned int i = 0; i < list.count(); i++ ) {
+    for ( unsigned int i = 0; i < list.count(); i++ )
+    {
         BarcodeDlgBase* bdb = list.at( i );
         bdb->setData( b );
     }
 }
 
-void AdvancedBarcodeDialog::getData( Barkode* b ) 
+void AdvancedBarcodeDialog::getData( Barkode* b )
 {
-    for( unsigned int i = 0; i < list.count(); i++ ) {
+    for ( unsigned int i = 0; i < list.count(); i++ )
+    {
         BarcodeDlgBase* bdb = list.at( i );
         bdb->getData( b );
     }
@@ -149,8 +151,8 @@ TBarcodeDlg::TBarcodeDlg( QWidget *parent )
     QToolTip::add( spinModule, i18n( "<qt>Change the module width used by TBarcode. Take a look into the "
                                      "TBarcode documentation for details. Normally you do not want to change "
                                      "this value.</qt>" ) );
-    
-    setLayout(layout);
+
+    setLayout( layout );
 }
 
 void TBarcodeDlg::setData( Barkode* b )
@@ -255,29 +257,29 @@ void TBarcodeDlg::getData( Barkode* b ) const
     }
 }
 
-PDF417BarcodeDlg::PDF417BarcodeDlg(QWidget *parent)
-    : QWidget( parent )
+PDF417BarcodeDlg::PDF417BarcodeDlg( QWidget *parent )
+        : QWidget( parent )
 {
     QVBoxLayout* layout = new QVBoxLayout( this );
 
     setEnabled( Barkode::haveTBarcode() || Barkode::havePDFBarcode() );
-    
+
     spinRow = new KIntNumInput( this );
-    spinRow->setLabel( i18n("Rows:"),  Qt::AlignLeft | Qt::AlignVCenter );
+    spinRow->setLabel( i18n( "Rows:" ),  Qt::AlignLeft | Qt::AlignVCenter );
     spinRow->setRange( 0, 90, 1, true );
 
     spinCol = new KIntNumInput( spinRow, 0, this );
-    spinCol->setLabel( i18n("Columns:"),  Qt::AlignLeft | Qt::AlignVCenter );
+    spinCol->setLabel( i18n( "Columns:" ),  Qt::AlignLeft | Qt::AlignVCenter );
     spinCol->setRange( 0, 30, 1, true );
 
     spinErr = new KIntNumInput( spinCol, 0, this );
-    spinErr->setLabel( i18n("Error correction level:"),  Qt::AlignLeft | Qt::AlignVCenter );
+    spinErr->setLabel( i18n( "Error correction level:" ),  Qt::AlignLeft | Qt::AlignVCenter );
     spinErr->setRange( 1, 8, 1, true );
 
     layout->addWidget( spinRow );
     layout->addWidget( spinCol );
     layout->addWidget( spinErr );
-    
+
     setLayout( layout );
 }
 
@@ -285,7 +287,7 @@ void PDF417BarcodeDlg::setData( Barkode* b )
 {
     PDF417Options* options = dynamic_cast<PDF417Options*>( b->engine()->options() );
 
-    if( options ) 
+    if ( options )
     {
         spinRow->setValue( options->row() );
         spinCol->setValue( options->col() );
@@ -297,7 +299,7 @@ void PDF417BarcodeDlg::getData( Barkode* b ) const
 {
     PDF417Options* options = dynamic_cast<PDF417Options*>( b->engine()->options() );
 
-    if( options ) 
+    if ( options )
     {
         options->setRow( spinRow->value() );
         options->setCol( spinCol->value() );
@@ -305,18 +307,18 @@ void PDF417BarcodeDlg::getData( Barkode* b ) const
     }
 }
 
-DataMatrixDlg::DataMatrixDlg(QWidget *parent )
-    : QWidget( parent )
+DataMatrixDlg::DataMatrixDlg( QWidget *parent )
+        : QWidget( parent )
 {
     QHBoxLayout* datamLayout = new QHBoxLayout( this );
 
     comboDataMatrix = new KComboBox( false, this );
 
-    datamLayout->addWidget( new QLabel( i18n("Data Matrix symbol sizes (rows x cols):"), this ) );
+    datamLayout->addWidget( new QLabel( i18n( "Data Matrix symbol sizes (rows x cols):" ), this ) );
     datamLayout->addWidget( comboDataMatrix );
     datamLayout->addItem( new QSpacerItem( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum ) );
 
-    comboDataMatrix->addItem( i18n("Automatic calculation" ) );
+    comboDataMatrix->addItem( i18n( "Automatic calculation" ) );
     comboDataMatrix->addItem( "10 x 10" );
     comboDataMatrix->addItem( "12 x 12" );
     comboDataMatrix->addItem( "14 x 14" );
@@ -347,13 +349,13 @@ DataMatrixDlg::DataMatrixDlg(QWidget *parent )
     comboDataMatrix->addItem( "12 x 36" );
     comboDataMatrix->addItem( "16 x 36" );
     comboDataMatrix->addItem( "16 x 48" );
-    
+
     setLayout( datamLayout );
 }
 
 void DataMatrixDlg::setData( Barkode* b )
 {
-    comboDataMatrix->setCurrentItem( b->datamatrixSize());
+    comboDataMatrix->setCurrentItem( b->datamatrixSize() );
 }
 
 void DataMatrixDlg::getData( Barkode* b ) const
@@ -362,31 +364,31 @@ void DataMatrixDlg::getData( Barkode* b ) const
 }
 
 SequenceDlg::SequenceDlg( QWidget *parent )
-    : QWidget( parent )
+        : QWidget( parent )
 {
     QVBoxLayout* layout = new QVBoxLayout( this );
 
-    checkSequence = new QCheckBox( i18n("&Enable sequence"), this );
-                                                                                                        
-    radioNumbers = new QRadioButton( i18n("Iterate over numbers 0-9"), this );
-    radioAlpha = new QRadioButton( i18n("Iterate over characters A-Z"), this );
-    radioAlphaNum = new QRadioButton( i18n("Iterate over A-Z, 0-9"), this );
+    checkSequence = new QCheckBox( i18n( "&Enable sequence" ), this );
+
+    radioNumbers = new QRadioButton( i18n( "Iterate over numbers 0-9" ), this );
+    radioAlpha = new QRadioButton( i18n( "Iterate over characters A-Z" ), this );
+    radioAlphaNum = new QRadioButton( i18n( "Iterate over A-Z, 0-9" ), this );
 
     spinStep = new KIntNumInput( this );
-    spinStep->setLabel( i18n("Step:"), Qt::AlignLeft | Qt::AlignVCenter );
+    spinStep->setLabel( i18n( "Step:" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinStep->setRange( -100, 100, 1, false );
 
     spinStart = new KIntNumInput( spinStep, 1, this );
-    spinStart->setLabel( i18n("Start:"), Qt::AlignLeft | Qt::AlignVCenter );
+    spinStart->setLabel( i18n( "Start:" ), Qt::AlignLeft | Qt::AlignVCenter );
     spinStart->setRange( -100000, 100000, 1, false );
-    
+
     layout->addWidget( checkSequence );
     layout->addWidget( radioNumbers );
     layout->addWidget( radioAlpha );
     layout->addWidget( radioAlphaNum );
     layout->addWidget( spinStep );
     layout->addWidget( spinStart );
-    
+
     setLayout( layout );
 
     connect( checkSequence, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -400,29 +402,29 @@ void SequenceDlg::setData( Barkode* b )
     checkSequence->setChecked( b->sequenceEnabled() );
     spinStep->setValue( b->sequenceStep() );
     spinStart->setValue( b->sequenceStart() );
-    
-    if( b->sequenceMode() == NUM )
+
+    if ( b->sequenceMode() == NUM )
         radioNumbers->setChecked( true );
-    else if( b->sequenceMode() == ALPHA )
+    else if ( b->sequenceMode() == ALPHA )
         radioAlpha->setChecked( true );
-    else if( b->sequenceMode() == ALPHANUM )
+    else if ( b->sequenceMode() == ALPHANUM )
         radioAlphaNum->setChecked( true );
-        
+
     enableControls();
 }
 
 void SequenceDlg::getData( Barkode* b ) const
 {
     b->setSequenceEnabled( checkSequence->isChecked() );
-    
+
     b->setSequenceStep( spinStep->value() );
     b->setSequenceStart( spinStart->value() );
-    
-    if( radioNumbers->isChecked() )
+
+    if ( radioNumbers->isChecked() )
         b->setSequenceMode( NUM );
-    else if( radioAlpha->isChecked() )
+    else if ( radioAlpha->isChecked() )
         b->setSequenceMode( ALPHA );
-    else if( radioAlphaNum->isChecked() )
+    else if ( radioAlphaNum->isChecked() )
         b->setSequenceMode( ALPHANUM );
 }
 
@@ -436,22 +438,22 @@ void SequenceDlg::enableControls()
     spinStart->setEnabled( checkSequence->isChecked() && radioNumbers->isChecked() );
 }
 
-ColorDlg::ColorDlg(QWidget *parent)
-    : QWidget( parent )
+ColorDlg::ColorDlg( QWidget *parent )
+        : QWidget( parent )
 {
     QVBoxLayout* layout = new QVBoxLayout( this );
-    
+
     buttonBarColor = new KColorButton( this );
     buttonBackColor = new KColorButton( this );
     buttonTextColor = new KColorButton( this );
 
-    layout->addWidget( new QLabel( i18n("Bar Color:"), this ), 0, 0 );
-    layout->addWidget( new QLabel( i18n("Background Color:"), this ), 1, 0 );
-    layout->addWidget( new QLabel( i18n("Text Color:"), this ), 2, 0 );
+    layout->addWidget( new QLabel( i18n( "Bar Color:" ), this ), 0, 0 );
+    layout->addWidget( new QLabel( i18n( "Background Color:" ), this ), 1, 0 );
+    layout->addWidget( new QLabel( i18n( "Text Color:" ), this ), 2, 0 );
     layout->addWidget( buttonBarColor, 0, 1 );
     layout->addWidget( buttonBackColor, 1, 1 );
     layout->addWidget( buttonTextColor, 2, 1 );
-    
+
     setLayout( layout );
 }
 
@@ -469,20 +471,24 @@ void ColorDlg::getData( Barkode* b ) const
     b->setTextColor( buttonTextColor->color() );
 }
 
-PurePostscriptDlg::PurePostscriptDlg(QWidget *parent)
-    : QVBox( parent )
+PurePostscriptDlg::PurePostscriptDlg( QWidget *parent )
+        : QWidget( parent )
 {
-    QVGroupBox* gb  = new QVGroupBox( i18n("Barcode Writer in Pure Postscript"), this );
-    gb->setEnabled( Barkode::havePurePostscriptBarcode() );
-    
-    checkChecksum = new QCheckBox( i18n("Enable &Checksum"), gb );
+    QVBoxLayout* layout = new QVBoxLayout( this );
+
+    setEnabled( Barkode::havePurePostscriptBarcode() );
+    checkChecksum = new QCheckBox( i18n( "Enable &Checksum" ), this );
+
+    layout->addWidget( checkChecksum );
+
+    setLayout( layout );
 }
 
 void PurePostscriptDlg::setData( Barkode* b )
 {
     PurePostscriptOptions* options = dynamic_cast<PurePostscriptOptions*>( b->engine()->options() );
 
-    if( options ) 
+    if ( options )
     {
         checkChecksum->setChecked( options->checksum() );
         checkChecksum->setEnabled( Barkode::hasFeature( b->type(), MODULOALLCHECK ) );
@@ -492,8 +498,8 @@ void PurePostscriptDlg::setData( Barkode* b )
 void PurePostscriptDlg::getData( Barkode* b ) const
 {
     PurePostscriptOptions* options = dynamic_cast<PurePostscriptOptions*>( b->engine()->options() );
-    
-    if( options ) 
+
+    if ( options )
         options->setChecksum( checkChecksum->isChecked() );
 }
 

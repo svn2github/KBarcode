@@ -18,11 +18,10 @@
 #ifndef BARCODEDIALOGS_H
 #define BARCODEDIALOGS_H
 
-#include <qmap.h>
+#include <QMap>
 #include <QList>
-#include <qwidget.h>
-#include <q3vbox.h>
-#include <kdialog.h>
+#include <QWidget>
+
 #include <kpagedialog.h>
 #include <kpagewidgetmodel.h>
 

@@ -56,7 +56,7 @@ class BarcodeDlgBase {
   *
   * @author Dominik Seichter
   */
-class AdvancedBarcodeDialog : public KDialogBase {
+class AdvancedBarcodeDialog : public KPageDialog {
     Q_OBJECT
     public:
         AdvancedBarcodeDialog( QString type, QWidget* parent = 0 );

@@ -44,42 +44,53 @@
 
 
 AdvancedBarcodeDialog::AdvancedBarcodeDialog( QString type, QWidget* parent )
-    : KDialogBase( KDialogBase::Tabbed, i18n("Barcode Settings"),
-      KDialogBase::Ok | KDialogBase::Cancel, KDialogBase::Ok, parent)
+    : KPageDialog( parent )
+
 {
+    setFaceType( KPageDialog::Tabbed );
+    setCaption( i18n("Barcode Settings") );
+    setButtons( KDialog::Ok | KDialog::Cancel );
+    setDefaultButton( KDialog::Ok );
+
     list.setAutoDelete( false );
     
     if( Barkode::hasFeature( type, PDF417BARCODE ) ) {
-        KVBox* box = addVBoxPage( i18n("PDF417") );
+        KVBox* box = nev KVBox();
+        KPageWidgetItem* item = addPage( box, i18n("PDF417") );
         PDF417BarcodeDlg* dlg = new PDF417BarcodeDlg( box );
         list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, DATAMATRIX ) ) {
-        KVBox* box = addVBoxPage( i18n("DataMatrix") );
+        KVBox* box = new KVBox();
+        KPageWidgetItem* item = addPage( box, i18n("DataMatrix") );
         DataMatrixDlg* dlg = new DataMatrixDlg( box );
-        list.append( (BarcodeDlgBase*)dlg );        
+        list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, TBARCODEADV ) ) {
-        KVBox* box = addVBoxPage( i18n("TBarcode") );
+        KVBox* box = new KVBox();
+        KPageWidgetItem* item = addPage( box, i18n("TBarcode") );
         TBarcodeDlg* dlg = new TBarcodeDlg( box );
-        list.append( (BarcodeDlgBase*)dlg );        
+        list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, PUREADV ) ) {
-        KVBox* box = addVBoxPage( i18n("Barcode Writer in Pure Postscript") );
+        KVBox* box = new KVBox();
+        KPageWidgetItem* item = addPage( box, i18n("Barcode Writer in Pure Postscript") );
         PurePostscriptDlg* dlg = new PurePostscriptDlg( box );
-        list.append( (BarcodeDlgBase*)dlg );        
+        list.append( (BarcodeDlgBase*)dlg );
     }
 
     if( Barkode::hasFeature( type, COLORED ) ) {
-        KVBox* box = addVBoxPage( i18n("Colors") );
+        KVBox* box = new KVBox();
+        KPageWidgetItem* item = addPage( box, i18n("Colors") );
         ColorDlg* dlg = new ColorDlg( box );
-        list.append( (BarcodeDlgBase*)dlg );        
+        list.append( (BarcodeDlgBase*)dlg );
     }
 
-    KVBox* box = addVBoxPage( i18n("Sequence") );
+    KVBox* box = new KVBox();
+    KPageWidgetItem* item = addPage( box, i18n("Sequence") );
     SequenceDlg* dlg = new SequenceDlg( box );
     list.append( (BarcodeDlgBase*)dlg );
 }

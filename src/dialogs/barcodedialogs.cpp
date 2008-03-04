@@ -364,25 +364,19 @@ void DataMatrixDlg::getData( Barkode* b ) const
 SequenceDlg::SequenceDlg( QWidget *parent )
     : QWidget( parent )
 {
-    QVBoxLayout* main = new QVBoxLayout( this, 6, 6 );
+    QVBoxLayout* layout = new QVBoxLayout( this );
 
-    QButtonGroup* group = new QButtonGroup( i18n("Sequence"), this );
-    group->setColumnLayout(0, Qt::Vertical );
-    group->layout()->setSpacing( 6 );
-    group->layout()->setMargin( 11 );
-    QVBoxLayout* layout = new QVBoxLayout( group->layout() );
-
-    checkSequence = new QCheckBox( i18n("&Enable sequence"), group );
+    checkSequence = new QCheckBox( i18n("&Enable sequence"), this );
                                                                                                         
-    radioNumbers = new QRadioButton( i18n("Iterate over numbers 0-9"), group );
-    radioAlpha = new QRadioButton( i18n("Iterate over characters A-Z"), group );
-    radioAlphaNum = new QRadioButton( i18n("Iterate over A-Z, 0-9"), group );
+    radioNumbers = new QRadioButton( i18n("Iterate over numbers 0-9"), this );
+    radioAlpha = new QRadioButton( i18n("Iterate over characters A-Z"), this );
+    radioAlphaNum = new QRadioButton( i18n("Iterate over A-Z, 0-9"), this );
 
-    spinStep = new KIntNumInput( group );
+    spinStep = new KIntNumInput( this );
     spinStep->setLabel( i18n("Step:"), Qt::AlignLeft | Qt::AlignVCenter );
     spinStep->setRange( -100, 100, 1, false );
 
-    spinStart = new KIntNumInput( spinStep, 1, group );
+    spinStart = new KIntNumInput( spinStep, 1, this );
     spinStart->setLabel( i18n("Start:"), Qt::AlignLeft | Qt::AlignVCenter );
     spinStart->setRange( -100000, 100000, 1, false );
     
@@ -393,7 +387,7 @@ SequenceDlg::SequenceDlg( QWidget *parent )
     layout->addWidget( spinStep );
     layout->addWidget( spinStart );
     
-    main->addWidget( group );
+    setLayout( layout );
 
     connect( checkSequence, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
     connect( radioNumbers, SIGNAL( clicked() ), this, SLOT( enableControls() ) );
@@ -436,6 +430,7 @@ void SequenceDlg::enableControls()
 {
     radioNumbers->setEnabled( checkSequence->isChecked() );
     radioAlpha->setEnabled( checkSequence->isChecked() );
+    // FIXME: enable/fix or kill this button
     radioAlphaNum->setEnabled( false ); //checkSequence->isChecked() );
     spinStep->setEnabled( checkSequence->isChecked() );
     spinStart->setEnabled( checkSequence->isChecked() && radioNumbers->isChecked() );

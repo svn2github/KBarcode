@@ -51,9 +51,14 @@ const QString cached = I18N_NOOP("There are currently %1 cached barcodes.");
 using namespace KABC;
 
 ConfigDialog::ConfigDialog( QWidget* parent )
-    : KDialogBase( IconList, i18n("Configure KBarcode"), KDialogBase::Ok|KDialogBase::Cancel,
-      KDialogBase::Ok, parent, "", true, true )
+    : KDialog( parent )
 {
+    setFaceType( List );
+    setCaption( i18n("Configure KBarcode") );
+    setButtons( KDialog::Ok|KDialog::Cancel );
+    setDefaultButton( KDialog::Ok );
+    setModal( true );
+
     setupTab2(); // Printer
     setupTab1(); // SQL
     setupTab4(); // label editor
@@ -67,163 +72,177 @@ ConfigDialog::~ConfigDialog()
 
 void ConfigDialog::setupTab1( )
 {
-    QFrame* box = addPage( i18n("SQL Settings"), "", BarIcon("connect_no") );
-    QVBoxLayout* layout = new QVBoxLayout( box, 6, 6 );
-    QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
+    KVBox* page = new KVBox();
+    KPageWidgetItem* item = addPage( page, i18n( "SQL Settings" ) );
+    item->setIcon( BarIcon( "connect_no" ) );
 
-    sqlwidget = new SqlWidget( false, box, "sqlwidget" );
+    sqlwidget = new SqlWidget( false, page );
 
-    layout->addWidget( sqlwidget );
-    layout->addItem( spacer );
+    // TODO: test if it's needed here
+    // QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
 }
 
 void ConfigDialog::setupTab2()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
-    
-    QFrame* box = addPage( i18n("Print Settings"), "", BarIcon("fileprint") );
 
-    QVBoxLayout* tabLayout = new QVBoxLayout( box, 11, 6 );
-    QHBoxLayout* Layout0 = new QHBoxLayout( 0, 6, 6 );
-    QHBoxLayout* Layout1 = new QHBoxLayout( 0, 6, 6 );
-    QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
+    KVBox* page = new KVBox();
+    KPageWidgetItem* item = addPage( page, i18n( "Print Settings" ) );
+    item->setIcon( BarIcon( "fileprint" ) );
 
-    printerQuality = new KComboBox( false, box );
-    printerQuality->addItem( i18n("Medium Resolution (300dpi)") );
-    printerQuality->addItem( i18n("High Resolution (600dpi)") );
-    printerQuality->addItem( i18n("Very High Resolution (1200dpi)") );
+    QHBoxLayout* Layout0 = new QHBoxLayout( page );
+    QHBoxLayout* Layout1 = new QHBoxLayout( page );
 
-    switch( lb->quality ) {
+    // QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding );
+
+    printerQuality = new KComboBox( false, this );
+    printerQuality->addItem( i18n( "Medium Resolution (300dpi)" ) );
+    printerQuality->addItem( i18n( "High Resolution (600dpi)" ) );
+    printerQuality->addItem( i18n( "Very High Resolution (1200dpi)" ) );
+
+    switch ( lb->quality )
+    {
+
         case PrinterSettings::Middle:
-            printerQuality->setCurrentItem( 0 );
+            printerQuality->setCurrentIndex( 0 );
             break;
+
         case PrinterSettings::High:
-            printerQuality->setCurrentItem( 1 );
+            printerQuality->setCurrentIndex( 1 );
             break;
+
         case PrinterSettings::VeryHigh:
-            printerQuality->setCurrentItem( 2 );
+            printerQuality->setCurrentIndex( 2 );
             break;
+
         default:
             break;
     }
 
-    pageFormat = new KComboBox( false, box );
+    pageFormat = new KComboBox( false, this );
+
     PrinterSettings::getInstance()->insertPageFormat( pageFormat );
-    pageFormat->setCurrentItem( lb->format );
-    
-    Layout0->addWidget( new QLabel( i18n("Printer Resolution:"), box ) );
+    pageFormat->setCurrentIndex( lb->format );
+
+    Layout0->addWidget( new QLabel( i18n( "Printer Resolution:" ), this ) );
     Layout0->addWidget( printerQuality );
-    Layout1->addWidget( new QLabel( i18n("Preview Page Format:"), box ) );
+    Layout1->addWidget( new QLabel( i18n( "Preview Page Format:" ), this ) );
     Layout1->addWidget( pageFormat );
-    tabLayout->addLayout( Layout0 );
-    tabLayout->addLayout( Layout1 );
-    tabLayout->addItem( spacer );
 }
 
 void ConfigDialog::setupTab3()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
 
-    QFrame* box = addPage( i18n("Import"), "", BarIcon("fileimport") );
+    QWidget* page = new QWidget( this );
+    KPageWidgetItem* item = addPage( page, i18n( "Import" ) );
+    item->setIcon( BarIcon( "fileimport" ) );
+
     QGridLayout* grid = new QGridLayout( box, 2, 2 );
 
-    QLabel* label = new QLabel( box );
+    QLabel* label = new QLabel( page );
     label->setText( i18n("Comment:") );
     grid->addWidget( label, 0, 0 );
 
-    comment = new KLineEdit( lb->comment, box );
+    comment = new KLineEdit( lb->comment, page );
     grid->addWidget( comment, 0, 1 );
 
-    label = new QLabel( box );
+    label = new QLabel( page );
     label->setText( i18n( "Separator:" ) );
     grid->addWidget( label, 1, 0 );
 
-    separator = new KLineEdit( lb->separator, box );
+    separator = new KLineEdit( lb->separator, page );
     grid->addWidget( separator, 1, 1 );
 
-    label = new QLabel( box );
+    label = new QLabel( page );
     label->setText( i18n("Quote Character:") );
     grid->addWidget( label, 2, 0 );
 
-    quote  = new KLineEdit( lb->quote, box );
+    quote  = new KLineEdit( lb->quote, page );
     grid->addWidget( quote, 2, 1 );
 
-    checkUseCustomNo = new QCheckBox( i18n("&Use customer article no. for import"), box );
+    checkUseCustomNo = new QCheckBox( i18n("&Use customer article no. for import"), page );
     checkUseCustomNo->setChecked( lb->useCustomNo );
     
-    grid->addMultiCellWidget( checkUseCustomNo, 3, 3, 0, 2 );
+    grid->addWidget( checkUseCustomNo, 3, 0, 1, 2 );
     
-    QHBoxLayout* Layout1 = new QHBoxLayout( 0, 6, 6 );
-    Layout1->addWidget( new QLabel( i18n("File Format:"), box ) );
+    QHBoxLayout* Layout1 = new QHBoxLayout( 0 );
+    Layout1->addWidget( new QLabel( i18n("File Format:"), page ) );
 
-    combo1 = new KComboBox( box );
+    combo1 = new KComboBox( page );
     combo1->addItem( i18n("Quantity") );
     combo1->addItem( i18n("Article Number") );
     combo1->addItem( i18n("Group") );
     Layout1->addWidget( combo1 );
 
-    combo2 = new KComboBox( box );
+    combo2 = new KComboBox( page );
     combo2->addItem( i18n("Quantity") );
     combo2->addItem( i18n("Article Number") );
     combo2->addItem( i18n("Group") );
     Layout1->addWidget( combo2 );
 
-    combo3 = new KComboBox( box );
+    combo3 = new KComboBox( page );
     combo3->addItem( i18n("Quantity") );
     combo3->addItem( i18n("Article Number") );
     combo3->addItem( i18n("Group") );
     Layout1->addWidget( combo3 );
 
-    grid->addMultiCellLayout( Layout1, 4, 4, 0, 2 );
+    grid->addLayout( Layout1, 4, 0, 1, 2 );
     QSpacerItem* spacer = new QSpacerItem( 0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum );
-    grid->addItem( spacer, 5, 0 );    
+    grid->addItem( spacer, 5, 0 );
+    
+    KConfigGroup config = KGlobal::config()->group("FileFormat");
+    combo1->setCurrentIndex( config.readEntry("Data0", 0 ) );
+    combo2->setCurrentIndex( config.readEntry("Data1", 1 ) );
+    combo3->setCurrentIndex( config.readEntry("Data2", 2 ) );
 
-    KConfig* config = KGlobal::config();
-    config->setGroup("FileFormat");
-    combo1->setCurrentItem( config->readNumEntry("Data0", 0 ) );
-    combo2->setCurrentItem( config->readNumEntry("Data1", 1 ) );
-    combo3->setCurrentItem( config->readNumEntry("Data2", 2 ) );
+    page->setLayout( grid );
 }
 
 void ConfigDialog::setupTab4()
 {
-    QFrame* box = addPage( i18n("Label Editor"), "", BarIcon("kbarcode") );
+    QWidget* page = new QWidget( this );
+    KPageWidgetItem* item = addPage( page, i18n( "Label Editor" ) );
+    item->setIcon( BarIcon( "kbarcode" ) );
+
     QGridLayout* tabLayout = new QGridLayout( box, 11, 6 );
 
-    checkNewDlg = new QCheckBox( box );
+    checkNewDlg = new QCheckBox( page );
     checkNewDlg->setText( i18n("&Create a new label on startup") );
 
-    date = new KLineEdit( box );
-    labelDate = new QLabel( box );
+    date = new KLineEdit( page );
+    labelDate = new QLabel( page );
     
     connect( date, SIGNAL( textChanged( const QString & ) ), this, SLOT( updateDatePreview() ) );
 
-    spinGrid = new KIntNumInput( 0, box );
+    spinGrid = new KIntNumInput( 0, page );
     spinGrid->setLabel( i18n("Grid:" ), Qt::AlignLeft | Qt::AlignVCenter );
-    spinGrid->setRange(2, 100, 1, false );
-
-    colorGrid = new KColorButton( box );
+    spinGrid->setRange(2, 100, 1 );
+    spinGrid->setSliderEnabled( false );
+    
+    colorGrid = new KColorButton( page );
 
     tabLayout->addWidget( checkNewDlg, 0, 0 );
-    tabLayout->addMultiCellWidget( spinGrid, 1, 1, 0, 2 );
-    tabLayout->addWidget( new QLabel( i18n("Grid Color:"), box ), 2, 0 );
+    tabLayout->addWidget( spinGrid, 1, 0, 1, 2 );
+    tabLayout->addWidget( new QLabel( i18n("Grid Color:"), page ), 2, 0 );
     tabLayout->addWidget( colorGrid, 2, 1 );
-    tabLayout->addWidget( new QLabel( i18n("Date Format:"), box ), 3, 0 );
+    tabLayout->addWidget( new QLabel( i18n("Date Format:"), page ), 3, 0 );
     tabLayout->addWidget( date, 3, 1 );
     tabLayout->addWidget( labelDate, 3, 2 );
+    
+    page.setLayout( tabLayout );
 }
 
 void ConfigDialog::setupTab5()
 {
     labelprinterdata* lb = PrinterSettings::getInstance()->getData();
-    QFrame* box = addPage( i18n("On New"), "", BarIcon("filenew") );
-
-    QVBoxLayout* tabLayout = new QVBoxLayout( box, 11, 6 );
-
-    QButtonGroup* bg = new QButtonGroup( i18n("On New Article"), box );
+    
+    KVBox* page = new KVBox();
+    KPageWidgetItem* item = addPage( page, i18n( "On New" ) );
+    item->setIcon( BarIcon( "filenew" ) );
+    
+    QButtonGroup* bg = new QButtonGroup( i18n("On New Article"), page );
     bg->setColumnLayout(0, Qt::Vertical );
-    bg->layout()->setSpacing( 6 );
-    bg->layout()->setMargin( 11 );
     QGridLayout* bgLayout = new QGridLayout( bg->layout() );
 
     QStringList alist, glist;
@@ -249,7 +268,7 @@ void ConfigDialog::setupTab5()
     onNewArticle3->insertStringList( alist );
     onNewArticle4->insertStringList( alist );
 
-    bgLayout->setColStretch( 1, 3 );
+    bgLayout->setColumnStretch( 1, 3 );
 
     bgLayout->addWidget( new QLabel( "1.", bg ), 0, 0 );
     bgLayout->addWidget( new QLabel( "2.", bg ), 1, 0 );
@@ -261,10 +280,8 @@ void ConfigDialog::setupTab5()
     bgLayout->addWidget( onNewArticle3, 2, 1 );
     bgLayout->addWidget( onNewArticle4, 3, 1 );
 
-    QButtonGroup* bg2 = new QButtonGroup( i18n("On New Group"), box );
+    QButtonGroup* bg2 = new QButtonGroup( i18n("On New Group"), page );
     bg2->setColumnLayout(0, Qt::Vertical );
-    bg2->layout()->setSpacing( 6 );
-    bg2->layout()->setMargin( 11 );
     QGridLayout* bg2Layout = new QGridLayout( bg2->layout() );
 
     onNewGroup1 = new KComboBox( false, bg2 );
@@ -277,7 +294,7 @@ void ConfigDialog::setupTab5()
     onNewGroup3->insertStringList( glist );
     onNewGroup4->insertStringList( glist );
 
-    bg2Layout->setColStretch( 1, 3 );
+    bg2Layout->setColumnStretch( 1, 3 );
 
     bg2Layout->addWidget( new QLabel( "1.", bg2 ), 0, 0 );
     bg2Layout->addWidget( new QLabel( "2.", bg2 ), 1, 0 );
@@ -289,27 +306,24 @@ void ConfigDialog::setupTab5()
     bg2Layout->addWidget( onNewGroup3, 2, 1 );
     bg2Layout->addWidget( onNewGroup4, 3, 1 );
 
-    tabLayout->addWidget( bg );
-    tabLayout->addWidget( bg2 );
+    onNewArticle1->setCurrentIndex( lb->articleEvent1 );
+    onNewArticle2->setCurrentIndex( lb->articleEvent2 );
+    onNewArticle3->setCurrentIndex( lb->articleEvent3 );
+    onNewArticle4->setCurrentIndex( lb->articleEvent4 );
 
-    onNewArticle1->setCurrentItem( lb->articleEvent1 );
-    onNewArticle2->setCurrentItem( lb->articleEvent2 );
-    onNewArticle3->setCurrentItem( lb->articleEvent3 );
-    onNewArticle4->setCurrentItem( lb->articleEvent4 );
-
-    onNewGroup1->setCurrentItem( lb->groupEvent1 );
-    onNewGroup2->setCurrentItem( lb->groupEvent2 );
-    onNewGroup3->setCurrentItem( lb->groupEvent3 );
-    onNewGroup4->setCurrentItem( lb->groupEvent4 );
+    onNewGroup1->setCurrentIndex( lb->groupEvent1 );
+    onNewGroup2->setCurrentIndex( lb->groupEvent2 );
+    onNewGroup3->setCurrentIndex( lb->groupEvent3 );
+    onNewGroup4->setCurrentIndex( lb->groupEvent4 );
 }
 
 void ConfigDialog::accept()
 {
-    KConfig* config = KGlobal::config();
-    config->setGroup("FileFormat");
-    config->writeEntry("Data0", combo1->currentItem() );
-    config->writeEntry("Data1", combo2->currentItem() );
-    config->writeEntry("Data2", combo3->currentItem() );
+    KConfigGroup config = KGlobal::config()->group("FileFormat");
+    
+    config.writeEntry("Data0", combo1->currentIndex() );
+    config.writeEntry("Data1", combo2->currentIndex() );
+    config.writeEntry("Data2", combo3->currentIndex() );
 
     sqlwidget->save();
 
@@ -317,20 +331,20 @@ void ConfigDialog::accept()
     lpdata->comment = comment->text();
     lpdata->separator = separator->text();
     lpdata->quote = quote->text();
-    lpdata->format = pageFormat->currentItem();
+    lpdata->format = pageFormat->currentIndex();
 
-    lpdata->articleEvent1 = onNewArticle1->currentItem();
-    lpdata->articleEvent2 = onNewArticle2->currentItem();
-    lpdata->articleEvent3 = onNewArticle3->currentItem();
-    lpdata->articleEvent4 = onNewArticle4->currentItem();
+    lpdata->articleEvent1 = onNewArticle1->currentIndex();
+    lpdata->articleEvent2 = onNewArticle2->currentIndex();
+    lpdata->articleEvent3 = onNewArticle3->currentIndex();
+    lpdata->articleEvent4 = onNewArticle4->currentIndex();
 
-    lpdata->groupEvent1 = onNewGroup1->currentItem();
-    lpdata->groupEvent2 = onNewGroup2->currentItem();
-    lpdata->groupEvent3 = onNewGroup3->currentItem();
-    lpdata->groupEvent4 = onNewGroup4->currentItem();
+    lpdata->groupEvent1 = onNewGroup1->currentIndex();
+    lpdata->groupEvent2 = onNewGroup2->currentIndex();
+    lpdata->groupEvent3 = onNewGroup3->currentIndex();
+    lpdata->groupEvent4 = onNewGroup4->currentIndex();
     lpdata->useCustomNo = checkUseCustomNo->isChecked();
 
-    switch( printerQuality->currentItem() ) {
+    switch( printerQuality->currentIndex() ) {
         case 0:
             lpdata->quality = PrinterSettings::Middle;
             break;

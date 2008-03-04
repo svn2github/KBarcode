@@ -18,9 +18,7 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include <kdialogbase.h>
-//Added by qt3to4:
-#include <QLabel>
+#include <kdialog.h>
 
 struct labelprinterdata;
 struct mysqldata;
@@ -39,7 +37,7 @@ class SqlWidget;
 /** KBarcodes configuration dialog for advanced settings.
   */
 
-class ConfigDialog : public KDialogBase  {
+class ConfigDialog : public KDialog  {
     Q_OBJECT
     public:
         ConfigDialog( QWidget* parent );

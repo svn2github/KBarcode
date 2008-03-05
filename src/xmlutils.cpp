@@ -123,7 +123,6 @@ void XMLUtils::writeXMLHeader( QDomNode* root, const QString & description, Defi
 void XMLUtils::readDocumentItems( DocumentItemList* list, QDomDocument* doc, TokenProvider* token, bool kbarcode18 )
 {
     QDomNode n = doc->documentElement().firstChild();
-    list->setAutoDelete( false );
     
     if( kbarcode18 )
     {
@@ -167,7 +166,7 @@ void XMLUtils::readDocumentItems( DocumentItemList* list, QDomDocument* doc, Tok
                     r->setBoundingRect( rect );
                     
                     QPixmap pix;
-                    pix.loadFromData( e.text().utf8(), "XPM" );
+                    pix.loadFromData( e.text().toUtf8(), "XPM" );
                     r->setPixmap( pix );
                     r->setRotation( e.attribute("rotation", "0.0" ).toDouble() );
                     r->setZ( e.attribute( "z", "0" ).toInt() );
@@ -185,7 +184,7 @@ void XMLUtils::readDocumentItems( DocumentItemList* list, QDomDocument* doc, Tok
                     r->setColor( readXMLColor( &e, "color", Qt::black ) );
                     list->append( r );
                 } else if( e.tagName() == "line" ) {
-#warning "TODO: test legacy loading of lines"
+                    //TODO: test legacy loading of lines
                     LineItem* cl = new LineItem();
                     int x = e.attribute( "x1", "0" ).toInt();
                     int y = e.attribute( "y1", "0" ).toInt();
@@ -363,7 +362,7 @@ Definition* XMLUtils::readDefinition( QDomElement* tag )
         int id = label_def_id;
         QStringList p = Definition::getProducers();
         if( !p.contains( producer ) ) {
-            for( unsigned int i = 0; i < p.count(); i++ ) {
+            for( int i = 0; i < p.count(); i++ ) {
                 id = Definition::getClosest( p[i], type );
                 if( id >= 0 )
                     break;

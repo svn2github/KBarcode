@@ -22,7 +22,7 @@
 //Added by qt3to4:
 #include <QFrame>
 #include <QList>
-#include <kdialogbase.h>
+#include <kpagedialog.h>
 
 class CSVFile;
 class EncodingCombo;

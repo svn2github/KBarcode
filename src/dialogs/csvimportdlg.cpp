@@ -60,10 +60,16 @@ extern QString removeQuote( QString text, QString quote );
 const char* NOFIELD = "<NONE>";
 
 CSVImportDlg::CSVImportDlg(QWidget *parent )
-    : KDialogBase( KDialogBase::Tabbed, i18n("Import"),
-      KDialogBase::Ok | KDialogBase::Close, KDialogBase::Ok, parent,false,true)
+    : KPageDialog( parent )
 {
-    setButtonOK( i18n("&Import"), i18n("Import the selected file into your tables.") );
+    setFaceType( KPageDialog::Tabbed );
+    setCaption( i18n("Import") );
+    setButtons( KDialog::Ok | KDialog::Close );
+    setDefaultButton( KDialog::Ok );
+    setModal( false );
+    showButtonSeparator( true );
+    setButtonText( KDialog::Ok, i18n("&Import") );
+    setButtonToolTip( KDialog::Ok, i18n("Import the selected file into your tables.") );
     
     createPage1();
     createPage2();

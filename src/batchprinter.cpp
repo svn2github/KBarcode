@@ -37,7 +37,7 @@
 #include <kabc/addressee.h>
 #include <kabc/addresseelist.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kimageio.h>
 #include <klocale.h>
 #include <kmessagebox.h>

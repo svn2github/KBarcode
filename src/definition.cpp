@@ -25,6 +25,7 @@
 
 // KDE includes
 #include <kapplication.h>
+#include <kconfiggroup.h>
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -299,11 +300,10 @@ bool Definition::openFile()
 
     QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
-        KConfig* config = KGlobal::config();
-        config->setGroup( "Definitions" );
-
+        KConfigGroup config = KGlobal::config()->group( "Definitions" );
+        
         // copy file to new location
-        QString fname = config->readEntry( "defpath", locate( "data", "kbarcode/labeldefinitions.sql" ) );
+        QString fname = config.readEntry( "defpath", locate( "data", "kbarcode/labeldefinitions.sql" ) );
         if( !QFile::exists( fname ) || fname.isEmpty() ) 
             return ( showFileError() ? openFile() : false );
 
@@ -553,10 +553,9 @@ bool Definition::showFileError()
 
         QString f = KFileDialog::getOpenFileName( QString::null, QString::null, 0 );
         if( !f.isEmpty() && QFile::exists( f ) ) {
-            KConfig* config = KGlobal::config();
-            config->setGroup( "Definitions" );
-            config->writeEntry( "defpath", f );
-            config->sync();
+            KConfigGroup config = KGlobal::config()->group( "Definitions" );
+            config.writeEntry( "defpath", f );
+            config.sync();
         }
         nodefmsg = false;
         return openFile();

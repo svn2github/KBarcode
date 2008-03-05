@@ -23,7 +23,7 @@
 // KDE includes
 #include <kapplication.h>
 #include <kcolorbutton.h>
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <klineedit.h>
 #include <knuminput.h>
 
@@ -57,25 +57,24 @@ KBarcodeSettings::~KBarcodeSettings()
 
 void KBarcodeSettings::saveConfig()
 {
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group( "LabelEditor" );
 
-    config->setGroup("LabelEditor");
-    config->writeEntry("grid", gridsize );
-    config->writeEntry("gridcolor", gridcolor );
-    config->writeEntry("AskNewDlg", newdlg );
-    config->writeEntry("DateFormat", dateFormat );
+    config.writeEntry("grid", gridsize );
+    config.writeEntry("gridcolor", gridcolor );
+    config.writeEntry("AskNewDlg", newdlg );
+    config.writeEntry("DateFormat", dateFormat );
 }
 
 void KBarcodeSettings::loadConfig()
 {
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group( "LabelEditor" );
 
     QColor tmpc( Qt::lightGray );
-    config->setGroup("LabelEditor");
-    gridsize = config->readNumEntry("grid", 5);
-    gridcolor = config->readColorEntry("gridcolor", &tmpc );
-    newdlg = config->readBoolEntry("AskNewDlg", true );
-    dateFormat = config->readEntry("DateFormat", "dd-MM-yyyy" );
+
+    gridsize = config.readEntry("grid", 5);
+    gridcolor = config.readEntry("gridcolor", &tmpc );
+    newdlg = config.readEntry("AskNewDlg", true );
+    dateFormat = config.readEntry("DateFormat", "dd-MM-yyyy" );
 }
 
 void KBarcodeSettings::configure()

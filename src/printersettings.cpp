@@ -21,7 +21,7 @@
 // KDE includes
 #include <kapplication.h>
 #include <kcombobox.h>
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kurl.h>
@@ -93,29 +93,30 @@ PrinterSettings* PrinterSettings::getInstance()
 
 void PrinterSettings::loadConfig()
 {
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group( "Printer" );
 
-    config->setGroup("Printer");
-    lpdata->articleEvent1 = (enum linebreak)config->readNumEntry("articleEvent1", NO_BREAK );
-    lpdata->articleEvent2 = (enum linebreak)config->readNumEntry("articleEvent2", NO_BREAK );
-    lpdata->articleEvent3 = (enum linebreak)config->readNumEntry("articleEvent3", NO_BREAK );
-    lpdata->articleEvent4 = (enum linebreak)config->readNumEntry("articleEvent4", NO_BREAK );
-    lpdata->groupEvent1 = (enum linebreak)config->readNumEntry("groupEvent1", NO_BREAK );
-    lpdata->groupEvent2 = (enum linebreak)config->readNumEntry("groupEvent2", NO_BREAK );
-    lpdata->groupEvent3 = (enum linebreak)config->readNumEntry("groupEvent3", NO_BREAK );
-    lpdata->groupEvent4 = (enum linebreak)config->readNumEntry("groupEvent4", NO_BREAK );
-    lpdata->useCustomNo = config->readBoolEntry("UseArticleCustomerNo", false );
-    lpdata->quality = config->readNumEntry( "quality", Middle );
-    // screen resolution was removed before 1.5.4, use middle instead
+    lpdata->articleEvent1 = (enum linebreak)config.readEntry("articleEvent1", NO_BREAK );
+    lpdata->articleEvent2 = (enum linebreak)config.readEntry("articleEvent2", NO_BREAK );
+    lpdata->articleEvent3 = (enum linebreak)config.readEntry("articleEvent3", NO_BREAK );
+    lpdata->articleEvent4 = (enum linebreak)config.readEntry("articleEvent4", NO_BREAK );
+    lpdata->groupEvent1 = (enum linebreak)config.readEntry("groupEvent1", NO_BREAK );
+    lpdata->groupEvent2 = (enum linebreak)config.readEntry("groupEvent2", NO_BREAK );
+    lpdata->groupEvent3 = (enum linebreak)config.readEntry("groupEvent3", NO_BREAK );
+    lpdata->groupEvent4 = (enum linebreak)config.readEntry("groupEvent4", NO_BREAK );
+    lpdata->useCustomNo = config.readEntry("UseArticleCustomerNo", false );
+    lpdata->quality = config.readEntry( "quality", Middle );
+    
     if( lpdata->quality != High && lpdata->quality != Middle  && lpdata->quality != VeryHigh )
         lpdata->quality = Middle;
 
-    config->setGroup("BatchPrinting");
-    lpdata->comment = config->readEntry("comment", "#" );
-    lpdata->separator = config->readEntry("separator", ";" );
-    lpdata->quote = config->readEntry("quote", "");
-    lpdata->border = config->readBoolEntry("border", false );
-    lpdata->format = config->readNumEntry("PageSize", -1 );
+    config = KGlobal::config()->group( "BatchPrinting" );
+    
+    lpdata->comment = config.readEntry("comment", "#" );
+    lpdata->separator = config.readEntry("separator", ";" );
+    lpdata->quote = config.readEntry("quote", "");
+    lpdata->border = config.readEntry("border", false );
+    lpdata->format = config.readEntry("PageSize", -1 );
+    
     // get default page size from KDE
     if( lpdata->format == -1 )
         for( unsigned int i = 0; i < sizeof( pageFormatInfo ) / sizeof( PageFormatInfo ); i++ )
@@ -128,28 +129,28 @@ void PrinterSettings::loadConfig()
 
 void PrinterSettings::saveConfig()
 {
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group( "Printer" );
 
-    config->setGroup("Printer");
-    config->writeEntry("articleEvent1", lpdata->articleEvent1 );
-    config->writeEntry("articleEvent2", lpdata->articleEvent2 );
-    config->writeEntry("articleEvent3", lpdata->articleEvent3 );
-    config->writeEntry("articleEvent4", lpdata->articleEvent4 );
-    config->writeEntry("groupEvent1", lpdata->groupEvent1 );
-    config->writeEntry("groupEvent2", lpdata->groupEvent2 );
-    config->writeEntry("groupEvent3", lpdata->groupEvent3 );
-    config->writeEntry("groupEvent4", lpdata->groupEvent4 );
-    config->writeEntry("quality", lpdata->quality );
-    config->writeEntry("UseArticleCustomerNo", lpdata->useCustomNo );
+    config.writeEntry("articleEvent1", lpdata->articleEvent1 );
+    config.writeEntry("articleEvent2", lpdata->articleEvent2 );
+    config.writeEntry("articleEvent3", lpdata->articleEvent3 );
+    config.writeEntry("articleEvent4", lpdata->articleEvent4 );
+    config.writeEntry("groupEvent1", lpdata->groupEvent1 );
+    config.writeEntry("groupEvent2", lpdata->groupEvent2 );
+    config.writeEntry("groupEvent3", lpdata->groupEvent3 );
+    config.writeEntry("groupEvent4", lpdata->groupEvent4 );
+    config.writeEntry("quality", lpdata->quality );
+    config.writeEntry("UseArticleCustomerNo", lpdata->useCustomNo );
         
-    config->setGroup("BatchPrinting");
-    config->writeEntry("comment", lpdata->comment );
-    config->writeEntry("separator", lpdata->separator );
-    config->writeEntry("quote", lpdata->quote );
-    config->writeEntry("border", lpdata->border );
-    config->writeEntry("PageSize", lpdata->format );
+    config = KGlobal::config()->group( "BatchPrinting" );
+    
+    config.writeEntry("comment", lpdata->comment );
+    config.writeEntry("separator", lpdata->separator );
+    config.writeEntry("quote", lpdata->quote );
+    config.writeEntry("border", lpdata->border );
+    config.writeEntry("PageSize", lpdata->format );
 
-    config->sync();
+    config.sync();
 }
 
 int PrinterSettings::getQuality() const

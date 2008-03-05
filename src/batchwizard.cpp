@@ -58,6 +58,7 @@
 #include <kapplication.h>
 #include <kcombobox.h>
 #include <kcompletion.h>
+#include <kconfiggroup.h>
 #include <kfiledialog.h>
 #include <kiconloader.h>
 #include <kimageio.h>
@@ -910,12 +911,10 @@ void BatchWizard::loadData( const QString & data )
         return;
     }
 
-    // new config entry!!!
-    KConfig* config = KGlobal::config();
-    config->setGroup("FileFormat");
-    int pos[3] = { config->readNumEntry("Data0", 0 ),
-                   config->readNumEntry("Data1", 1 ),
-                   config->readNumEntry("Data2", 2 ) };
+    KConfigGroup config = KGlobal::config()->group("FileFormat");
+    int pos[3] = { config.readEntry("Data0", 0 ),
+                   config.readEntry("Data1", 1 ),
+                   config.readEntry("Data2", 2 ) };
 
     bool custom_article_no = lpdata->useCustomNo;
     QBuffer buf( data.utf8() );
@@ -976,12 +975,8 @@ void BatchWizard::loadData( const QString & data )
     }
 
     if( !dropped.isEmpty() )
-#if QT_VERSION >= 0x030100
         KMessageBox::informationList( this, i18n("<qt>The following items can not be added:" )+ "</qt>", dropped );
-#else
-        KMessageBox::questionYesNoList( this, i18n("<qt>The following items can not be added:" )+ "</qt>", dropped );
-#endif
-
+    
     enableControls();
 }
 

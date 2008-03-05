@@ -183,31 +183,31 @@ LabelEditor::~LabelEditor()
 
 void LabelEditor::loadConfig()
 {
-    KConfig* config = KGlobal::config();
-    recentAct->loadEntries( config, "RecentFiles" );
+    KConfigGroup config = KGlobal::config()->group( "RecentFiles" );
+    recentAct->loadEntries( config );
 
-    gridAct->setChecked( config->readBoolEntry("gridenabled", false ) );
+    config = KGlobal::config()->group( "LabelEditor" );
+
+    gridAct->setChecked( config.readEntry("gridenabled", false ) );
     toggleGrid();
 }
 
 void LabelEditor::saveConfig()
 {
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group( "RecentFiles" );
 
-    recentAct->saveEntries( config, "RecentFiles" );
+    recentAct->saveEntries( config );
 
-    config->setGroup("LabelEditor");
-    config->writeEntry("gridenabled", gridAct->isChecked() );
+    config = KGlobal::config()->group( "LabelEditor" );
+    config.writeEntry("gridenabled", gridAct->isChecked() );
 
-    config->sync();
+    config.sync();
 
     MainWindow::saveConfig();
 }
 
 void LabelEditor::createCommandHistory()
 {
-    KConfig* config = KGlobal::config();
-
     if( undoAct && redoAct )
     {
 	undoAct->unplug( editMenu );
@@ -221,7 +221,6 @@ void LabelEditor::createCommandHistory()
     history = new KCommandHistory( actionCollection(), false );
     cv->setHistory( history );
 
-    config->setGroup("LabelEditor");
     history->setUndoLimit( KBARCODE_UNDO_LIMIT );
     history->setRedoLimit( KBARCODE_UNDO_LIMIT );
 }

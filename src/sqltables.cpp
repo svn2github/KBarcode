@@ -35,7 +35,7 @@
 // KDE includes
 #include <kapplication.h>
 #include <kcombobox.h>
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -288,9 +288,8 @@ void SqlTables::importLabelDef()
 
     QString f = KStandardDirs::locateLocal( "data", "kbarcode/labeldefinitions.sql" );
     if( !QFile::exists( f ) ) {
-        KConfig* config = KGlobal::config();
-        config->setGroup( "Definitions" );
-        f = config->readEntry( "defpath", locate( "data", "kbarcode/labeldefinitions.sql" ) );
+        KConfigGroup config = KGlobal::config()->group( "Definitions" );
+        f = config.readEntry( "defpath", locate( "data", "kbarcode/labeldefinitions.sql" ) );
     }
 
     importData( f, db );
@@ -347,30 +346,28 @@ void SqlTables::exec( QSqlQuery* query, const QString & text )
 
 void SqlTables::loadConfig()
 {
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group( "SQL" );
 
-    config->setGroup("SQL");
-    sqldata.username = config->readEntry("username", "root");
-    sqldata.password = config->readEntry("password", "" );
-    sqldata.hostname = config->readEntry("hostname", "localhost" );
-    sqldata.database = config->readEntry("database", "kbarcode" );
-    sqldata.driver = config->readEntry("driver", "QMYSQL3" );
-    sqldata.autoconnect = config->readBoolEntry("autoconnect", false );
+    sqldata.username = config.readEntry("username", "root");
+    sqldata.password = config.readEntry("password", "" );
+    sqldata.hostname = config.readEntry("hostname", "localhost" );
+    sqldata.database = config.readEntry("database", "kbarcode" );
+    sqldata.driver = config.readEntry("driver", "QMYSQL3" );
+    sqldata.autoconnect = config.readEntry("autoconnect", false );
 }
 
 void SqlTables::saveConfig()
 {
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group( "SQL" );
 
-    config->setGroup("SQL");
-    config->writeEntry("username", sqldata.username );
-    config->writeEntry("password", sqldata.password );
-    config->writeEntry("hostname", sqldata.hostname );
-    config->writeEntry("database", sqldata.database );
-    config->writeEntry("driver", sqldata.driver );
-    config->writeEntry("autoconnect", sqldata.autoconnect );
+    config.writeEntry("username", sqldata.username );
+    config.writeEntry("password", sqldata.password );
+    config.writeEntry("hostname", sqldata.hostname );
+    config.writeEntry("database", sqldata.database );
+    config.writeEntry("driver", sqldata.driver );
+    config.writeEntry("autoconnect", sqldata.autoconnect );
 
-    config->sync();
+    config.sync();
 }
 
 void SqlTables::updateTables()

@@ -24,7 +24,7 @@
 // KDE includes
 #include <kaction.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmenubar.h>
@@ -121,11 +121,9 @@ void MainWindow::setupActions()
 
 void MainWindow::loadConfig()
 {
-	// TODO: rewrite with KConfigGroup
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group("Wizard");
 
-    config->setGroup("Wizard");
-    first = config->readBoolEntry("firststart2", true );
+    first = config.readEntry("firststart2", true );
 
     SqlTables* tables = SqlTables::getInstance();
     if( tables->getData().autoconnect && !first && autoconnect && connectAct ) {
@@ -141,27 +139,25 @@ void MainWindow::loadConfig()
 
 void MainWindow::saveConfig()
 {
-	// TODO: rewrite with KConfigGroup
-    KConfig* config = KGlobal::config();
+    KConfigGroup config = KGlobal::config()->group("Wizard");
 
-    config->setGroup("Wizard");
-    config->writeEntry("firststart2", false );
+    config.writeEntry("firststart2", false );
 
     PrinterSettings::getInstance()->saveConfig();
     SqlTables::getInstance()->saveConfig();
     KBarcodeSettings::getInstance()->saveConfig();
 
-    config->sync();
+    config.sync();
 }
 
 void MainWindow::assistant()
 {
-	// TODO: create an assistant
-    /* ConfWizard* wiz = new ConfWizard( 0, "wiz", true );
+    // FIXME: create an assistant
+    ConfWizard* wiz = new ConfWizard( 0, "wiz", true );
     if( wiz->exec() == QDialog::Accepted && wiz->checkDatabase->isChecked() )
         SqlTables::getInstance()->connectMySQL();
 
-    delete wiz; */
+    delete wiz;
 }
 
 void MainWindow::connectMySQL()

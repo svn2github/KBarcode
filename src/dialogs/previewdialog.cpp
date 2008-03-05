@@ -39,7 +39,7 @@
 #include <kabc/addresseedialog.h>
 #include <kapplication.h>
 #include <kcombobox.h>
-#include <kconfig.h>
+#include <kconfiggroup.h>
 #include <kiconloader.h>
 #include <klineedit.h>
 #include <klocale.h>
@@ -146,9 +146,9 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
     connect( customerName, SIGNAL( activated(int) ), this, SLOT( customerNameChanged(int) ) );
     connect( customerId, SIGNAL( activated(int) ), this, SLOT( customerIdChanged(int) ) );
 
-    KConfig* config = KGlobal::config();
-    config->setGroup( "PreviewDialog" );
-    resize( config->readNumEntry( "width", width() ), config->readNumEntry( "height", height() ) );
+    KConfigGroup config = KGlobal::config()->group( "PreviewDialog" );
+    
+    resize( config.readEntry( "width", width() ), config.readEntry( "height", height() ) );
     
     if( SqlTables::isConnected() )
         setupSql();
@@ -156,11 +156,11 @@ PreviewDialog::PreviewDialog( QIODevice* device, Definition* d, QString filename
 
 PreviewDialog::~PreviewDialog()
 {
-    KConfig* config = KGlobal::config();
-    config->setGroup( "PreviewDialog" );
-    config->writeEntry( "width", width() );
-    config->writeEntry( "height", height() );
-    config->sync();
+    KConfigGroup config = KGlobal::config()->group( "PreviewDialog" );
+
+    config.writeEntry( "width", width() );
+    config.writeEntry( "height", height() );
+    config.sync();
 }
 
 void PreviewDialog::setupSql()

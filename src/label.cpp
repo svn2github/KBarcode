@@ -213,7 +213,7 @@ void Label::setBarcodeValue( Barkode* barcode )
             {
                 if( !query1.value(0).toString().isEmpty() ) 
                 {
-                    barcode->setValue( query.value(0).toString() );
+                    barcode->setValue( query1.value(0).toString() );
                     barcode->setType( encoding_type );
                 }
             }

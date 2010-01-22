@@ -57,7 +57,7 @@ enum { NOCUT = 0x00001, MULTILINE = 0x00002, NOTEXT = 0x00004, NOSCALE = 0x00008
 
 /** This structure holds information about a supported barcode encoding typedef
   */
-typedef struct tBarcodeInfo 
+typedef struct _tBarcodeInfo 
 {
     /** the name which is stored for identification in the xml file
       * and used as commandline parameter for external tools
@@ -82,7 +82,7 @@ typedef struct tBarcodeInfo
      */
     QString validator;
     QString validatorNot;
-};
+} tBarcodeInfo;
 
 typedef QList<tBarcodeInfo> TBarcodeInfoList;
 
@@ -130,7 +130,7 @@ class Barkode {
     unsigned int barHeight() const;
     const QString & type() const;
     const QString & value() const;
-    sequenceEnabled() const;
+    bool sequenceEnabled() const;
     ESequence sequenceMode() const;
     int sequenceStart() const;
     int sequenceStep() const;

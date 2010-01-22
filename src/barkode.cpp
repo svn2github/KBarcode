@@ -388,17 +388,17 @@ const QColor & Barkode::textColor() const
     return m_textcolor;
 }
 
-const unsigned int Barkode::fontsize() const
+unsigned int Barkode::fontsize() const
 {
     return m_fontsize;
 }
 
-const unsigned int Barkode::quietZone() const
+unsigned int Barkode::quietZone() const
 {
     return m_quietzone;
 }
 
-const unsigned int Barkode::barHeight() const
+unsigned int Barkode::barHeight() const
 {
     return m_bar_height;
 }
@@ -413,27 +413,27 @@ const QString & Barkode::value() const
     return m_value;
 }
 
-const unsigned int Barkode::index() const
+unsigned int Barkode::index() const
 {
     return m_index;
 }
 
-const bool Barkode::sequenceEnabled() const
+bool Barkode::sequenceEnabled() const
 {
     return m_sequence;
 }
 
-const ESequence Barkode::sequenceMode() const
+ESequence Barkode::sequenceMode() const
 {
     return m_esequence;
 }
 
-const int Barkode::sequenceStart() const
+int Barkode::sequenceStart() const
 {
     return m_sequence_start;
 }
 
-const int Barkode::sequenceStep() const
+int Barkode::sequenceStep() const
 {
     return m_sequence_step;
 }
@@ -443,27 +443,27 @@ const QString & Barkode::databaseMode() const
     return m_database_mode;
 }
 
-const bool Barkode::textVisible() const
+bool Barkode::textVisible() const
 {
     return m_text_visible;
 }
 
-const int Barkode::rotation() const
+int Barkode::rotation() const
 {
     return m_rotation;
 }
 
-const double Barkode::scaling() const
+double Barkode::scaling() const
 {
     return m_scaling;
 }
 
-const double Barkode::cut() const
+double Barkode::cut() const
 {
     return m_cut;
 }
 
-const int Barkode::datamatrixSize() const
+int Barkode::datamatrixSize() const
 {
     return m_datamatrix_size;
 }

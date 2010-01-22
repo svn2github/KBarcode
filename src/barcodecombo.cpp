@@ -316,7 +316,9 @@ void BarcodeWidget::slotValidateValue()
 {
     QColor c = data->hasAcceptableInput() ? this->foregroundColor() : Qt::red;
 
-    data->setPaletteForegroundColor( c );
+    QPalette palette;
+    palette.setColor(data->foregroundRole(), c);
+    data->setPalette(palette);    
 }
 
 void BarcodeWidget::changed() 
